@@ -14,9 +14,9 @@ z = float(z)
 
 if (x ** 2)+(y ** 2) == (z ** 2):
 	print('retângulo')
-elif (x ** 2)+(y ** 2) < (z ** 2) and x+y>z:
-	print('acutângulo')
 elif (x ** 2)+(y ** 2) > (z ** 2) and x+y>z:
+	print('acutângulo')
+elif (x ** 2)+(y ** 2) < (z ** 2) and x+y>z:
  	print('obstusângulo')
 else:
 	print('não forma triângulo')
