@@ -1,0 +1,81 @@
+ARQUIVOS 
+
+1 - ARQUIVOS DE TEXTO
+-Sequência de caracteres em alguma codificação (UTF-8, ascII)
+-Arquivo txt é uma sequência de bytes --> cada byte devolve um caractere
+de acordo com a codificação (ou um emoji)
+
+
+2 - ARQUIVO BINÁRIO
+-Todos os arquivos (inclusive os de texto)
+-Seq. de bytes
+
+
+Comando 'file nome_arquivo' --> identifica o formato do arquivo pelos primeiors bytes 
+
+
+DIRETÓRIO
+É um arquivo especial que contém uma lista de arquivos 
+
+Todo proograma executa  aprtir de um diretório, chamado de 
+diretório de trabalho. Para saber qual é o diretório de trabalho 
+digite "pwd" no terminal. 
+
+/ para separar diretórios
+/ raiz da hierarquia 
+
+Caminhos absolutos 
+/home/maria/imagem.jpg
+/home/pedro/arquivo.txt
+
+Caminhos relativos 
+./maria/imagem.jpg
+arquivo.txt
+
+Abrir e fechar arquivos 
+with open('nome_arquivo') as arquivo:
+    # acessa dados do arquivo, sequencialmente ou diretamente
+
+.strip() tira caracteres vazios da string --> remover \n da quebra de linha 
+cada linha é uma str 
+
+.readline() lê linha por linha 
+
+MODOS DE ABERTURA DE UM ARQUIVO
+open("nome_arquivo", "w")
+
+modo  - operação - posição do cursos do aqruivo
+r - read - início
+r+ - leitura e escrita - início
+w - escrita - início (trunca aqruivo)
+w+ escrita e leitura - início (trunca aqruivo)
+a - escrita - final
+a+ - leitura - início
+
+quando abrimos u arquivo com w, se o nome dele não existe, ele é criaodo
+se existir, ele é truncado a 0 bytes, descartando quaisquer dados armazenados anteriormente 
+o cursos é posicionado em modo de escrita no incioi do arquivo
+
+cuidado, ele pode levar a perda de dados
+
+para verificar se o arquivo já existe, módulos os
+os.rename
+os.remove 
+
+ESCREVER ARQUIVO
+
+ with open(nome_arquivo, "w") as arquivo:
+        for palavra in palavras:
+            linha = palavra + "\n"  #precisamos adicionar uma quebra de linha manualmente 
+            arquivo.write(linha)
+
+ou 
+
+ with open(nome_arquivo, "w") as arquivo:
+    print(lista, file=arquivo)
+
+
+
+
+
+

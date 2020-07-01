@@ -1,8 +1,14 @@
-lista = input().split()
+"""if i % 2 == 1:
+            lista_conceitos.append(dado)
+print(lista_conceitos)
 
-for i in range(len(lista)):
-    lista[i] = int(lista[i])
+"""
 
-print(lista)
-print(type(lista))
-print(type(lista[0]))
+lista = ['tarefa0', 'A', 'tarefa1', 'C', 'tarefa2', 'C', 'faltou']
+
+lista_conceitos = []
+
+for i, dado in enumerate(lista):
+    while dado != 'presente':
+        print('não é presente')
+        

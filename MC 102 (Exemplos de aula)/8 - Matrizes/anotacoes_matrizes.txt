@@ -1,0 +1,29 @@
+MATRIZES 
+
+Quais estruturas de dados iremos usar?
+-variéveis escalares (int, float, bool, string, complexo)
+-listas
+-tupla 
+-dicionários
+
+Como representar as notas de 34exercícios de 3 alunos?
+
+a) Como representar os exercícios de um aluno?
+R: uma lista de floats
+
+b) Como representar as notas de todos os alunos?
+R: uma lista de listas de floats 
+
+notas_turma = [['a', 'b', 'c', 'd']['e', 'f', 'g', 'h']['i', 'j', 'k', 'l']]
+
+len(notas_turma) #dá qtde de alunos --> VAMOS CHAMAR A LISTA MAIOR PELO 
+INDICE I 
+OU SEJA, LINHA I REPRESENTA O ALUNO I
+
+len(notas_turma[0]) #dá etde de exercícios --> VAMOS CHAMAR OS ELEMENTOS DAS 
+LISTAS MENORES PELO INDICE J 
+OU SEJA, COLUNA J REPESENTA O EXERCÍCIO J 
+
+
+notas_turma[i][j] #j-ésima nota do i-ésimo aluno 
+
