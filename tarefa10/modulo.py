@@ -1,55 +1,71 @@
 
 def codificar(largura, altura, imagem):
     """ Parte de uma matriz com linhas de 0 e 1 e escrevea imagem no formato PBM """ 
-    codificacao = []
-    
+    codificacao = ''
+    lista_codificacao = []
     string_todos_bits = '' 
     str_bits_pares = ''
     str_bits_impares = ''
+    lista_frequencia = []
+    lista_pares_finais = []
 
     for i in range(altura):
         string = str(imagem[i]).strip().replace("'", "")
         string_todos_bits = string_todos_bits + string 
     
-    for digito in string_todos_bits:
-        bits_pares = string_todos_bits[i: i+8].strip(' ')
+    vezes = int(len(string_todos_bits) / 8)
+    k = 0
+    for i in range(vezes+1):
+        bits_pares = string_todos_bits[i+k: i+k+8].strip(' ')
         str_bits_pares = str_bits_pares + bits_pares
-        bits_impares = string_todos_bits[i+8 : i+16].strip(' ')
+       
+        bits_impares = string_todos_bits[i+k+8 : i+k+17].strip(' ')
         str_bits_impares = str_bits_impares + bits_impares
-        
-    for i in range(len(bits_pares)):
-        str_atual = str(bits_pares[i]).strip('[]').replace("'", "")
-        str_bits_pares = str_bits_pares + str_atual
-
-    for i in range(len(bits_impares)):
-        str_atual = str(bits_impares[i]).strip('[]').replace("'", "")
-        str_bits_impares = str_bits_impares + str_atual
-    
-    num_pares = largura * 2
-    lista_frequencia = []
-    lista_pares_finais = []
-
-    print(str_bits_pares)
-    print(str_bits_impares)
-    
+        k += 16
 
     tuplas = list(zip(str_bits_pares, str_bits_impares))
-    print(tuplas)
+
     contador = 1
     for i in range(len(tuplas)-1): 
-        if i-2 <= len(tuplas):
+        if i <= len(tuplas):
             if tuplas[i][0] == tuplas[i+1][0] and tuplas[i][1] == tuplas[i+1][1]:
                 contador += 1
+                proximo_igual = True 
+                if i == len(tuplas) - 2:
+                    if tuplas[-1] == tuplas[-2] and proximo_igual:
+                        lista_frequencia.append(contador)
+                        lista_pares_finais.append(tuplas[-1])
+                    elif tuplas[-1] != tuplas [-2] and proximo_igual:
+                        lista_frequencia.append(contador)
+                        lista_frequencia.append(tuplas[-3])
+                        lista_frequencia.append(1)
+                        lista_pares_finais.append(tuplas[-1])
+                    elif not proximo_igual:
+                        if tuplas[-1] == tuplas[-2]:
+                            lista_frequencia.append(contador)
+                            lista_frequencia.append(tuplas[-3])
+                            lista_frequencia.append(2)
+                            lista_pares_finais.append(tuplas[-1])
+                        else:           #tuplas[-1] != tuplas [-2] 
+                            lista_frequencia.append(contador)
+                            lista_frequencia.append(tuplas[-3])
+                            lista_frequencia.append(1)
+                            lista_pares_finais.append(tuplas[-2])
+                            lista_frequencia.append(1)
+                            lista_pares_finais.append(tuplas[-1])
             else:
                 lista_frequencia.append(contador)
                 contador = 1
                 lista_pares_finais.append(tuplas[i-1])
         
     for y in range(len(lista_frequencia)):
-        codificacao.append(lista_frequencia[y])
-        par_bits = int(lista_pares_finais[y][0] + lista_pares_finais[y][1])
-        codificacao.append(par_bits)  
-    
+        lista_codificacao.append(lista_frequencia[y])
+        par_bits = lista_pares_finais[y][0] + lista_pares_finais[y][1]
+        lista_codificacao.append(par_bits)  
+    for elemento in lista_codificacao:
+        codificacao = codificacao + str(elemento) + ' '
+    print(codificacao)
+ 
     return codificacao
 
 
