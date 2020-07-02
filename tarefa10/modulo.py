@@ -63,9 +63,7 @@ def codificar(largura, altura, imagem):
         par_bits = lista_pares_finais[y][0] + lista_pares_finais[y][1]
         lista_codificacao.append(par_bits)  
     for elemento in lista_codificacao:
-        codificacao = codificacao + str(elemento) + ' '
-    print(codificacao)
- 
+        codificacao = codificacao + str(elemento) + ' ' 
     return codificacao
 
 
@@ -111,8 +109,8 @@ def carregar_imagem_codificada(nome_do_arquivo):
         tipo = arquivo.readline()
         largura_altura = arquivo.readline()
         codificacaostr = arquivo.readline()
-        largura = largura_altura[0]
-        altura = largura_altura[1]
+        largura = int(largura_altura[0])
+        altura = int(largura_altura[1])
     codificacao = list(codificacaostr)
     return largura, altura, codificacao
 
@@ -125,7 +123,6 @@ def carregar_imagem_decodificada(nome_do_arquivo):
         for linha in arquivo:
             linha_atual = linha.strip()
             imagem.append(linha_atual)
-    arquivo.close()
     largura = int(largura_altura[0])
     altura = int(largura_altura[2])
     return largura, altura, imagem
@@ -135,7 +132,7 @@ def escrever_imagem_codificada(largura, altura, codificacao, nome_do_arquivo):
     with open(nome_do_arquivo, 'w') as arquivo:
         linha1 = 'P1C' + '\n'
         arquivo.write(linha1)
-        linha2 = str(altura) + str(largura) + '\n'
+        linha2 = str(largura) + ' ' + str(altura) + '\n'
         arquivo.write(linha2)
         linha = ''
         for i in range(len(codificacao)):
