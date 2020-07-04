@@ -68,7 +68,6 @@ def codificar(largura, altura, imagem):
 
 
 def decodificar(largura, altura, codificacao):
-    print(codificacao)
     todos_os_bits = []  #todos os bits da codificacao
     bits_pares = []     #todos os bits pares, que estarão em linhas pares
     bits_impares = []   #todos os bits impares que estarão em linhas impares
@@ -107,24 +106,22 @@ def decodificar(largura, altura, codificacao):
 def carregar_imagem_codificada(nome_do_arquivo):
     with open(nome_do_arquivo, "r") as arquivo:
         tipo = arquivo.readline()
-        largura_altura = arquivo.readline()
-        codificacaostr = arquivo.readline()
+        largura_altura = arquivo.readline().strip()
         largura = int(largura_altura[0])
-        altura = int(largura_altura[1])
-    codificacao = list(codificacaostr)
+        altura = int(largura_altura[2])
+        codificacao = list(arquivo.readline().strip())        
     return largura, altura, codificacao
 
 
 def carregar_imagem_decodificada(nome_do_arquivo):  
-    with open(nome_do_arquivo, "r") as arquivo:
-        tipo = arquivo.readline()
-        largura_altura = arquivo.readline()
-        imagem = []
+    imagem = []
+    with open(nome_do_arquivo) as arquivo:
+        tipo = arquivo.readline().strip()
+        largura_altura = arquivo.readline().strip()
+        largura = int(largura_altura[0])
+        altura = int(largura_altura[2])
         for linha in arquivo:
-            linha_atual = linha.strip()
-            imagem.append(linha_atual)
-    largura = int(largura_altura[0])
-    altura = int(largura_altura[2])
+            imagem.append(list(linha.strip())) 
     return largura, altura, imagem
 
 

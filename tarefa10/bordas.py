@@ -5,7 +5,6 @@ A borda de um objeto é representada pelos pixels que que tem ao menos um vizinh
 
 """
 
-
 from modulo import *
 
 
@@ -14,18 +13,34 @@ def destacar_bordas(largura, altura, imagem):
 
     for i in range(largura): 
         for j in range(altura):  
-            if imagem[i-1][j] == '0':
-                bordas[i][j] = '1'
-            elif imagem[i+1][j] == '0':
-                bordas[i][j] = '1'
-            elif imagem[i][j+1] == '0':
-                bordas[i][j] = '1'
-            elif imagem[i][j-1] == '0':
-                bordas[i][j] = '1'
+            if (i == 1 or i == largura) and (j == 1 or j == altura):
+                if imagem[i][j] == '1':
+                    bordas[i][j] = '1'
+            elif i == 1 and j!= 1 and j!= altura:
+                if imagem
+                
+                    bordas[i][j] = '1'
+            elif i == largura and j!= 1 and j!= altura:
+                if 
+                    bordas[i][j] = '1'
+            elif j == 1:
+                if 
+                    bordas[i][j] = '1'
+            elif j == largura:
+                if 
+                    bordas[i][j] = '1'       
 
+            elif imagem[i-1][j] == '1' and (imagem[i][j+1] == '0' or imagem[i][j-1] == '0' or imagem[i+1][j]== '0'):
+                bordas[i][j] = '1'
+            elif imagem[i+1][j] == '1' and (imagem[i][j+1] == '0' or imagem[i][j-1] == '0' or imagem[i-1][j]== '0'):
+                bordas[i][j] = '1'
+            elif imagem[i][j+1] == '1' and (imagem[i][j-1] == '0' or imagem[i+1][j] == '0' or imagem[i-1][j]== '0'):
+                bordas[i][j] = '1'
+            elif imagem[i][j-1] == '1' and (imagem[i][j+1] == '0' or imagem[i+1][j] == '0' or imagem[i-1][j]== '0'):
+                bordas[i][j] = '1'
+            
 
-
-    pass
+    return bordas
 
 
 def main():
