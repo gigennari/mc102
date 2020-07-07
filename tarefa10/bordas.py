@@ -11,33 +11,32 @@ from modulo import *
 def destacar_bordas(largura, altura, imagem):
     bordas = [[0 for _ in range(largura)] for _ in range (altura)]
 
-    for i in range(largura): 
-        for j in range(altura):  
-            if (i == 1 or i == largura) and (j == 1 or j == altura):
+    for i in range(altura): 
+        for j in range(largura):  
+            if (i == 1 or i == altura) and (j == 1 or j == largura):
                 if imagem[i][j] == '1':
                     bordas[i][j] = '1'
-            elif i == 1 and j!= 1 and j!= altura:
-                if imagem
-                
+            elif i == 1 and j!= 1 and j!= largura:
+                if imagem[i][j] == '1':
                     bordas[i][j] = '1'
-            elif i == largura and j!= 1 and j!= altura:
-                if 
+            elif i == altura and j!= 1 and j!= largura:
+                if imagem[i][j] == '1':
                     bordas[i][j] = '1'
-            elif j == 1:
-                if 
+            elif j == 1 and i!= 1 and j!= altura:
+                if imagem[i][j] == '1':
                     bordas[i][j] = '1'
-            elif j == largura:
-                if 
+            elif j == largura and i!= 1 and j!= altura:
+                if imagem[i][j] == '1':
                     bordas[i][j] = '1'       
-
-            elif imagem[i-1][j] == '1' and (imagem[i][j+1] == '0' or imagem[i][j-1] == '0' or imagem[i+1][j]== '0'):
-                bordas[i][j] = '1'
-            elif imagem[i+1][j] == '1' and (imagem[i][j+1] == '0' or imagem[i][j-1] == '0' or imagem[i-1][j]== '0'):
-                bordas[i][j] = '1'
-            elif imagem[i][j+1] == '1' and (imagem[i][j-1] == '0' or imagem[i+1][j] == '0' or imagem[i-1][j]== '0'):
-                bordas[i][j] = '1'
-            elif imagem[i][j-1] == '1' and (imagem[i][j+1] == '0' or imagem[i+1][j] == '0' or imagem[i-1][j]== '0'):
-                bordas[i][j] = '1'
+            elif (i != 1) and (i != altura) and (j != 1) and (j != largura):
+                if imagem[i-1][j] == '1' and (imagem[i][j+1] == '0' or imagem[i][j-1] == '0' or imagem[i+1][j]== '0'):
+                    bordas[i][j] = '1'
+                elif imagem[i+1][j] == '1' and (imagem[i][j+1] == '0' or imagem[i][j-1] == '0' or imagem[i-1][j]== '0'):
+                    bordas[i][j] = '1'
+                elif imagem[i][j+1] == '1' and (imagem[i][j-1] == '0' or imagem[i+1][j] == '0' or imagem[i-1][j]== '0'):
+                    bordas[i][j] = '1'
+                elif imagem[i][j-1] == '1' and (imagem[i][j+1] == '0' or imagem[i+1][j] == '0' or imagem[i-1][j]== '0'):
+                    bordas[i][j] = '1'
             
 
     return bordas
