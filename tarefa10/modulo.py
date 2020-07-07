@@ -3,69 +3,37 @@ def codificar(largura, altura, imagem):
     """ Parte de uma matriz com linhas de 0 e 1 e escrevea imagem no formato PBM """ 
     codificacao = ''
     lista_codificacao = []
-    string_todos_bits = '' 
-    str_bits_pares = ''
-    str_bits_impares = ''
     lista_frequencia = []
     lista_pares_finais = []
+    contador = 0
+    for i in range(0, altura, 2):   #i é linha
+        for j in range(largura):    #j é coluna
+            bit_cima = imagem[i][j]
+            bit_baixo = imagem[i+1][j]
+            if j == largura:
+                proximo_cima = imagem[i+2][0]
+                proximo_baixo = imagem[i+3][0]
+                if bit_cima == proximo_cima and bit_baixo == proximo_baixo:
+                    contador +=1
+                else:
+                    par_atual = str(bit_cima) + str(bit_baixo)
+                    lista_pares_finais.append(par_atual)
+                    lista_frequencia.append(contador+1)
+                    contador = 0
+            else:        
+                proximo_cima = imagem[i][j+1]
+                proximo_baixo = imagem[i+1][j+1]
+                if bit_cima == proximo_cima and bit_baixo == proximo_baixo:
+                    contador +=1
+                else:
+                    par_atual = str(bit_cima) + str(bit_baixo)
+                    lista_pares_finais.append(par_atual)
+                    lista_frequencia.append(contador+1)
+                    contador = 0
+    print(lista_pares_finais)
+    print(lista_frequencia)
 
-    for i in range(altura):
-        string = str(imagem[i]).strip().replace("'", "")
-        string_todos_bits = string_todos_bits + string 
-    
-    vezes = int(len(string_todos_bits) / 8)
-    k = 0
-    for i in range(vezes+1):
-        bits_pares = string_todos_bits[i+k: i+k+8].strip(' ')
-        str_bits_pares = str_bits_pares + bits_pares
-       
-        bits_impares = string_todos_bits[i+k+8 : i+k+17].strip(' ')
-        str_bits_impares = str_bits_impares + bits_impares
-        k += 16
-
-    tuplas = list(zip(str_bits_pares, str_bits_impares))
-
-    contador = 1
-    for i in range(len(tuplas)-1): 
-        if i <= len(tuplas):
-            if tuplas[i][0] == tuplas[i+1][0] and tuplas[i][1] == tuplas[i+1][1]:
-                contador += 1
-                proximo_igual = True 
-                if i == len(tuplas) - 2:
-                    if tuplas[-1] == tuplas[-2] and proximo_igual:
-                        lista_frequencia.append(contador)
-                        lista_pares_finais.append(tuplas[-1])
-                    elif tuplas[-1] != tuplas [-2] and proximo_igual:
-                        lista_frequencia.append(contador)
-                        lista_frequencia.append(tuplas[-3])
-                        lista_frequencia.append(1)
-                        lista_pares_finais.append(tuplas[-1])
-                    elif not proximo_igual:
-                        if tuplas[-1] == tuplas[-2]:
-                            lista_frequencia.append(contador)
-                            lista_frequencia.append(tuplas[-3])
-                            lista_frequencia.append(2)
-                            lista_pares_finais.append(tuplas[-1])
-                        else:           #tuplas[-1] != tuplas [-2] 
-                            lista_frequencia.append(contador)
-                            lista_frequencia.append(tuplas[-3])
-                            lista_frequencia.append(1)
-                            lista_pares_finais.append(tuplas[-2])
-                            lista_frequencia.append(1)
-                            lista_pares_finais.append(tuplas[-1])
-            else:
-                lista_frequencia.append(contador)
-                contador = 1
-                lista_pares_finais.append(tuplas[i-1])
-        
-    for y in range(len(lista_frequencia)):
-        lista_codificacao.append(lista_frequencia[y])
-        par_bits = lista_pares_finais[y][0] + lista_pares_finais[y][1]
-        lista_codificacao.append(par_bits)  
-    for elemento in lista_codificacao:
-        codificacao = codificacao + str(elemento) + ' ' 
     return codificacao
-
 
 def decodificar(largura, altura, codificacao):
     todos_os_bits = []  #todos os bits da codificacao
@@ -104,24 +72,28 @@ def decodificar(largura, altura, codificacao):
 
 
 def carregar_imagem_codificada(nome_do_arquivo):
-    with open(nome_do_arquivo, "r") as arquivo:
-        tipo = arquivo.readline()
-        largura_altura = arquivo.readline().strip()
-        largura = int(largura_altura[0])
-        altura = int(largura_altura[2])
-        codificacao = list(arquivo.readline().strip())        
+    with open(nome_do_arquivo) as arquivo:
+        linhas = []
+        for linha in arquivo:
+            linhas.append(linha.strip())  #linha 0 - P1c; linha 1 - altura largura; linha 2 - matriz 
+    largura, altura = linhas[1].split()
+    largura = int(largura)
+    altura = int(altura)
+    codificacao = [numero for numero in linhas[2].split()]
+
     return largura, altura, codificacao
 
 
-def carregar_imagem_decodificada(nome_do_arquivo):  
-    imagem = []
+def carregar_imagem_decodificada(nome_do_arquivo):     
     with open(nome_do_arquivo) as arquivo:
-        tipo = arquivo.readline().strip()
-        largura_altura = arquivo.readline().strip()
-        largura = int(largura_altura[0])
-        altura = int(largura_altura[2])
+        tipo = arquivo.readline()
+        largura_altura = arquivo.readline().strip().split()
+        imagem = []
         for linha in arquivo:
-            imagem.append(list(linha.strip())) 
+            imagem.append(list(linha.strip()))
+    largura = len(imagem[0])
+    altura = len(imagem)    
+
     return largura, altura, imagem
 
 

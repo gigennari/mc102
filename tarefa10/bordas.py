@@ -13,22 +13,24 @@ def destacar_bordas(largura, altura, imagem):
 
     for i in range(altura): 
         for j in range(largura):  
-            if (i == 1 or i == altura) and (j == 1 or j == largura):
+            if (i == 0 or i == altura) and (j == 0 or j == largura):
                 if imagem[i][j] == '1':
                     bordas[i][j] = '1'
-            elif i == 1 and j!= 1 and j!= largura:
+            elif i == 0 and j!= 0 and j!= largura:
                 if imagem[i][j] == '1':
                     bordas[i][j] = '1'
-            elif i == altura and j!= 1 and j!= largura:
+            elif i == altura and j!= 0 and j!= largura:
                 if imagem[i][j] == '1':
                     bordas[i][j] = '1'
-            elif j == 1 and i!= 1 and j!= altura:
+            elif j == 0 and i!= 0 and j!= altura:
                 if imagem[i][j] == '1':
                     bordas[i][j] = '1'
-            elif j == largura and i!= 1 and j!= altura:
+            elif j == largura and i!= 0 and j!= altura:
                 if imagem[i][j] == '1':
                     bordas[i][j] = '1'       
-            elif (i != 1) and (i != altura) and (j != 1) and (j != largura):
+            elif (i != 0) and (i != altura-1) and (j != 0) and (j != largura-1):
+                print(i)
+                print(j)
                 if imagem[i-1][j] == '1' and (imagem[i][j+1] == '0' or imagem[i][j-1] == '0' or imagem[i+1][j]== '0'):
                     bordas[i][j] = '1'
                 elif imagem[i+1][j] == '1' and (imagem[i][j+1] == '0' or imagem[i][j-1] == '0' or imagem[i-1][j]== '0'):
@@ -37,8 +39,7 @@ def destacar_bordas(largura, altura, imagem):
                     bordas[i][j] = '1'
                 elif imagem[i][j-1] == '1' and (imagem[i][j+1] == '0' or imagem[i+1][j] == '0' or imagem[i-1][j]== '0'):
                     bordas[i][j] = '1'
-            
-
+        
     return bordas
 
 

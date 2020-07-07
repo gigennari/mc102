@@ -9,6 +9,6 @@ def testar_leitura_p1c():
 
 
     assert codificacao == codificacao_esperada
-    print(codificacao)
+
 
 testar_leitura_p1c()
