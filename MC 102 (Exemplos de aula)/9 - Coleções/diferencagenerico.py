@@ -18,8 +18,7 @@ def ler_palavras_frequentes(nome_arquivo, n):
     with open(nome_arquivo) as arquivo:
         i = 0 
         for linha in arquivo:
-            palavra, frequencia = linha.strip().split()
-            lista.append(palavra)
+            lista.append(linha.strip())
             i += 1
             of i == n:
                 break   
@@ -37,6 +36,6 @@ def main():
     palavras_pt = ler_palavras_frequentes(pt_br.txt, 10)
     palavras_es = ler_palavras_frequentes(es.txt, 10)
     diferenca = calcular_diferenca(a,b)    
-    print(diferenca)
+    print(diferenca)   
 
 main()

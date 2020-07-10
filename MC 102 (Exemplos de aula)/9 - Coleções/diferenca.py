@@ -5,7 +5,7 @@ a diferença entre essesc onjuntos
 
 """
 
-def calcular_diferencia(a,b):
+def calcular_diferenca(a,b):
     """recebe conjuntos a e b e devolve a - b """
     diferenca = []
     for elemento_a in a:
@@ -16,7 +16,7 @@ def calcular_diferencia(a,b):
 def main():
     a = ["ana", "maria", "pedro", "felipe"] 
     b = ["lucas", "gustavo", "maria", "ana"]
-    diferenca = calcular_diferencia(a,b)    
+    diferenca = calcular_diferenca(a,b)    
     print(diferenca)
 
 main()

@@ -21,6 +21,8 @@ Como representar um dicionário? Como abstrair esse objeto em forma de uma estru
 Uma lista de tuplas 
 Tuplas --> (palavra, definicao, ano)
 
+dict
+
 """
 def criar_dicionario():
     """cria um dicionário vazio"""
@@ -46,19 +48,31 @@ def procurar_verbete(dicionario, palavra):
     return None
 
 def procurar_indice(dicionario, palavra):
+    """ devolve o índice de uma palavra no dicionário"""
     for i, verbete in enumerate(dicionario):
         if verbete[0] == palavra:
             return i
     return None
-    
+
+def atualizar_verbete(dicionario, verbete_atualizado):
+    """ altera o verbete correspondente a uma palavra """
+    idx = procurar_indice(dicionario, verbete_atualizado[0])
+
+    if idx == None: #se essa palavra não existir, basta adicioná-la ao fim da lista dicionário
+        dicionario.append(verbete_atualizado)
+    else:   #caso a palavra já exista em uma posição i, devemos atualizar a tupla que já continha a palavra
+        dicionario[idx] = verbete_atualizado
+
+
 def atualizar_definicao(dicionario, palavra, nova_definicao):   #não é possível alterar tuplas, devemos criar uma nova tupla
     """ atualiza a definição de uma palavra""" 
-    i = procurar_indice(dicionario, palavra)
-    verbete_antigo = dicionario[i]
+    idx = procurar_indice(dicionario, palavra)
+    verbete_antigo = dicionario[idx]
     verbete_novo = (verbete_antigo[0], nova_definicao, verbete_antigo[2])
-    dicionario[i] = verbete_novo
+    dicionario[idx] = verbete_novo
 
 def remover_verbete(dicionario, verbete):
+    """ remove um verbete do dicionário"""
     idx = procurar_indice(dicionario, verbete[0])
     dicionario.pop(idx)
 
@@ -71,13 +85,18 @@ def main():
     verbete = procurar_verbete(dicionario, "amor")
     palavra, definicao, ano  = verbete
     print(f'{palavra} significa {definicao}')
-
+ 
     nova_definicao = input("O que você acha que é amor?\n")
     atualizar_definicao(dicionario, "amor", nova_definicao)
 
     palavra, definicao, ano = procurar_verbete(dicionario, "amor")
     print(f"{palavra} agora significa {definicao}")
-
+    
+    verbete = procurar_verbete(dicionario, "fogo")
+    if verbete is None:
+        print("A palavra fogo não está no dicionário")
+    else:
+        print(f"Fogo significa {fogo[1]}")
 main() 
 
 
