@@ -1,0 +1,21 @@
+"""
+dicionario = {'ana': 2, 'daniel': 10, 'gabriel': 20}
+>>> dicionario
+{'ana': 2, 'daniel': 10, 'gabriel': 20}
+
+>>> dicionario.keys()
+dict_keys(['ana', 'daniel', 'gabriel'])
+ 
+>>> dicionario.values()
+dict_values([2, 10, 20])
+
+>>> 'ana' in dicionario
+True
+
+>>> 'joao' in dicionario
+False
+
+>>> dicionario['gabriel']
+20
+
+"""
