@@ -42,32 +42,38 @@ def decodificar(largura, altura, codificacao):
     linhas_pares = []
     linhas_impares = []
     imagem = []
-    for numero in codificacao:
-        if numero % 2 == 0:
-            sequencia = numero * codificacao[numero+1]
-            todos_os_bits.append(sequencia)
+    for i, numero in enumerate(codificacao):
+        if i % 2 == 0:
+            frequencia = int(numero) * codificacao[i+1]
+            todos_os_bits.append(frequencia)
     for i, bit in enumerate(todos_os_bits):
         if i % 2 == 0:
             bits_pares.append(bit)
         else:
             bits_impares.append(bit)
-    for i in bits_pares:
-        linha = bits_pares[i:i+8]
+    k = 0
+    for _ in range(bits_pares, 8):
+        linha = bits_pares[k:k+8]
         linhas_pares.append(linha)
-    for i in bits_impares:
-        linha = bits_pares[i:i+8]
+        k += 8
+    l = 0    
+    for _ in range(bits_impares, 8):
+        linha = bits_pares[l:l+8]
         linhas_impares.append(linha)
+        l += 8
+   
     linha_atual = []
     for i in range(altura):
-        for j in range(largura):
+        for j in range(largura, 8):
             if j % 2 == 0:
-                byte = bits_pares[(i*j)-1]
+                byte = bits_pares[((i+1)*j)-1]
                 linha_atual.append(byte)
             else:
                 byte = bits_impares[(i*j)-1]
                 linha_atual.append(byte)
             imagem.append(linha_atual)
-        linha_atual = []     
+        linha_atual = []   
+
     return imagem
 
 

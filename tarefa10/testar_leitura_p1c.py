@@ -6,8 +6,6 @@ def testar_leitura_p1c():
     assert altura == 6
     codificacao_esperada = ['4', '01', '4', '00', '16', '11']
 
-
-
     assert codificacao == codificacao_esperada
 
 
