@@ -36,42 +36,18 @@ def codificar(largura, altura, imagem):
 
 def decodificar(largura, altura, codificacao):
     todos_os_bits = []  #todos os bits da codificacao
-    bits_pares = []     #todos os bits pares, que estarão em linhas pares
-    bits_impares = []   #todos os bits impares que estarão em linhas impares
-    linhas_pares = []
-    linhas_impares = []
-    imagem = []
-    for i, numero in enumerate(codificacao):
-        if i % 2 == 0:
-            frequencia = int(numero) * codificacao[i+1]
-            todos_os_bits.append(frequencia)
-    for i, bit in enumerate(todos_os_bits):
-        if i % 2 == 0:
-            bits_pares.append(bit)
-        else:
-            bits_impares.append(bit)
+    imagem = [[0 for coluna in range(largura)] for linha in range(altura)] 
+    
+    for y in range(0, len(codificacao), 2):
+        for _ in range(int(codificacao[y])):
+            todos_os_bits.append(codificacao[y+1])  #aqui temos uma lista do tipo ['01', '01', '01', '01', '00']
+
     k = 0
-    for _ in range(bits_pares, 8):
-        linha = bits_pares[k:k+8]
-        linhas_pares.append(linha)
-        k += 8
-    l = 0    
-    for _ in range(bits_impares, 8):
-        linha = bits_pares[l:l+8]
-        linhas_impares.append(linha)
-        l += 8
-   
-    linha_atual = []
-    for i in range(altura):
-        for j in range(largura, 8):
-            if j % 2 == 0:
-                byte = bits_pares[((i+1)*j)-1]
-                linha_atual.append(byte)
-            else:
-                byte = bits_impares[(i*j)-1]
-                linha_atual.append(byte)
-            imagem.append(linha_atual)
-        linha_atual = []   
+    for i in range(0, altura, 2):
+        for j in range(largura):
+            imagem[i][j] = todos_os_bits[k+j][0]
+            imagem[i+1][j] = todos_os_bits[k+j][1]
+        k+= largura
 
     return imagem
 
@@ -104,10 +80,8 @@ def carregar_imagem_decodificada(nome_do_arquivo):
 
 def escrever_imagem_codificada(largura, altura, codificacao, nome_do_arquivo):
     with open(nome_do_arquivo, 'w') as arquivo:
-        linha1 = 'P1C' '\n'
-        arquivo.write(linha1)
-        linha2 = str(largura) + ' ' + str(altura) + '\n'
-        arquivo.write(linha2)
+        arquivo.write('P1C' '\n')
+        arquivo.write(str(largura) + ' ' + str(altura) + '\n')
         linha3 = ''
         for i in codificacao:
             linha3 += str(i) + ' '
@@ -116,8 +90,12 @@ def escrever_imagem_codificada(largura, altura, codificacao, nome_do_arquivo):
 
 
 def escrever_imagem_decodificada(largura, altura, imagem, nome_do_arquivo):
-    with open(nome_do_arquivo, 'w') as arquivo:
-        for sequencia in imagem:
-            linha = sequencia + '\n'
-            arquivo.write(linha)
+    with open(nome_do_arquivo, "w") as arquivo:
+        arquivo.write('P1''\n')
+        arquivo.write(str(largura) + ' ' + str(altura) + '\n')
+        for i in range(altura):    #a imagem é uma matriz 
+            for j in range(largura):
+                arquivo.write(str(imagem[i][j]))
+            arquivo.write('\n') #no final de cada linha, quebra de linha
+        
     return arquivo
