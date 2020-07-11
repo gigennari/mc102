@@ -1,9 +1,9 @@
 
 def codificar(largura, altura, imagem):
     """ Parte de uma matriz com linhas de 0 e 1 e escrevea imagem no formato PBM """ 
-    codificacao = []
-    lista_todos = []
     lista_codificacao = []
+    codificacao = ''
+    lista_todos = []
     lista_frequencia = []
     lista_pares_finais = []
     contador = 0
@@ -17,41 +17,41 @@ def codificar(largura, altura, imagem):
     
     contador = 1
     for i in range(len(lista_todos)-1):
-        if i <= (len(lista_todos) - 3):
+        if i <= len(lista_todos):
             if lista_todos[i] == lista_todos[i+1]:
                 contador += 1
                 proximo_igual = True 
+                if i == (len(lista_todos) - 2):
+                    if lista_todos[-1] == lista_todos[-2] and proximo_igual:    #3 últimos iguais (A, A, A)
+                        lista_frequencia.append(contador)
+                        lista_pares_finais.append(lista_todos[-1])
+                    elif lista_todos[-1] != lista_todos[-2] and proximo_igual: # A, A, B
+                        lista_frequencia.append(contador)
+                        lista_frequencia.append(lista_todos[-3])   
+                        lista_frequencia.append(1)
+                        lista_pares_finais.append(lista_todos[-1])  
+                    elif not proximo_igual: #se o penúltimo é diferente do antepenúltimo, o antepenúltimo já está nas listas freq/par
+                        if lista_todos[-1] == lista_todos[-2]: #A, B, B
+                            lista_frequencia.append(2)
+                            lista_pares_finais.append(lista_todos[-1])
+                        else: #A, B, C
+                            lista_frequencia.append(1)
+                            lista_pares_finais.append(lista_todos[-2])
+                            lista_frequencia.append(1)
+                            lista_pares_finais.append(lista_todos[-1])
             else:
                 lista_frequencia.append(contador)
                 lista_pares_finais.append(lista_todos[i])
                 contador = 1
-        elif i == (len(lista_todos) - 2):
-            if lista_todos[-1] == lista_todos[-2] and proximo_igual:    #3 últimos iguais (A, A, A)
-                lista_frequencia.append(contador+1)
-                lista_pares_finais.append(lista_todos[-1])
-            elif lista_todos[-1] != lista_todos[-2] and proximo_igual: # A, A, B
-                lista_frequencia.append(contador)
-                lista_frequencia.append(lista_todos[-2])   
-                lista_frequencia.append(1)
-                lista_pares_finais.append(lista_todos[-1])  
-            elif not proximo_igual: #se o penúltimo é diferente do antepenúltimo, o antepenúltimo já está nas listas freq/par
-                if lista_todos[-1] == lista_todos[-2]: #A, B, B
-                    lista_frequencia.append(2)
-                    lista_pares_finais.append(lista_todos[-1])
-                else: #A, B, C
-                    lista_frequencia.append(1)
-                    lista_pares_finais.append(lista_todos[-2])
-                    lista_frequencia.append(1)
-                    lista_pares_finais.append(lista_todos[-1])
-        
-          
-    print(lista_pares_finais)
-    print(lista_frequencia)
-
+         
     for i in range(len(lista_frequencia)):
-        codificacao.append(lista_frequencia[i])
-        codificacao.append(lista_pares_finais[i])
-
+        lista_codificacao.append(str(lista_frequencia[i]))
+        lista_codificacao.append(lista_pares_finais[i])
+    
+    for elemento in lista_codificacao:
+        codificacao += str(elemento) + ' ' 
+        codificacao = str(codificacao)
+        
     return codificacao
 
 def decodificar(largura, altura, codificacao):
@@ -124,15 +124,14 @@ def carregar_imagem_decodificada(nome_do_arquivo):
 
 def escrever_imagem_codificada(largura, altura, codificacao, nome_do_arquivo):
     with open(nome_do_arquivo, 'w') as arquivo:
-        linha1 = 'P1C' + '\n'
+        linha1 = 'P1C' '\n'
         arquivo.write(linha1)
         linha2 = str(largura) + ' ' + str(altura) + '\n'
         arquivo.write(linha2)
-        linha = ''
-        for i in range(len(codificacao)):
-            linha = linha + str(codificacao[i]).strip('[]').replace("'", "")
-        linha3 = linha + '\n'
-        arquivo.write(linha3)       
+        linha3 = ''
+        for elemento in codificacao:
+            linha3 += str(elemento) + ' '
+        arquivo.write(linha3.strip())       
     return arquivo
 
 
