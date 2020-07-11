@@ -1,37 +1,56 @@
 
 def codificar(largura, altura, imagem):
     """ Parte de uma matriz com linhas de 0 e 1 e escrevea imagem no formato PBM """ 
-    codificacao = ''
+    codificacao = []
+    lista_todos = []
     lista_codificacao = []
     lista_frequencia = []
     lista_pares_finais = []
     contador = 0
+    
     for i in range(0, altura, 2):   #i é linha
         for j in range(largura):    #j é coluna
             bit_cima = imagem[i][j]
             bit_baixo = imagem[i+1][j]
-            if j == largura:
-                proximo_cima = imagem[i+2][0]
-                proximo_baixo = imagem[i+3][0]
-                if bit_cima == proximo_cima and bit_baixo == proximo_baixo:
-                    contador +=1
-                else:
-                    par_atual = str(bit_cima) + str(bit_baixo)
-                    lista_pares_finais.append(par_atual)
-                    lista_frequencia.append(contador+1)
-                    contador = 0
-            else:        
-                proximo_cima = imagem[i][j+1]
-                proximo_baixo = imagem[i+1][j+1]
-                if bit_cima == proximo_cima and bit_baixo == proximo_baixo:
-                    contador +=1
-                else:
-                    par_atual = str(bit_cima) + str(bit_baixo)
-                    lista_pares_finais.append(par_atual)
-                    lista_frequencia.append(contador+1)
-                    contador = 0
+            par = str(bit_cima) + str(bit_baixo)
+            lista_todos.append(par)
+    
+    contador = 1
+    for i in range(len(lista_todos)-1):
+        if i <= (len(lista_todos) - 3):
+            if lista_todos[i] == lista_todos[i+1]:
+                contador += 1
+                proximo_igual = True 
+            else:
+                lista_frequencia.append(contador)
+                lista_pares_finais.append(lista_todos[i])
+                contador = 1
+        elif i == (len(lista_todos) - 2):
+            if lista_todos[-1] == lista_todos[-2] and proximo_igual:    #3 últimos iguais (A, A, A)
+                lista_frequencia.append(contador+1)
+                lista_pares_finais.append(lista_todos[-1])
+            elif lista_todos[-1] != lista_todos[-2] and proximo_igual: # A, A, B
+                lista_frequencia.append(contador)
+                lista_frequencia.append(lista_todos[-2])   
+                lista_frequencia.append(1)
+                lista_pares_finais.append(lista_todos[-1])  
+            elif not proximo_igual: #se o penúltimo é diferente do antepenúltimo, o antepenúltimo já está nas listas freq/par
+                if lista_todos[-1] == lista_todos[-2]: #A, B, B
+                    lista_frequencia.append(2)
+                    lista_pares_finais.append(lista_todos[-1])
+                else: #A, B, C
+                    lista_frequencia.append(1)
+                    lista_pares_finais.append(lista_todos[-2])
+                    lista_frequencia.append(1)
+                    lista_pares_finais.append(lista_todos[-1])
+        
+          
     print(lista_pares_finais)
     print(lista_frequencia)
+
+    for i in range(len(lista_frequencia)):
+        codificacao.append(lista_frequencia[i])
+        codificacao.append(lista_pares_finais[i])
 
     return codificacao
 

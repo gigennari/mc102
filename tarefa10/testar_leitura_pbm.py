@@ -13,5 +13,6 @@ def testar_leitura_pbm():
         ['1', '1', '1', '1','1', '1', '1', '1'],
     ]
     assert imagem == matriz_esperada
+    print(imagem)
 
 testar_leitura_pbm()
