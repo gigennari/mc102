@@ -17,7 +17,10 @@ def testar_codificar():
     codificacao_esperada = [4, '01', 4, '00', 16, '11']
 
     codificacao_calculada = codificar(largura, altura, imagem)
+ 
+
 
     assert codificacao_calculada == codificacao_esperada
+
 
 testar_codificar()

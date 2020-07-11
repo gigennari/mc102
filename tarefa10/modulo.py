@@ -1,11 +1,8 @@
 
 def codificar(largura, altura, imagem):
     """ Parte de uma matriz com linhas de 0 e 1 e escrevea imagem no formato PBM """ 
-    lista_codificacao = []
-    codificacao = ''
     lista_todos = []
-    lista_frequencia = []
-    lista_pares_finais = []
+    codificacao = []
     contador = 0
     
     for i in range(0, altura, 2):   #i é linha
@@ -16,42 +13,25 @@ def codificar(largura, altura, imagem):
             lista_todos.append(par)
     
     contador = 1
-    for i in range(len(lista_todos)-1):
-        if i <= len(lista_todos):
-            if lista_todos[i] == lista_todos[i+1]:
+    for i in range(1, len(lista_todos)): #comparar "de trás p frente" -- resolveu o problema com o último elemento no teste disquete
+        if i < len(lista_todos)-1:  #comparar até o penúltimo com o antepenúltimo
+            if lista_todos[i] == lista_todos[i-1]:
                 contador += 1
-                proximo_igual = True 
-                if i == (len(lista_todos) - 2):
-                    if lista_todos[-1] == lista_todos[-2] and proximo_igual:    #3 últimos iguais (A, A, A)
-                        lista_frequencia.append(contador)
-                        lista_pares_finais.append(lista_todos[-1])
-                    elif lista_todos[-1] != lista_todos[-2] and proximo_igual: # A, A, B
-                        lista_frequencia.append(contador)
-                        lista_frequencia.append(lista_todos[-3])   
-                        lista_frequencia.append(1)
-                        lista_pares_finais.append(lista_todos[-1])  
-                    elif not proximo_igual: #se o penúltimo é diferente do antepenúltimo, o antepenúltimo já está nas listas freq/par
-                        if lista_todos[-1] == lista_todos[-2]: #A, B, B
-                            lista_frequencia.append(2)
-                            lista_pares_finais.append(lista_todos[-1])
-                        else: #A, B, C
-                            lista_frequencia.append(1)
-                            lista_pares_finais.append(lista_todos[-2])
-                            lista_frequencia.append(1)
-                            lista_pares_finais.append(lista_todos[-1])
             else:
-                lista_frequencia.append(contador)
-                lista_pares_finais.append(lista_todos[i])
+                codificacao.append(contador)
+                codificacao.append(lista_todos[i-1])
                 contador = 1
-         
-    for i in range(len(lista_frequencia)):
-        lista_codificacao.append(str(lista_frequencia[i]))
-        lista_codificacao.append(lista_pares_finais[i])
-    
-    for elemento in lista_codificacao:
-        codificacao += str(elemento) + ' ' 
-        codificacao = str(codificacao)
-        
+                
+        else:                                             #i == (len(lista_todos) - 1); comparar último com penúltimo apenas; aqui contador = frequencia do penúltimo
+                if lista_todos[-1] == lista_todos[-2]:    
+                    codificacao.append(contador+1)
+                    codificacao.append(lista_todos[-1])
+                else:                                     # lista_todos[-1] != lista_todos[-2]:
+                    codificacao.append(contador)
+                    codificacao.append(lista_todos[-2])   
+                    codificacao.append(1)
+                    codificacao.append(lista_todos[-1])              
+   
     return codificacao
 
 def decodificar(largura, altura, codificacao):
@@ -129,11 +109,10 @@ def escrever_imagem_codificada(largura, altura, codificacao, nome_do_arquivo):
         linha2 = str(largura) + ' ' + str(altura) + '\n'
         arquivo.write(linha2)
         linha3 = ''
-        for elemento in codificacao:
-            linha3 += str(elemento) + ' '
-        arquivo.write(linha3.strip())       
+        for i in codificacao:
+            linha3 += str(i) + ' '
+        arquivo.write(linha3)       
     return arquivo
-
 
 
 def escrever_imagem_decodificada(largura, altura, imagem, nome_do_arquivo):
