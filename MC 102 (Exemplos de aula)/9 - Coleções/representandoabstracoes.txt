@@ -1,0 +1,27 @@
+
+REPRESENTANDO ABSTRAÇÕES EM PYTHON com dados distintos
+(matriz é para dados uniformes)
+
+LISTA DE TUPLAS
+1) Tuplas
+(palavra, classe, definição, ano)
+cada um é uma propriedade
+
+[(palavra, classe, definição, ano), (palavra, classe, definição, ano)...]
+
+
+LISTA DE DICTS
+2) Dicionários 
+o objeto é uma coleção de propriedades
+chave: valor 
+
+A vantagem de usar dict é que podemos:
+a) adicionar novas propriedades (enquanto a tupla é imutável)
+b) explicitar a qual propriedade nos referimos através de chaves 
+
+{"palavra": "amor", "classe": substantivo , "definição": um sentimento, "ano":1950}
+
+3) Classes 
+o objeto é uma coleção fixa de propriedades
+atributo: valor
+

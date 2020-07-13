@@ -23,6 +23,10 @@ Tuplas --> (palavra, definicao, ano)
 
 dict
 
+-adicionar classe da palavra ao verbete: alterar a forma como representamos o verbete
+
+
+Verbete = (palavra, classe, definição, ano)
 """
 def criar_dicionario():
     """cria um dicionário vazio"""
@@ -68,7 +72,7 @@ def atualizar_definicao(dicionario, palavra, nova_definicao):   #não é possív
     """ atualiza a definição de uma palavra""" 
     idx = procurar_indice(dicionario, palavra)
     verbete_antigo = dicionario[idx]
-    verbete_novo = (verbete_antigo[0], nova_definicao, verbete_antigo[2])
+    verbete_novo = (verbete_antigo[0], verbete_antigo[1], nova_definicao, verbete_antigo[3])
     dicionario[idx] = verbete_novo
 
 def remover_verbete(dicionario, verbete):
@@ -76,10 +80,12 @@ def remover_verbete(dicionario, verbete):
     idx = procurar_indice(dicionario, verbete[0])
     dicionario.pop(idx)
 
+
+
 def main():
     dicionario = criar_dicionario()
 
-    verbete = ("amor", "fogo que arde sem se ver", 1595)
+    verbete = ("amor", "substantivo", "fogo que arde sem se ver", 1595)
     adicionar_verbete(dicionario, verbete)
 
     verbete = procurar_verbete(dicionario, "amor")
@@ -89,7 +95,7 @@ def main():
     nova_definicao = input("O que você acha que é amor?\n")
     atualizar_definicao(dicionario, "amor", nova_definicao)
 
-    palavra, definicao, ano = procurar_verbete(dicionario, "amor")
+    palavra, classe, definicao, ano = procurar_verbete(dicionario, "amor")
     print(f"{palavra} agora significa {definicao}")
     
     verbete = procurar_verbete(dicionario, "fogo")
