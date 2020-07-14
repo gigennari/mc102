@@ -52,7 +52,18 @@ def ler_arquivo_texto(nome_do_arquivo):
     return palavras
 
 def descobrir_frequencias(palavras, stopwords):
-    pass
+    """ contar a frequencia de cada uma das palavras, eliminadas
+    as stopwords """ 
+    wordcount = {}  #vamos usar um dict para armazenar a palavra e sua frequencia juntos
+    palavras_interesse = [p for p in palavras if p not in stopwords]
+
+    for palavra in palavras_interesse:
+        if palavra in wordcount:
+            wordcount[palavra] += 1
+        else:
+            wordcount[palavra] = 1
+    print(wordcount)
+    return wordcount
 
 def calcular_quartil(wordcount):
     pass 
