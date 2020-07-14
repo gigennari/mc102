@@ -39,7 +39,6 @@ def ler_entrada():
             entrada.append(aqr_ou_palavra)
         except EOFError: 
             break 
-        print(entrada)
     return entrada
 
 def ler_arquivo_texto(nome_do_arquivo):
@@ -55,14 +54,13 @@ def descobrir_frequencias(palavras, stopwords):
     """ contar a frequencia de cada uma das palavras, eliminadas
     as stopwords """ 
     wordcount = {}  #vamos usar um dict para armazenar a palavra e sua frequencia juntos
-    palavras_interesse = [p for p in palavras if p not in stopwords]
+    palavras_interesse = [p for p in palavras if p not in stopwords] #aqui ainda é preciso usar lista para saber a frequencia
 
     for palavra in palavras_interesse:
         if palavra in wordcount:
             wordcount[palavra] += 1
         else:
             wordcount[palavra] = 1
-    print(wordcount)
     return wordcount
 
 def calcular_quartil(wordcount):
@@ -74,18 +72,32 @@ def calcular_quartil_especial(wordcount):
     cujas frequencias são <= 5; essa palavras são devolvidas em um outro dict"""
     pass
 
-def encontrar_mais_frequentes(dicionario):
-    pass
+def encontrar_mais_frequentes(wordcount_ordenado):
+    """ encontra as três mais palavras mais frequentes; a entrada é uma 
+    lista de tuplas """
+    tres_palavras = []
+    tres_palavras.append(wordcount_ordenado[0][0])
+    tres_palavras.append(wordcount_ordenado[1][0])
+    if wordcount_ordenado[2][1] == wordcount_ordenado[3][1]:
+        restante = dict(wordcount_ordenado[2:])
+        restante_ordem_alfabetica = sorted(restante.items(), key=lambda x: x[0], reverse=True)
+        tres_palavras.append(restante_ordem_alfabetica[0][0])
+    else:
+        tres_palavras.append(wordcount_ordenado[2][0])
+    return tres_palavras
 
 
 def main():
     nome_do_arquivo, stopwords = ler_entrada()  #recebe caminho do arquivo e lista de stopwords
     palavras = ler_arquivo_texto(str(nome_do_arquivo).strip('[]').replace("'", ""))     
     wordcount = descobrir_frequencias(palavras, stopwords)
-    tres_palavras = encontrar_mais_frequentes(wordcount)
+    wordcount_ordenado = sorted(wordcount.items(), key = lambda x: x[1],reverse=True )  #gera uma lista de tuplas
+    tres_palavras = encontrar_mais_frequentes(wordcount_ordenado)
+    
     quartil_especial, palavras_eliminadas = calcular_quartil_especial(wordcount)
     tres_palavras_eliminadas = encontrar_mais_frequentes
     
+    print(tres_palavras)
     #printar as 3 palavras mais frequentes
     #printar len do quartil especial
     #printar 3 palavras eliminadas do quartil
