@@ -1,5 +1,5 @@
 """
-Escreva um porograma que, dado um arquivo de texto, conte a frequência com que elas 
+Escreva um programa que, dado um arquivo de texto, conte a frequência com que elas 
 aparecem no texto e descubra algumas palavras-chaves do texto.
 
 As palavras mais frequentes dão uma boa ideia do tópico principal
@@ -29,4 +29,37 @@ Para resolver empates --> usar ordem lexicográfica (alfabética)
 
 
 """
+def ler_arquivo_texto(nome_do_arquivo):
+    """ lê o arquivo com todas as palavras do texto e as add a
+    um dicionário?"""
+    pass
 
+def descobrir_frequencias(texto, stopwords):
+    pass
+
+def calcular_quartil(wordcount):
+    pass 
+
+
+def calcular_quartil_especial(wordcount):
+    """devolve as palavras cuja frequencia soma 25%, removidas as palavras 
+    cujas frequencias são <= 5; essa palavras são devolvidas em um outro dict"""
+    pass
+
+def encontrar_mais_frequentes(dicionario):
+    pass
+
+
+def main():
+    texto = ler_arquivo_texto(nome_do_arquivo)  #1ª entrada
+    stopwords = ler_arquivo_texto(nome_do_arquivo)    #2ª entrada
+    wordcount = descobrir_frequencias(texto, stopwords)
+    tres_palavras = encontrar_mais_frequentes(wordcount)
+    quartil_especial, palavras_eliminadas = calcular_quartil_especial(wordcount)
+    tres_palavras_eliminadas = encontrar_mais_frequentes
+    
+    #printar as 3 palavras mais frequentes
+    #printar len do quartil especial
+    #printar 3 palavras eliminadas do quartil
+
+main() 
