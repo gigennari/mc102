@@ -29,12 +29,29 @@ Para resolver empates --> usar ordem lexicográfica (alfabética)
 
 
 """
+import string 
+
+def ler_entrada():
+    entrada = []
+    while True:
+        try:
+            aqr_ou_palavra = input().split()
+            entrada.append(aqr_ou_palavra)
+        except EOFError: 
+            break 
+        print(entrada)
+    return entrada
+
 def ler_arquivo_texto(nome_do_arquivo):
     """ lê o arquivo com todas as palavras do texto e as add a
     um dicionário?"""
-    pass
+    texto = open(nome_do_arquivo).read().lower()
+    for pontuacao in string.punctuation:    #remover pontuação
+        texto = texto.replace(pontuacao, ' ')
+    palavras = texto.split()
+    return palavras
 
-def descobrir_frequencias(texto, stopwords):
+def descobrir_frequencias(palavras, stopwords):
     pass
 
 def calcular_quartil(wordcount):
@@ -51,9 +68,9 @@ def encontrar_mais_frequentes(dicionario):
 
 
 def main():
-    texto = ler_arquivo_texto(nome_do_arquivo)  #1ª entrada
-    stopwords = ler_arquivo_texto(nome_do_arquivo)    #2ª entrada
-    wordcount = descobrir_frequencias(texto, stopwords)
+    nome_do_arquivo, stopwords = ler_entrada()  #recebe caminho do arquivo e lista de stopwords
+    palavras = ler_arquivo_texto(str(nome_do_arquivo).strip('[]').replace("'", ""))     
+    wordcount = descobrir_frequencias(palavras, stopwords)
     tres_palavras = encontrar_mais_frequentes(wordcount)
     quartil_especial, palavras_eliminadas = calcular_quartil_especial(wordcount)
     tres_palavras_eliminadas = encontrar_mais_frequentes
