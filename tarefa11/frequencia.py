@@ -18,18 +18,13 @@ quartil (a soma da frequencia das palavras do primeiro quartil é 25% do total
 de palavras), OU SEJA, QUANTAS PALAVRAS correspodem ao conjunto de palavras 
 que mais aparecem, somando uma frequência de 25% 
 
-para formar o quartil, DESCONSIDERAR palavras que se repetem 5 vezes ou menos
-
-3ª linha - até 3 palavras mais frequentes entre aquelas que não foram 
-incluídas na contagem da linha anterior, OU SEJA, as 3 palavras com maior 
-frequencia q estariam no quartil, mas se repetem 5 vezes ou menos, então 
-foram excluídas
-
+para formar o quartil, DESCONSIDERA até três palavras m
 Para resolver empates --> usar ordem lexicográfica (alfabética)
 
 
 """
 import string 
+import math
 
 def ler_entrada():
     entrada = []
@@ -63,27 +58,47 @@ def descobrir_frequencias(palavras, stopwords):
             wordcount[palavra] = 1
     return wordcount
 
-def calcular_quartil(wordcount):
-    pass 
 
+def calcular_quartil_especial(wc):
+    """remove as palavras cujas frequencias são <= 5 e devolve as palavras 
+    1/4 da lista restante; essa palavras são devolvidas em um outro dict"""
+    lista_tuplas = []
+    frequencia_alta = []
+    quartil = []
+    
+    for i in wc:    #transforma wc em uma lista de tuplas (palavra, freq)
+        tupla = (i, wc[i])
+        lista_tuplas.append(tupla)
 
-def calcular_quartil_especial(wordcount):
-    """devolve as palavras cuja frequencia soma 25%, removidas as palavras 
-    cujas frequencias são <= 5; essa palavras são devolvidas em um outro dict"""
-    pass
+    for i in range(len(lista_tuplas)):  #mantém apenas palavras que se repetem mais que 5 vezes
+        if lista_tuplas[i][1] > 5:  
+            frequencia_alta.append(lista_tuplas[i])
 
-def encontrar_mais_frequentes(wordcount_ordenado):
+    N = len(frequencia_alta)
+    Q14 = math.floor(0.25 * (N+1))
+    quartil = frequencia_alta[:Q14]
+
+    return len(quartil)
+
+def encontrar_mais_frequentes(wc):
     """ encontra as três mais palavras mais frequentes; a entrada é uma 
     lista de tuplas """
-    tres_palavras = []
-    tres_palavras.append(wordcount_ordenado[0][0])
-    tres_palavras.append(wordcount_ordenado[1][0])
-    if wordcount_ordenado[2][1] == wordcount_ordenado[3][1]:
-        restante = dict(wordcount_ordenado[2:])
-        restante_ordem_alfabetica = sorted(restante.items(), key=lambda x: x[0], reverse=True)
-        tres_palavras.append(restante_ordem_alfabetica[0][0])
+    tres_palavras = [wc[0][0], wc[1][0]]   
+    
+    if wc[2][1] == wc[3][1]:
+        restante = wc[2:]
+        mesma_freq = [wc[2]]
+        for i in range(len(restante)-1):
+            if restante[i][1] == restante[i+1][1]:  #deixa apenas tuplas que tem a mesma frequencia da 3ª palavra
+                mesma_freq.append(restante[i+1])
+            else:
+                break 
+        mesma_freq = dict(mesma_freq)
+        mesma_freq_ordem_alfabetica = sorted(mesma_freq, key=lambda x: x[0])  #não esta colocando em ordem alfabetica
+        
+        tres_palavras.append(mesma_freq_ordem_alfabetica[0]) 
     else:
-        tres_palavras.append(wordcount_ordenado[2][0])
+        tres_palavras.append(wc[2][0]) 
     return tres_palavras
 
 
@@ -93,13 +108,13 @@ def main():
     wordcount = descobrir_frequencias(palavras, stopwords)
     wordcount_ordenado = sorted(wordcount.items(), key = lambda x: x[1],reverse=True )  #gera uma lista de tuplas
     tres_palavras = encontrar_mais_frequentes(wordcount_ordenado)
-    
-    quartil_especial, palavras_eliminadas = calcular_quartil_especial(wordcount)
-    tres_palavras_eliminadas = encontrar_mais_frequentes
-    
-    print(tres_palavras)
-    #printar as 3 palavras mais frequentes
-    #printar len do quartil especial
-    #printar 3 palavras eliminadas do quartil
+    len_quartil = calcular_quartil_especial(wordcount)
+    tres_palavras_eliminadas = encontrar_mais_frequentes(wordcount_ordenado[len_quartil:])
+
+    print(wordcount_ordenado)
+
+    print(str(tres_palavras).strip('[]').replace("'", "").replace(",", ""))  #printar as 3 palavras mais frequentes/ converter str
+    print(len_quartil)    #printar len do quartil especial
+    print(str(sorted(tres_palavras_eliminadas)).strip('[]').replace("'", "").replace(",", "")) #printar 3 palavras eliminadas do quartil/ converter str 
 
 main() 

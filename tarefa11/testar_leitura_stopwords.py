@@ -1,9 +1,9 @@
-from frequencia.py import ler_entrada
+from frequencia import ler_entrada
 
 def testar_leitura_entrada():
     
-    caminho_arquivo_esperado = ['testes/texto5.txt']
-    stopwords_esperado = ['eu', 'na', 'e']
+    caminho_arquivo_esperado = 'testes/texto5.txt'
+    stopwords_esperado = ['eu', 'na', 'e', 'com']
     
     caminho_arquivo, stopwords = ler_entrada()
 
