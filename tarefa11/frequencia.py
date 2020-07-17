@@ -23,7 +23,8 @@ Para resolver empates --> usar ordem lexicográfica (alfabética)
 
 
 """
-import string 
+
+import string
 import math
 
 def ler_entrada():
@@ -36,18 +37,30 @@ def ler_entrada():
             break 
     return entrada
 
+def limpar_pontuacao(string):
+
+    pontuacao = ".,;:?!''/*#@&" #sem hifen
+    sem_pontucao = ""
+
+    for letra in string:
+        if letra not in pontuacao:
+            sem_pontucao += letra
+    
+    return sem_pontucao
+
 def ler_arquivo_texto(nome_do_arquivo):
     """ lê o arquivo com todas as palavras do texto e as add a
     um dicionário?"""
     texto = open(nome_do_arquivo).read().lower()
-    for pontuacao in string.punctuation:    #remover pontuação
-        texto = texto.replace(pontuacao, ' ')
+    
+    texto = limpar_pontuacao(texto)
+           
     palavras = texto.split()
     return palavras
 
 def descobrir_frequencias(palavras, stopwords):
     """ contar a frequencia de cada uma das palavras, eliminadas
-    as stopwords """ 
+    as stopwords; devolve dict """ 
     wordcount = {}  #vamos usar um dict para armazenar a palavra e sua frequencia juntos
     palavras_interesse = [p for p in palavras if p not in stopwords] #aqui ainda é preciso usar lista para saber a frequencia
 
@@ -58,47 +71,42 @@ def descobrir_frequencias(palavras, stopwords):
             wordcount[palavra] = 1
     return wordcount
 
+def ordenar_wc(wordcount):
+    """ ordena em ordem alfabética e frequência"""  #evitou ter que tratar cada caso na hora de encontrar os três elementos de maior frequencia 
+        
+    wco = sorted(wordcount.items(), key=lambda a: a[0])  #devolve uma lista de tuplas (palavra, frequencia) em ordem alfabérica
+
+    wco.sort(key=lambda f: f[1], reverse=True)    #ordena a lista em ordem crescente 
+
+    return wco
 
 def calcular_quartil_especial(wc):
     """remove as palavras cujas frequencias são <= 5 e devolve as palavras 
     1/4 da lista restante; essa palavras são devolvidas em um outro dict"""
-    lista_tuplas = []
     frequencia_alta = []
-    quartil = []
-    
-    for i in wc:    #transforma wc em uma lista de tuplas (palavra, freq)
-        tupla = (i, wc[i])
-        lista_tuplas.append(tupla)
 
-    for i in range(len(lista_tuplas)):  #mantém apenas palavras que se repetem mais que 5 vezes
-        if lista_tuplas[i][1] > 5:  
-            frequencia_alta.append(lista_tuplas[i])
+    for i in range(len(wc)):  #mantém apenas palavras que se repetem mais que 5 vezes
+        if wc[i][1] > 5:  
+            frequencia_alta.append(wc[i])      
 
     N = len(frequencia_alta)
-    Q14 = math.floor(0.25 * (N+1))
-    quartil = frequencia_alta[:Q14]
-
-    return len(quartil)
+    Q14 = round(0.25 * (N+1))
+    depois_quartil = frequencia_alta[Q14:]
+    valor = frequencia_alta[Q14-1][1]   #é a frequencia do último elemento do quartil Q14 - 1 pq a lista começa no 0
+    contador = Q14  #com certeza já há Q14 elementos (do quartil) que têm freq igual ou maior à do último elemento
+    
+    for i in range(len(depois_quartil)):    #queremos verificar se os próximos números, depois do quartil, tem a mesma freq do último
+        if depois_quartil[i][1] == valor:
+            contador += 1
+        else:
+            break
+    return contador
 
 def encontrar_mais_frequentes(wc):
     """ encontra as três mais palavras mais frequentes; a entrada é uma 
     lista de tuplas """
-    tres_palavras = [wc[0][0], wc[1][0]]   
-    
-    if wc[2][1] == wc[3][1]:
-        restante = wc[2:]
-        mesma_freq = [wc[2]]
-        for i in range(len(restante)-1):
-            if restante[i][1] == restante[i+1][1]:  #deixa apenas tuplas que tem a mesma frequencia da 3ª palavra
-                mesma_freq.append(restante[i+1])
-            else:
-                break 
-        mesma_freq = dict(mesma_freq)
-        mesma_freq_ordem_alfabetica = sorted(mesma_freq, key=lambda x: x[0])  #não esta colocando em ordem alfabetica
-        
-        tres_palavras.append(mesma_freq_ordem_alfabetica[0]) 
-    else:
-        tres_palavras.append(wc[2][0]) 
+    tres_palavras = [wc[0][0], wc[1][0], wc[2][0]]  
+
     return tres_palavras
 
 
@@ -106,15 +114,14 @@ def main():
     nome_do_arquivo, stopwords = ler_entrada()  #recebe caminho do arquivo e lista de stopwords
     palavras = ler_arquivo_texto(str(nome_do_arquivo).strip('[]').replace("'", ""))     
     wordcount = descobrir_frequencias(palavras, stopwords)
-    wordcount_ordenado = sorted(wordcount.items(), key = lambda x: x[1],reverse=True )  #gera uma lista de tuplas
-    tres_palavras = encontrar_mais_frequentes(wordcount_ordenado)
-    len_quartil = calcular_quartil_especial(wordcount)
-    tres_palavras_eliminadas = encontrar_mais_frequentes(wordcount_ordenado[len_quartil:])
+    wordcount_ordenado = ordenar_wc(wordcount) #gera uma lista de tuplas
 
-    print(wordcount_ordenado)
+    tres_palavras = encontrar_mais_frequentes(wordcount_ordenado)
+    len_quartil = calcular_quartil_especial(wordcount_ordenado)
+    tres_palavras_eliminadas = encontrar_mais_frequentes(wordcount_ordenado[len_quartil:])
 
     print(str(tres_palavras).strip('[]').replace("'", "").replace(",", ""))  #printar as 3 palavras mais frequentes/ converter str
     print(len_quartil)    #printar len do quartil especial
-    print(str(sorted(tres_palavras_eliminadas)).strip('[]').replace("'", "").replace(",", "")) #printar 3 palavras eliminadas do quartil/ converter str 
+    print(str(tres_palavras_eliminadas).strip('[]').replace("'", "").replace(",", "")) #printar 3 palavras eliminadas do quartil/ converter str 
 
 main() 
