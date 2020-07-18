@@ -55,12 +55,21 @@ def escrever_arquivo_agenda(nome_arquivo, agenda):
     with open(nome_arquivo) as arquivo:
         arquivo.write(str(agenda))
     
-
 def encontrar_evento(evento):
     pass 
 
-def criar_evento(agenda):
-    pass 
+def criar_evento(agenda, nome, descricao, data, hora):
+    """ Cria um novo evento e adiciona ele na agenda"""
+    evento = {
+        "nome": nome, 
+        "descricao": descricao, 
+        "data": data, 
+        "hora": hora
+    }
+    numero = len(agenda) + 1
+    agenda[numero] = evento
+    escrever_arquivo_agenda(agenda)
+    return agenda
 
 def alterar_evento(agenda, evento):
     """Procura evento, altera dict dentro do dict"""
@@ -78,7 +87,7 @@ def main():
     if args.acao == "inicializar":
         inicializar_agenda(agenda)
     elif args.acao == "criar":
-        criar_evento(agenda):
+        criar_evento(agenda, args.nome, args.descricao, args.data, args.hora):
     elif args.acao == "alterar":
         alterar_evento(agenda, args.evento):
     elif args.acao = "remover":
