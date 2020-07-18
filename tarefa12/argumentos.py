@@ -55,8 +55,12 @@ def escrever_arquivo_agenda(nome_arquivo, agenda):
     with open(nome_arquivo) as arquivo:
         arquivo.write(str(agenda))
     
-def encontrar_evento(evento):
-    pass 
+def encontrar_evento(agenda, evento):
+    """Recebe o número do evento e devolve o dict do evento"""
+    for numero in agenda:
+        if numero == evento:
+            return agenda[numero] 
+    return None
 
 def criar_evento(agenda, nome, descricao, data, hora):
     """ Cria um novo evento e adiciona ele na agenda"""
