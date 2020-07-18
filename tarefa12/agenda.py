@@ -19,13 +19,13 @@ a ação correspondente (inicializar, criar, alterar, remover, listar)
 Devolver uma mensagem, informando que a ação foi realizada
 Para listar, saída compatível com os exemplos do teste
 
-AGENDA = {   1: {nome: "" , descricao: "", data: "", hora: ""}, 2: {nome: "" , descricao: "", data: "", hora: ""}, 3:{}   }
+AGENDA = {1: {nome: "" , descricao: "", data: "", hora: ""}, 2: {}, 3:{}}
 
 """
 
 import sys
-import argparse
-import ast  
+import argparse 
+
 
 
 def ler_agenda(nome_arquivo):
@@ -33,15 +33,13 @@ def ler_agenda(nome_arquivo):
     str_agenda = ""
     with open('nome_arquivo') as arquivo:
         str_agenda = arquivo.readline()
-    agenda = ast.literal_eval(str_agenda)
+    agenda = eval(str_agenda)
     return agenda 
 
 def inicializar_agenda(nome_arquivo):
     """Apenas cria arquivo agenda.csv"""
     arquivo = open(nome_arquivo, 'w')    #ao abrir o arquivo, se ele não existe, é criado
     arquivo.close()
-
-    return arquivo
 
 def escrever_arquivo_agenda(nome_arquivo, agenda):
     with open(nome_arquivo, 'w') as arquivo:
@@ -104,16 +102,7 @@ def remover_evento(agenda, identificador):
     agenda.pop(identificador)  #evento é o inteiro chave de agenda 
     return agenda 
 
-def bubble_sort(eventos, identificadores):
-    for _ in range(len(identificadores)-1):
-        for i in range (len(identificadores)-1):
-            if identificadores[i] > identificadores[i+1]:
-                identificadores [i], identificadores[i+1] = identificadores[i+1], identificadores[i]
-                eventos [i], eventos[i+1] = eventos[i+1], eventos[i]
-                
-    return eventos, identificadores
-
-def listar_eventos(agenda, dia):
+def listar_eventos(agenda, data):
     """ Encontra e imprime na tela todos os eventos da agenda na data inserida pelo usuário """
 
     eventos = []
@@ -121,12 +110,10 @@ def listar_eventos(agenda, dia):
     identificadores = agenda.keys()   #precisamos das chaves para acessar os eventos e para saber o numero deles na hora de imprimir
 
     for identificador in identificadores:
-        if agenda[identificador]['data'] == dia:
+        if agenda[identificador]['data'] == data:
             eventos.append(agenda[identificador])    #lista recebe dicts dos eventos 
             numero_eventos.append(identificador)    #lista recebe numero do evento
 
-    if len(eventos) >= 2:
-        eventos, numero_eventos = bubble_sort(eventos, identificadores)
 
     if len(eventos) == 0:   #se len é 0, não há eventos
         print(f"Não existem eventos para o dia {data}!")
@@ -142,10 +129,10 @@ def listar_eventos(agenda, dia):
 
 
 def main():
-
     parser = argparse.ArgumentParser()
-    parser.add_argument("-a", "--agenda", help="nome de sua agenda.", type=str, required=True)
-    parser.add_argument("acao", help="ação sobre a agenda.", type=str)   #não tem --, é digitada diretamente no terminal 
+
+    parser.add_argument("-a", "--agenda", help="nome de sua agenda.", type=str)
+    parser.add_argument("acao", help="ação sobre a agenda.", type=str, required=True)   #não tem --, é digitada diretamente no terminal 
    
     parser.add_argument("--evento", help="identificador do evento.", default= None, type=int)   #evento é inteiro, será a chave do dict agenda
     
@@ -159,18 +146,17 @@ def main():
     if args.acao == "inicializar":
         inicializar_agenda(args.agenda)
     else:
-        agenda = ler_agenda(args.agenda) #lê agenda 
+        agenda = ler_agenda(args.agenda)
         if args.acao == "criar":
-            agenda = criar_evento(agenda, args.nome, args.descricao, args.data, args.hora)  #devolve agenda com novo evento
-            escrever_arquivo_agenda(args.agenda, agenda) #escreve agenda no arquivo csv
+            agenda = criar_evento(agenda, args.nome, args.descricao, args.data, args.hora):  #devolve agenda com novo evento
+            escrever_arquivo_agenda(agenda) #escreve agenda no arquivo csv
         elif args.acao == "alterar":
             agenda = alterar_evento(agenda, args.evento, args.nome, args.descricao, args.data, args.hora)    #devolve a agenda com evento alterado
-            escrever_arquivo_agenda(args.agenda, agenda) #escreve agenda no arquivo csv
-        elif args.acao == "remover":
-            remover_evento(agenda, args.evento) #devolve agenda sem o evento
-            agenda = escrever_arquivo_agenda(args.agenda, agenda) #escreve agenda no arquivo csv
+            escrever_arquivo_agenda(agenda) #escreve agenda no arquivo csv
+        elif args.acao = "remover":
+            agenda = remover_evento(agenda, args.evento) #devolve agenda sem o evento
+            escrever_arquivo_agenda(agenda) #escreve agenda no arquivo csv
         elif args.acao == "listar":
             listar_eventos(agenda, args.data)   #apenas lista eventos da data, não altera a agenda
-
-    
+        
 main()
