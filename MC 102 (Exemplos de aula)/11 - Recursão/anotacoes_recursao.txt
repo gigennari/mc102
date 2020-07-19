@@ -1,0 +1,16 @@
+RECURSÃO
+
+--> chamar a função dentro da própria função
+
+---> não guardar valores intermediários durante a resolução de um 
+problema 
+
+
+Requisitos:
+1) Identificar casos básicos (n pequeno)
+
+2) Resolver caso geral (n grande)
+a) primeiro construímos uma ou mais instâncias menores do mesmo problema;
+b) depois, obtemos soluções para essas instâncias fazendo chamadas recursivas;
+c) finalmente, transformamos as soluções para as instâncias menores a fim de se obter um resultado do problema original.
+
