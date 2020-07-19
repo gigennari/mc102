@@ -51,16 +51,19 @@ ALTURA_A0 = 1189
 def menor_subtipo(w_folha, h_folha, tipo, w, h):
     """ Devolve o menor subtipo da folha em que cabe o retângulo """
 
-    #cria instância menor 
-    h_menor = w_folha
-    w_menor = h_folha // 2
-    tipo_menor = tipo + 1
-
-    #se não cabe na folha menor
-    if w > w_menor or h > h_menor:
-        return tipo_menor 
+    if w > w_folha or h > h_folha:
+        return None 
     else:
-        return menor_subtipo(w_menor, h_menor, tipo_menor, w, h)
+        #cria instância menor 
+        h_menor = w_folha
+        w_menor = h_folha // 2
+        tipo_menor = tipo + 1
+
+        #se não cabe na folha menor
+        if w > w_menor or h > h_menor:
+            return tipo_menor 
+        else:
+            return menor_subtipo(w_menor, h_menor, tipo_menor, w, h)
 
 
 
