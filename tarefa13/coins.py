@@ -43,51 +43,46 @@ Fazer em dict levou MUITO TEMPO para executar; vou fazer por lista e printar den
 
 import sys
 
-def calcular_notas(valor, notas):
+def calcular_notas(valor):
     """Calcula quantas cédulas cabem em um valor, com a menor quantidade de células. Printa quantas cédulas são necessárias
     de cada valor e devolve valor menor que 2 reais para ser dividido em moedas""" 
  
-    while valor > 2.00:
+    notas = [10000, 5000, 2000, 1000, 500, 200]
+
+    while valor > 200:
         for nota in notas:
             quantas_cabem = valor // nota
             valor -= quantas_cabem * nota
             if quantas_cabem >= 1:
-                print(f"{int(quantas_cabem)} nota(s) de R$ {nota:.2f}")
+                print(f"{int(quantas_cabem)} nota(s) de R$ {nota//100:.2f}")
 
     return valor
 
-def calcular_moedas(valor, moedas):
+def calcular_moedas(valor):
     """Vê quais moedas podem decompor um valor, com a menor quantidade possível de moedas;
     printa a quantidade de moedas de cada valor""" 
 
+    moedas = [100, 50, 25, 10, 5, 1]
 
-    if valor > 1:
-            valor -= 1
-            print(f"1 moeda(s) de R$ 1.00")
 
     while valor > 0.00:
         for moeda in moedas:    
             quantas_cabem = valor // moeda
             valor -= quantas_cabem * moeda
             if quantas_cabem >= 1:
-                print(f"{int(quantas_cabem)} moeda(s) de R$ {moeda:.2f}")
+                print(f"{int(quantas_cabem)} moeda(s) de R$ {moeda/100:.2f}")
     
     return 
 
 
 def main():
-    valor = float(input())
+    valor = float(input())*100
     
-    notas = [100.00, 50.00, 20.00, 10.00, 5.00, 2.00]
-    moedas = [1.00, 0.50, 0.25, 0.10, 0.05, 0.01]
-
     print("NOTAS:")
-    restante = calcular_notas(valor, notas) 
+    restante = calcular_notas(valor) 
 
     if restante > 0:
         print("MOEDAS:")
-        moedas = calcular_moedas(restante, moedas)
-    else:
-        sys.exit()
+        moedas = calcular_moedas(restante)
 
 main()
