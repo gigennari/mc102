@@ -28,7 +28,15 @@ caso contrário,
 
 def busca(lista, contador, num):
     """Acha a posição de um número na lista"""
-    pass
+    if contador == len(lista) and lista[contador] != num:
+        return -1
+    else:
+        if lista[contador] == num:
+            return contador
+        else:
+            contador += 1
+            return busca(lista, contador, num)
+
 
 def main():
     lista = input().split()
