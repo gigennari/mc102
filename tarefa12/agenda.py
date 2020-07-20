@@ -19,7 +19,7 @@ a ação correspondente (inicializar, criar, alterar, remover, listar)
 Devolver uma mensagem, informando que a ação foi realizada
 Para listar, saída compatível com os exemplos do teste
 
-AGENDA = {1: {nome: "" , descricao: "", data: "", hora: ""}, 2: {}, 3:{}}
+AGENDA = {1: {nome: "" , descricao: "", data: "", hora: ""}, 2: {}}
 
 """
 
