@@ -39,3 +39,43 @@ na hora de imprimir, se valor da chave for 0, passar
 
 """
 
+def calcular_notas(valor, notas):
+    """Vê quais notas podem decompor um valor inteiro e altera os valores
+    do dict notas; devolve o dict""" 
+    pass
+
+def calcular_moedas(valor, moedas):
+      """Vê quais moedas podem decompor um valor e altera os valores
+    do dict moedas; devolve o dict""" 
+    pass
+
+def main():
+    valor = round(float(input()), 2)
+    
+    inteiro = int(valor)
+    notas = {100.00: 0, 50.00:0, 25.00:0...}
+
+    centavos = valor - inteiro
+    moedas = {1.00:0, 0.50:0, 0.25:0...}
+
+    notas = calcular_notas(inteiro, notas)
+    moedas = calcular_moedas(centavos, moeda)
+
+    chaves_notas = notas.keys()
+    chaves_moedas = moedas.keys()
+
+    print("NOTAS:")
+    for nota in chaves_notas:
+        if notas[nota] == 0:
+            pass
+        else: 
+            print(f"{notas[nota]} nota(s) de R$ {nota}")
+    
+    print("MOEDAS:")
+    for moeda in chaves_moedas:
+        if moedas[moeda] == 0:
+            pass
+        else: 
+            print(f"{moedas[moeda]} moeda(s) de R$ {moeda}")
+
+main()
