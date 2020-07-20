@@ -17,11 +17,17 @@ Note que o mmc é o produto de a e b, divido pelo mdc
 
 def mdc(a, b):
     """ Encontra o maior divisor comum entre dois números recursivamente"""
-    pass
+    if a == b:
+        return a
+    elif a > b:
+        return mdc(a - b, b)
+    else:
+        return mdc(b - a, a)
+
 
 def mmc(a, b):
     """ Calcula o mmc entre dois números, chamando a função mdc recursiva"""
-    pass
+    return a*b / mdc(a,b)
 
 def main():
     numeros = input().split()
