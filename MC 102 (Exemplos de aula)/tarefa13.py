@@ -39,10 +39,24 @@ na hora de imprimir, se valor da chave for 0, passar
 
 """
 
-def calcular_notas(valor, notas):
+def calcular_notas(valor, notas, moedas):
     """Vê quais notas podem decompor um valor inteiro e altera os valores
     do dict notas; devolve o dict""" 
-    pass
+    
+    cedulas = notas.keys()
+
+    while valor > 1.00:
+        for cedula in cedulas:
+            if valor / cedula < 0:
+                pass
+            elif valor / cedula > 0:
+                valor -= cedula
+                notas[cedula] += 1
+
+    if valor == 1:
+        moedas[1.00] += 1   #caso o valor seja ímpar, precisamos add uma moeda de 1 real 
+
+    return notas, moedas
 
 def calcular_moedas(valor, moedas):
       """Vê quais moedas podem decompor um valor e altera os valores
@@ -58,7 +72,7 @@ def main():
     centavos = valor - inteiro
     moedas = {1.00:0, 0.50:0, 0.25:0...}
 
-    notas = calcular_notas(inteiro, notas)
+    notas, moedas = calcular_notas(inteiro, notas, moedas)  #caso o valor seja ímpar, precisamo adicionar uma moeda de 1 real 
     moedas = calcular_moedas(centavos, moeda)
 
     chaves_notas = notas.keys()
