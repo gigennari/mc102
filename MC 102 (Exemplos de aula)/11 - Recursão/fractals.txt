@@ -1,0 +1,18 @@
+Podemos usar recursão para fazer desenhos 
+
+Exemplos:
+Tree fractal
+Cross fractal 
+Cesaro curve fractal
+Sierpinski triangle 
+Dragon curve 
+Snowflake
+C curve
+
+
+dentre muitos outros
+
+Para fazer isso em python, importamos o módulo turtle
+
+from turtle import *
+
