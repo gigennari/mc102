@@ -47,9 +47,9 @@ def calcular_notas(valor, notas, moedas):
 
     while valor > 1.00:
         for cedula in cedulas:
-            if valor / cedula < 0:
+            if valor / cedula < 1 :
                 pass
-            elif valor / cedula > 0:
+            elif valor / cedula > 1:
                 valor -= cedula
                 notas[cedula] += 1
 
@@ -69,9 +69,9 @@ def calcular_moedas(valor, moedas):
 
     while valor > 0.00:
         for moeda in moedas_disponiveis:    
-            if valor / moeda < 0:
+            if (valor / moeda) < 1:
                 pass
-            elif valor / moeda > 0:
+            elif valor / moeda > 1:
                 valor -= moeda
                 moedas[moeda] += 1
 
