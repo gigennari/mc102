@@ -19,7 +19,16 @@ Verifique de novo o caso básico
 
 def maximo(lista):
     """ Encontra o valor máximo de uma lista desordenada recursivamente"""
-    pass
+    
+    if len(lista) == 1:
+        return lista[0]
+    else:
+        if lista [0] > lista[1]:
+            lista.pop(1)
+            return maximo(lista)
+        else:
+            lista.pop(0)
+            return maximo(lista)
 
 def main():
     numeros = input().split()
