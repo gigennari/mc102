@@ -19,8 +19,6 @@ ou seja, é n * (n-1)!
 
 """
 
-
-
 def fatorial(n):
     """Calcula o fatorial de um número n recursivamente"""
     if n == 0:
@@ -32,3 +30,5 @@ def main():
     n = int(input())
 
     print(fatorial(n))
+
+main()
