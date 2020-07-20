@@ -61,7 +61,21 @@ def calcular_notas(valor, notas, moedas):
 def calcular_moedas(valor, moedas):
       """Vê quais moedas podem decompor um valor e altera os valores
     do dict moedas; devolve o dict""" 
-    pass
+    
+    moedas_disponiveis = moedas.keys()
+
+    #como já adicionamos as moedas de 1 real na função calcular notas e o valor é, com certeza, inferior a 1 real, vamos eliminá-lo da lista
+    moedas_disponiveis.pop(0)   #agora moedas_disponiveis = [0.50, 0.25, 0.10, 0.05, 0.01]
+
+    while valor > 0.00:
+        for moeda in moedas_disponiveis:    
+            if valor / moeda < 0:
+                pass
+            elif valor / moeda > 0:
+                valor -= moeda
+                moedas[moeda] += 1
+
+    return moedas
 
 def main():
     valor = round(float(input()), 2)
@@ -72,7 +86,7 @@ def main():
     centavos = valor - inteiro
     moedas = {1.00:0, 0.50:0, 0.25:0...}
 
-    notas, moedas = calcular_notas(inteiro, notas, moedas)  #caso o valor seja ímpar, precisamo adicionar uma moeda de 1 real 
+    notas, moedas = calcular_notas(inteiro, notas, moedas)  #caso o valor seja ímpar, precisamos adicionar uma moeda de 1 real --  passar dict moedas
     moedas = calcular_moedas(centavos, moeda)
 
     chaves_notas = notas.keys()
