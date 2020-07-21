@@ -19,19 +19,24 @@ Entrada: um inteiro não negativo
 31
 Saída: o n-ésimo número da sequencia de fibonacci modificado
 83047505
+
+O tempo de execução diminui usando um dict para armazenar todos os fib já calculados 
 """
 
-def fib(n):
+def fib(n, valores_conhecidos):
     """ Calcula o fibonacci modificado de um inteiro n"""
-    if 0 <= n <=2:
-        return n
+    if n in valores_conhecidos:
+        return valores_conhecidos[n]
     else:
-        return fib(n-1) + fib(n-2) + fib(n-3)
+        intermediario = fib(n-1, valores_conhecidos) + fib(n-2, valores_conhecidos) + fib(n-3, valores_conhecidos)
+        valores_conhecidos[n] = intermediario
+        return valores_conhecidos[n]
 
 
 def main():
     n = int(input())
 
-    print(fib(n))
+    valores_conhecidos = {0:0, 1:1, 2:2}
+    print(fib(n, valores_conhecidos))
 
 main()
