@@ -21,7 +21,6 @@ inicio < fim
 1ª metade
 2ª metade
 
-
 """
 
 def intercalar(lista, inicio, meio, fim):
@@ -35,39 +34,26 @@ def intercalar(lista, inicio, meio, fim):
         if (pointer1 < meio) and (pointer2 < fim):
             if lista[pointer1] < lista[pointer2]:
                 lista_ordenada[i] = lista[pointer1]
-                print(lista[pointer1])
                 pointer1 += 1  
             else:
                 lista_ordenada[i] = lista[pointer2]
-                print(lista[pointer2])
                 pointer2 +=1
-        else:
-            if pointer2 < fim:
-                lista_ordenada[i] = lista[pointer2]
-                print(lista[pointer2])
-                pointer2 += 1
-            elif pointer1 < meio:
-                lista_ordenada[i] = lista[pointer1]
-                print(lista[pointer1])
-                pointer1 += 1
+        if pointer2 <= fim:
+            lista_ordenada[i] = lista[pointer2]
+            pointer2 += 1
+        elif pointer1 <= meio:
+            lista_ordenada[i] = lista[pointer1]
+            pointer1 += 1
 
-        print(lista_ordenada)
     return lista_ordenada
 
 def merge_sort(lista, inicio, fim):
 
-    contador = 0
-    while contador < len(lista):
-        if inicio == fim:
-            return lista
-        else:
-            meio = (inicio + fim) // 2
-            merge_sort(lista, inicio, meio)
-            merge_sort(lista, meio+1, fim)
-            contador += 1
-        
-    ordenada = intercalar(lista, inicio, meio, fim)
-    return ordenada
+    if inicio < fim:
+        meio = (inicio + fim) // 2
+        merge_sort(lista, inicio, meio)
+        merge_sort(lista, meio+1, fim)
+        return intercalar(lista, inicio, meio, fim)
     
 
 
