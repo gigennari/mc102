@@ -23,20 +23,31 @@ caso contrário,
     contador += 1
     verificar novamente lista[contador]
 
+Isso é busca sequencial 
+Busca binária divide lista na metade 
+
+Caso básico: só há 1 elemento na lista 
 
 """
 
-def busca(lista, contador, num):
-    """Acha a posição de um número na lista"""
-    if contador == len(lista) and lista[contador-1] != num:
+def busca(lista, liminf, limsup, num):
+    """ Busca um valor em uma lista, avaliando sempre a metade
+    de um intervalo. Toda vez que atualizamos um limintante, descartamos 
+    metade das possibilidades. Dividir log2(n) vezes para achar o valor"
+    """
+    if liminf == limsup and lista[liminf] != num:
         return -1
     else:
-        if lista[contador] == num:
-            return contador
+        m = (liminf + limsup) // 2  #o // aredondar a divisão para baixo
+        
+        if lista [m] == num:
+            return m
+        elif lista[m] < num:
+            liminf = m + 1
+            return busca(lista, liminf, limsup, num)
         else:
-            contador += 1
-            return busca(lista, contador, num)
-
+            limsup = m - 1
+            return busca(lista, liminf, limsup, num)
 
 def main():
     lista = input().split()
@@ -45,7 +56,7 @@ def main():
     for i in range(len(lista)):
         lista[i] = int(lista[i])
 
-    contador = 0
-    print(busca(lista, contador, num))
+    contador = 0 
+    print(busca(lista, 0, len(lista), num))
 
 main()
