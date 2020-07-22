@@ -60,9 +60,10 @@ def contador(lista, k):
         contador += 1
         menor = encontrar_minimo(lista)
         listaordem.append(menor)
+        lista.remove(min(lista))
         
-    if contador == i:
-            return listaordem[k]
+    if contador == k:
+            return listaordem[k-1]
     
 
 def main():
