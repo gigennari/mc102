@@ -23,46 +23,44 @@ inicio < fim
 
 """
 
-def intercalar(lista, inicio, meio, fim):
-    """ Percorre as duas sublistas, intercalando os valores de modo
-    que a lista fial seja ordenada crescentemente"""
-    pointer1 = inicio
-    pointer2 = meio+1
-    lista_ordenada = [0 for _ in range(len(lista))]
-    
-    for i in range(len(lista)):
-        if (pointer1 < meio) and (pointer2 < fim):
-            if lista[pointer1] < lista[pointer2]:
-                lista_ordenada[i] = lista[pointer1]
-                pointer1 += 1  
-            else:
-                lista_ordenada[i] = lista[pointer2]
-                pointer2 +=1
-        if pointer2 <= fim:
-            lista_ordenada[i] = lista[pointer2]
-            pointer2 += 1
-        elif pointer1 <= meio:
-            lista_ordenada[i] = lista[pointer1]
-            pointer1 += 1
+def intercalar(esquerda, direita):
+    if not len(esquerda):   #se a lista estiver vazia
+        return esquerda
+    if not len(direita):
+        return direita
 
-    return lista_ordenada
+    resultado = []
+    i, j = 0, 0
+    while (len(resultado) < len(esquerda) + len(direita)):  #repetir até intercalar todos 
+        if esquerda[i] < direita[j]:    #se o elemento da lista da esquerda for menor
+            resultado.append(esquerda[i])   #colocar ele na lista resultados
+            i+= 1   #aumentar contador da lista da esquerda
+        else:   #mesma coisa para a lista da direita
+            resultado.append(direita[j])
+            j+= 1
 
-def merge_sort(lista, inicio, fim):
+        if i == len(esquerda) or j == len(direita): #se, durante o loop, uma lista chegar ao fim, add o restante da outra e encerrar
+            resultado.extend(esquerda[i:] or direita[j:])
+            break 
+    return resultado
 
-    if inicio < fim:
-        meio = (inicio + fim) // 2
-        merge_sort(lista, inicio, meio)
-        merge_sort(lista, meio+1, fim)
-        return intercalar(lista, inicio, meio, fim)
-    
+def merge_sort(lista):
 
+    if len(lista) < 2:
+	    return lista
+    else:
+        meio = int(len(lista)/2)
+        esquerda = merge_sort(lista[:meio])
+        direita = merge_sort(lista[meio:])
+        return intercalar(esquerda, direita)
 
 def main():
     numeros = input().split()
+
     for i in range(len(numeros)):
         numeros[i] = int(numeros[i])
 
-    ordenados = merge_sort(numeros, 0, len(numeros)-1)
+    ordenados = merge_sort(numeros)
 
     print(str(ordenados).strip('[]').replace("'", "").replace(",", "")) 
 
