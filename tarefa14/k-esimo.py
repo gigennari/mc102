@@ -34,45 +34,41 @@ comparamos número excluido com numero atual
 se numero atual for menor que o anterior, atulizar minimo
 devolve minimo
 
+Encontrar o mínimo recursivamente não funciona quando há muitos dados. 
+Vamos fazer recursão para contador
+se contador == 0:
+devolver o último item da lista de indices 
+
+caso contrário, chama a função novamente com uma lista menor e subtrair um do contador 
 
 """
 
-def encontrar_minimo(lista):
-    """Econtra o menor numero em uma lista"""
-    if len(lista) == 1:
-        return lista[0]
-    else:
-        minimo = lista[0]
-        minimoatual = encontrar_minimo(lista[1:])
-        if minimoatual < minimo:
-            minimo = minimoatual
-        else:
-            encontrar_minimo(lista[1:])
-        return minimo
-
-
-def contador(lista, k):
+def kesimo(lista, contador):
     """Conta quantas vezes encotramos o valor mínimo de uma lista"""
-    contador = 0
-    listaordem = []
 
-    for i in range(k):
-        contador += 1
-        menor = encontrar_minimo(lista)
-        listaordem.append(menor)
-        lista.remove(min(lista))
+    if contador == 1:
+        menor = lista[0]
+        for numero in lista:
+            if numero < menor:
+                menor = numero
+        return menor
+    else:
+        contador -= 1
+        menor = lista[0]
+        for numero in (lista):
+            if numero < menor:
+                menor = numero
+        i = lista.index(menor)
+        lista.pop(i)
+        return kesimo(lista, contador)
+                
         
-    if contador == k:
-            return listaordem[k-1]
-    
-
 def main():
     lista = input().split()
     for i in range(len(lista)):
         lista[i] = int(lista[i])
     k = int(input())
 
-
-    print(contador(lista, k))
+    print(kesimo(lista, k))
 
 main()
