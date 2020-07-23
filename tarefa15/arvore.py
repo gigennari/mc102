@@ -15,7 +15,7 @@ mesmo subdiretório e se o link não foi acessado antes.
 import re 
 from modulo import*
 
-def criar_arvore(urlinicial, urlbase, urlatual, lista_validas, lista_printadas, recuo):
+def criar_arvore(urlinicial, urlbase, urlatual, lista_validas, lista_printadas):
 
     urlatual = obter_html(urlinicial) #função do módulo, devolve str
     
@@ -45,10 +45,9 @@ def validar_urls(urlatual):
 def impressao_recursiva(lista_validas, lista_printadas, contador):
 
     if contador == len(lista_validas):
-        urlinicial = lista_validas[i]
-            recuo = ""
-            lista_validas = []
-            return criar_arvore(urlinicial, urlbase, urlatual, lista_validas, lista_printadas, contador)
+        urlinicial = lista_validas[contador]
+        lista_validas = []
+        return criar_arvore(urlinicial, urlbase, urlatual, lista_validas, lista_printadas)
     else:
         for i, url in enumerate(lista_validas):
             if nao_visitado(url, lista_printadas):
@@ -56,7 +55,7 @@ def impressao_recursiva(lista_validas, lista_printadas, contador):
                 lista_printadas.append(url)
                 novaurl = lista_validas[contador]
                 contador += 1
-                impressao_recursiva(lista_validas, lista_printadas, contador)
+            impressao_recursiva(lista_validas, lista_printadas, contador)
 
 
 def nao_visitado(url, lista_printadas):
@@ -73,7 +72,7 @@ def main():
     urlatual = urlinicial   #deve ser alterado pelo regex assim que receber
     urlbase = urlinicial 
     lista_printadas = []   #acumula todas as url já printadas na tela para evitar repetição
-    recuo = ""  #não há espaçamento para o primeiro link
-    arvore = criar_arvore(urlinicial, urlbase, urlatual, lista_printadas, recuo)
+    lista_validas = []
+    arvore = criar_arvore(urlinicial, urlbase, urlatual, lista_validas, lista_printadas)
 
 main()
