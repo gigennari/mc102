@@ -15,57 +15,53 @@ mesmo subdiretório e se o link não foi acessado antes.
 import re 
 from modulo import*
 
-def criar_arvore(urlinicial, urlbase, urlatual, lista_validas, lista_arvore, recuo):
+def criar_arvore(urlinicial, urlbase, urlatual, lista_validas, lista_printadas, recuo):
 
     urlatual = obter_html(urlinicial) #função do módulo, devolve str
     
-    lista_validas = validar_urls()
+    lista_validas = validar_urls(urlatual)
 
-    verificar_condicoes_e_imprimir()
+    impressao_recursiva(lista_validas, lista_printadas, 0)
     
 
-def validar_urls(lista_todas, urlinicial, urlbase):
-       
-    lista_todas =            #como encontrar todas?
+def validar_urls(urlatual):
 
     #href/regex
     href = [""] 
-    regex = r'href="(.*?)"' 
+    padrao = r'href="(.*?)"'    #padrão do regex; ? nongreedy
     
     #re.findall()
-    lista_todas = re.findall(regex, lista_todas)      
+    lista_todas = re.findall(padrao, urlatual)      
 
     #verficar se todas a urls são válidas --> lista_validas
     lista_validas = []
     for url in lista_todas:
-        if eh_url_valida(url, url_inicial): #se for uma url válida (exclui, por exemplos, links para o youtube e outros sites)
+        if eh_url_valida(url, urlatual): #se for uma url válida (exclui, por exemplos, links para o youtube e outros sites)
             lista_validas.append(url)   #add à lista de urls válidas
 
     return lista_validas
+            
 
-def verificar_condicoes_e_imprimir():
-    
-    #verficar se a url em lista_validas tem o mesmo subdiretório e ainda não foi printada
-    for i, url in enumerate(lista_validas):
+def impressao_recursiva(lista_validas, lista_printadas, contador):
 
-        if subdiretorio_igual() and nao_visitado(url, lista_arvore):
-            recuo += "  "
-            print(recuo+url)
-            lista_arvore.append(url, lista_arvore)    #registrar todas as urls já visitadas
-        else:
-            urlatual = lista_validas[i]
+    if contador == len(lista_validas):
+        urlinicial = lista_validas[i]
             recuo = ""
             lista_validas = []
-            return criar_arvore(urlinicial, urlbase, urlatual, lista_validas, lista_arvore, recuo)
+            return criar_arvore(urlinicial, urlbase, urlatual, lista_validas, lista_printadas, contador)
+    else:
+        for i, url in enumerate(lista_validas):
+            if nao_visitado(url, lista_printadas):
+                print(2 * contador * ' ' + url)
+                lista_printadas.append(url)
+                novaurl = lista_validas[contador]
+                contador += 1
+                impressao_recursiva(lista_validas, lista_printadas, contador)
 
 
-def subdiretorio_igual(urlbase, url):
-    """Verifica se um link encontrado está no mesmo subdiretório do link atual"""
-    pass
-
-def nao_visitado(url, lista_arvore):
+def nao_visitado(url, lista_printadas):
     """Procura se um url já foi visitado e registrado na árvore"""
-    if url not in lista_arvore:
+    if url not in lista_printadas:
         return True
     else:
         return False 
@@ -75,9 +71,9 @@ def main():
     urlinicial = input()
 
     urlatual = urlinicial   #deve ser alterado pelo regex assim que receber
-    urlbase = urlinicial #deve ser alterado pelo regex assim que receber
-    lista_arvore = []   #acumula todas as url já printadas na tela para evitar repetição
+    urlbase = urlinicial 
+    lista_printadas = []   #acumula todas as url já printadas na tela para evitar repetição
     recuo = ""  #não há espaçamento para o primeiro link
-    arvore = criar_arvore(urlinicial, urlbase, urlatual, lista_arvore, recuo)
+    arvore = criar_arvore(urlinicial, urlbase, urlatual, lista_printadas, recuo)
 
 main()
