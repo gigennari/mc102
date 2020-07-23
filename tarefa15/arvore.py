@@ -19,7 +19,7 @@ mesmo subdiretório e se o link não foi acessado antes.
 import re 
 from modulo import*
 
-def criar_arvore(urlbase, urlatual, lista_validas, lista_arvore, recuo):
+def criar_arvore(urlinicial, urlbase, urlatual, lista_validas, lista_arvore, recuo):
 
     html_url_atual = obter_html(urlinicial) #função do módulo, devolve str
     
@@ -46,12 +46,19 @@ def subdiretorio_igual(urlatual, urlencontrado):
 
 def nao_visitado(url, lista_arvore):
     """Procura se um url já foi visitado e registrado na árvore"""
-    pass
+    if url not in lista_arvore:
+        return True
+    else:
+        return False 
 
 
 def main():
     urlinicial = input()
 
-    arvore = criar_arvore()
+    urlatual = urlinicial   
+    urlbase = urlinicial #deve ser alterado pelo regex assim que receber
+    lista_arvore = []   #acumula todas as url já printadas na tela para evitar repetição
+    recuo = ""  #não há espaçamento para o primeiro link
+    arvore = criar_arvore(urlinicial, urlbase, urlatual, lista_arvore, recuo)
 
 main()
