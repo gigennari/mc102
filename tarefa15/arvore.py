@@ -25,7 +25,7 @@ def criar_arvore(urlinicial, urlbase, urlatual, lista_validas, lista_printadas):
     lista_validas = validar_urls(urlinicial, urlbase, htmlatual)
 
     contador = 0
-    impressao_recursiva(lista_validas, lista_printadas, contador)
+    impressao_recursiva(urlinicial, urlbase, lista_validas, lista_printadas, contador)
     
 
 def validar_urls(urlinicial, urlbase, urlatual):
@@ -47,7 +47,7 @@ def validar_urls(urlinicial, urlbase, urlatual):
     return lista_validas
             
 
-def impressao_recursiva(lista_validas, lista_printadas, contador):
+def impressao_recursiva(urlinicial, urlbase, lista_validas, lista_printadas, contador):
     """ Printa as urls que ainda não foram printadas. Quando toda a lista de urls válidas já foi percorrida, chama criar árvore. """
 
     if contador == len(lista_validas):
@@ -60,8 +60,11 @@ def impressao_recursiva(lista_validas, lista_printadas, contador):
                 print(2 * contador * ' ' + url)
                 lista_printadas.append(url)
                 contador += 1
-                
-                impressao_recursiva(lista_validas, lista_printadas, contador)
+                novos_validos = validar_urls(urlinicial, urlbase, url)  #como obter os exs de fixação do teste 1?
+                if len(novos_validos) != 0:            
+                    impressao_recursiva(urlinicial, urlbase, novos_validos, lista_printadas, contador)
+                else:
+                    impressao_recursiva(urlinicial, urlbase, novos_validos, lista_printadas, contador)
 
        
 def nao_visitado(url, lista_printadas):
