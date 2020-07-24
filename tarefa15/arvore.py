@@ -20,9 +20,9 @@ from modulo import*
 def criar_arvore(urlbase, urlatual, lista_validas, lista_printadas, lista_ramificada, contador):
     """Recebe a url inicial, converte para hatml, chama a função validar urls e depois imprime recursivamente as urls"""
 
-    lista_validas = validar_urls(urlbase, urlatual)
-
+    
     contador = 0
+
     impressao_recursiva(urlbase, lista_validas, lista_printadas, contador)
     
 
@@ -32,7 +32,7 @@ def validar_urls(urlbase, urlatual):
 
     #href/regex
     href = [""] 
-    padrao = r'href="(.*?)"'    #padrão do regex; nongreedy
+    padrao = r'(?<=href=["\']).+?(?=["\'])'    #padrão do regex; nongreedy
     
     #re.findall()
     lista_todas = re.findall(padrao, htmlatual)      
@@ -41,30 +41,30 @@ def validar_urls(urlbase, urlatual):
     lista_validas = [] 
     for i in range(len(lista_todas)):
         lista_todas[i] = resolver_url(lista_todas[i], urlbase)
-        if eh_url_valida(lista_todas[i], urlbase): #se for uma url válida (exclui, por exemplos, links para o youtube e outros sites)
+        if eh_url_valida(lista_todas[i], urlbase) and lista_todas[i] not in lista_validas:#se for uma url válida (exclui, por exemplos, links para o youtube e outros sites)
             lista_validas.append(lista_todas[i])   #add à lista de urls válidas
+    
     return lista_validas
 
 def impressao_recursiva(urlbase, lista_validas, lista_printadas, lista_ramificada, contador):
     """ Printa as urls que ainda não foram printadas. Quando toda a lista de urls válidas já foi percorrida, chama criar árvore. """
 
-
     for i, j in enumerate(lista_validas):
-        if i == 0 and j not in lista_printadas():
-            lista_ramificada.append((" ")*contador + i)
+        if i == 0 and j not in lista_printadas:
+            lista_ramificada.append((" ")*contador + j)
             lista_printadas.append(j)
             contador += 2
         else:
             if j not in lista_printadas:
-                lista_ramificada.append((" ")*contador + i)
+                lista_ramificada.append((" ")*contador + j)
                 lista_printadas.append(j)
-                novos_validos = validar_urls(urlinicial, urlbase, j)
+                novos_validos = validar_urls(urlbase, j)
+                print(novos_validos) 
                 if len(novos_validos) != 0:
-                    contador += 2
-                    impressao_recursiva(urlbase, novos_validos, lista_printadas, lista_ramificada, contador) 
+                    impressao_recursiva(urlbase, novos_validos, lista_printadas, lista_ramificada, contador + 2) 
                 else:
-                    impressao_recursiva(urlbase, lista_validas, lista_printadas, lista_ramificada, contador)
-
+                    impressao_recursiva(urlbase, lista_validas, lista_printadas, lista_ramificada, 0)
+    return lista_ramificada 
 
 
 '''
@@ -92,14 +92,15 @@ def impressao_recursiva(urlbase, lista_validas, lista_printadas, contador):
 def main():
     urlinicial = input()
 
-    urlbase = validar_urls(urlinicial, urlinicial)
+    lista_validas = validar_urls(urlinicial, urlinicial)
 
-    urlatual = urlbase 
+    urlbase = urlinicial
 
     lista_printadas = []   #acumula todas as url já printadas na tela para evitar repetição
-    lista_validas = []
     lista_ramificada = []
-    contador = 0
-    arvore = criar_arvore(urlbase, urlatual, lista_validas, lista_printadas, lista_ramificada, contador)
+    arvore = impressao_recursiva(urlbase, lista_validas, lista_printadas, lista_ramificada, 0)
+
+    for i in arvore:
+        print(i)
 
 main()
