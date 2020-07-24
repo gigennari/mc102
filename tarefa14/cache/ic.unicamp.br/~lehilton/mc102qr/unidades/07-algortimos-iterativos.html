@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    Algoritmos e Programação de Computadores
+    - Algoritmos iterativos
+  </title>
+
+  <meta name="keywords" content="MC102, Algoritmos e Programação de Computadores, Python">
+  <meta name="description" content="Página da disciplina de MC102 para turma QR">
+  <meta name="author" content="Lehilton Pedrosa">
+
+  <!-- Bootstrap core CSS -->
+  <link href="../dist/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Theme css -->
+  <link href="../dist/css/main.min.css" rel="stylesheet">
+
+  <!-- Prism -->
+  <!-- <link href="../dist/vendor/prism/prism.css" rel="stylesheet" /> -->
+</head>
+<body >
+
+  <body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="../index.html">MC102</a>
+
+
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+      aria-label="Toggle navigation">
+      Menu
+      <i>&#9776;</i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item top back-to-top-link">
+          <a class="nav-link" href="#"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>topo</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="../index.html">voltar</a>
+        </li>
+
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Header -->
+<header class="masthead"   style="background-image: url('../images/home-bg.jpg')" >
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-heading">
+
+          <h1 >Algoritmos iterativos</h1>
+
+
+          <span class="meta">Terça, 28 de abril de 2020</span>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+
+
+      <div class="col-lg-8 col-md-10 mx-auto">
+
+        <p>Já aprendemos razoavelmente bem a linguagem de Python. Vimos como
+escrever programas que comandos sequenciais e condicionais <code class="language-text">if</code>,
+comandos iterativos <code class="language-text">for</code> e <code class="language-text">while</code> e a organizar e chamar funções.
+Também vimos como declarar variáveis e criar listas. Nesta unidade,
+iremos explorar um pouco como utilizar tudo isso para resolver
+problemas, alguns mais simples, outros um pouco mais complicados.</p>
+<h1 id="iteracoes-simples-e-variaveis-iteradoras">Iterações simples e variáveis iteradoras</h1>
+<p>Vamos revisar alguns trechos de códigos triviais, mas vamos estudar um
+pouco mais os detalhes do que está acontecendo. Primeiro, vamos
+imprimir os 100 primeiros números inteiros.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">100</span>):
+    <span style="color: #008000">print</span>(i)
+</pre><p>Esse trecho usa diretamente o comando <code class="language-text">for</code>, que é utilizado quando
+queremos percorrer sequências, no caso o intervalo <code class="language-text">range(100)</code> que
+corresponde a uma sequência de números $0, 1, \dots, 99$. Essa é a maneira
+natural de resolver esse problema em Python, assim ela esconde uma série
+de detalhes sobre o nosso algoritmo.</p>
+<p>Para entender o que o computador faz quando executamos um código
+como esse, é melhor reescrever o trecho de uma maneira equivalente, mas
+utilizando instruções mais simples, i.e., de mais baixo nível de abstração.</p>
+<pre class="highlightlanguage-python">i <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+<span style="color: #008000; font-weight: bold">while</span> i <span style="color: #666666">&lt;</span> <span style="color: #666666">100</span>:
+    <span style="color: #008000">print</span>(i)
+    i <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+</pre><p>Agora podemos fazer várias observações. A variável <code class="language-text">i</code> está
+intimamente ligada ao laço iterativo; como no exemplo ela conta o
+número de iterações executadas, damos a ela o nome de variável
+<strong>contadora</strong>. Podemos identificar partes relevantes que acessam ou
+modificam o valor de <code class="language-text">i</code>.</p>
+<ol>
+<li>
+<p><strong>Inicialização</strong>. A variável contadora é inicializada em <code class="language-text">i = 0</code>;
+inicializar significa associar um valor inicial adequado antes do
+primeiro uso.</p>
+</li>
+<li>
+<p><strong>Condição</strong>. Testamos uma condição para continuar executando o
+laço em <code class="language-text">i &lt; 100</code>. Alguma vezes é útil pensar que o teste irá
+falhar apenas quando atingirmos uma condição desejada (ter impresso
+100 números). Observe que imediatamente depois do laço, o valor de
+<code class="language-text">i</code> é igual a 100.</p>
+</li>
+<li>
+<p><strong>Atualização</strong>. A variável é atualizada com <code class="language-text">i += 1</code>. Dentro do
+corpo do laço deve haver algum mecanismo para atualizar a variável
+contadora de forma que, em algum momento, a condição falhe.</p>
+</li>
+</ol>
+<p>A figura abaixo tem um código escrito em outra linguagem de
+programação. Você é capaz de identificar a inicialização, a condição e
+a atualização?</p>
+<img src="figs/joke.png" style="width: 100%; max-width: 600px;">
+<p>De maneira mais geral, podemos ter várias variáveis associadas a um
+laço. Como nem sempre essas variáveis contam o número de iterações
+executadas, costumamos chamá-las de variáveis <strong>acumuladoras</strong>, já que
+elas acumulam os resultados das operações de atualização. A seguinte
+função imprime as primeiras <code class="language-text">n</code> potências na base dois.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">imprimir_potencias</span>(n):
+    i <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    pot <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    <span style="color: #008000; font-weight: bold">while</span> i <span style="color: #666666">&lt;</span> <span style="color: #666666">10</span>:
+        <span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;2^</span><span style="color: #BB6688; font-weight: bold">{i}</span><span style="color: #BA2121"> = </span><span style="color: #BB6688; font-weight: bold">{pot}</span><span style="color: #BA2121">&quot;</span>)
+        i <span style="color: #666666">=</span> i <span style="color: #666666">+</span> <span style="color: #666666">1</span>
+        pot <span style="color: #666666">=</span> <span style="color: #666666">2</span> <span style="color: #666666">*</span> pot
+</pre><p>Reflita sobre qual é o valor de <code class="language-text">i</code> e <code class="language-text">pot</code> imediatamente
+depois de terminado o laço.</p>
+<p>Vamos tentar responder uma pergunta um pouco mais fundamental: será
+que um computador que tem operação de divisão é mais poderoso do que
+um que não tem? Para responder isso, vamos resolver um exercício rápido.</p>
+<blockquote>
+<p>Calcule a divisão inteira de dois números usando apenas soma e
+subtração.</p>
+</blockquote>
+<p>Aqui estamos deliberadamente limitando o nosso computador para não
+utilizar a operação de divisão. Primeiro, vamos escrever um algoritmo.
+A entrada são dois números, um $dividendo$ e um $divisor$.</p>
+<ol>
+<li>$residuo \gets dividendo$</li>
+<li>$contador \gets 0$</li>
+<li>
+Enquanto $residuo \geq divisor$:<ol>
+<li>$residuo \gets residuo - divisor$</li>
+<li>$contador \gets contador + 1$</li>
+</ol>
+</li>
+<li>Exiba $contador$</li>
+</ol>
+<p>Repare que nesse pequeno algoritmo, temos uma variável acumuladora que
+decresce de valor. Reflita sobre a correção desse algoritmo e faça
+alguns testes pequenos para se convencer. Uma possível implementação
+em Python seria:</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">divisao_inteira</span>(dividendo, divisor):
+    residuo <span style="color: #666666">=</span> dividendo
+    contador <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    <span style="color: #008000; font-weight: bold">while</span> residuo <span style="color: #666666">&gt;=</span> divisor:
+        residuo <span style="color: #666666">=</span> residuo <span style="color: #666666">-</span> divisor
+        contador <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+    <span style="color: #008000; font-weight: bold">return</span> contador
+</pre><p>Você poderia resolver esse problema usando um <code class="language-text">for</code> ao invés de
+<code class="language-text">while</code>?</p>
+<h1 id="comandos-iterativos-aninhados">Comandos iterativos aninhados</h1>
+<p>Eventualmente, queremos executar um comando iterativo no corpo de um
+outro comando iterativo. Na maioria das vezes, iremos lidar com duas
+variáveis contadoras simultaneamente. Por isso, é importante prestar
+atenção no nomes das variáveis e como e quando elas são alteradas.</p>
+<p>Observe e procure entender o seguinte trecho:</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">imprimir</span>(m, n):
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(m):
+        <span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;Linha </span><span style="color: #BB6688; font-weight: bold">{i}</span><span style="color: #BA2121">:&quot;</span>, end<span style="color: #666666">=</span><span style="color: #BA2121">&quot;&quot;</span>)
+        <span style="color: #008000; font-weight: bold">for</span> j <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n):
+            <span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot; (</span><span style="color: #BB6688; font-weight: bold">{i}</span><span style="color: #BA2121">,</span><span style="color: #BB6688; font-weight: bold">{j}</span><span style="color: #BA2121">)&quot;</span>, end<span style="color: #666666">=</span><span style="color: #BA2121">&quot;&quot;</span>)
+        <span style="color: #008000">print</span>()
+</pre><p>Essa função deve imprimir algo como</p>
+<pre class="highlight">Linha 0: (0,0) (0,1) (0,2) (0,3)
+Linha 1: (1,0) (1,1) (1,2) (1,3)
+Linha 2: (2,0) (2,1) (2,2) (2,3)
+</pre><p>Quando temos comandos iterativos aninhados como o anterior,
+normalmente falamos do laço externo e do laço interno. Iremos dizer
+que para cada valor <strong>fixado</strong> da variável <code class="language-text">i</code>, percorremos com
+variável <code class="language-text">j</code>. Vamos ver outro exemplo, uma pouco mais concreto, mas
+igualmente entediante:</p>
+<pre class="highlightlanguage-python">media_provas <span style="color: #666666">=</span> <span style="color: #666666">0.0</span>
+<span style="color: #008000; font-weight: bold">for</span> prova <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, <span style="color: #666666">4</span>):
+    nota_prova <span style="color: #666666">=</span> <span style="color: #666666">0.0</span>
+    <span style="color: #008000; font-weight: bold">for</span> questao <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, <span style="color: #666666">11</span>):
+        <span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;Digite a nota questao </span><span style="color: #BB6688; font-weight: bold">{questao}</span><span style="color: #BA2121"> da prova </span><span style="color: #BB6688; font-weight: bold">{prova}</span><span style="color: #BA2121">: &quot;</span>)
+        nota_questao <span style="color: #666666">=</span> <span style="color: #008000">float</span>(<span style="color: #008000">input</span>())
+        nota_prova <span style="color: #666666">+=</span> nota_questao
+    media_provas <span style="color: #666666">+=</span> nota_prova
+media_provas <span style="color: #666666">=</span> media_provas <span style="color: #666666">/</span> <span style="color: #666666">3.0</span>
+<span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;A média das provas foi </span><span style="color: #BB6688; font-weight: bold">{media_provas}</span><span style="color: #BA2121">&quot;</span>)
+</pre><h1 id="lacos-infinitos">Laços infinitos</h1>
+<p>Quando um programa executa indefinidamente um mesmo conjunto de
+instruções de um laço, então esse é um <strong>laço infinito</strong>. Por esse
+motivo, algumas vezes dizemos que o programa está ou entrou em
+<strong>loop</strong>. Isso ocorre por um erro no programa, que faz com que o laço
+nunca atinja a sua condição de parada. A causa pode ser um mero erro
+de digitação, ou alguma condição especial não tratada pelo algoritmo.</p>
+<p>Vamos criar um programa para imprimir o triângulo como o abaixo,
+mas com $n$ linhas.</p>
+<pre class="highlight">**********
+*********
+********
+*******
+******
+*****
+****
+***
+**
+*
+</pre><p>Um candidato a programa seria.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">triangulo</span>(n):
+    i <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+    j <span style="color: #666666">=</span> n
+    <span style="color: #008000; font-weight: bold">while</span> i <span style="color: #666666">&lt;=</span> n:
+        i <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+        <span style="color: #008000; font-weight: bold">while</span> i <span style="color: #666666">&lt;</span> j:
+            <span style="color: #008000">print</span>(<span style="color: #BA2121">&#39;*&#39;</span>, end<span style="color: #666666">=</span><span style="color: #BA2121">&quot;&quot;</span>)
+            i <span style="color: #666666">=</span> i <span style="color: #666666">+</span> <span style="color: #666666">1</span>
+        <span style="color: #008000">print</span>()
+        j <span style="color: #666666">=</span> j <span style="color: #666666">-</span> <span style="color: #666666">1</span>
+</pre><p>Esse programa imprime o triângulo desejado, mas continua executando
+indefinidamente. Se você quiser parar a execução terá que instruir o
+seu terminal a finalizar o processo, normalmente apertando-se as
+teclas <code class="language-text">CTRL + C</code> no seu terminal. O problema não está na ideia do
+algoritmo, mas no fato de que reusamos uma variável para representar
+dois valores distintos! Descubra qual é esse erro, explique porque a
+condição de parada nunca é alcançada e corrija o programa.</p>
+<h2 id="comandos-nao-estruturados">Comandos não estruturados</h2>
+<p>Algumas vezes, a condição de parada escrita logo depois do comando
+<code class="language-text">while</code> nunca é alcançada, mas o programa não entra em loop. Já vimos
+um caso desses, aqui está outro exemplo:</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">ler_inteiro</span>():
+    <span style="color: #008000; font-weight: bold">while</span> <span style="color: #008000; font-weight: bold">True</span>:
+        string_lida <span style="color: #666666">=</span> <span style="color: #008000">input</span>(<span style="color: #BA2121">&quot;Digite um número inteiro não negativo: &quot;</span>)
+        <span style="color: #008000; font-weight: bold">if</span> string_lida<span style="color: #666666">.</span>isdigit():
+            <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">int</span>(string_lida)
+</pre><p>Essa função insiste em ler um número do teclado até que o usuário
+digite uma entrada válida composta somente de números decimais. Repare
+que saímos do laço com um comando <code class="language-text">return</code>. O mesmo efeito poderia ser
+utilizado com o comando <code class="language-text">break</code>.</p>
+<p>Uma atenção especial deve ser dada a esses comandos: <code class="language-text">break</code>,
+<code class="language-text">continue</code>, <code class="language-text">return</code> (quando utilizado dentro de um laço). Eles são
+comandos <strong>não estruturados</strong>, o que significa que algumas das
+propriedades dos laços que normalmente esperaríamos não serão
+satisfeitas. Por exemplo, considere o trecho:</p>
+<pre class="highlightlanguage-python">i <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+<span style="color: #008000; font-weight: bold">while</span> i <span style="color: #666666">&lt;</span> <span style="color: #666666">10</span>:
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;Linha </span><span style="color: #BB6688; font-weight: bold">{i}</span><span style="color: #BA2121">:&quot;</span>, end<span style="color: #666666">=</span><span style="color: #BA2121">&quot;&quot;</span>)
+    <span style="color: #008000; font-weight: bold">if</span> i <span style="color: #666666">%</span> <span style="color: #666666">2</span> <span style="color: #666666">==</span> <span style="color: #666666">0</span>:
+        <span style="color: #008000; font-weight: bold">continue</span>
+    <span style="color: #008000; font-weight: bold">if</span> i <span style="color: #666666">==</span> <span style="color: #666666">4</span>:
+        <span style="color: #008000; font-weight: bold">break</span>
+    <span style="color: #008000; font-weight: bold">for</span> j <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(i):
+        <span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot; </span><span style="color: #BB6688; font-weight: bold">{j}</span><span style="color: #BA2121">&quot;</span>, end<span style="color: #666666">=</span><span style="color: #BA2121">&quot;&quot;</span>)
+    <span style="color: #008000">print</span>()
+    i <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+</pre><p>Esse programa entra em loop e tem um comportamento bem difícil de
+entender. O motivo é que a variável contadora não é atualizada em toda
+iteração. Para corrigir isso, mova a linha <code class="language-text">i += 1</code> para o início do
+corpo do laço. Qual o valor de <code class="language-text">i</code> quando o programa termina? Tente
+determinar a saída desse programa.</p>
+<h1 id="fauna">Fauna</h1>
+<p>Vamos ver um problema um pouco mais interessante do que os anteriores
+— pelo menos um pouco mais animal.</p>
+<blockquote>
+<p>Um coelho está a dois metros de sua esposa. Para chegar até ela, ele
+salta uma vez a cada minuto. Primeiro dá um saldo de um metro,
+depois de meio metro, depois de um quarto de metro e assim por
+diante. Em quanto tempo ele chegará até ela?</p>
+<img src="figs/coelho.svg" style="width: 100%; max-width: 500px;">
+</blockquote>
+<p>Parece fácil resolver esse problema. Basta uma variável acumuladora
+para guardar a distância percorrida e outra para guardar o tamanho
+do próximo passo. Tente resolver esse exercício. Eu escreveria o
+seguinte:</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">tempo_gasto_coelho</span>():
+    numero_saltos <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    distancia <span style="color: #666666">=</span> <span style="color: #666666">0.0</span>
+    proximo_salto <span style="color: #666666">=</span> <span style="color: #666666">1.0</span>
+
+    <span style="color: #008000; font-weight: bold">while</span> distancia <span style="color: #666666">&lt;</span> <span style="color: #666666">2.0</span>:
+        numero_saltos <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+        distancia <span style="color: #666666">+=</span> proximo_salto
+        proximo_salto <span style="color: #666666">=</span> proximo_salto <span style="color: #666666">/</span> <span style="color: #666666">2</span>
+
+    <span style="color: #008000; font-weight: bold">return</span> numero_saltos
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">main</span>():
+    tempo <span style="color: #666666">=</span> tempo_gasto_coelho()
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;O coelho gasta </span><span style="color: #BB6688; font-weight: bold">{tempo}</span><span style="color: #BA2121"> minutos&quot;</span>)
+
+main()
+</pre><p>Você já deve estar desconfiado — e com razão — de que esse programa
+tem algum erro. De fato, não faz muito tempo você deve ter aprendido a
+calcular soma de uma progressão geométrica. Nesse problema, a
+distância percorrida pelo coelho é dada pela soma dos inversos de $n$
+potências na base dois,</p>
+<p>$$
+\mbox{distância} = 1 + \frac{1}{2} + \frac{1}{4} + \dots +  \frac{1}{2^n},
+$$</p>
+<p>onde $n$ é o número de saltos do coelho. Se você tem boa memória, deve
+se lembrar de que essa soma é sempre menor que $2$ e só é igual a $2$
+quando $n = \infty$. Parece razoável então supor que esse é mais um
+exemplo de programa que entra em laço infinito. Execute esse programa
+e explique o seu comportamento!</p>
+<p>Vamos agora mudar de animal.</p>
+<blockquote>
+<p>Uma tartaruga está a 22m de sua casa. No primeiro minuto, ela anda
+um metro, no segundo minuto, mais cansada, meio metro, no terceiro,
+um terço de metro e assim por diante. Em quanto tempo ela chegará
+até a casa?</p>
+<img src="figs/tartaruga.svg" style="width: 100%; max-width: 500px;">
+</blockquote>
+<p>Não é difícil modificar o programa anterior para calcular o tempo que
+a tartaruga irá gastar. Faça isso.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">tempo_gasto_tartaruga</span>():
+    numero_passo <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    distancia <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    proximo_passo <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+
+    <span style="color: #008000; font-weight: bold">while</span> distancia <span style="color: #666666">&lt;</span> <span style="color: #666666">22</span>:
+        numero_passo <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+        distancia <span style="color: #666666">+=</span> proximo_passo
+        proximo_passo <span style="color: #666666">=</span> <span style="color: #666666">1.0</span> <span style="color: #666666">/</span> numero_passo
+
+    <span style="color: #008000; font-weight: bold">return</span> numero_passo
+</pre><p>Dessa vez, devemos esperar que o programa pare. Isso porque você já
+sabe ou irá aprender em breve que a soma da série harmônica diverge,
+isso é, para qualquer número real $D$, sempre existe um número $n$ tal
+que</p>
+<p>$$
+1 + \frac{1}{2} + \frac{1}{3} + \dots + \frac{1}{n} &gt; D.
+$$</p>
+<p>Assim, existe um número $n_0$ para o qual a soma é maior do que $22$.
+Portanto, no momento que nossa função <code class="language-text">tempo_gasto_tartaruga</code> tiver
+executado $n_0$ iterações, a condição do <code class="language-text">while</code> irá falhar e o
+programa irá terminar.</p>
+<p>Execute o programa acima e descubra e verifique se o programa
+realmente para e explique o comportamento do programa. Algumas vezes,
+quando estamos estudando um programa, é útil investigar como as
+variáveis contadoras e acumularas estão se modificando. Para isso
+usamos um debugger ou adicionamos instruções de impressão no corpo do
+código. Nesse exemplo, eu adicionaria as seguintes linhas no final do
+corpo do <code class="language-text">while</code>:</p>
+<pre class="highlightlanguage-python">        <span style="color: #008000; font-weight: bold">if</span> numero_passo <span style="color: #666666">%</span> <span style="color: #666666">1000000</span> <span style="color: #666666">==</span> <span style="color: #666666">0</span>:
+            <span style="color: #008000">print</span>(distancia)
+</pre><h1 id="lendo-e-simulando-codigo">Lendo e simulando código</h1>
+<p>Enquanto aprender a programar implica em aprender a escrever um
+programa, na maior parte do tempo em que estivermos programando vamos
+estar fazendo o inverso: lendo código. Os trechos de códigos que lemos
+algumas vezes são trechos de código que escrevemos recentemente, mas
+serão principalmente trechos de códigos escritos por outra pessoa, ou
+que nós mesmos escrevemos há muito tempo.</p>
+<p>A razão para termos de ler programas são diversas. Em particular,
+lemos código porque ele não faz o que esperávamos que fizesse. Entre
+os motivos para isso ocorrer, já sabemos que estão os <em>erros de
+programação</em>, quando utilizamos instruções de maneira equivocada, ou
+<em>erros de lógica</em>, quando o algoritmo que projetamos não resolve o
+problema correspondente.</p>
+<p>O nosso desafio é, portanto, descobrir um erro. Independente do tipo
+de erro, a principal ferramenta para identificá-lo é a <strong>simulação
+de código</strong>. Sabemos que ela pode ser feita de duas maneiras distintas</p>
+<ol>
+<li>
+<p>Automaticamente, utilizando um debugger. Normalmente chamamos esse
+processo de depuração ou <strong>debugging</strong>.</p>
+</li>
+<li>
+<p>Manualmente, utilizando lápis e papel. Normalmente, chamamos esse
+processo de <strong>teste de mesa</strong>.</p>
+</li>
+</ol>
+<p>Vamos ver um exemplo:</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">desenho</span>(n):
+    m <span style="color: #666666">=</span> <span style="color: #666666">2</span> <span style="color: #666666">*</span> n <span style="color: #666666">-</span> <span style="color: #666666">1</span>
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n):
+        j <span style="color: #666666">=</span> <span style="color: #666666">2</span> <span style="color: #666666">*</span> i <span style="color: #666666">+</span> <span style="color: #666666">1</span>
+        <span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>((m<span style="color: #666666">-</span>j)<span style="color: #666666">//2</span>):
+            <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot; &quot;</span>, end<span style="color: #666666">=</span><span style="color: #BA2121">&quot;&quot;</span>)
+        <span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(j):
+            <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;*&quot;</span>, end<span style="color: #666666">=</span><span style="color: #BA2121">&quot;&quot;</span>)
+        <span style="color: #008000">print</span>()
+</pre><p>Para entender o que essa função faz, podemos usar a seguinte estratégia:</p>
+<ol>
+<li>
+<p>Faça um teste de mesa. Use valores razoáveis para os dados da
+entrada. Por exemplo, se <code class="language-text">n = 1</code> então talvez não iremos simular
+todas as linhas de código; se <code class="language-text">n = 100</code>, então o teste de mesa será
+muito lento e entediante e não iremos conseguir simular no papel.
+Usar <code class="language-text">n = 4</code> parece uma boa tentativa para essa função.</p>
+</li>
+<li>
+<p>Procure descrever em alto nível o que cada laço faz
+independentemente, ignorando os detalhes. Por exemplo, ao final do
+laço mais externo temos a impressão de uma quebra de linha, então
+sabemos que cada iteração corresponde a uma linha; o primeiro laço
+interno tem um único comando que imprime um espaço, então sabemo
+que esse laço imprime uma sequência de espaços, etc.</p>
+</li>
+</ol>
+<p>Usando essa estratégia, descreva o que essa função faz.</p>
+<h1 id="desenhando-na-tela">Desenhando na tela</h1>
+<p>Vamos criar um programa que desenha um disco na tela, usando caracteres,
+como o seguinte:</p>
+<pre class="highlight">                    *
+            * * * * * * * * *
+        * * * * * * * * * * * * *
+      * * * * * * * * * * * * * * *
+    * * * * * * * * * * * * * * * * *
+    * * * * * * * * * * * * * * * * *
+  * * * * * * * * * * * * * * * * * * *
+  * * * * * * * * * * * * * * * * * * *
+  * * * * * * * * * * * * * * * * * * *
+  * * * * * * * * * * * * * * * * * * *
+* * * * * * * * * * * * * * * * * * * * *
+  * * * * * * * * * * * * * * * * * * *
+  * * * * * * * * * * * * * * * * * * *
+  * * * * * * * * * * * * * * * * * * *
+  * * * * * * * * * * * * * * * * * * *
+    * * * * * * * * * * * * * * * * *
+    * * * * * * * * * * * * * * * * *
+      * * * * * * * * * * * * * * *
+        * * * * * * * * * * * * *
+            * * * * * * * * *
+                    *
+</pre><p>Repare que o raio do disco é 10, então o número de linhas é 21. Antes
+de escrever um código, vamos pensar em um algoritmo simples em alto
+nível:</p>
+<ol>
+<li>
+para cada linha de $1$ até $2 * \text{RAIO} + 1$<ol>
+<li>calcule o número de espaços para a linha</li>
+<li>calcule o número de asteriscos para linha</li>
+<li>imprima uma string de espaço</li>
+<li>imprima uma string de asteriscos com quebra de linha</li>
+</ol>
+</li>
+</ol>
+<p>Nem todos os passos estão bem definidos, então precisamos detalhar em
+como executar cada um dos passos. Vamos arriscar escrever o algoritmo
+principal e deixar os detalhes para depois.</p>
+<pre class="highlightlanguage-python">RAIO <span style="color: #666666">=</span> <span style="color: #666666">10</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">desenhar_disco</span>():
+    <span style="color: #008000; font-weight: bold">for</span> linha <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">2</span> <span style="color: #666666">*</span> RAIO <span style="color: #666666">+</span> <span style="color: #666666">1</span>):
+        num_espaco <span style="color: #666666">=</span> calcular_num_espacos(linha)
+        num_asterisco <span style="color: #666666">=</span> calcular_num_asteriscos(linha)
+        str_espaco <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;  &quot;</span> <span style="color: #666666">*</span> num_espaco
+        str_asterisco <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;* &quot;</span> <span style="color: #666666">*</span> num_asterisco
+        <span style="color: #008000">print</span>(str_espaco, end<span style="color: #666666">=</span><span style="color: #BA2121">&quot;&quot;</span>)
+        <span style="color: #008000">print</span>(str_asterisco, end<span style="color: #666666">=</span><span style="color: #BA2121">&quot;&quot;</span>)
+        <span style="color: #008000">print</span>()
+</pre><p>Enquanto o algoritmo é bem simples, pulamos a definição de duas
+funções importantes. Executar essas instruções não é uma tarefa
+trivial e, para isso precisamos de algum conhecimento em geometria e
+alguma paciência. Com um pouco de álgebra, descobrimos o número de
+asteriscos em uma linha e depois o número de espaços. Você não precisa
+se preocupar em como chegar nessas contas se não quiser.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">calcular_num_asteriscos_eixo</span>(linha):
+    y <span style="color: #666666">=</span> RAIO <span style="color: #666666">-</span> linha
+    x <span style="color: #666666">=</span> math<span style="color: #666666">.</span>sqrt(RAIO <span style="color: #666666">**</span> <span style="color: #666666">2</span> <span style="color: #666666">-</span> y <span style="color: #666666">**</span> <span style="color: #666666">2</span>)
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">int</span>(x)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">calcular_num_asteriscos</span>(linha):
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">2</span> <span style="color: #666666">*</span> calcular_num_asteriscos_eixo(linha) <span style="color: #666666">+</span> <span style="color: #666666">1</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">calcular_num_espacos</span>(linha):
+    <span style="color: #008000; font-weight: bold">return</span> RAIO <span style="color: #666666">-</span> calcular_num_asteriscos_eixo(linha)
+</pre><p>Teste esse programa. Enquanto nosso algoritmo funciona e resolve a
+tarefa, a solução é bem insatisfatória. Parece muito difícil ter que
+pensar em tantos detalhes e, se quisermos mudar a figura geométrica,
+teremos que escrever outro algoritmo completamente diferente.</p>
+<p>Para criar um programa um pouco mais simples e mais fácil de
+modificar, podemos tentar resolver a mesma tarefa com um algoritmo
+diferente. Olhar para para um mesmo problema por diferentes
+perspectivas pode nos trazer algoritmos mais simples.</p>
+<p>Podemos interpretar a tela do computador como uma tela de pintura.
+Assim, cada espaço na tela representa um lugar ou uma célula onde não
+pintamos e cada asterisco uma célula que pintamos. Além disso, vamos
+imaginar que temos um sistema de coordenadas, como na figura:</p>
+<img src="figs/grade.svg" style="width: 100%; max-width: 600px;">
+<p>Com isso, tudo que precisamos fazer é percorrer toda a tela e imprimir
+asterisco ou espaço, dependendo se a célula deve ou não ser pintada.
+Repare que podemos batizar cada célula da figura com um par de números
+$(i,j)$ correspondente à abscissa e à ordenada do nosso sistema de
+coordenadas. Criamos o seguinte programa:</p>
+<pre class="highlightlanguage-python">RAIO <span style="color: #666666">=</span> <span style="color: #666666">10</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">esta_disco</span>(i, j):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Devolve true se (i,j) estiver</span>
+<span style="color: #BA2121; font-style: italic">    no disco&quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">return</span> i <span style="color: #666666">**</span> <span style="color: #666666">2</span> <span style="color: #666666">+</span> j <span style="color: #666666">**</span> <span style="color: #666666">2</span> <span style="color: #666666">&lt;=</span> RAIO <span style="color: #666666">**</span> <span style="color: #666666">2</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">desenhar_disco2</span>():
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">-</span>RAIO, RAIO <span style="color: #666666">+</span> <span style="color: #666666">1</span>):
+        <span style="color: #008000; font-weight: bold">for</span> j <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">-</span>RAIO, RAIO <span style="color: #666666">+</span> <span style="color: #666666">1</span>):
+            no_disco <span style="color: #666666">=</span> esta_disco(i, j)
+            <span style="color: #008000; font-weight: bold">if</span> no_disco:
+                <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;* &quot;</span>, end<span style="color: #666666">=</span><span style="color: #BA2121">&quot;&quot;</span>)
+            <span style="color: #008000; font-weight: bold">else</span>:
+                <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;  &quot;</span>, end<span style="color: #666666">=</span><span style="color: #BA2121">&quot;&quot;</span>)
+        <span style="color: #008000">print</span>()
+
+</pre><p>Comparando com o algoritmo anterior, embora a função <code class="language-text">desenhar_disco2</code>
+tenha dois laços aninhados, ela parece mais simples de entender. Mais
+importante, é mais fácil modificá-la. Modifique o programa para que
+ele desenhe uma elipse ao invés de um disco. Depois experimente
+desenhar outras figuras geométricas.</p>
+<h1 id="ordenacao">Ordenação</h1>
+<p>Em seguida, vamos tratar de um problema clássico em Computação.</p>
+<blockquote>
+<p>Escreva uma função que recebe uma lista de números inteiros e
+ordene-os de maneira crescente.</p>
+</blockquote>
+<h2 id="comparando-elementos">Comparando elementos</h2>
+<p>De maneira um pouco mais geral, estamos interessados em estudar
+algoritmos para ordenar conjuntos de elementos. Esses elementos podem
+ser de vários tipos. A única restrição que fazemos sobre eles é que
+possamos compará-los:</p>
+<ul>
+<li>números reais,</li>
+<li>nomes de pessoas,</li>
+<li>times de futebol... :)</li>
+</ul>
+<p>Poder comparar significa que dados dois elementos, podemos dizer se um
+é menor do que o outro. Para ser um pouco mais preciso, uma comparação
+$\le$ é uma relação entre os elementos de um conjunto $A$ de forma que
+dados dois elementos quaisquer $x , y \in A$, podemos decidir se $x
+\le y$ ou não.</p>
+<p>Isso é bastante claro para números reais, afinal basta compararmos de
+acordo com a reta real. Mas isso não é claro se formos trabalhar com
+números complexos. Vamos fazer alguns testes. Em Python, podemos
+escrever um número imaginário adicionando o prefixo <code class="language-text">j</code> ao número.
+Faça o seguinte em um console Python e tente experimentar com números
+reais, números complexos e comparações.</p>
+<pre class="highlightlanguage-pycon"><span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>inteiro_x <span style="color: #666666">=</span> <span style="color: #666666">23</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>flutuante_y <span style="color: #666666">=</span> <span style="color: #666666">3.6</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>inteiro_x <span style="color: #666666">&lt;=</span> flutuante_y
+<span style="color: #888888">False</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>complexo_w <span style="color: #666666">=</span> <span style="color: #666666">1</span>j
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>complexo_w <span style="color: #666666">**</span> <span style="color: #666666">2</span>
+<span style="color: #888888">(-1+0j)</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>complexo_z <span style="color: #666666">=</span> <span style="color: #666666">1</span> <span style="color: #666666">-</span> <span style="color: #666666">3</span>j
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>complexo_w <span style="color: #666666">&lt;=</span> complexo_z
+<span style="color: #0044DD">Traceback (most recent call last):</span>
+  File <span style="color: #008000">&quot;&lt;stdin&gt;&quot;</span>, line <span style="color: #666666">1</span>, in &lt;module&gt;
+<span style="color: #FF0000">TypeError</span>: &#39;&lt;=&#39; not supported between instances of &#39;complex&#39; and &#39;complex&#39;
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>complexo_w <span style="color: #666666">&lt;=</span> flutuante_y
+<span style="color: #0044DD">Traceback (most recent call last):</span>
+  File <span style="color: #008000">&quot;&lt;stdin&gt;&quot;</span>, line <span style="color: #666666">1</span>, in &lt;module&gt;
+<span style="color: #FF0000">TypeError</span>: &#39;&lt;=&#39; not supported between instances of &#39;complex&#39; and &#39;float&#39;
+</pre><p>Para comparar nomes de pessoas queremos comparar strings. Não é tão
+evidente como comparar duas strings assim como comparar dois números.
+Para isso, precisamos entender como uma string é representada em
+memória: uma string é uma sequência de caracteres e um caractere é
+representado por um ou mais bytes. Esses bytes representam números em
+uma grande tabela padronizada chamada
+<a href="https://www.unicode.org/">Unicode</a>, assim, se compararmos duas
+strings com exatamente um caractere cada uma, basta comparar os
+números correspondentes.</p>
+<pre class="highlightlanguage-pycon"><span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>caractere_a <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;a&#39;</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span><span style="color: #008000">ord</span>(caractere_a)
+<span style="color: #888888">97</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span><span style="color: #008000">chr</span>(<span style="color: #666666">97</span>)
+<span style="color: #888888">&#39;a&#39;</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>caractere_b <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;B&#39;</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span><span style="color: #008000">ord</span>(caractere_b)
+<span style="color: #888888">66</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>caractere_a <span style="color: #666666">&lt;=</span> caractere_b
+<span style="color: #888888">False</span>
+</pre><p>Perceba que o caractere <code class="language-text">&#39;B&#39;</code> maiúsculo vem antes do caractere <code class="language-text">&#39;a&#39;</code>
+minúsculo porque o código dos caracteres maiúsculos vêm antes na
+tabela. Uma vez que sabemos comparar dois caracteres, podemos compara
+caractere por caractere <strong>lexicograficamente</strong> usando a mesma
+estratégia dos dicionários. Tente ordenar as palavras abaixo
+lexicograficamente e depois verifique a sua ordenação usando o console
+Python.</p>
+<pre class="highlight">Zumbi
+zebra
+zumba
+tumba
+almanaque
+alma
+</pre><p>Da mesma maneira que podemos ordenar strings lexicograficamente,
+Python permite comparar listas. Existem algumas restrições no entanto,
+a principal delas é que possamos comparar os elementos das listas
+individualmente. Experimente:</p>
+<pre class="highlightlanguage-pycon"><span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>lista_x <span style="color: #666666">=</span> [<span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">3</span>]
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>lista_y <span style="color: #666666">=</span> [<span style="color: #666666">0.4</span>, <span style="color: #666666">100.0</span>, <span style="color: #666666">200</span>, <span style="color: #666666">1000</span>]
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>lista_x <span style="color: #666666">&lt;</span> lista_y
+<span style="color: #888888">False</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>lista_z <span style="color: #666666">=</span> [<span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">3</span>j]
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>lista_x <span style="color: #666666">&lt;</span> lista_z
+<span style="color: #0044DD">Traceback (most recent call last):</span>
+  File <span style="color: #008000">&quot;&lt;stdin&gt;&quot;</span>, line <span style="color: #666666">1</span>, in &lt;module&gt;
+<span style="color: #FF0000">TypeError</span>: &#39;&lt;&#39; not supported between instances of &#39;int&#39; and &#39;complex&#39;
+</pre><p>Finalmente, queremos comparar times de futebol. Obviamente Python não
+toma partido de nenhum time e sequer entende o que é um time de
+futebol. Para que possamos comparar então, precisamos duas coisas:</p>
+<ol>
+<li>como representar um time?</li>
+<li>como comparar duas dessas representações?</li>
+</ol>
+<p>Por exemplo, pode ser que queremos representar os dados estatísticos
+do time em um campeonato. Se no campeonato a ordenação dos times dos
+melhores para os piores seguir a ordem de mais pontos, maior saldo de
+gols e menor número de cartões amarelos, podemos representar um time
+usando uma tupla:</p>
+<p>$$
+(-pontos, -saldo\_gols, cartoes\_amarelos)
+$$</p>
+<p>Com isso, podemos usar o fato de que Python já sabe comparar tuplas de
+números e utilizar o operador nativo.</p>
+<pre class="highlightlanguage-pycon"><span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>flamingo <span style="color: #666666">=</span> (<span style="color: #666666">-15</span>, <span style="color: #666666">-10</span>, <span style="color: #666666">3</span>)
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>botachamas <span style="color: #666666">=</span> (<span style="color: #666666">-15</span>, <span style="color: #666666">-10</span>, <span style="color: #666666">1</span>)
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>mangueiras <span style="color: #666666">=</span> (<span style="color: #666666">-10</span>, <span style="color: #666666">-12</span>, <span style="color: #666666">0</span>)
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>flamingo <span style="color: #666666">&lt;=</span> botachamas
+<span style="color: #888888">False</span>
+</pre><p>Porque utilizamos números negativos? Quem é o primeiro colocado entre
+os três times anteriores?</p>
+<p>É claro que dependendo do campeonato, a ordenação será diferente. Mais
+do que isso, pode ser que queremos ordenar times de maneira geral,
+assim vamos representar um time apenas por uma string contendo o nome
+do time. Como não queremos ordenar os times por ordem alfabética, não
+podemos mais utilizar o operador <code class="language-text">&lt;=</code> de Python. Por isso, precisamos
+de algum mecanismo alternativo para decidir se um elemento vem antes
+de outro elemento.</p>
+<p>O mecanismo que normalmente adotamos é criar uma função <code class="language-text">comparar</code> que
+recebe dois argumentos <code class="language-text">x</code> e <code class="language-text">y</code> e simula o papel da <code class="language-text">x &lt;= y</code>. Assim
+<code class="language-text">comparar(x,y)</code> é <code class="language-text">True</code> sempre que <code class="language-text">x &lt;= y</code>. Repare que definimos
+apenas um operador correspondendo a <code class="language-text">&lt;=</code>, mas se quisermos saber ser
+<code class="language-text">x &gt; y</code> então bastaria escrever <code class="language-text">not comparar(x,y)</code>.</p>
+<p>Dada a natureza subjetiva de comparação de times, cada torcedor teria
+critérios diferentes para comparar seus times. Por exemplo, um
+flaminguista pode acreditar que seu time vem antes de qualquer outro e
+que todos os outros são iguais. Ele escreveria:</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">comparar_times</span>(time_x, time_y):
+    <span style="color: #008000; font-weight: bold">if</span> time_x <span style="color: #666666">==</span> time_y:
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">True</span>
+    <span style="color: #008000; font-weight: bold">elif</span> time_y <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;Flamingo&#39;</span>:
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">False</span>
+    <span style="color: #008000; font-weight: bold">else</span>:
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">True</span>
+</pre><p>Experimente passando vários argumentos distintos e tente explicar o
+comportamento dessa função.</p>
+<p>A discussão anterior deve ter deixado claro que a relação de
+comparação é apenas um conceito abstrato e a maneira como
+implementamos essa comparação é indiferente para os algoritmos de
+ordenação.</p>
+<h2 id="algoritmos-de-ordenacao">Algoritmos de ordenação</h2>
+<p>Existem várias estratégias para ordenar uma lista de números.
+Vamos estudar três estratégias, que levam a três algoritmos
+distintos.</p>
+<ol>
+<li>
+<p>Percorrer os elementos dois a dois e trocar pares de elementos fora
+de ordem e continuar esse processo até que todos estejam ordenados.
+Já vimos o algoritmo que faz isso, que é o algoritmo ordenação da
+bolha ou <strong>bubble sort</strong>.</p>
+</li>
+<li>
+<p>Selecionar o menor elemento e trocá-lo com o primeiro e repetir
+esse processo com os demais. Esse é o algoritmo de ordenação por
+seleção ou <strong>selection sort</strong>.</p>
+</li>
+<li>
+<p>Percorrer os elementos e inserir cada um deles na posição correta.
+Esse é o algoritmo de ordenação por inserção ou <strong>insertion sort</strong>.</p>
+</li>
+</ol>
+<h3 id="ordenacao-da-bolha">Ordenação da bolha</h3>
+<p>Já vimos o algoritmo de ordenação da bolha. Vamos reescrever o algoritmo
+em português, dessa vez em mais alto nível.</p>
+<ol>
+<li>
+Repita $n-1$ vezes:<ol>
+<li>
+Para cada índice $i$ do primeiro ao penúltimo<ol>
+<li>Compare o elemento de $i$ com o de $i+1$</li>
+<li>Se estiverem fora de ordem, troque-os</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p>Com o algoritmo escrito, fica fácil escrever uma função em Python.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">bubble_sort</span>(lista):
+    n <span style="color: #666666">=</span> <span style="color: #008000">len</span>(lista)
+    <span style="color: #008000; font-weight: bold">for</span> _ <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n<span style="color: #666666">-1</span>):
+        <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n <span style="color: #666666">-</span> <span style="color: #666666">1</span>):
+            <span style="color: #008000; font-weight: bold">if</span> lista[i] <span style="color: #666666">&gt;</span> lista[i<span style="color: #666666">+1</span>]:
+                aux <span style="color: #666666">=</span> lista[i]
+                lista[i] <span style="color: #666666">=</span> lista[i<span style="color: #666666">+1</span>]
+                lista[i<span style="color: #666666">+1</span>] <span style="color: #666666">=</span> aux
+</pre><p>As últimas três linhas realizam a troca dos elementos. Elas são
+instruções bem simples, então dificilmente alguma programadora iria
+convertê-las em uma função em um código real. Na nossa discussão,
+poderia ser mais claro se pudéssemos dizer <code class="language-text">trocar(lista, i, i+1)</code>,
+então vamos reescrever nossa função por apelo a clareza.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">trocar</span>(lista, i, j):
+    aux <span style="color: #666666">=</span> lista[i]
+    lista[i] <span style="color: #666666">=</span> lista[j]
+    lista[j] <span style="color: #666666">=</span> aux
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">bubble_sort</span>(lista):
+    n <span style="color: #666666">=</span> <span style="color: #008000">len</span>(lista)
+    <span style="color: #008000; font-weight: bold">for</span> _ <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n<span style="color: #666666">-1</span>):
+        <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n <span style="color: #666666">-</span> <span style="color: #666666">1</span>):
+            <span style="color: #008000; font-weight: bold">if</span> lista[i] <span style="color: #666666">&gt;</span> lista[i<span style="color: #666666">+1</span>]:
+                trocar(lista, i, i<span style="color: #666666">+1</span>)
+</pre><p>Nunca devemos nos esquecer de testar. Façamos isso
+adicionando e executando.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">main</span>():
+    lista <span style="color: #666666">=</span> [<span style="color: #666666">3</span>, <span style="color: #666666">5</span>, <span style="color: #666666">2</span>, <span style="color: #666666">0</span>, <span style="color: #666666">9</span>, <span style="color: #666666">6</span>]
+    bubble_sort(lista)
+    <span style="color: #008000">print</span>(lista)
+
+main()
+</pre><h3 id="ordenacao-por-selecao">Ordenação por seleção</h3>
+<p>O algoritmo de ordenação por seleção pode ser resumido como colocar
+cada item no seu devido lugar. Assim, primeiro colocamos o primeiro
+elemento na primeira posição, em seguida colocamos o segundo elemento
+na segunda posição e assim por diante.</p>
+<p>Pode ser útil colorir a lista em duas cores: uma parte verde no início
+da lista que já contém todos os elementos ordenados e uma parte preta,
+que contém os demais elemento, todos eles <strong>maiores</strong> do que os
+elementos na lista verde. Portanto, para aumentar o tamanho da parte
+verde da lista, basta encontrar a posição do menor elemento da lista
+preta e trocá-lo de posição com o primeiro elemento da lista preta.</p>
+<p>Veja a animação a seguir que exemplifica a execução desse
+algoritmo. Para animar, clique na figura e segure as setas
+para direita ou para a esquerda.</p>
+<div tabindex="0" class="pdfjs-wrapper" data-pdfjs-src="slides/sort_selection.pdf">
+  <div class="pdfjs-holder">
+    <canvas id="canvas2"></canvas>
+  </div>
+  <div role="navigation" class="row justify-content-between">
+    <div class="col-12 col-sm-5 col-lg-4">
+      <div class="btn btn-secondary w-100 mt-1 mt-sm-0 pdfjs-prev">
+        &larr;
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-5 col-lg-4">
+      <div class="btn btn-secondary w-100 mt-0 mt-sm-0 pdfjs-next">
+        &rarr;
+      </div>
+    </div>
+  </div>
+</div><p>Já podemos escrever o algoritmo em português. No algoritmo a seguir,
+iremos falar de lista <em>preta</em>. Para deixar esse termo preciso, iremos
+dizer que a lista preta é a parte da lista original que começa no
+índice $i$ e vai até o último índice.</p>
+<ol>
+<li>
+para cada índice $i$ do primeiro até o último<ol>
+<li>encontrar o menor elemento da lista preta</li>
+<li>troque esse elemento com o primeiro da lista preta</li>
+</ol>
+</li>
+</ol>
+<p>Simples, claro e conciso. Agora podemos implementar; como sempre,
+iremos utilizar stubs para simplificar o processo de desenvolvimento.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">encontrar_indice_menor</span>(lista, i):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Devolve o índice do menor elemento em lista[i:]&quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">pass</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">selection_sort</span>(lista):
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(lista)):
+        indice_menor <span style="color: #666666">=</span> encontrar_indice_menor(lista, i)
+        trocar(i, indice_menor)
+</pre><p>Uma pergunta, o que acontece quando <code class="language-text">i</code> corresponde ao último
+índice da lista?</p>
+<p>Uma observação é importante. Para que possamos trocar dois elementos
+da lista com a função <code class="language-text">trocar</code>, precisamos do <strong>índice</strong> onde está o
+menor elemento da lista preta, não o valor. Agora implementemos o
+stub.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">encontrar_indice_menor</span>(lista, i):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Devolve o índice do menor elemento em lista[i:]&quot;&quot;&quot;</span>
+    indice_menor <span style="color: #666666">=</span> i
+    <span style="color: #008000; font-weight: bold">for</span> j <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(i, <span style="color: #008000">len</span>(lista)):
+        <span style="color: #008000; font-weight: bold">if</span> lista[j] <span style="color: #666666">&lt;</span> lista[indice_menor]:
+            indice_menor <span style="color: #666666">=</span> j
+    <span style="color: #008000; font-weight: bold">return</span> indice_menor
+</pre><p>Não foi muito mais difícil do que encontrar o mínimo a lista inteira.
+Você viu como é muito mais simples utilizar funções, sempre nos
+preocupamos com tarefas pequeninas. Mas com a experiência, a maioria
+dos programadores iria escrever todas as instruções do algoritmo
+diretamente no corpo de <code class="language-text">selection_sort</code>. Tente fazer isso. Claro, não
+deixe de testar sua função adicionando uma chamada na função <code class="language-text">main</code>.</p>
+<h3 id="ordenacao-por-insercao">Ordenação por inserção</h3>
+<p>Para explicar o algoritmo de inserção, pode ser útil fazer um
+exercício de pensamento. Imagine você com um baralho de cartas. Para
+ordenar, você coloca o deck de cartas do lado esquerdo da mesa e pega
+a carta do topo, uma por vez. A cada carta retirada, vc insere em um
+novo deck de cartas do lado direito da mesa, já na posição correta. É
+claro que no final, todas as cartas estarão ordenadas no deck da
+direita.</p>
+<p>Enquanto essa intuição é simples, não queremos utilizar esse
+algoritmo. O motivo é que não queremos criar duas listas simplesmente
+para ordenar os elementos. Usar duas listas, além de gastar mais
+memória e mais tempo de execução, é completamente desnecessário para
+esse algoritmo. Para utilizar apenas uma lista, vamos de novo pintá-lo
+com duas cores: uma parte verde ordenada e outra preta com os demais
+elementos.</p>
+<div tabindex="0" class="pdfjs-wrapper" data-pdfjs-src="slides/sort_insertion.pdf">
+  <div class="pdfjs-holder">
+    <canvas id="canvas2"></canvas>
+  </div>
+  <div role="navigation" class="row justify-content-between">
+    <div class="col-12 col-sm-5 col-lg-4">
+      <div class="btn btn-secondary w-100 mt-1 mt-sm-0 pdfjs-prev">
+        &larr;
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-5 col-lg-4">
+      <div class="btn btn-secondary w-100 mt-0 mt-sm-0 pdfjs-next">
+        &rarr;
+      </div>
+    </div>
+  </div>
+</div><p>Vamos escrever o algoritmo. Mais uma vez, vamos usar $i$ para
+representar o início da lista preta e dizer que a lista verde é a
+parte da lista do primeiro elementos até o último antes de $i$.</p>
+<ol>
+<li>
+para índice $i$ do segundo até o último:<ol>
+<li>$chave \gets lista[i]$</li>
+<li>encontre a posição de inserção $j$ de $chave$ na lista verde</li>
+<li>desloque para direita os elementos do índice $j$ até $i - 1$</li>
+<li>$lista[j] \gets chave$</li>
+</ol>
+</li>
+</ol>
+<p>De novo, temos algumas instruções ainda não completamente
+especificadas. Vamos escrever o algoritmo usando stubs.
+Vamos aproveitar a descrição dos passos
+do nosso algoritmo para documentar essas funções.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">encontrar_posicao</span>(lista, i, chave):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    devolve a posição de inserção de chave em lista[:i]</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">pass</span>
+
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">deslocar_lista</span>(lista, i, j):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    desloca para direita os elementos de lista</span>
+<span style="color: #BA2121; font-style: italic">    do índice j até i-1</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">pass</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">insertion_sort</span>(lista):
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, <span style="color: #008000">len</span>(lista)):
+        chave <span style="color: #666666">=</span> lista[i]
+        j <span style="color: #666666">=</span> encontrar_posicao(lista, i, chave)
+        deslocar_lista(lista, i, j)
+        lista[j] <span style="color: #666666">=</span> chave
+</pre><p>Agora não deve ser difícil implementar cada subtarefa
+independentemente. Fazemo-lo!</p>
+<pre class="highlightlanguage-python">
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">encontrar_posicao</span>(lista, i, chave):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    devolve a posição de inserção de chave em lista[:i]</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    j <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    <span style="color: #008000; font-weight: bold">while</span> j <span style="color: #666666">!=</span> i <span style="color: #AA22FF; font-weight: bold">and</span> chave <span style="color: #666666">&gt;</span> lista[j]:
+        j <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+    <span style="color: #008000; font-weight: bold">return</span> j
+
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">deslocar_lista</span>(lista, i, j):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    desloca para direita os elementos de lista</span>
+<span style="color: #BA2121; font-style: italic">    do índice j até i-1</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    k <span style="color: #666666">=</span> i
+    <span style="color: #008000; font-weight: bold">while</span> k <span style="color: #666666">&gt;</span> j:
+        lista[k] <span style="color: #666666">=</span> lista[k<span style="color: #666666">-1</span>]
+        k <span style="color: #666666">-=</span> <span style="color: #666666">1</span>
+</pre><p>Vamos refletir um pouco sobre esse algoritmo. Em cada iteração,
+queremos descobrir em qual posição <code class="language-text">j</code> da lista verde iremos inserir o
+valor de <code class="language-text">chave</code>. Assim, percorremos do primeiro até o índice <code class="language-text">j</code>.
+Depois, temos que deslocar a parte da lista de <code class="language-text">j</code> até o índice <code class="language-text">i-1</code>.
+Isso significa que devemos acessar todos os elementos da lista verde
+em toda iteração! Faça o seguinte, com essa preocupação em mente,
+tente simular o algoritmo de ordenação por inserção  para a
+seguinte lista:</p>
+<pre class="highlightlanguage-python">lista <span style="color: #666666">=</span> [<span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">3</span>, <span style="color: #666666">5</span>, <span style="color: #666666">4</span>, <span style="color: #666666">6</span>, <span style="color: #666666">8</span>, <span style="color: #666666">7</span>]
+</pre><p>Simule todos os passos na mão. Tente descobrir uma melhoria nesse
+algoritmo de forma a evitar ter de percorrer toda a lista verde em
+toda iteração! Implemente essa melhoria, dessa vez sem utilizar
+sub-rotinas.</p>
+
+
+        <!-- Navigation buttons -->
+<div role="navigation" class="row justify-content-between">
+
+  <div class="col-12 col-sm-5 col-lg-4">
+    <a class="btn btn-primary w-100 mt-1 mt-sm-0" href="06-funcoes.html">
+      &larr; Anterior
+    </a>
+  </div>
+
+  <div class="col-12 d-none d-lg-inline-block col-lg-4">
+    <a class="btn btn-secondary w-100" href="../index.html">
+      Voltar
+    </a>
+  </div>
+
+  <div class="col-12 col-sm-5 col-lg-4">
+    <a class="btn btn-primary w-100 mt-1 mt-sm-0" href="08-matrizes.html">
+      Próxima &rarr;
+    </a>
+  </div>
+
+</div>      </div>
+    </div>
+</article>
+
+<hr />
+
+
+<!-- Footer -->
+<footer>
+  <p class="copyright text-muted">
+    <a href="https://www.ic.unicamp.br/~lehilton/" title="Página pessoal">
+      Copyright &copy; 2020
+    </a>
+  </p>
+</footer>
+<!-- Bootstrap core JavaScript -->
+<script src="../dist/vendor/jquery/jquery.min.js"></script>
+<script src="../dist/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="../dist/vendor/prism/prism.js"></script> -->
+
+<!-- Custom scripts for this template -->
+<script src="../dist/js/main.min.js"></script>
+
+<!-- Mathjax setup -->
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+  };
+</script>
+<script src="../dist/vendor/mathjax/tex-chtml.js" id="MathJax-script" async></script>
+
+<script type="text/javascript" src="../dist/vendor/pdfjs/pdf.js"></script>
+<script type="text/javascript" src="../dist/vendor/pdfjs/pdf.worker.js"></script>
+<script type="text/javascript" src="../dist/js/renderPDF.min.js"></script>
+
+</script>
+
+
+  </body>
+
+</html>

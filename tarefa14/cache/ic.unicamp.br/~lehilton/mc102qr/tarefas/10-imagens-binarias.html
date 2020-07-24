@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    Algoritmos e Programação de Computadores
+    - Imagens binárias
+  </title>
+
+  <meta name="keywords" content="MC102, Algoritmos e Programação de Computadores, Python">
+  <meta name="description" content="Página da disciplina de MC102 para turma QR">
+  <meta name="author" content="Lehilton Pedrosa">
+
+  <!-- Bootstrap core CSS -->
+  <link href="../dist/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Theme css -->
+  <link href="../dist/css/main.min.css" rel="stylesheet">
+
+  <!-- Prism -->
+  <!-- <link href="../dist/vendor/prism/prism.css" rel="stylesheet" /> -->
+</head>
+<body >
+
+  <body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="../index.html">MC102</a>
+
+
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+      aria-label="Toggle navigation">
+      Menu
+      <i>&#9776;</i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item top back-to-top-link">
+          <a class="nav-link" href="#"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>topo</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="../index.html">voltar</a>
+        </li>
+
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Header -->
+<header class="masthead"   style="background-image: url('../images/home-bg.jpg')" >
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-heading">
+
+          <h1 >Imagens binárias</h1>
+
+
+          <span class="meta">Segunda, 18 de maio de 2020</span>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+
+
+      <div class="col-lg-8 col-md-10 mx-auto">
+
+        <p><strong>Atenção:</strong> Esta tarefa não será corrigida manualmente, mas você deve
+tentar respondê-la genuinamente. Se tiver alguma dúvida se ela está ou
+não correta, procure os monitores. Tentativas de passar no teste
+automático sem responder as questões serão consideradas fraude.</p>
+<h1 id="imagens-monocromaticas">Imagens monocromáticas</h1>
+<h2 id="representacao">Representação</h2>
+<p>Imagens monocromáticas são imagens de apenas duas cores, normalmente preto e branco. Tais imagens podem ser representadas por uma matriz de bits de modo que um bit 0 representa a cor branca e um bit 1 representa a cor preta. Cada bit corresponde a um <em>pixel</em> da imagem.</p>
+<p>No formato PBM, uma imagem pode ser escrita como um arquivo de texto da seguinte forma: a primeira linha indica o tipo do arquivo, P1 nesse caso; a segunda linha indica as dimensões da imagem, largura e altura respectivamente; cada linha seguinte representa uma linha imagem escrevendo 0 para o pixels brancos e 1 para o pixels pretos. Para um exemplo, a matriz de bits abaixo representa a imagem seguinte. Observe que para facilitar a visualização, a imagem foi aumentada.</p>
+<pre class="highlight">0 0 0 0 1 0
+0 0 0 0 1 0
+0 0 0 0 1 0
+0 0 0 0 1 0
+0 0 0 0 1 0
+0 0 0 0 1 0
+1 0 0 0 1 0
+0 1 1 1 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+</pre><p><img src="figs/Example_of_ASCII-art_turned_into_a_bitmap_scale20.pbm.png" alt="" /></p>
+<p>Enquanto essa representação em matriz é conveniente, ela utiliza muita memória, especialmente em imagem de alta resolução, com vários milhoẽs de pixels (megapixels). Assim, para reduzir a quantidade de memória necessária para armazenar imagens que sejam representadas dessa forma, normalmente, utilizamos alguma outra representação mais compacta. Por exemplo, podemos codificar uma sequência de elementos utilizando a <a href="https://en.wikipedia.org/wiki/Run-length_encoding">codificação run-length</a>.</p>
+<p>Com essa codificação, representamos cada sequência de elementos iguais como o tamanho da sequência seguido do valor do bit. Por exemplo, a sequência de bits <code class="language-text">ZZUZZUUUZZUUUUUU</code> poderia ser representada como <code class="language-text">2Z1U2Z3U2Z6U</code>. Essa codificação também é uma compressão sem perda e é utilizada em diferentes formatos de arquivos.</p>
+<p>Nessa tarefa, vamos alterar um pouco a codificação de run-length. Como a imagem é representada por uma matriz, vamos fazer a codificação utilizando duas linhas, assim, temos quatro possíveis padrões: <code class="language-text">00</code>, <code class="language-text">01</code>, <code class="language-text">10</code> e <code class="language-text">11</code>. O primeiro bit é da primeira linha e o segundo bit da segunda. Então, para armazenar uma imagem binária nesse formato, começamos definindo a largura e altura da imagem separadas por um espaço e na próxima linha, escrevemos a sequência que define a imagem como o número de vezes o padrão se repete seguido do padrão. Por exemplo, a matriz</p>
+<pre class="highlight">00000000
+11110000
+11111111
+11111111
+11111111
+11111111
+</pre><p>deve ser codificada do seguinte modo:</p>
+<pre class="highlight">P1C
+8 6
+4 01 4 00 16 11
+</pre><p>onde <code class="language-text">P1C</code> indica o tipo do arquivo e <code class="language-text">8 6</code> é a informação de largura e altura.
+Repare que a altura é sempre um número par.</p>
+<p>Você deve terminar de implentar o módulo chamado <code class="language-text">modulo.py</code> que codifica e decodifica imagens binárias utilizando a codificação run-length. Esse módulo deve ler imagens no disco no formato <a href="https://en.wikipedia.org/wiki/Netpbm">PBM</a> e escrever no disco no formato compactado descrito acima, ou vice-e-versa.</p>
+<p>As funções que precisam ser implementadas são:</p>
+<ul>
+<li>função para codificar imagem com nome <code class="language-text">codificar</code>;</li>
+<li>função para decodificar imagem com nome <code class="language-text">decodificar</code>;</li>
+<li>função de leitura de arquivo compactado com nome <code class="language-text">carregar_imagem_codificada</code>;</li>
+<li>função de escrita de arquivo compactado <code class="language-text">escrever_imagem_codificada</code>;</li>
+<li>função de leitura de arquivo pbm descompactado com nome <code class="language-text">carregar_imagem_decodificada</code>;</li>
+<li>função de escrita de arquivo pbm descompactado <code class="language-text">escrever_imagem_decodificada</code>.</li>
+</ul>
+<p>Um módulo com as assinaturas dessas funções está disponível na pasta da tarefa. Você pode construir sua solução alterando esse módulo.</p>
+<h2 id="bordas">Bordas</h2>
+<p>Em processamento de imagens, uma tarefa bastante importante é detectar as bordas dos objetos em uma imagem. A borda de um objeto é formada pelos pixels que tem ao menos um vizinho que não está no objeto.</p>
+<p>A seguir, podemos ver um exemplo de imagem binária e a sua imagem de bordas.</p>
+<p><img src="figs/binary_image.png" alt="" />
+<img src="figs/border.png" alt="" /></p>
+<p>Você deve implementar um programa em Python que dada uma imagem binária produz uma imagem de bordas e a escreve no formato PBM. Um esboço desse programa já está disponível na pasta da tarefa com nome <code class="language-text">bordas.py</code>.</p>
+<h2 id="entrada">Entrada</h2>
+<p>Uma imagem binária codificada com nossa versão do código de run-lenth.</p>
+<h2 id="saida">Saída</h2>
+<p>A imagem binária das bordas da imagem codificada com nossa versão do código de run-lenth.</p>
+<h1 id="dicas">Dicas</h1>
+<ul>
+<li>
+<p>Pode ser útil olhar para a imagem em um visualizador. Em
+distribuições GNU/Linux, a maioria dos visualizadores pode abrir
+arquivos PBM facilmente. Em outros sistemas operacionais, você
+talvez precise instalar um visualizador ou editor de imagens, ou
+pode usar uma ferramenta de conversão online, como
+<a href="https://convertio.co/pt/pbm-png/">essa</a>. Se seu visualizador não
+funcionar, você tentar fazer download
+<a href="https://sourceforge.net/projects/openseeit/">desse</a>.</p>
+</li>
+<li>
+<p>Você não deve modificar a função <code class="language-text">main</code> do arquivo <code class="language-text">bordas.py</code>
+fornecido. Ela é utilizada pelo script de teste automático. Essa
+função só faz uma tarefa: ler uma imagem compactada de um arquivo
+(e.g., <code class="language-text">testes/cross.in</code>) e escrever uma imagem compactada em outro
+arquivo (<code class="language-text">testes/cross.out</code>). O script <code class="language-text">testar.py</code> irá verificar se
+esse arquivo de saída bate com o gabarito (<code class="language-text">testes/cross.res</code>).</p>
+<p>No entanto, as funções que você vai implementar podem ser utilizadas
+de diversas maneiras! Para testar apropriadamente, você deverá criar
+seus próprios testes. Por exemplo, para testar a leitura de arquivo
+PBM, fornecemos um arquivo programa Python <code class="language-text">testar_leitura_pbm.py</code></p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">modulo</span> <span style="color: #008000; font-weight: bold">import</span> carregar_imagem_decodificada
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">testar_leitura_pbm</span>():
+    largura, altura, imagem <span style="color: #666666">=</span> carregar_imagem_decodificada(<span style="color: #BA2121">&quot;testes/jota.pbm&quot;</span>)
+    <span style="color: #008000; font-weight: bold">assert</span> largura <span style="color: #666666">==</span> <span style="color: #666666">6</span>
+    <span style="color: #008000; font-weight: bold">assert</span> altura <span style="color: #666666">==</span> <span style="color: #666666">10</span>
+    matriz_esperada <span style="color: #666666">=</span> [
+        [<span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;1&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>],
+        [<span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;1&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>],
+        [<span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;1&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>],
+        [<span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;1&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>],
+        [<span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;1&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>],
+        [<span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;1&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>],
+        [<span style="color: #BA2121">&#39;1&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;1&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>],
+        [<span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;1&#39;</span>, <span style="color: #BA2121">&#39;1&#39;</span>, <span style="color: #BA2121">&#39;1&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>],
+        [<span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>],
+        [<span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>, <span style="color: #BA2121">&#39;0&#39;</span>],
+    ]
+    <span style="color: #008000; font-weight: bold">assert</span> imagem <span style="color: #666666">==</span> matriz_esperada
+
+testar_leitura_pbm()
+</pre><p>O que esse programa faz é verificar se a imagem que a função
+implementada devolve é de fato a matriz de bits que fornecemos
+manualmente. Quando você executar esse programa, se você vir uma
+mensagem de erro, então sua função tem um problema; mas se nada
+aconteceu, então o teste passou.</p>
+<p>Para testar a sua função de detecção de bordas, você pode criar um
+arquivo um arquivo <code class="language-text">testar_bordas.py</code> parecido com o seguinte</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">bordas</span> <span style="color: #008000; font-weight: bold">import</span> destacar_bordas
+
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">testar_bordas</span>():
+    <span style="color: #408080; font-style: italic"># crie um exemplo de imagem pequena para testar</span>
+    largura <span style="color: #666666">=</span> <span style="color: #666666">...</span>
+    altura <span style="color: #666666">=</span> <span style="color: #666666">...</span>
+    imagem <span style="color: #666666">=</span> [
+        <span style="color: #666666">...</span>
+    ]
+
+    <span style="color: #408080; font-style: italic"># cria a matriz de bordas que você espera para essa imagem</span>
+    bordas_esperadas <span style="color: #666666">=</span> [
+        <span style="color: #666666">...</span>
+    ]
+
+    <span style="color: #408080; font-style: italic"># aqui chamamos a função sendo testada</span>
+    bordas_calculadas <span style="color: #666666">=</span> destacar_bordas(largura, altura, imagem)
+
+    <span style="color: #408080; font-style: italic"># isso irá gerar um erro quando a função não estiver correta</span>
+    <span style="color: #008000; font-weight: bold">assert</span> bordas_esperadas <span style="color: #666666">==</span> bordas_calculadas
+
+    <span style="color: #408080; font-style: italic"># se o programa não falhou, então talvez sua função esteja correta</span>
+
+
+testar_bordas()
+</pre></li>
+</ul>
+
+
+        <!-- Navigation buttons -->
+<div role="navigation" class="row justify-content-between">
+
+  <div class="col-12 col-sm-5 col-lg-4">
+    <a class="btn btn-primary w-100 mt-1 mt-sm-0" href="09-conceito-frequencia.html">
+      &larr; Anterior
+    </a>
+  </div>
+
+  <div class="col-12 d-none d-lg-inline-block col-lg-4">
+    <a class="btn btn-secondary w-100" href="../index.html">
+      Voltar
+    </a>
+  </div>
+
+  <div class="col-12 col-sm-5 col-lg-4">
+    <a class="btn btn-primary w-100 mt-1 mt-sm-0" href="11-dicionarios-e-tuplas.html">
+      Próxima &rarr;
+    </a>
+  </div>
+
+</div>      </div>
+    </div>
+</article>
+
+<hr />
+
+
+<!-- Footer -->
+<footer>
+  <p class="copyright text-muted">
+    <a href="https://www.ic.unicamp.br/~lehilton/" title="Página pessoal">
+      Copyright &copy; 2020
+    </a>
+  </p>
+</footer>
+<!-- Bootstrap core JavaScript -->
+<script src="../dist/vendor/jquery/jquery.min.js"></script>
+<script src="../dist/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="../dist/vendor/prism/prism.js"></script> -->
+
+<!-- Custom scripts for this template -->
+<script src="../dist/js/main.min.js"></script>
+
+<!-- Mathjax setup -->
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+  };
+</script>
+<script src="../dist/vendor/mathjax/tex-chtml.js" id="MathJax-script" async></script>
+
+
+
+  </body>
+
+</html>

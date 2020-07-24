@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    Algoritmos e Programação de Computadores
+    - Estruturas elementares em Python
+  </title>
+
+  <meta name="keywords" content="MC102, Algoritmos e Programação de Computadores, Python">
+  <meta name="description" content="Página da disciplina de MC102 para turma QR">
+  <meta name="author" content="Lehilton Pedrosa">
+
+  <!-- Bootstrap core CSS -->
+  <link href="../dist/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Theme css -->
+  <link href="../dist/css/main.min.css" rel="stylesheet">
+
+  <!-- Prism -->
+  <!-- <link href="../dist/vendor/prism/prism.css" rel="stylesheet" /> -->
+</head>
+<body >
+
+  <body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="../index.html">MC102</a>
+
+
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+      aria-label="Toggle navigation">
+      Menu
+      <i>&#9776;</i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item top back-to-top-link">
+          <a class="nav-link" href="#"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>topo</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="../index.html">voltar</a>
+        </li>
+
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Header -->
+<header class="masthead"   style="background-image: url('../images/home-bg.jpg')" >
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-heading">
+
+          <h1 >Estruturas elementares em Python</h1>
+
+
+          <span class="meta">Terça, 31 de março de 2020</span>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+
+
+      <div class="col-lg-8 col-md-10 mx-auto">
+
+        <p><strong>Instruções</strong>: Enquanto você lê, você deve acompanhar os exemplos
+utilizando um console Python. Experimente escrever outras instruções
+análogas e vá além do que está escrito. Após a leitura do conteúdo
+abaixo, você deve ler os capítulos 1, 2 e o capítulo 3 até 3.1.2 do
+<a href="https://docs.python.org/pt-br/3/tutorial/index.html">tutorial</a>
+Python.</p>
+<hr />
+<h1 id="estruturas-elementares-em-python">Estruturas elementares em Python</h1>
+<p>Suponha que precisamos somar dois números de vários algarismos,
+digamos, 124682 e 2468. Esses números são pequenos, então você pode
+facilmente escrever os dois números no papel, alinhados pelo último
+dígito, e executar um algoritmo de soma tradicional.</p>
+<pre class="highlight">  124682
++   2468
+--------
+  127150
+</pre><p>Melhor ainda, para esse problema pode ser razoável tomar uma
+calculadora de mesa. Uma calculadora nada mais é do que um computador
+que realiza operações aritméticas e em que escrevemos as instruções
+diretamente no teclado. Se quisermos utilizar um computador moderno,
+então precisamos decidir duas coisas:</p>
+<ol>
+<li>Em que linguagem de programação escreveremos nossas instruções?</li>
+<li>Qual o mecanismo utilizaremos para executar essas instruções?</li>
+</ol>
+<p>A resposta da primeira pergunta para essa disciplina é Python 3. Como
+Python é uma linguagem interpretada, a resposta da segunda pergunta é
+<em>invocando um interpretador</em>. Existem duas maneiras de invocar o
+interpretador do Python: interativa e não interativa.</p>
+<h1 id="interpretador-de-comandos-interativo">Interpretador de comandos interativo</h1>
+<p>Usamos o interpretador de comandos interativos quando queremos
+realizar operações simples e curtas apenas uma vez. Muitas vezes
+também utilizamos esse interpretadora para experimentar e explorar a
+linguagem, algum algoritmos ou alguma biblioteca de funções existente.
+Para isso, primeiro invocamos o interpretador de comandos <code class="language-text">python3</code>
+sem argumentos a partir do terminal do computador.</p>
+<pre class="highlightlanguage-console"><span style="color: #888888">python3</span>
+</pre><p>Iremos ver o console do Python 3 em que podemos digitar comandos, como</p>
+<pre class="highlightlanguage-pycon"><span style="color: #888888">Python 3.7.3 (default, Oct  7 2019, 12:56:13)</span>
+<span style="color: #888888">[GCC 8.3.0] on linux</span>
+<span style="color: #888888">Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.</span>
+<span style="color: #888888">&gt;&gt;&gt;</span>
+</pre><p>Podemos digitar expressões aritméticas usuais (soma, subtração,
+divisão e multiplicação) nesse console. Experimente várias delas.</p>
+<pre class="highlightlanguage-pycon"><span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span><span style="color: #666666">124682</span> <span style="color: #666666">+</span> <span style="color: #666666">2468</span>
+<span style="color: #888888">127150</span>
+</pre><p>Ao contrário do computador moderno, a nossa calculadora é bem limitada.
+Você deve adivinhar que uma das principais limitações da
+calculadora é que a memória dela é muito limitada — só armazena os
+operandos e, normalmente, um resultado anterior. Se você tiver
+realizando operações com várias números, você precisa anotar cada
+resultado intermediário no papel. Em Python, podemos criar
+uma <em>variável</em>. Por exemplo,
+o IMC é dado pela seguinte fórmula</p>
+<p>$$
+\mbox{IMC} = \frac{{\mbox{massa}}}{({\mbox{altura}}\cdot {\mbox{altura}})}
+$$</p>
+<p>Então podemos calcular nosso índice como o seguinte</p>
+<pre class="highlightlanguage-pycon"><span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>peso <span style="color: #666666">=</span> <span style="color: #666666">73</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>altura <span style="color: #666666">=</span> <span style="color: #666666">1.75</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>imc <span style="color: #666666">=</span> peso <span style="color: #666666">/</span> (altura <span style="color: #666666">*</span> altura)
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>imc
+<span style="color: #888888">23.836734693877553</span>
+</pre><p>Devemos ler <em>&quot;peso recebe 73&quot;, &quot;altura recebe 1.75&quot;, etc</em>. O que as
+três primeiras linhas fazem é criar variáveis que guardam os valores
+do lado direto. Lembrem-se, uma variável corresponde a uma caixa na
+memória que guarda um determinado valor. Cada uma dessas três linhas
+faz o seguinte:</p>
+<ul>
+<li>reserva um espaço na memória suficiente para um valor</li>
+<li>guardo o valor do lado direito de <code class="language-text">=</code> nesse espaço</li>
+<li>associa o <em>nome</em> do lado esquerdo de <code class="language-text">=</code> a esse valor</li>
+</ul>
+<p>Observe que apenas após a último linha obtemos algum resultado:
+atribuição não é uma expressão em Python e apenas expressões têm o seu
+valor impresso no console interativo.</p>
+<h1 id="tipos-de-variaveis">Tipos de variáveis</h1>
+<p>Você deve se lembrar de que todo valor armazenado na memória do computador
+tem um tipo associado. Para descobrir o tipo associado a cada uma das
+variáveis, usamos o seguinte:</p>
+<pre class="highlightlanguage-pycon"><span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span><span style="color: #008000">type</span>(peso)
+<span style="color: #888888">&lt;class &#39;int&#39;&gt;</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span><span style="color: #008000">type</span>(altura)
+<span style="color: #888888">&lt;class &#39;float&#39;&gt;</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span><span style="color: #008000">type</span>(imc)
+<span style="color: #888888">&lt;class &#39;float&#39;&gt;</span>
+</pre><p>Vemos que <code class="language-text">peso</code> tem tipo <code class="language-text">int</code>. Um tipo <code class="language-text">int</code> corresponde a um número
+inteiro (positivo, negativo ou zero). Em Python 3 (mas não em Python
+2), um número inteiro pode ter quantos dígitos forem necessários.
+Experimente, por exemplo, calcular a décima potência de <code class="language-text">-99999999</code> em uma
+calculadora comum. Certamente ela terminará com um erro. Em Python,
+podemos fazer o seguinte</p>
+<pre class="highlightlanguage-pycon"><span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span><span style="color: #666666">-99999999</span> <span style="color: #666666">**</span> <span style="color: #666666">10</span>
+<span style="color: #888888">-99999990000000449999988000000209999997480000020999999880000000449999999000000001</span>
+</pre><p>Você acabou de aprender que <code class="language-text">**</code> corresponde ao operador de
+exponenciação de Python. Mas tem algo estranho: a potência par de um
+número não pode ser negativa, mas o resultado obtido foi negativo! Na
+verdade, o que acabamos de calcular foi <code class="language-text">-(99999999 ** 10)</code>. O
+operador <code class="language-text">**</code> tem precedência ou prioridade sobre o operador de
+negação <code class="language-text">-</code>. Deveríamos escrever, portanto,</p>
+<pre class="highlightlanguage-pycon"><span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>(<span style="color: #666666">-99999999</span>) <span style="color: #666666">**</span> <span style="color: #666666">10</span>
+<span style="color: #888888">99999990000000449999988000000209999997480000020999999880000000449999999000000001</span>
+</pre><p>Já as variáveis <code class="language-text">altura</code> e <code class="language-text">imc</code> têm tipo <code class="language-text">float</code>. Um <code class="language-text">float</code> é um
+tipo numérico de <em>ponto flutuante</em>, que é utilizada para guardar uma
+<strong>aproximação</strong> de um número real. Observe que falamos ponto, e não
+vírgula: ao contrário do português do Brasil, na maioria das
+linguagens de programação utilizamos um ponto <code class="language-text">.</code> para indicar a parte
+fracionária de um número.</p>
+<p>O fato de que guardamos uma aproximação ao usarmos um número
+fracionário é importante. Por exemplo, é evidente que a soma
+<code class="language-text">0.1 + 0.2</code> deve valer exatamente <code class="language-text">0.3</code>, mas o interpretador Python
+parece discordar:</p>
+<pre class="highlightlanguage-pycon"><span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span><span style="color: #666666">0.1</span> <span style="color: #666666">+</span> <span style="color: #666666">0.2</span>
+<span style="color: #888888">0.30000000000000004</span>
+</pre><p>Ao contrário dos números inteiros, em que sempre guardamos uma
+representação exato no número, não é possível guardar uma
+representação exata de cada número real. Pense, por exemplo, em como
+representar o número $\pi$ e cada um dos outros números irracionais:
+não podemos enumerar todos os números irracionais! Para a maioria das
+nossas aplicações que veremos, usar uma aproximação é mais do que
+suficiente, mas devemos tomar cuidado sempre que:</p>
+<ol>
+<li>compararmos números de ponto flutuante</li>
+<li>armazenarmos números astronomicamente grandes ou pequenos</li>
+</ol>
+<p>As variáveis de ponto flutuante são armazenadas guardando três números
+inteiros: sinal, mantissa e expoente e representam um número
+$$(-1)^{sinal} \cdot mantissa \cdot 2^{expoente}$$</p>
+<p>Por exemplo, $$0.5 = (-1)^0 \cdot 1 \cdot 2^{-1}$$</p>
+<p>Para a programadora, normalmente é indiferente essa representação,
+desde que ele se atente ao fato de que cada número de ponto flutuante
+é uma aproximação de algum número representado!</p>
+<p>É claro que o tipo da variável <code class="language-text">peso</code> é inteiro, pois o valor atribuído
+é <code class="language-text">73</code>. Podemos forçar a utilização de <code class="language-text">float</code> adicionando um ponto</p>
+<pre class="highlightlanguage-pycon"><span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>peso_float <span style="color: #666666">=</span> <span style="color: #666666">73.</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span><span style="color: #008000">type</span>(peso_float)
+<span style="color: #888888">&lt;class &#39;float&#39;&gt;</span>
+</pre><p>Mas por que <code class="language-text">imc</code> tem tipo <code class="language-text">float</code>? O motivo disso é que a expressão
+do lado direito é avaliada para um número float: sempre que dividimos
+dois números, obtemos um float em Python 3, mesmo que a divisão seja
+exata! Se quisermos obter apenas o quociente inteiro de uma divisão,
+usamos o operador <code class="language-text">//</code></p>
+<pre class="highlightlanguage-pycon"><span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span><span style="color: #666666">5</span> <span style="color: #666666">/</span> <span style="color: #666666">2</span>
+<span style="color: #888888">2.5</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span><span style="color: #666666">6</span> <span style="color: #666666">/</span> <span style="color: #666666">2</span>
+<span style="color: #888888">3.0</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span><span style="color: #666666">6</span> <span style="color: #666666">//</span> <span style="color: #666666">2</span>
+<span style="color: #888888">3</span>
+</pre><h1 id="erros">Erros</h1>
+<p>Quando programamos pode acontecer uma série de erros. Um dos erros
+mais comuns é o <strong>erro de sintaxe</strong> e pode acontecer mesmo com
+operações bem simples como as que aprendermos. Por exemplo, se nos
+esquecermos de um operador</p>
+<pre class="highlightlanguage-pycon"><span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>imc <span style="color: #666666">=</span> peso <span style="color: #666666">/</span> (altura  altura)
+  File <span style="color: #008000">&quot;&lt;stdin&gt;&quot;</span>, line <span style="color: #666666">1</span>
+    imc <span style="color: #666666">=</span> peso <span style="color: #666666">/</span> (altura  altura)
+                               <span style="color: #666666">^</span>
+<span style="color: #FF0000">SyntaxError</span>: invalid syntax
+</pre><p>O símbolo <code class="language-text">^</code> está apontando para o elemento do programa (<em>token</em>) que
+não era esperado naquela posição. De fato, ali deveríamos ter um símbolo
+de multiplicação <code class="language-text">*</code>.</p>
+<p>Outro erro de programação bastante comum é utilizar uma variável não
+definida, algumas vezes porque escrevemos o nome da variável com a
+grafia incorreta</p>
+<pre class="highlightlanguage-pycon"><span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>imc <span style="color: #666666">=</span> peso <span style="color: #666666">/</span> (altura <span style="color: #666666">*</span> autura)
+<span style="color: #0044DD">Traceback (most recent call last):</span>
+  File <span style="color: #008000">&quot;&lt;stdin&gt;&quot;</span>, line <span style="color: #666666">1</span>, in &lt;module&gt;
+<span style="color: #FF0000">NameError</span>: name &#39;autura&#39; is not defined
+</pre><p>Outros erros são chamados <strong>erros de execução</strong> e acontecem apenas no
+momento da execução. Por exemplo, se tivéssemos digitado a altura
+erradamente:</p>
+<pre class="highlightlanguage-pycon"><span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>peso <span style="color: #666666">=</span> <span style="color: #666666">73</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>altura <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>imc <span style="color: #666666">=</span> peso <span style="color: #666666">/</span> (altura <span style="color: #666666">*</span> altura)
+<span style="color: #0044DD">Traceback (most recent call last):</span>
+  File <span style="color: #008000">&quot;&lt;stdin&gt;&quot;</span>, line <span style="color: #666666">1</span>, in &lt;module&gt;
+<span style="color: #FF0000">ZeroDivisionError</span>: division by zero
+</pre><p>Os erros acima são chamados de <em>exceções</em>. Quando uma exceção ocorre,
+o interpretador para a execução do seu programa com uma mensagem de
+erro e se recursa a continuar. Algumas vezes, é preciso tratar
+exceções, mas por agora não falaremos disso. Nos nossos primeiros
+programas, as exceções indicam simplesmente que o programa está
+incorreto é deve ser corrigido.</p>
+<p>Finalmente, podemos ter <strong>erros de lógica</strong>, que são erros que não são
+detectados pelo interpretadores. Ao contrário dos erros anteriores,
+pode ser difícil encontrar esse erro e, algumas vezes, um erro de
+lógica pode passar desapercebido por muito tempo. Já vimos esse problema
+com a precedência acima. Vamos ver outro caso de descuido com a
+ordem das operações:</p>
+<pre class="highlightlanguage-pycon"><span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>peso <span style="color: #666666">=</span> <span style="color: #666666">73</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>altura <span style="color: #666666">=</span> <span style="color: #666666">1.75</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>imc <span style="color: #666666">=</span> peso <span style="color: #666666">/</span> altura<span style="color: #666666">*</span>altura
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>imc
+<span style="color: #888888">73.0</span>
+</pre><p>Alguém que tomasse esse resultado como correto iria com certeza estar
+bastante preocupado com sua saúde!</p>
+<h1 id="um-parenteses-modulos">Um parênteses: módulos</h1>
+<p>Uma razão comum para se usar uma sessão interativa do interpretador é
+experimentar com novos módulos e funções. Não vamos ver como criar módulos agora,
+mas podemos desde já como utilizá-los. Suponha que queremos calcular a raiz
+quadrada de um número. Não existe operador em Python dedicado para isso,
+mas podemos importar esse operador de um módulo <code class="language-text">math</code>. Por exemplo,
+para calcular o tamanho da diagonal de um retângulo, fazemos o seguinte:</p>
+<pre class="highlightlanguage-pycon"><span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">math</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>cateto1 <span style="color: #666666">=</span> <span style="color: #666666">10</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>cateto2 <span style="color: #666666">=</span> <span style="color: #666666">5</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>hipotenusa <span style="color: #666666">=</span> math<span style="color: #666666">.</span>sqrt(cateto1<span style="color: #666666">**2</span> <span style="color: #666666">+</span> cateto2<span style="color: #666666">**2</span>)
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>hipotenusa
+<span style="color: #888888">11.180339887498949</span>
+</pre><p>Dica: nas sessões interativas, as teclas para cima e para baixo
+navegam no histórico de comandos digitados. Além disso, você pode usar
+o tab para completar uma palavra, depois de escrever o prefixo. Por
+exemplo, para ver quais nomes ou operadores estão disponíveis no
+módulo importado, digite <code class="language-text">math.</code> e aperte tab duas vezes. Para ver o
+que cada operação faz, use <code class="language-text">help</code>: <code class="language-text">help(math.cos)</code> irá mostrar a
+documentação dessa operação. Talvez seja necessário digitar <code class="language-text">q</code> para
+sair da documentação.</p>
+<hr />
+<h1 id="escrevendo-um-programa">Escrevendo um programa</h1>
+<p>Embora o modo interativo do interpretador Python seja útil, ele só
+serve em situações limitadas, quando queremos executar as instruções
+uma única vez. Na maior parte das vezes, quando queremos executar
+instruções Python, primeiro escrevemos um programa em Python. Os
+programas em Python também são chamados de <em>script</em>, em parte porque
+Python é utilizado muitas vezes com ferramenta de automação de tarefas
+cotidianas, em parte para distinguir de outros programas já compilados
+em linguagem de máquina.</p>
+<p>Vamos construir um programa que</p>
+<ol>
+<li>pede para o usuário digitar um nome</li>
+<li>imprime uma mensagem de bom dia para o usuário</li>
+</ol>
+<p>Criamos o seguinte programa, i.e., criarmos um arquivo
+de texto chamado <code class="language-text">bomdia.py</code> e digitamos</p>
+<pre class="highlightlanguage-python">usuario <span style="color: #666666">=</span> <span style="color: #008000">input</span>(<span style="color: #BA2121">&quot;Digite seu nome: &quot;</span>)
+<span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;Bom dia&quot;</span>, usuario)
+</pre><p>Após salvar o arquivo, podemos executar o programa invocando o
+interpretador Python em um terminal de execução. Esse programa irá
+imprimir uma mensagem pedindo o nome. Ao escrevermos algum texto,
+digamos, Maria, e apertarmos Enter, obteremos o seguinte terminal</p>
+<pre class="highlightlanguage-console"><span style="color: #000080; font-weight: bold">user@host:$</span> python3 bomdia.py
+<span style="color: #888888">Digite seu nome: Maria</span>
+<span style="color: #888888">Bom dia Maria</span>
+</pre><p>No programa vemos dois comandos que fazem parte da Linguagem Python. A
+função <code class="language-text">input</code> lê um texto digitado pelo usuário no teclado até o
+momento em que ele digita a tecla Enter. O que essa função devolve é
+uma variável que guarda a <strong>sequência de caracteres</strong> digitada pelo
+usuário. Essa variável, que é do tipo string, ou <code class="language-text">str</code>, é associada ao
+identificador <code class="language-text">usuario</code>, que é o nome do usuário.</p>
+<p>A função <code class="language-text">print</code> recebe uma sequência de argumentos, cada um pode ter
+um valor e um tipo diferente. O que ela faz é mostrar (ou imprimir) na
+tela os valores na forma de texto, isso é, de uma string. Se houver
+vários argumentos, a função <code class="language-text">print</code> irá mostra um espaço entre eles.</p>
+<h2 id="strings">Strings</h2>
+<p>No código acima, temos <code class="language-text">&quot;Bom dia&quot;</code> que é uma string literal. As
+strings literais representam valores do tipo <code class="language-text">str</code> que não mudam e
+correspondem à sequência de caracteres entre as aspas. Se quisermos
+inserir um caractere de aspas dentro da string, precisamos escapar do
+significado especial que esse caractere tem utilizando uma
+contra-barra, ou <em>backslash</em> antes.</p>
+<p>Por exemplo, considere um programa <code class="language-text">pensamento.py</code> com o seguinte
+conteúdo</p>
+<pre class="highlightlanguage-python">frase <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;Descartes disse:</span><span style="color: #BB6622; font-weight: bold">\n\&quot;</span><span style="color: #BA2121">penso, logo existo</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">&quot;</span>
+<span style="color: #008000">print</span>(frase)
+</pre><p>O primeiro comando de <code class="language-text">pensamento.py</code> cria uma string com aspas.
+Poderíamos também utilizar aspas simples,</p>
+<pre class="highlightlanguage-python">frase <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;Descartes disse:</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;penso, logo existo&quot;&#39;</span>
+<span style="color: #008000">print</span>(frase)
+</pre><p>já que o caractere <code class="language-text">&quot;</code> não têm significado especial dentro da string
+literal. Se executarmos esse programa, iremos obter</p>
+<pre class="highlight">Descartes disse:
+&quot;penso, logo existo&quot;
+</pre><p>Repare que o <code class="language-text">\n</code> não foi impresso, mas sim foi mostrada uma quebra de
+linha: de fato, <code class="language-text">\n</code> é um caractere de controle que instrui o terminal
+a saltar uma linha. Se quiséssemos a própria barra, deveríamos escapar
+do significado especial da barra, usando</p>
+<pre class="highlightlanguage-python">frase <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;Descartes disse:</span><span style="color: #BB6622; font-weight: bold">\\</span><span style="color: #BA2121">n&quot;penso, logo existo&quot;&#39;</span>
+<span style="color: #008000">print</span>(frase)
+</pre><p>que imprimiria</p>
+<pre class="highlight">Descartes disse:\n&quot;penso, logo existo&quot;
+</pre><h1 id="operacoes-de-string">Operações de string</h1>
+<p>Assim como podemos fazer operações com números inteiros e números
+de ponto flutuante, também podemos fazer várias operações com string.
+Uma operação comum é criar uma <em>substring</em> ou acessar um determinado
+caractere. Veja o exemplo:</p>
+<pre class="highlightlanguage-python">frase <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;O essencial é invisível aos olhos&quot;</span>
+<span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;O primeiro caractere é: &quot;</span>, frase[<span style="color: #666666">0</span>])
+<span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;O segundo é um espaço: &quot;</span>, frase[<span style="color: #666666">1</span>])
+<span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;A segunda palavra é: &quot;</span>, frase[<span style="color: #666666">2</span>:<span style="color: #666666">11</span>])
+<span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;Um sufixo é:&quot;</span>, frase[<span style="color: #666666">16</span>:])
+<span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;A última palavra é:&quot;</span>, frase[<span style="color: #666666">-5</span>:])
+</pre><p>Executando o código acima, obtemos</p>
+<pre class="highlight">O primeiro caractere é:  O
+O segundo é um espaço:
+A segunda palavra é:  essencial
+Um sufixo é: visível aos olhos
+A última palavra é: olhos
+</pre><p>Execute o exemplo, releia o código e reflita. Procure entender porque
+essa saída é executada e procure a documentação se necessário.</p>
+<p>Uma outra operação comum com strings é a concatenação.
+Por exemplo, poderíamos reescrever o exemplo acima
+da seguinte maneira; dessa vez, usando a pontuação
+adequadamente.</p>
+<pre class="highlightlanguage-python">usuario <span style="color: #666666">=</span> <span style="color: #008000">input</span>(<span style="color: #BA2121">&quot;Digite seu nome: &quot;</span>)
+mensagem <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;Bom dia, &quot;</span> <span style="color: #666666">+</span> usuario <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;.&quot;</span>
+<span style="color: #008000">print</span>(mensagem)
+</pre><p>Reutilizamos o símbolo de <code class="language-text">+</code>. Mas perceba que nesse caso ambos
+operandos são strings, assim o significado de <code class="language-text">+</code> é <strong>concatenar</strong> as
+duas strings, em ordem. Qual a saída será obtida?</p>
+<h1 id="convertendo-tipos">Convertendo tipos</h1>
+<p>Vamos agora usar o que aprendemos para criar um programa
+que calcula a hipotenusa de um triângulo retângulo.
+Escrevemos o seguinte</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">math</span>
+
+cateto1 <span style="color: #666666">=</span> <span style="color: #008000">input</span>()
+cateto2 <span style="color: #666666">=</span> <span style="color: #008000">input</span>()
+
+hipotenusa <span style="color: #666666">=</span> math<span style="color: #666666">.</span>sqrt(cateto1<span style="color: #666666">*</span>cateto1 <span style="color: #666666">+</span> cateto2<span style="color: #666666">*</span>cateto2)
+
+<span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;A hipotenusa é &quot;</span> <span style="color: #666666">+</span> hipotenusa)
+</pre><p>Como você já deve imaginar, esse programa não funciona. Experimente. O
+motivo é fácil de entender: ninguém garante que o usuário irá escrever
+dois números válidos! E de fato, <code class="language-text">input</code> apenas lê uma sequência de
+caracteres e não tenta interpretá-la de nenhuma maneira. O tipo de
+ambos <code class="language-text">cateto1</code> e <code class="language-text">cateto2</code> no programa acima é <code class="language-text">str</code>. Ou seja, são
+strings: não podemos <code class="language-text">multiplicar</code> duas strings!</p>
+<p>Para que nosso programa funcione, precisamos que o valor das variáveis
+que representam os catetos sejam números de ponto flutuante! Mas como
+transformar uma string, que contém a sequência de dígitos decimais e, possivelmente um ponto, no número fracionário que ele representa em
+ponto flutuante? Para isso, usamos uma função de <strong>conversão</strong>
+para <code class="language-text">float</code>.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">math</span>
+
+cateto1 <span style="color: #666666">=</span> <span style="color: #008000">float</span>(<span style="color: #008000">input</span>())
+cateto2 <span style="color: #666666">=</span> <span style="color: #008000">float</span>(<span style="color: #008000">input</span>())
+
+hipotenusa <span style="color: #666666">=</span> math<span style="color: #666666">.</span>sqrt(cateto1<span style="color: #666666">*</span>cateto1 <span style="color: #666666">+</span> cateto2<span style="color: #666666">*</span>cateto2)
+
+<span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;A hipotenusa é &quot;</span> <span style="color: #666666">+</span> hipotenusa)
+</pre><p>Agora sim, a hipotenusa será calculada corretamente! Mas o programa
+ainda está incorreto. O erro é que tentamos fazer uma concatenação com
+um operando que não é uma string! Para converter um valor em uma
+string, usamos a função <code class="language-text">str</code>. Corrija esse programa usando conversão
+para string e depois fazendo a concatenação adequada!</p>
+<h2 id="formatando-a-saida">Formatando a saída</h2>
+<p>Em Python 3, existe uma maneira bem conveniente de converter valores
+em strings, que são as strings de modelo para formatação. A ideia é
+escrever um texto e deixar marcações, <em>placeholders</em>, para substituir
+com o valor formatado. Por exemplo, se quiséssemos sempre escrever o
+valor da hipotenusa com duas casas decimais, poderíamos fazer o
+seguinte</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">math</span>
+
+cateto1 <span style="color: #666666">=</span> <span style="color: #008000">float</span>(<span style="color: #008000">input</span>())
+cateto2 <span style="color: #666666">=</span> <span style="color: #008000">float</span>(<span style="color: #008000">input</span>())
+
+hipotenusa <span style="color: #666666">=</span> math<span style="color: #666666">.</span>sqrt(cateto1<span style="color: #666666">*</span>cateto1 <span style="color: #666666">+</span> cateto2<span style="color: #666666">*</span>cateto2)
+
+<span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;Os catetos são </span><span style="color: #BB6688; font-weight: bold">{}</span><span style="color: #BA2121"> e </span><span style="color: #BB6688; font-weight: bold">{}</span><span style="color: #BA2121">!&quot;</span><span style="color: #666666">.</span>format(cateto1, cateto2))
+<span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;A hipotenusa é </span><span style="color: #BB6688; font-weight: bold">{:0.2f}</span><span style="color: #BA2121">.&quot;</span><span style="color: #666666">.</span>format(hipotenusa))
+</pre><p>Procure na documentação as várias formas de usar <code class="language-text">format</code>. Nas versões
+mais novas de Python, há também uma maneira mais compacta
+de escrever esse código, usando as f-strings:</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">math</span>
+
+cateto1 <span style="color: #666666">=</span> <span style="color: #008000">float</span>(<span style="color: #008000">input</span>())
+cateto2 <span style="color: #666666">=</span> <span style="color: #008000">float</span>(<span style="color: #008000">input</span>())
+
+hipotenusa <span style="color: #666666">=</span> math<span style="color: #666666">.</span>sqrt(cateto1<span style="color: #666666">*</span>cateto1 <span style="color: #666666">+</span> cateto2<span style="color: #666666">*</span>cateto2)
+
+<span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;Os catetos são </span><span style="color: #BB6688; font-weight: bold">{cateto1}</span><span style="color: #BA2121"> e </span><span style="color: #BB6688; font-weight: bold">{cateto2}</span><span style="color: #BA2121">!&quot;</span>)
+<span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;A hipotenusa é </span><span style="color: #BB6688; font-weight: bold">{hipotenusa:0.2f}</span><span style="color: #BA2121">.&quot;</span>)
+</pre><p>Repare que as f-strings começam com um símbolo <code class="language-text">f</code>.</p>
+<h1 id="comandos-condicionais">Comandos condicionais</h1>
+<p>Vamos resolver o seguinte exercício:</p>
+<blockquote>
+<p>Escreva um programa que lê um número inteiro do teclado e imprime
+&quot;sim&quot; se o número for par e maior do que 10, ou for ímpar e menor do
+que 50. Caso contrário o programa deve imprimir &quot;não&quot;.</p>
+</blockquote>
+<p>Primeiro, vamos tentar escrever um algoritmo
+em português</p>
+<pre class="highlight">numero &lt;-- leia um número do teclado
+se número for par
+    se numero &gt; 10
+        imprima sim
+    senão
+        imprima não
+do contrário, se for ímpar
+    se numero &lt; 50
+        imprima sim
+    senão
+        imprima não
+</pre><p>Parece razoável supor que esse problema é bem simples, então fazendo
+algumas simulações rápidas nos convencemos de que o programa está
+correto. Vamos reescrever o algoritmo, agora em Python</p>
+<pre class="highlightlanguage-python">numero <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">input</span>())
+<span style="color: #008000; font-weight: bold">if</span> numero <span style="color: #666666">%</span> <span style="color: #666666">2</span> <span style="color: #666666">==</span> <span style="color: #666666">0</span>:
+    <span style="color: #008000; font-weight: bold">if</span> numero <span style="color: #666666">&gt;</span> <span style="color: #666666">10</span>:
+        <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;sim&quot;</span>)
+    <span style="color: #008000; font-weight: bold">else</span>:
+        <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;não&quot;</span>)
+<span style="color: #008000; font-weight: bold">else</span>:
+    <span style="color: #008000; font-weight: bold">if</span> numero <span style="color: #666666">&lt;</span> <span style="color: #666666">50</span>:
+        <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;sim&quot;</span>)
+    <span style="color: #008000; font-weight: bold">else</span>:
+        <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;não&quot;</span>)
+</pre><p>Há muitas novidades aqui, vamos parte a parte. Primeiro, o recuo em
+que os comandos são escritos é fundamental para identificar a
+estrutura do algoritmo. Temos duas palavras-chaves novas: <code class="language-text">if</code> e
+<code class="language-text">else</code>. O comando <code class="language-text">if</code> significa <strong>se</strong> e é seguido por uma condição.
+Se essa condição for verdadeira, e somente nesse caso, o corpo de
+comandos que segue os dois pontos e que está recuado é executado. O
+comando <code class="language-text">else</code> é opcional; o corpo desse comando é executando sempre
+que o a condição do <code class="language-text">if</code> falhar.</p>
+<h2 id="valores-booleanos">Valores booleanos</h2>
+<p>Primeiro precisamos entender o que é uma condição: uma condição é uma
+expressão cujo resultado é um valor do tipo <code class="language-text">bool</code>. Um tipo <code class="language-text">bool</code>,
+por sua vez, é um valor de verdade que pode ser ou <code class="language-text">True</code> ou <code class="language-text">False</code> e
+nada mais.</p>
+<p>Obtemos valores booleanos normalmente fazendo perguntas! Em uma
+linguagem de programação, essas perguntas estão na forma de
+comparações e outras funções. Por exemplo, se quisermos verificar se
+o usuário digitou apenas números decimais, podemos
+usar</p>
+<pre class="highlightlanguage-python">numero_string <span style="color: #666666">=</span> <span style="color: #008000">input</span>()
+<span style="color: #008000; font-weight: bold">if</span> numero_string<span style="color: #666666">.</span>isdigit():
+    numero <span style="color: #666666">=</span> <span style="color: #008000">int</span>(numero_string)
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;O texto digitado </span><span style="color: #BB6688; font-weight: bold">{numero_string}</span><span style="color: #BA2121"> contém apenas dígitos decimais.&quot;</span>)
+<span style="color: #008000; font-weight: bold">else</span>:
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;O texto digitado </span><span style="color: #BB6688; font-weight: bold">{numero_string}</span><span style="color: #BA2121"> contém apenas dígitos decimais.&quot;</span>)
+</pre><p>Poderíamos reescrever o programa anterior da seguinte maneira:</p>
+<pre class="highlightlanguage-python">numero <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">input</span>())
+
+par <span style="color: #666666">=</span> numero <span style="color: #666666">%</span> <span style="color: #666666">2</span> <span style="color: #666666">==</span> <span style="color: #666666">0</span>
+maior_10 <span style="color: #666666">=</span> numero <span style="color: #666666">&gt;</span> <span style="color: #666666">10</span>
+menor_50 <span style="color: #666666">=</span> numero <span style="color: #666666">&lt;</span> <span style="color: #666666">50</span>
+
+<span style="color: #008000; font-weight: bold">if</span> par:
+    <span style="color: #008000; font-weight: bold">if</span> maior_10:
+        <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;sim&quot;</span>)
+    <span style="color: #008000; font-weight: bold">else</span>:
+        <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;não&quot;</span>)
+<span style="color: #008000; font-weight: bold">else</span>:
+    <span style="color: #008000; font-weight: bold">if</span> menor_50:
+        <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;sim&quot;</span>)
+    <span style="color: #008000; font-weight: bold">else</span>:
+        <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;não&quot;</span>)
+</pre><p>O tipo dessas três novas variáveis é <code class="language-text">bool</code>. Confira usando um console
+Python e digitando</p>
+<pre class="highlightlanguage-pycon"><span style="color: #888888">var = True</span>
+<span style="color: #888888">type(var)</span>
+<span style="color: #888888">par = numero % 2 == 0</span>
+<span style="color: #888888">type(var)</span>
+</pre><h2 id="operadores-booleanos">Operadores booleanos</h2>
+<p>Às vezes, queremos fazer duas perguntas ao mesmo tempo, outras vezes
+precisamos satisfazer apenas uma de várias condições. Pensando nisso,
+vamos reescrever o programa</p>
+<pre class="highlightlanguage-python">numero <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">input</span>())
+
+par <span style="color: #666666">=</span> numero <span style="color: #666666">%</span> <span style="color: #666666">2</span> <span style="color: #666666">==</span> <span style="color: #666666">0</span>
+maior_10 <span style="color: #666666">=</span> numero <span style="color: #666666">&gt;</span> <span style="color: #666666">10</span>
+menor_50 <span style="color: #666666">=</span> numero <span style="color: #666666">&lt;</span> <span style="color: #666666">50</span>
+
+<span style="color: #008000; font-weight: bold">if</span> par <span style="color: #AA22FF; font-weight: bold">and</span> maior_10:
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;sim&quot;</span>)
+<span style="color: #008000; font-weight: bold">elif</span> <span style="color: #AA22FF; font-weight: bold">not</span> par <span style="color: #AA22FF; font-weight: bold">and</span> menor_50:
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;sim&quot;</span>)
+<span style="color: #008000; font-weight: bold">else</span>:
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;não&quot;</span>)
+</pre><p>Observamos algumas novas palavras-chaves: a primeira é <code class="language-text">and</code> (a
+conjunção <em>e</em> escrita em inglês) que significa que queremos que
+<strong>ambas</strong> condições sejam verdadeiras, a da esquerda e a da direita; a
+segunda é <code class="language-text">not</code> (<em>não</em> em inglês), que nega o valor e verdade de uma
+expressão; a última é <code class="language-text">elif</code>, que significa, do contrário, verifique a
+condição e execute. O <code class="language-text">elif</code> nada mais é do que uma forma mais
+compacta de escrever um código equivalente:</p>
+<pre class="highlightlanguage-python">numero <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">input</span>())
+
+par <span style="color: #666666">=</span> numero <span style="color: #666666">%</span> <span style="color: #666666">2</span> <span style="color: #666666">==</span> <span style="color: #666666">0</span>
+maior_10 <span style="color: #666666">=</span> numero <span style="color: #666666">&gt;</span> <span style="color: #666666">10</span>
+menor_50 <span style="color: #666666">=</span> numero <span style="color: #666666">&lt;</span> <span style="color: #666666">50</span>
+
+<span style="color: #008000; font-weight: bold">if</span> par <span style="color: #AA22FF; font-weight: bold">and</span> maior_10:
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;sim&quot;</span>)
+<span style="color: #008000; font-weight: bold">else</span>:
+  <span style="color: #008000; font-weight: bold">if</span> par <span style="color: #AA22FF; font-weight: bold">and</span> menor_50:
+      <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;sim&quot;</span>)
+  <span style="color: #008000; font-weight: bold">else</span>:
+      <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;não&quot;</span>)
+</pre><p>Mas, como essa sequência de <code class="language-text">if</code> seguido de <code class="language-text">else</code> é bastante comum,
+fica mais fácil escrever todos os corpos de comando no mesmo recuo.
+Podemos usar quantos <code class="language-text">elif</code> após um <code class="language-text">if</code> quanto forem necessários.</p>
+<p>No nosso exemplo, o corpo de <code class="language-text">if</code> e <code class="language-text">elif</code> são iguais. Assim, podemos
+simplificar ainda mais o programa acima.</p>
+<pre class="highlightlanguage-python">numero <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">input</span>())
+
+par <span style="color: #666666">=</span> numero <span style="color: #666666">%</span> <span style="color: #666666">2</span> <span style="color: #666666">==</span> <span style="color: #666666">0</span>
+maior_10 <span style="color: #666666">=</span> numero <span style="color: #666666">&gt;</span> <span style="color: #666666">10</span>
+menor_50 <span style="color: #666666">=</span> numero <span style="color: #666666">&lt;</span> <span style="color: #666666">50</span>
+
+<span style="color: #008000; font-weight: bold">if</span> par <span style="color: #AA22FF; font-weight: bold">and</span> maior_10 <span style="color: #AA22FF; font-weight: bold">or</span> <span style="color: #AA22FF; font-weight: bold">not</span> par <span style="color: #AA22FF; font-weight: bold">and</span> menor_50:
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;sim&quot;</span>)
+<span style="color: #008000; font-weight: bold">else</span>:
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;não&quot;</span>)
+</pre><p>A palavra-chave <code class="language-text">or</code> é um operador que devolve verdadeiro bastando que
+pelo menos um dos seus operando seja <code class="language-text">True</code>.</p>
+<p>Note que nem sempre é fácil entender qual a ordem em que as operações
+serão executadas. Para isso é necessário conhecer a precedência dos
+operadores (e um bocado de experiência). No caso do <code class="language-text">if</code> acima, <code class="language-text">not</code>
+é executado primeiro e <code class="language-text">or</code> é executado por último. Em expressões
+complicadas, como a acima, é sempre mais claro (e mais prático), usar
+parênteses:</p>
+<pre class="highlightlanguage-python">numero <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">input</span>())
+
+par <span style="color: #666666">=</span> numero <span style="color: #666666">%</span> <span style="color: #666666">2</span> <span style="color: #666666">==</span> <span style="color: #666666">0</span>
+maior_10 <span style="color: #666666">=</span> numero <span style="color: #666666">&gt;</span> <span style="color: #666666">10</span>
+menor_50 <span style="color: #666666">=</span> numero <span style="color: #666666">&lt;</span> <span style="color: #666666">50</span>
+
+<span style="color: #008000; font-weight: bold">if</span> (par <span style="color: #AA22FF; font-weight: bold">and</span> maior_10) <span style="color: #AA22FF; font-weight: bold">or</span> (<span style="color: #AA22FF; font-weight: bold">not</span> par <span style="color: #AA22FF; font-weight: bold">and</span> menor_50):
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;sim&quot;</span>)
+<span style="color: #008000; font-weight: bold">else</span>:
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;não&quot;</span>)
+</pre><p>O nome booleano, que em Python corresponde a <code class="language-text">bool</code>, é uma homenagem a
+um matemático
+<a href="https://pt.wikipedia.org/wiki/George_Boole">George Bool</a>, a quem é
+frequentemente atribuída a criação da álgebra booleana. Por ora, basta
+conhecermos bem as chamadas <strong>tabelas-verdades</strong> das operações:</p>
+<table>
+<thead>
+<tr>
+<th><code class="language-text">A</code></th>
+<th><code class="language-text">not A</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>True</td>
+<td>False</td>
+</tr>
+<tr>
+<td>False</td>
+<td>True</td>
+</tr>
+</tbody></table><table>
+<thead>
+<tr>
+<th><code class="language-text">A</code></th>
+<th><code class="language-text">B</code></th>
+<th><code class="language-text">A and B</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+</tr>
+<tr>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+</tr>
+<tr>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+</tr>
+<tr>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+</tr>
+</tbody></table><table>
+<thead>
+<tr>
+<th><code class="language-text">A</code></th>
+<th><code class="language-text">B</code></th>
+<th><code class="language-text">A or B</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+</tr>
+<tr>
+<td>True</td>
+<td>False</td>
+<td>True</td>
+</tr>
+<tr>
+<td>False</td>
+<td>True</td>
+<td>True</td>
+</tr>
+<tr>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+</tr>
+</tbody></table><p>Relembrar algumas equivalências bem conhecidas também é importante:</p>
+<ul>
+<li><code class="language-text">not (a == b)</code> é equivalente a <code class="language-text">a != b</code></li>
+<li><code class="language-text">not (a != b)</code> é equivalente a <code class="language-text">a == b</code></li>
+<li><code class="language-text">not (a &gt; b)</code> é equivalente a <code class="language-text">a &lt;= b</code></li>
+<li><code class="language-text">not (a &lt; b)</code> é equivalente a <code class="language-text">a &gt;= b</code></li>
+<li><code class="language-text">not (a &gt;= b)</code> é equivalente a <code class="language-text">a &lt; b</code></li>
+<li><code class="language-text">not (a &lt;= b)</code> é equivalente a <code class="language-text">a &gt; b</code></li>
+</ul>
+<p>E refletir sobre algumas formas que às vezes passam desapercebido:</p>
+<ul>
+<li><code class="language-text">not (a and b)</code> é equivalente a <code class="language-text">not a  or  not b</code></li>
+<li><code class="language-text">not (a or b)</code> é equivalente a <code class="language-text">not a  and  not b</code></li>
+</ul>
+<h2 id="repetindo">Repetindo</h2>
+<p>O corpo de comandos de <code class="language-text">if</code> e de <code class="language-text">else</code> pode ser executado uma ou
+nenhuma vez dependendo da condição. Muitas vezes, queremos repetir um
+conjunto de comandos enquanto determinada condição é satisfeita.</p>
+<p>Iremos ver comandos repetitivos com calma depois. Por enquanto,
+resolvamos um exercício:</p>
+<blockquote>
+<p>Escreva um programa que leia ma sequência de pares de números
+inteiros e pare apenas quando a soma de ambos for 42.</p>
+</blockquote>
+<pre class="highlightlanguage-python"><span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;Escreva dois números&quot;</span>)
+a <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">input</span>())
+b <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">input</span>())
+soma <span style="color: #666666">=</span> a <span style="color: #666666">+</span> b
+
+<span style="color: #008000; font-weight: bold">while</span> soma <span style="color: #666666">!=</span> <span style="color: #666666">42</span>:
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;Escreva dois números&quot;</span>)
+    a <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">input</span>())
+    b <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">input</span>())
+    soma <span style="color: #666666">=</span> a <span style="color: #666666">+</span> b
+
+<span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;Parabéns, a soma de </span><span style="color: #BB6688; font-weight: bold">{a}</span><span style="color: #BA2121"> e </span><span style="color: #BB6688; font-weight: bold">{b}</span><span style="color: #BA2121"> é um número fundamental&quot;</span>)
+</pre><p>Há uma novidade: a palavra-chave <code class="language-text">while</code> é como <code class="language-text">if</code>, mas é um comando
+<strong>repetitivo</strong>, isso significa que o corpo de comandos do <code class="language-text">while</code> deve
+mudar o valor das variáveis a mudar a expressão de condição.</p>
+<p>Há um problema desse código: repetimos a mesma coisa duas vezes. Como sempre precisamos executar uma vez, podemos substituir a expressão da
+condição por uma variável, assim:</p>
+<pre class="highlightlanguage-python">procurando <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">True</span>
+
+<span style="color: #008000; font-weight: bold">while</span> procurando:
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;Escreva dois números&quot;</span>)
+    a <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">input</span>())
+    b <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">input</span>())
+    soma <span style="color: #666666">=</span> a <span style="color: #666666">+</span> b
+
+    <span style="color: #008000; font-weight: bold">if</span> soma <span style="color: #666666">==</span> <span style="color: #666666">42</span>:
+      procurando <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">False</span>
+
+<span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;Parabéns, a soma de </span><span style="color: #BB6688; font-weight: bold">{a}</span><span style="color: #BA2121"> e </span><span style="color: #BB6688; font-weight: bold">{b}</span><span style="color: #BA2121"> é um número fundamental&quot;</span>)
+</pre>
+
+        <!-- Navigation buttons -->
+<div role="navigation" class="row justify-content-between">
+
+  <div class="col-12 col-sm-5 col-lg-4">
+    <a class="btn btn-primary w-100 mt-1 mt-sm-0" href="03-linguagens-programacao.html">
+      &larr; Anterior
+    </a>
+  </div>
+
+  <div class="col-12 d-none d-lg-inline-block col-lg-4">
+    <a class="btn btn-secondary w-100" href="../index.html">
+      Voltar
+    </a>
+  </div>
+
+  <div class="col-12 col-sm-5 col-lg-4">
+    <a class="btn btn-primary w-100 mt-1 mt-sm-0" href="05-listas.html">
+      Próxima &rarr;
+    </a>
+  </div>
+
+</div>      </div>
+    </div>
+</article>
+
+<hr />
+
+
+<!-- Footer -->
+<footer>
+  <p class="copyright text-muted">
+    <a href="https://www.ic.unicamp.br/~lehilton/" title="Página pessoal">
+      Copyright &copy; 2020
+    </a>
+  </p>
+</footer>
+<!-- Bootstrap core JavaScript -->
+<script src="../dist/vendor/jquery/jquery.min.js"></script>
+<script src="../dist/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="../dist/vendor/prism/prism.js"></script> -->
+
+<!-- Custom scripts for this template -->
+<script src="../dist/js/main.min.js"></script>
+
+<!-- Mathjax setup -->
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+  };
+</script>
+<script src="../dist/vendor/mathjax/tex-chtml.js" id="MathJax-script" async></script>
+
+
+
+  </body>
+
+</html>

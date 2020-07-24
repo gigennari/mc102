@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    Algoritmos e Programação de Computadores
+    - Listas
+  </title>
+
+  <meta name="keywords" content="MC102, Algoritmos e Programação de Computadores, Python">
+  <meta name="description" content="Página da disciplina de MC102 para turma QR">
+  <meta name="author" content="Lehilton Pedrosa">
+
+  <!-- Bootstrap core CSS -->
+  <link href="../dist/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Theme css -->
+  <link href="../dist/css/main.min.css" rel="stylesheet">
+
+  <!-- Prism -->
+  <!-- <link href="../dist/vendor/prism/prism.css" rel="stylesheet" /> -->
+</head>
+<body >
+
+  <body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="../index.html">MC102</a>
+
+
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+      aria-label="Toggle navigation">
+      Menu
+      <i>&#9776;</i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item top back-to-top-link">
+          <a class="nav-link" href="#"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>topo</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="../index.html">voltar</a>
+        </li>
+
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Header -->
+<header class="masthead"   style="background-image: url('../images/home-bg.jpg')" >
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-heading">
+
+          <h1 >Listas</h1>
+
+
+          <span class="meta">Terça, 7 de abril de 2020</span>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+
+
+      <div class="col-lg-8 col-md-10 mx-auto">
+
+        <p><strong>Instruções</strong>: Enquanto você lê, você deve acompanhar os exemplos
+utilizando um console e Python. Para essa unidade, você deve ler o
+restante do capítulo 3 a partir de 3.1.2 e as seções do capítulo 4 até
+4.5 do
+<a href="https://docs.python.org/pt-br/3/tutorial/index.html">tutorial</a>
+Python.</p>
+<hr />
+<p>Vamos refazer nosso algoritmo para a lista de compras, mas dessa vez
+vamos guardar os valores dos itens na memória do computador. Vamos
+resolver o seguinte exercício:</p>
+<blockquote>
+<p>Escreva um programa que leia uma sequência de valores de itens de
+compra e mostre o valor da soma de todos os itens. O usuário deverá
+escrever o valor de cada item, um por linha. Quando não houver mais
+itens, o usuário irá indicar esse fato escrevendo um número negativo
+qualquer.</p>
+</blockquote>
+<p>Para ter certeza de que entendemos o problema, primeiro escrevemos
+um exemplo de entrada:</p>
+<pre class="highlight">3.50
+5.00
+16.36
+-1
+</pre><p>Assim, usando uma calculadora fica claro que devemos somar os valores
+das três primeiras linhas e obter o seguinte resultado.</p>
+<pre class="highlight">24.86
+</pre><p>Como de costume, vamos escrever primeiro um algoritmo em português.</p>
+<pre class="highlight">lista_compras &lt;-- crie uma lista de compras
+valor &lt;-- leia um valor de item
+enquanto valor &gt; 0:
+    adicionar valor a lista_compras
+    valor &lt;-- leia um valor de item
+
+soma &lt;-- 0
+para cada valor na lista_compras:
+    soma &lt;-- soma + valor
+mostrar o valor da soma total
+</pre><p>Já sabemos implementar todas as linhas, com exceção da primeira: criar
+uma lista de compras: criar uma lista de compras. Como você deve
+imaginar, não existe uma tal abstração <em>lista de compras</em> na linguagem
+de programação Python. Então para implementar esse programa, teremos
+que responder duas perguntas:</p>
+<ol>
+<li>como representar <strong>um item</strong> da lista de compras no contexto desse
+algoritmo?</li>
+<li>como armazenar um <strong>conjunto de itens</strong> da lista de compras em uma
+única variável?</li>
+</ol>
+<p>A resposta da primeira pergunta reforça que o que armazenamos de fato
+na memória do computador não são <em>itens de compra</em>, mas dados
+relacionados a um item. Nesse caso, o único dado de interesse é o
+valor desse item, que devemos representar como um número de ponto
+flutuante. Assim, para responder a segunda pergunta precisamos de um
+mecanismo para armazenar um conjunto de números de ponto flutuante. Em
+Python, a maneira natural de armazenar uma coleção de dados é criando
+uma lista. Uma implementação do algoritmo seria a seguinte:</p>
+<pre class="highlightlanguage-python"><span style="color: #408080; font-style: italic"># leia uma sequência de valores de itens</span>
+lista_compras <span style="color: #666666">=</span> []
+valor <span style="color: #666666">=</span> <span style="color: #008000">float</span>(<span style="color: #008000">input</span>())
+<span style="color: #008000; font-weight: bold">while</span> valor <span style="color: #666666">&gt;=</span> <span style="color: #666666">0</span>:
+    lista_compras<span style="color: #666666">.</span>append(valor)
+    valor <span style="color: #666666">=</span> <span style="color: #008000">float</span>(<span style="color: #008000">input</span>())
+
+<span style="color: #408080; font-style: italic"># somar todos os valores da lista</span>
+soma <span style="color: #666666">=</span> <span style="color: #666666">0.0</span>
+<span style="color: #008000; font-weight: bold">for</span> valor <span style="color: #AA22FF; font-weight: bold">in</span> lista_compras:
+    soma <span style="color: #666666">+=</span> valor
+<span style="color: #008000">print</span>(soma)
+</pre><p>Há diversas novidades nesse trecho de código. Vamos explorá-lo
+em partes.</p>
+<h1 id="listas">Listas</h1>
+<p>A expressão <code class="language-text">[]</code> cria uma nova variável do tipo lista que inicialmente
+está vazia. Há várias maneiras de criar uma lista. Vamos experimentar
+algumas, experimente:</p>
+<pre class="highlightlanguage-pycon"><span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>lista_vazia <span style="color: #666666">=</span> []
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>outra_lista_vazia <span style="color: #666666">=</span> <span style="color: #008000">list</span>()
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>primos <span style="color: #666666">=</span> [<span style="color: #666666">2</span>, <span style="color: #666666">3</span>, <span style="color: #666666">5</span>, <span style="color: #666666">7</span>, <span style="color: #666666">11</span>]
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>cinco_zeros <span style="color: #666666">=</span> [<span style="color: #666666">0</span>] <span style="color: #666666">*</span> <span style="color: #666666">5</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>escritores <span style="color: #666666">=</span> [<span style="color: #BA2121">&quot;Vinicius de Moraes&quot;</span>,
+<span style="color: #000080; font-weight: bold">... </span>              <span style="color: #BA2121">&quot;Cecília Meireles&quot;</span>,
+<span style="color: #000080; font-weight: bold">... </span>              <span style="color: #BA2121">&quot;Mary Shelley&quot;</span>,
+<span style="color: #000080; font-weight: bold">... </span>              <span style="color: #BA2121">&quot;Cora Coralina&quot;</span>,
+<span style="color: #000080; font-weight: bold">... </span>              <span style="color: #BA2121">&quot;Pedro dos Anjos&quot;</span>,]
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>escritoras <span style="color: #666666">=</span> escritores[<span style="color: #666666">1</span>:<span style="color: #666666">4</span>]
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>notas <span style="color: #666666">=</span> [<span style="color: #666666">10.0</span>, <span style="color: #666666">7.5</span>, <span style="color: #666666">3.14</span>]
+</pre><p>O número de referências que estão armazenadas em uma
+lista pode ser variável. Ela pode começar vazia ou com alguns elementos.
+Podemos inserir um elemento no <strong>final</strong> da lista com a operação <code class="language-text">append</code>
+e remover um elemento do <strong>final</strong> da lista com a operação <code class="language-text">pop</code>.</p>
+<pre class="highlightlanguage-pycon"><span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>primos <span style="color: #666666">=</span> [<span style="color: #666666">2</span>, <span style="color: #666666">3</span>, <span style="color: #666666">5</span>, <span style="color: #666666">7</span>, <span style="color: #666666">11</span>]
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span><span style="color: #008000">type</span>(primos)
+<span style="color: #888888">&lt;class &#39;list&#39;&gt;</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span><span style="color: #008000">len</span>(primos)
+<span style="color: #888888">5</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>primos<span style="color: #666666">.</span>append(<span style="color: #666666">17</span>)
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>primos
+<span style="color: #888888">[2, 3, 5, 7, 11, 17]</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>primos<span style="color: #666666">.</span>extend([<span style="color: #666666">19</span>, <span style="color: #666666">23</span>])
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>primos
+<span style="color: #888888">[2, 3, 5, 7, 11, 17, 19, 23]</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>primos<span style="color: #666666">.</span>pop()
+<span style="color: #888888">23</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>primos
+<span style="color: #888888">[2, 3, 5, 7, 11, 17, 19]</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>primos <span style="color: #666666">=</span> primos <span style="color: #666666">+</span> [<span style="color: #666666">29</span>, <span style="color: #666666">31</span>]
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>primos
+<span style="color: #888888">[2, 3, 5, 7, 11, 17, 19, 29, 31]</span>
+</pre><p>Procure na documentação outras funções para remover ou inserir em uma
+posição arbitrária e para remover um determinado elemento. Experimente
+tentar remover elementos de listas vazias ou remover elementos que não
+existem na lista.</p>
+<p>Uma lista é uma variável que contém um <strong>conjunto de referências</strong>
+para outras variáveis. Você pode desenhar <code class="language-text">lista_compras</code> como grande
+quadrado na memória que contém referências para diversas variáveis. Ao
+executar o programa com o exemplo de entrada, obteremos uma figura
+parecida com a seguinte:</p>
+<img src="figs/lista_exemplo.png" style="width: 100%; max-width: 500px;">
+<p>Você pode imaginar que na verdade há diversos nomes distintos referenciando
+as variáveis distintas, como na figura:</p>
+<img src="figs/lista_exemplo2.png" style="width: 100%; max-width: 500px;">
+<p>Os motivos por que usamos uma lista ao invés de diversas variáveis
+soltas são:</p>
+<ol>
+<li>podemos armazenar um <strong>número variável</strong> de elementos na memória,
+todos representados por um mesmo nome</li>
+<li>podemos acessar uma variável distinta dessa coleção por meio de um
+<strong>índice não constante</strong></li>
+</ol>
+<p>Isso é importante porque, no momento em que estamos escrevendo um
+algoritmo, não sabemos quantos elementos a coleção deverá ter, nem
+qual posição será acessada. Vamos experimentar o seguinte programa:</p>
+<pre class="highlightlanguage-python">n <span style="color: #666666">=</span> <span style="color: #008000">input</span>(<span style="color: #BA2121">&quot;Digite quantos amigos você tem? &quot;</span>)
+amigos <span style="color: #666666">=</span> []
+i <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+<span style="color: #008000; font-weight: bold">while</span> i <span style="color: #666666">&lt;</span> n:
+    nome <span style="color: #666666">=</span> <span style="color: #008000">input</span>(<span style="color: #BA2121">f&quot;Digite o nome do amigo número </span><span style="color: #BB6688; font-weight: bold">{i}</span><span style="color: #BA2121">: &quot;</span>)
+    amigos<span style="color: #666666">.</span>append(nome)
+    i <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+
+j <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">input</span>(<span style="color: #BA2121">&quot;Digite um número: &quot;</span>))
+<span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;Seu amigo número </span><span style="color: #BB6688; font-weight: bold">{j}</span><span style="color: #BA2121"> chama-se </span><span style="color: #BB6688; font-weight: bold">{amigos[j]}</span><span style="color: #BA2121">&quot;</span>)
+</pre><p>Experimente executar esse programa. Observe que nada garante que o
+número armazenado na variável <code class="language-text">j</code> corresponde a um número de amigo
+válido. O que acontece quando você digita um número negativo? E quando
+digita um número maior ou igual o número <code class="language-text">n</code>?</p>
+<p>Assim como as variáveis simples, também podemos mudar os valores a que
+se referem os elementos de uma lista. O seguinte programa multiplica
+por um número diferente cada elemento de uma lista de inteiros:</p>
+<pre class="highlightlanguage-python">sequencia <span style="color: #666666">=</span> [<span style="color: #666666">1</span>] <span style="color: #666666">*</span> <span style="color: #666666">5</span>
+i <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+<span style="color: #008000; font-weight: bold">while</span> i <span style="color: #666666">&lt;</span> <span style="color: #666666">10</span>:
+    sequencia[i] <span style="color: #666666">=</span> sequencia[i <span style="color: #666666">-</span> <span style="color: #666666">1</span>] <span style="color: #666666">*</span> i
+    i <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+<span style="color: #008000">print</span>(sequencia)
+</pre><h2 id="um-parentese">Um parêntese</h2>
+<p>Você consegue dizer o que esse programa faz? Tente simular no papel e
+depois verifique executando esse programa com o auxílio de um <code class="language-text">debugger</code>.
+Para isso, você pode utilizar uma IDE configurada apropriadamente
+como o VSCode. Alternativamente, salve o programa
+seguinte como <code class="language-text">sequencia.py</code></p>
+<pre class="highlightlanguage-python">sequencia <span style="color: #666666">=</span> [<span style="color: #666666">1</span>] <span style="color: #666666">*</span> <span style="color: #666666">5</span>
+i <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+<span style="color: #008000; font-weight: bold">while</span> i <span style="color: #666666">&lt;</span> <span style="color: #666666">10</span>:
+    breakpoint()
+    sequencia[i] <span style="color: #666666">=</span> sequencia[i <span style="color: #666666">-</span> <span style="color: #666666">1</span>] <span style="color: #666666">*</span> i
+    i <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+<span style="color: #008000">print</span>(sequencia)
+</pre><p>e execute em um terminal usando <code class="language-text">python3 sequencia.py</code>. Isso irá
+iniciar um sessão do Python debugger padrão (pdb) toda vez que a linha
+que contém <code class="language-text">breakpoint()</code> for executada. Nessa sessão, você pode
+inspecionar os valores atuais das variáveis, assim como num terminal
+interativo. Depois de ver o valor das variáveis, digite <code class="language-text">continue</code>,
+para continuar executando a próxima linha até a próxima instrução
+<code class="language-text">breakpoint()</code>.</p>
+<h2 id="listas-heterogeneas">Listas heterogêneas</h2>
+<p>Na grande maioria da vezes, vamos considerar apenas listas que contêm
+elementos de um determinado tipo. As listas em Python, no entanto,
+permitem listas que contêm elementos de tipos heterogêneos. Vejamos
+um exemplo:</p>
+<pre class="highlightlanguage-pycon"><span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>numeros <span style="color: #666666">=</span> [<span style="color: #BA2121">&quot;um&quot;</span>, <span style="color: #666666">2</span>, <span style="color: #666666">3.0</span>]
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span><span style="color: #008000">type</span>(numeros[<span style="color: #666666">0</span>])
+<span style="color: #888888">&lt;class &#39;str&#39;&gt;</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span><span style="color: #008000">type</span>(numeros[<span style="color: #666666">1</span>])
+<span style="color: #888888">&lt;class &#39;int&#39;&gt;</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span><span style="color: #008000">type</span>(numeros[<span style="color: #666666">2</span>])
+<span style="color: #888888">&lt;class &#39;float&#39;&gt;</span>
+</pre><p>Enquanto isso pode ser conveniente às vezes, você não deve criar
+listas desse tipo, pelo menos por enquanto. Um dos motivos é que não
+podemos tratar os elementos dessa lista de maneira uniforme. Qual
+seria o resultado de <code class="language-text">numeros[0] + numeros[1]</code>?</p>
+<h1 id="percorrendo-listas">Percorrendo listas</h1>
+<p>Voltando ao exemplo da lista de compras, agora precisamos percorrer
+os elementos da lista. Para isso, usamos a construção <code class="language-text">for</code> como
+seguinte:</p>
+<pre class="highlightlanguage-python"><span style="color: #408080; font-style: italic"># somar todos os valores da lista</span>
+soma <span style="color: #666666">=</span> <span style="color: #666666">0.0</span>
+<span style="color: #008000; font-weight: bold">for</span> valor <span style="color: #AA22FF; font-weight: bold">in</span> lista_compras:
+    soma <span style="color: #666666">+=</span> valor
+<span style="color: #008000">print</span>(soma)
+</pre><p>Você pode ler como _para cada <code class="language-text">valor</code> de <code class="language-text">lista*compras*, execute as seguinte instruções_. O que esse trecho faz é criar um novo nome de variável </code>valor<code class="language-text">e executar bloco de código indentado do</code>for<code class="language-text">uma vez para cada elemento da lista, em ordem. Em cada iteração,</code>valor`
+estará referenciando um elemento da lista.</p>
+<p>Observe que embora não faça parte do <code class="language-text">for</code>, a variável <code class="language-text">soma</code> está
+associada a esse laço. Ao final de cada iteração ela terá o valor da
+soma parcial dos valores até o item corrente, por isso é chamada de
+variável <code class="language-text">acumuladora</code>. Faça os exercícios de fixação para descobrir
+mais usos de variáveis acumuladoras.</p>
+<p>Na verdade, você pode usar o <code class="language-text">for</code> para percorrer qualquer iterador ou
+sequência em Python. Não vamos estudar iteradores em detalhes. Um
+iterador bastante comum é obtido pela função <code class="language-text">range</code>, que
+representa um intervalo inteiro. Podemos usá-lo da seguinte forma:</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">10</span>):
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;Executando iteração com i = </span><span style="color: #BB6688; font-weight: bold">{i}</span><span style="color: #BA2121">&quot;</span>)
+</pre><p>Isso irá imprimir a seguinte saída</p>
+<pre class="highlight">Executando iteração com i = 0
+Executando iteração com i = 1
+Executando iteração com i = 2
+Executando iteração com i = 3
+Executando iteração com i = 4
+Executando iteração com i = 5
+Executando iteração com i = 6
+Executando iteração com i = 7
+Executando iteração com i = 8
+Executando iteração com i = 9
+</pre><p>Procure a documentação de <code class="language-text">range</code> para ver outras formas de usá-la.
+Tente descobrir o que faz o seguinte programa:</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">5</span>, <span style="color: #666666">11</span>):
+    <span style="color: #008000; font-weight: bold">for</span> j <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">10-</span>i):
+        <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot; &quot;</span>, end<span style="color: #666666">=</span><span style="color: #BA2121">&quot;&quot;</span>)
+    <span style="color: #008000; font-weight: bold">for</span> j <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">2*</span>i):
+        <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;*&quot;</span>, end<span style="color: #666666">=</span><span style="color: #BA2121">&quot;&quot;</span>)
+    <span style="color: #008000; font-weight: bold">for</span> j <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">10-</span>i):
+        <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot; &quot;</span>, end<span style="color: #666666">=</span><span style="color: #BA2121">&quot;&quot;</span>)
+    <span style="color: #008000">print</span>()
+</pre><p>Enquanto o valor devolvido por <code class="language-text">range</code> funciona como uma lista, ele
+não é uma lista. Mas se quiser pode converter um intervalo (ou
+qualquer sequência) em uma lista. Isso na maioria das vezes não é
+necessário, mas você pode querer verificar isso:</p>
+<pre class="highlightlanguage-pycon"><span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>intervalo_pares <span style="color: #666666">=</span> <span style="color: #008000">range</span>(<span style="color: #666666">2</span>, <span style="color: #666666">11</span>, <span style="color: #666666">2</span>)
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>intervalo_pares
+<span style="color: #888888">range(2, 11, 2)</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span><span style="color: #008000">type</span>(intervalo_pares)
+<span style="color: #888888">&lt;class &#39;range&#39;&gt;</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>pares <span style="color: #666666">=</span> <span style="color: #008000">list</span>(intervalo_pares)
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>pares
+<span style="color: #888888">[2, 4, 6, 8, 10]</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>minha_string <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;Uma string&quot;</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span><span style="color: #008000">type</span>(minha_string)
+<span style="color: #888888">&lt;class &#39;str&#39;&gt;</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>sequencia_caracteres <span style="color: #666666">=</span> <span style="color: #008000">list</span>(minha_string)
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>sequencia_caracteres
+<span style="color: #888888">[&#39;U&#39;, &#39;m&#39;, &#39;a&#39;, &#39; &#39;, &#39;s&#39;, &#39;t&#39;, &#39;r&#39;, &#39;i&#39;, &#39;n&#39;, &#39;g&#39;]</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span><span style="color: #008000">type</span>(sequencia_caracteres)
+<span style="color: #888888">&lt;class &#39;list&#39;&gt;</span>
+</pre><h2 id="um-outro-exemplo">Um outro exemplo</h2>
+<p>Você pode se questionar porque precisamos guardar todos os valores da
+nossa lista de compras se apenas gostaríamos de somá-los. De fato, não
+precisamos: nesse exemplo, ter criado uma lista apenas fez com que
+utilizássemos mais memória (para armazenar uma lista) do que era
+necessário. Nessa disciplina as entradas não serão tão grandes a ponto
+de precisarmos economizar memória, então sempre que for conveniente,
+vamos armazenar os dados em uma lista. Há algumas vantagens de
+escrever programas assim: primeiro, é mais fácil pensar sobre uma
+lista e, segundo, há uma série de funções prontas para tratar listas
+em Python. O último trecho de código poderia ser substituído pela
+seguinte linha</p>
+<pre class="highlightlanguage-python"><span style="color: #008000">print</span>(<span style="color: #008000">sum</span>(lista_compras))
+</pre><p>Pesquise sobre a função <code class="language-text">sum</code> e outras funções agregadoras de Python,
+mas tenha em mente que nessa nessa disciplina queremos aprender e
+exercitar os algoritmos explicitamente.</p>
+<p>Um exercícios em que é <strong>necessário</strong> manter uma lista em memória é
+o seguinte:</p>
+<blockquote>
+<p>Escreva um programa que receba uma sequência de nomes digitados no
+teclado e imprima as iniciais. Para sinalizar que não há mais nomes,
+o usuário irá digitar um traço <code class="language-text">-</code>.</p>
+</blockquote>
+<p>Um exemplo de entrada é</p>
+<pre class="highlight">Maria
+João
+Pedro
+Catarina
+Carlos
+-
+</pre><p>Com o que já aprendemos, podemos escrever o seguinte:</p>
+<pre class="highlightlanguage-python"><span style="color: #408080; font-style: italic"># ler uma sequência de nomes</span>
+lista_nomes <span style="color: #666666">=</span> []
+nome <span style="color: #666666">=</span> <span style="color: #008000">input</span>()
+<span style="color: #008000; font-weight: bold">while</span> nome <span style="color: #666666">!=</span> <span style="color: #BA2121">&quot;-&quot;</span>:
+    lista_nomes<span style="color: #666666">.</span>append(nome)
+    nome <span style="color: #666666">=</span> <span style="color: #008000">input</span>()
+
+<span style="color: #408080; font-style: italic"># guardar as iniciais</span>
+lista_iniciais <span style="color: #666666">=</span> []
+<span style="color: #008000; font-weight: bold">for</span> nome <span style="color: #AA22FF; font-weight: bold">in</span> lista_nomes:
+    inicial <span style="color: #666666">=</span> nome[<span style="color: #666666">0</span>]
+    lista_iniciais<span style="color: #666666">.</span>append(inicial)
+
+<span style="color: #008000">print</span>(<span style="color: #BA2121">&quot; &quot;</span><span style="color: #666666">.</span>join(lista_iniciais))
+</pre><p>Preste atenção no argumento de <code class="language-text">print</code> e pesquise sobre a função
+<code class="language-text">join</code>, que nos auxilia a criar uma string separada por espaços. Ao
+testarmos esse programa e analisarmos a saída, no entanto, iremos
+notar um problema.</p>
+<pre class="highlight">M J P C C
+</pre><p>A saída contém iniciais repetidas. Isso é fácil de corrigir quando
+guardamos a lista de iniciais: basta testar se já encontramos a
+inicial antes de inserir. Podemos fazer isso usando
+um operador novo.</p>
+<pre class="highlightlanguage-python"><span style="color: #408080; font-style: italic"># ler uma sequência de nomes</span>
+lista_nomes <span style="color: #666666">=</span> []
+nome <span style="color: #666666">=</span> <span style="color: #008000">input</span>()
+<span style="color: #008000; font-weight: bold">while</span> nome <span style="color: #666666">!=</span> <span style="color: #BA2121">&quot;-&quot;</span>:
+    lista_nomes<span style="color: #666666">.</span>append(nome)
+    nome <span style="color: #666666">=</span> <span style="color: #008000">input</span>()
+
+<span style="color: #408080; font-style: italic"># guardar as iniciais</span>
+lista_iniciais <span style="color: #666666">=</span> []
+<span style="color: #008000; font-weight: bold">for</span> nome <span style="color: #AA22FF; font-weight: bold">in</span> lista_nomes:
+    inicial <span style="color: #666666">=</span> nome[<span style="color: #666666">0</span>]
+    <span style="color: #008000; font-weight: bold">if</span> inicial <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #AA22FF; font-weight: bold">in</span> lista_iniciais:
+        lista_iniciais<span style="color: #666666">.</span>append(inicial)
+
+<span style="color: #008000">print</span>(<span style="color: #BA2121">&quot; &quot;</span><span style="color: #666666">.</span>join(lista_iniciais))
+</pre><p>O operador <code class="language-text">in</code> (ou sua versão negada <code class="language-text">not in</code>) devolve um valor
+booleano indicando se o item à esquerda está na lista à direita.</p>
+<h1 id="copiando-uma-lista-e-referencias">Copiando uma lista e referências</h1>
+<p>Você deve ter reparado que sempre que falamos do operador de
+atribuição <code class="language-text">=</code>, nós distinguimos entre o nome da variável e
+o valor da variável. Isso é particularmente importante quando
+trabalhamos com lista. Por exemplo, tente descobrir
+o que é impresso pelo seguinte trecho:</p>
+<pre class="highlightlanguage-python">mamiferos <span style="color: #666666">=</span> [<span style="color: #BA2121">&quot;golfinho&quot;</span>, <span style="color: #BA2121">&quot;humano&quot;</span>, <span style="color: #BA2121">&quot;cachorro&quot;</span>]
+animais <span style="color: #666666">=</span> mamiferos
+animais<span style="color: #666666">.</span>append(<span style="color: #BA2121">&quot;sapo&quot;</span>)
+<span style="color: #008000">print</span>(mamiferos)
+</pre><p>Ao executar esse código você verá que não teremos impresso apenas
+espécies mamíferas, mas também um anfíbio. Muito embora uma tradução
+ingênua para o português poderia dizer que &quot;sapo&quot; foi adicionado
+apenas a lista de animais, na verdade a lista <code class="language-text">animais</code> e <code class="language-text">mamiferos</code>
+são uma só! Uma representação em memória desse trecho é</p>
+<img src="figs/lista_referencia.png" style="width: 100%; max-width: 500px;">
+<p>Quando escrevemos a linha <code class="language-text">animais = mamiferos</code> o que fazemos
+é dar um novo nome à mesma lista que foi criada antes.
+Para fazer uma cópia de uma lista, precisamos de um pouco mais de trabalho.
+Observe e procure entender o código abaixo</p>
+<pre class="highlightlanguage-python">mamiferos <span style="color: #666666">=</span> [<span style="color: #BA2121">&quot;golfinho&quot;</span>, <span style="color: #BA2121">&quot;humano&quot;</span>, <span style="color: #BA2121">&quot;cachorro&quot;</span>]
+mammals <span style="color: #666666">=</span> mamiferos
+
+animais <span style="color: #666666">=</span> []
+
+<span style="color: #008000; font-weight: bold">for</span> m <span style="color: #AA22FF; font-weight: bold">in</span> mamiferos:
+    animais<span style="color: #666666">.</span>append(m)
+
+animais<span style="color: #666666">.</span>append(<span style="color: #BA2121">&quot;sapo&quot;</span>)
+
+mammals[<span style="color: #666666">2</span>] <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;elefante&quot;</span>
+
+<span style="color: #008000">print</span>(mamiferos)
+<span style="color: #008000">print</span>(mammals)
+<span style="color: #008000">print</span>(animais)
+</pre><p>Agora, a saída será:</p>
+<pre class="highlight">[&#39;golfinho&#39;, &#39;humano&#39;, &#39;elefante&#39;]
+[&#39;golfinho&#39;, &#39;humano&#39;, &#39;elefante&#39;]
+[&#39;golfinho&#39;, &#39;humano&#39;, &#39;cachorro&#39;, &#39;sapo&#39;]
+</pre><p>Uma representação da memória poderia ser:</p>
+<img src="figs/lista_referencia2.png" style="width: 100%; max-width: 500px;">
+<h2 id="list-comprehension">List comprehension</h2>
+<p>Criar uma lista a partir de outra sequência é tão comum que Python tem
+uma maneira mais curta de escrever o mesmo código, que é chamada de
+<code class="language-text">list comprehension</code>. Por exemplo, podemos criar uma cópia de uma
+lista de números, mas multiplicando por dois.</p>
+<pre class="highlightlanguage-python">notas <span style="color: #666666">=</span> [<span style="color: #666666">3.5</span>, <span style="color: #666666">6.0</span>, <span style="color: #666666">1.9</span>, <span style="color: #666666">10</span>, <span style="color: #666666">7.4</span>, <span style="color: #666666">4.3</span>]
+dobros <span style="color: #666666">=</span> [<span style="color: #666666">2</span> <span style="color: #666666">*</span> nota <span style="color: #008000; font-weight: bold">for</span> nota <span style="color: #AA22FF; font-weight: bold">in</span> notas]
+<span style="color: #008000">print</span>(dobros)
+</pre><p>Podemos, inclusive, filtrar um subconjunto de números:</p>
+<pre class="highlightlanguage-python">notas <span style="color: #666666">=</span> [<span style="color: #666666">3.5</span>, <span style="color: #666666">6.0</span>, <span style="color: #666666">1.9</span>, <span style="color: #666666">10</span>, <span style="color: #666666">7.4</span>, <span style="color: #666666">4.3</span>]
+dobros_notas_vermelhas <span style="color: #666666">=</span> [<span style="color: #666666">2</span> <span style="color: #666666">*</span> nota <span style="color: #008000; font-weight: bold">for</span> nota <span style="color: #AA22FF; font-weight: bold">in</span> notas <span style="color: #008000; font-weight: bold">if</span> nota <span style="color: #666666">&lt;</span> <span style="color: #666666">5</span>]
+<span style="color: #008000">print</span>(dobros_notas_vermelhas)
+</pre><p>Estudo e experimente trabalhar com list comprehensions. No entanto,
+por enquanto, prefira as versões mais explícitas apresentadas
+anteriormente quando for resolver os exercícios e as tarefas.</p>
+<h2 id="saindo-de-um-laco-antecipadamente">Saindo de um laço antecipadamente</h2>
+<p>Vimos que um <code class="language-text">for</code> executa uma iteração para <strong>todo</strong>
+elemento da sequência. Vamos ver mais um exemplo:</p>
+<blockquote>
+<p>Escreva um programa que imprima todos os divisores de um número não
+triviais (isso é, os divisores que não são um ou o próprio número.)</p>
+</blockquote>
+<p>Como sempre, queremos escrever um algoritmo para esse problema em
+português.</p>
+<pre class="highlight">n &lt;-- leia um número do teclado
+divisores &lt;-- crie uma lista vazia
+para d de 2 até n - 1:
+    se d divide n:
+        adicione d aos divisores
+devolva divisores
+</pre><p>Nesse ponto, deve ser trivial traduzir esse algoritmo em um código
+em Python:</p>
+<pre class="highlightlanguage-python">n <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">input</span>())
+divisores <span style="color: #666666">=</span> []
+<span style="color: #008000; font-weight: bold">for</span> d <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">2</span>, n):
+    <span style="color: #008000; font-weight: bold">if</span> n <span style="color: #666666">%</span> d <span style="color: #666666">==</span> <span style="color: #666666">0</span>:
+        divisores<span style="color: #666666">.</span>append(d)
+
+<span style="color: #008000">print</span>(divisores)
+</pre><p>Um número é primo se ele é maior do que um e não tém divisores não
+triviais. É fácil modificar o código acima e verificar se um número
+é primo:</p>
+<pre class="highlightlanguage-python">n <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">input</span>())
+divisores <span style="color: #666666">=</span> []
+<span style="color: #008000; font-weight: bold">for</span> d <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">2</span>, n):
+    <span style="color: #008000; font-weight: bold">if</span> n <span style="color: #666666">%</span> d <span style="color: #666666">==</span> <span style="color: #666666">0</span>:
+        divisores<span style="color: #666666">.</span>append(d)
+
+<span style="color: #008000; font-weight: bold">if</span> n <span style="color: #666666">==</span> <span style="color: #666666">1</span> <span style="color: #AA22FF; font-weight: bold">or</span> divisores:
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;O número é 1 ou tem divisores não triviais&quot;</span>)
+<span style="color: #008000; font-weight: bold">else</span>:
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;O número é primo&quot;</span>)
+</pre><p>Para entender esse código precisamos perceber uma sutileza:
+<code class="language-text">divisores</code> é uma lista, mas ela foi usada no lugar em que
+esperaríamos um valor booleano. Em Python, coleções (como listas)
+podem ser usadas como valores de verdade: elas são consideradas <code class="language-text">True</code>
+sempre que não forem vazias, e <code class="language-text">False</code> caso contrário. Pesquise sobre
+as várias formas de testar valores de verdade
+(<a href="https://docs.python.org/3/library/stdtypes.html#truth-value-testing">Truth Value Testing</a>)
+em Python 3.</p>
+<p>Se você é impaciente deve estar incomodado com o código acima: ele
+executa mais operações do que é necessário. Parece latente que um
+número como <code class="language-text">1000000000</code> não é primo. Ainda assim, se executarmos o
+código acima e digitarmos esse valor, teremos uma surpresa
+desagradável — e não interessa que você tenha um computador top de
+linha ou mesmo um supercomputador!</p>
+<p>O motivo é que desde o momento em que testamos o primeiro divisor, já
+sabíamos que o número <code class="language-text">1000000000</code> não era primo, mas o programa é
+alheio ao seu sofrimento e continua obstinado em executar todas as
+iterações. Para terminar um laço antes do final, usamos um comando
+especial <code class="language-text">break</code>. Isso irá terminar o laço e continuar na instrução
+imediatamente posterior.</p>
+<pre class="highlightlanguage-python">n <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">input</span>())
+divisor_encontrado <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">False</span>
+<span style="color: #008000; font-weight: bold">for</span> d <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">2</span>, n):
+    <span style="color: #008000; font-weight: bold">if</span> n <span style="color: #666666">%</span> d <span style="color: #666666">==</span> <span style="color: #666666">0</span>:
+        divisor_encontrado <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">True</span>
+        <span style="color: #008000; font-weight: bold">break</span>
+
+<span style="color: #008000; font-weight: bold">if</span> n <span style="color: #666666">==</span> <span style="color: #666666">1</span> <span style="color: #AA22FF; font-weight: bold">or</span> divisor_encontrado:
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;O número é 1 ou tem divisores não triviais&quot;</span>)
+<span style="color: #008000; font-weight: bold">else</span>:
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;O número é primo&quot;</span>)
+</pre><p>O comando <code class="language-text">for</code> permite um comando <code class="language-text">else</code> opcional. Essa é uma
+peculiaridade de Python (não há muitas outras linguagens com esse tipo
+de construção) e você deve evitá-la até ter mais experiência.
+Poderíamos reescrever o código assim:</p>
+<pre class="highlightlanguage-python">n <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">input</span>())
+
+<span style="color: #008000; font-weight: bold">for</span> d <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">2</span>, n):
+    <span style="color: #008000; font-weight: bold">if</span> n <span style="color: #666666">%</span> d <span style="color: #666666">==</span> <span style="color: #666666">0</span>:
+        divisor_encontrado <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">True</span>
+        <span style="color: #008000; font-weight: bold">break</span>
+<span style="color: #008000; font-weight: bold">else</span>:
+    divisor_encontrado <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">False</span>
+
+<span style="color: #008000; font-weight: bold">if</span> n <span style="color: #666666">==</span> <span style="color: #666666">1</span> <span style="color: #AA22FF; font-weight: bold">or</span> divisor_encontrado:
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;O número é 1 ou tem divisores não triviais&quot;</span>)
+<span style="color: #008000; font-weight: bold">else</span>:
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;O número é primo&quot;</span>)
+</pre><h2 id="construindo-um-menu-de-opcoes">Construindo um menu de opções</h2>
+<p>Vamos ver outro exemplo em que utilizar um <code class="language-text">break</code> pode
+facilitar escrever um programa. Vamos resolver o seguinte
+exercício</p>
+<blockquote>
+<p>Escreva uma caculadora que realiza soma e subtração. Uma instrução
+começa com o operador e uma linha seguido de duas linhas com os
+operandos. O programa deve executar quantas operações forem
+fornecidas pelo usuário, que digitá <code class="language-text">F</code> quando quiser terminar.</p>
+</blockquote>
+<p>Aqio está um exemplo de entrada:</p>
+<pre class="highlight">+
+3
+5
+-
+4
+1
+-
+5
+0
+F
+</pre><p>e a saída correspondente:</p>
+<pre class="highlight">8
+3
+5
+</pre><p>Tente escrever um algoritmo e um código em Python para esse exercício.
+Depois estude como eu escreveria:</p>
+<pre class="highlightlanguage-python">
+<span style="color: #008000; font-weight: bold">while</span> <span style="color: #008000; font-weight: bold">True</span>:
+    operador <span style="color: #666666">=</span> <span style="color: #008000">input</span>()
+    <span style="color: #008000; font-weight: bold">if</span> operador <span style="color: #666666">==</span> <span style="color: #BA2121">&quot;+&quot;</span>:
+        num1 <span style="color: #666666">=</span> <span style="color: #008000">float</span>(<span style="color: #008000">input</span>())
+        num2 <span style="color: #666666">=</span> <span style="color: #008000">float</span>(<span style="color: #008000">input</span>())
+        soma <span style="color: #666666">=</span> num1 <span style="color: #666666">+</span> num2
+        <span style="color: #008000">print</span>(soma)
+    <span style="color: #008000; font-weight: bold">elif</span> operador <span style="color: #666666">==</span> <span style="color: #BA2121">&quot;-&quot;</span>:
+        num1 <span style="color: #666666">=</span> <span style="color: #008000">float</span>(<span style="color: #008000">input</span>())
+        num2 <span style="color: #666666">=</span> <span style="color: #008000">float</span>(<span style="color: #008000">input</span>())
+        diferenca <span style="color: #666666">=</span> num1 <span style="color: #666666">-</span> num2
+        <span style="color: #008000">print</span>(diferenca)
+    <span style="color: #008000; font-weight: bold">elif</span> operador <span style="color: #666666">==</span> <span style="color: #BA2121">&quot;F&quot;</span>:
+        <span style="color: #008000; font-weight: bold">break</span>
+    <span style="color: #008000; font-weight: bold">else</span>:
+        <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;Operação inválida&quot;</span>)
+</pre><p>Experimente adicionar outras operações a sua calculadora.</p>
+
+
+        <!-- Navigation buttons -->
+<div role="navigation" class="row justify-content-between">
+
+  <div class="col-12 col-sm-5 col-lg-4">
+    <a class="btn btn-primary w-100 mt-1 mt-sm-0" href="04-estruturas-elementares.html">
+      &larr; Anterior
+    </a>
+  </div>
+
+  <div class="col-12 d-none d-lg-inline-block col-lg-4">
+    <a class="btn btn-secondary w-100" href="../index.html">
+      Voltar
+    </a>
+  </div>
+
+  <div class="col-12 col-sm-5 col-lg-4">
+    <a class="btn btn-primary w-100 mt-1 mt-sm-0" href="06-funcoes.html">
+      Próxima &rarr;
+    </a>
+  </div>
+
+</div>      </div>
+    </div>
+</article>
+
+<hr />
+
+
+<!-- Footer -->
+<footer>
+  <p class="copyright text-muted">
+    <a href="https://www.ic.unicamp.br/~lehilton/" title="Página pessoal">
+      Copyright &copy; 2020
+    </a>
+  </p>
+</footer>
+<!-- Bootstrap core JavaScript -->
+<script src="../dist/vendor/jquery/jquery.min.js"></script>
+<script src="../dist/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="../dist/vendor/prism/prism.js"></script> -->
+
+<!-- Custom scripts for this template -->
+<script src="../dist/js/main.min.js"></script>
+
+<!-- Mathjax setup -->
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+  };
+</script>
+<script src="../dist/vendor/mathjax/tex-chtml.js" id="MathJax-script" async></script>
+
+
+
+  </body>
+
+</html>

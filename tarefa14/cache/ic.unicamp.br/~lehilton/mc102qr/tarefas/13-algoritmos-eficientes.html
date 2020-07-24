@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    Algoritmos e Programação de Computadores
+    - Algoritmos eficientes
+  </title>
+
+  <meta name="keywords" content="MC102, Algoritmos e Programação de Computadores, Python">
+  <meta name="description" content="Página da disciplina de MC102 para turma QR">
+  <meta name="author" content="Lehilton Pedrosa">
+
+  <!-- Bootstrap core CSS -->
+  <link href="../dist/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Theme css -->
+  <link href="../dist/css/main.min.css" rel="stylesheet">
+
+  <!-- Prism -->
+  <!-- <link href="../dist/vendor/prism/prism.css" rel="stylesheet" /> -->
+</head>
+<body >
+
+  <body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="../index.html">MC102</a>
+
+
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+      aria-label="Toggle navigation">
+      Menu
+      <i>&#9776;</i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item top back-to-top-link">
+          <a class="nav-link" href="#"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>topo</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="../index.html">voltar</a>
+        </li>
+
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Header -->
+<header class="masthead"   style="background-image: url('../images/home-bg.jpg')" >
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-heading">
+
+          <h1 >Algoritmos eficientes</h1>
+
+
+          <span class="meta">Quinta, 18 de junho de 2020</span>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+
+
+      <div class="col-lg-8 col-md-10 mx-auto">
+
+        <p><strong>Atenção:</strong> Esta tarefa não será corrigida manualmente, mas você deve
+tentar respondê-la genuinamente. Se tiver alguma dúvida se ela está ou
+não correta, procure os monitores. Tentativas de passar no teste
+automático sem responder as questões serão consideradas fraude.</p>
+<p><strong>Observação:</strong> Os exercícios seguintes foram extraídos de
+repositórios de problemas públicos na internet. Se você tiver
+interesse, pode submeter sua solução também nessas plataformas, além
+de estudar e resolver vários dos outros problemas disponíveis. Mas
+você não pode copiar nem consultar quaisquer soluções prontas;
+qualquer tentativa nesse sentido será considerada fraude.</p>
+<h1 id="notas-e-moedas">Notas e Moedas</h1>
+<p>Leia um número de ponto flutuante com duas casas decimais. Esse valor
+representa um valor monetário. A seguir, calcule o menor número de
+notas e moedas possíveis no qual o valor pode ser decomposto. As notas
+consideradas são de 100, 50, 20, 10, 5, 2. As moedas possíveis são de
+1, 0.50, 0.25, 0.10, 0.05 e 0.01. A seguir mostre a relação de notas e
+moedas necessárias.</p>
+<p>O nome do seu programa deve ser <code class="language-text">coins.py</code>. Você receberá conceito
+<strong>B</strong> por resolver corretamente esse exercício.</p>
+<h2 id="entrada">Entrada</h2>
+<p>O arquivo de entrada contém um valor de ponto flutuante N.</p>
+<pre class="highlight">576.73
+</pre><h2 id="saida">Saída</h2>
+<p>Imprima a quantidade mínima de notas e moedas necessárias para trocar
+o valor inicial, conforme exemplo fornecido. Utilize ponto para
+separar a parte decimal.</p>
+<pre class="highlight">NOTAS:
+5 nota(s) de R$ 100.00
+1 nota(s) de R$ 50.00
+1 nota(s) de R$ 20.00
+1 nota(s) de R$ 5.00
+MOEDAS:
+1 moeda(s) de R$ 1.00
+1 moeda(s) de R$ 0.50
+2 moeda(s) de R$ 0.10
+3 moeda(s) de R$ 0.01
+</pre><p>Fonte: <a href="https://www.urionlinejudge.com.br/judge/pt/problems/view/1021">https://www.urionlinejudge.com.br/judge/pt/problems/view/1021</a></p>
+<h1 id="dividindo-os-trabalhos-i">Dividindo os Trabalhos I</h1>
+<p>Chegamos finalmente no final do semestre e pra variar, trabalhos estão
+acumulados! Os professores, com a intenção de ajudar (ou não),
+decidiram que os trabalhos serão feitos em duplas. Além disso, eles
+deram o spoiler do grau de dificuldade que cada trabalho.</p>
+<p>Sabendo disso, Rangel, nosso velho amigo, escolheu Gugu como parceiro
+em sua dupla, pois ele sabe que Gugu é um cara responsável. Como ambos
+estão apertados, eles decidiram dividir os trabalhos com os seguintes
+critérios:</p>
+<ul>
+<li>
+<p>A ordem dos trabalhos não pode ser alterada durante a divisão;</p>
+</li>
+<li>
+<p>A divisão precisa ser justa, ou seja, as somas dos graus de
+dificuldades dos trabalhos a serem feitos por Rangel e por Gugu
+devem ter a menor <strong>diferença</strong> possível;</p>
+</li>
+<li>
+<p>Rangel sempre faz os primeiros trabalhos e Gugu os restantes.</p>
+</li>
+</ul>
+<p>Como os dois estão muito ocupados na biblioteca pegando os livros para
+resolverem os trabalhos, eles pediram a você para determinar essa
+diferença.</p>
+<p>O nome do seu programa deve ser <code class="language-text">jobs.py</code>. Você receberá conceito
+<strong>A</strong> apenas se resolver corretamente esse exercício. Dica: pense em
+uma forma de calcular a diferença sem percorrer toda a lista de
+trabalhos mais de uma vez.</p>
+<h2 id="entrada">Entrada</h2>
+<p>O arquivo contém vários casos de teste. A primeira linha de cada caso
+contém um inteiro <strong>N</strong> que indica o número de trabalhos a serem
+realizados. A segunda linha contém <strong>N</strong> inteiros representando os
+graus de dificuldade.</p>
+<pre class="highlight">3
+2 3 5
+4
+1 2 2 6
+</pre><h2 id="saida">Saída</h2>
+<p>Para cada caso de teste, deve ser impresso um inteiro que corresponde
+à diferença descrita acima. Deixe uma quebra de linha após a resposta
+de cada caso de teste, inclusive após o último.</p>
+<pre class="highlight">0
+1
+</pre><p>Fonte: <a href="https://www.urionlinejudge.com.br/judge/pt/problems/view/2715">https://www.urionlinejudge.com.br/judge/pt/problems/view/2715</a></p>
+
+
+        <!-- Navigation buttons -->
+<div role="navigation" class="row justify-content-between">
+
+  <div class="col-12 col-sm-5 col-lg-4">
+    <a class="btn btn-primary w-100 mt-1 mt-sm-0" href="12-colecoes-dinamicas.html">
+      &larr; Anterior
+    </a>
+  </div>
+
+  <div class="col-12 d-none d-lg-inline-block col-lg-4">
+    <a class="btn btn-secondary w-100" href="../index.html">
+      Voltar
+    </a>
+  </div>
+
+  <div class="col-12 col-sm-5 col-lg-4">
+    <a class="btn btn-primary w-100 mt-1 mt-sm-0" href="14-recursao.html">
+      Próxima &rarr;
+    </a>
+  </div>
+
+</div>      </div>
+    </div>
+</article>
+
+<hr />
+
+
+<!-- Footer -->
+<footer>
+  <p class="copyright text-muted">
+    <a href="https://www.ic.unicamp.br/~lehilton/" title="Página pessoal">
+      Copyright &copy; 2020
+    </a>
+  </p>
+</footer>
+<!-- Bootstrap core JavaScript -->
+<script src="../dist/vendor/jquery/jquery.min.js"></script>
+<script src="../dist/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="../dist/vendor/prism/prism.js"></script> -->
+
+<!-- Custom scripts for this template -->
+<script src="../dist/js/main.min.js"></script>
+
+<!-- Mathjax setup -->
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+  };
+</script>
+<script src="../dist/vendor/mathjax/tex-chtml.js" id="MathJax-script" async></script>
+
+
+
+  </body>
+
+</html>

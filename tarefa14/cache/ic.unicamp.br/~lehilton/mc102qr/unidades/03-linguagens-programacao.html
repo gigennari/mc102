@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    Algoritmos e Programação de Computadores
+    - Linguagens de programação
+  </title>
+
+  <meta name="keywords" content="MC102, Algoritmos e Programação de Computadores, Python">
+  <meta name="description" content="Página da disciplina de MC102 para turma QR">
+  <meta name="author" content="Lehilton Pedrosa">
+
+  <!-- Bootstrap core CSS -->
+  <link href="../dist/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Theme css -->
+  <link href="../dist/css/main.min.css" rel="stylesheet">
+
+  <!-- Prism -->
+  <!-- <link href="../dist/vendor/prism/prism.css" rel="stylesheet" /> -->
+</head>
+<body >
+
+  <body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="../index.html">MC102</a>
+
+
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+      aria-label="Toggle navigation">
+      Menu
+      <i>&#9776;</i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item top back-to-top-link">
+          <a class="nav-link" href="#"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>topo</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="../index.html">voltar</a>
+        </li>
+
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Header -->
+<header class="masthead"   style="background-image: url('../images/home-bg.jpg')" >
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-heading">
+
+          <h1 >Linguagens de programação</h1>
+
+
+          <span class="meta">Terça, 24 de março de 2020</span>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+
+
+      <div class="col-lg-8 col-md-10 mx-auto">
+
+        <p>Pensar em termos de algoritmos é útil para as diversas atividades
+cotidianas, seja cozinhar, procurar um número telefônico, agendar um
+compromisso, fazer compras. Mas queremos escrever algoritmos
+principalmente para utilizar um computador. Por isso, precisamos
+entender como fazer com que o algoritmo saia do papel e passe a ser
+executado pelo computador.</p>
+<p>Lembre-se de que dissemos que os computadores são máquinas burras que
+só são capazes de realizar tarefas bem simples, como inverter ou zerar
+bits na memória. Esse conjunto de instruções que o computador é capaz
+de realizar é o que chamamos de <strong>linguagem de máquina</strong>. Um algoritmo
+escrito em linguagem de máquina, por sua vez, é uma sequência de bits
+e bytes. Para que possamos visualizar um algoritmo em linguagem de
+máquina, normalmente escrevemos uma representação em texto, em uma
+linguagem de montagem, ou assembly language. Por exemplo, um trecho de
+código em assembly se parece com</p>
+<pre class="highlightlanguage-asm"><span style="color: #A0A000">LOOP:</span>   <span style="color: #0000FF">MOV</span> <span style="color: #880000">A</span>, <span style="color: #666666">3</span>
+        <span style="color: #0000FF">INC</span> <span style="color: #880000">A</span>
+        <span style="color: #0000FF">JMP</span> <span style="color: #880000">LOOP</span>
+</pre><p>Pode parecer surpreendente que essas máquinas realizem tarefas tão
+elaboradas, como simulações químicas, controle de tráfego aéreo, etc.
+O que permite que consigamos instruir os computadores a executar
+tarefas tão elaboradas, mesmo que eles só realizem tarefas bem simples
+é que nós escrevemos os algoritmos para os computadores em um idioma
+mais abstrato do que as linguagens de máquina.</p>
+<p>Mas quando escrevemos um algoritmo, digamos, em português, estamos
+escrevendo para uma outra pessoa. Não há computador que genuinamente
+entenda o que significa &quot;percorrer uma lista&quot;, &quot;adicionar ao número
+anotado&quot;, etc. Que entenda, por exemplo, &quot;percorra a lista somando os
+valores&quot;. A principal dificuldade aqui é que o português é uma
+linguagem ambígua — e o computador não pode adivinhar qual o significado
+de cada uma dessas instruções.</p>
+<p>Para escrever um algoritmo de forma que o computador entenda, usamos
+uma <strong>linguagem de programação</strong>. Assim, depois de escrito o algoritmo
+(normalmente em português ou em algum formato parecido), uma pessoa, a
+<strong>programadora</strong> traduz esse algoritmo para uma linguagem de
+programação. Assim, ela transforma um <em>algoritmo</em> em um <em>programa</em>
+correspondente. Observe que a programadora pode, inclusive, não ser a
+mesma pessoa que criou o algoritmo.</p>
+<p>Uma linguagem que é inambígua para o computador é a própria linguagem
+de máquina, ou a linguagem de montagem correspondente. Mas isso não
+deixaria feliz a programadora, que teria que escrever programas
+imensos, mesmo para tarefas bem simples. Por isso, utilizamos uma
+linguagem de programação de <strong>alto nível</strong>, para que escrevamos
+programas mais parecidos com o algoritmo que nós normalmente
+escreveríamos, mas que seja inambíguo como exige um computador.</p>
+<h1 id="sintaxe">Sintaxe</h1>
+<p>Uma linguagem de programação normalmente tem uma <strong>sintaxe</strong> rígida,
+que é o conjunto de regras que determina quais combinações de símbolos
+e palavras-chaves podem ser utilizadas. Por exemplo, se em uma
+linguagem a palavra-chave para ler um número e guardá-lo na variável X
+for <strong>input</strong> X, escrever <strong>read</strong> X iria resultar em um <em>erro de
+sintaxe</em>. Por mais que uma pessoa entenderia qual o objetivo da
+programadora ao escrever a instrução errada, um computador não
+entenderia. A razão para escolher uma palavra <strong>input</strong> em inglês é
+para facilitar a leitura, mas uma palavra-chave poderia ser qualquer
+sequência de símbolos.</p>
+<p>Considere o programa a seguir um uma linguagem hipotética.</p>
+<pre class="highlightlanguage-pascal">input N <span style="color: #666666">;</span>
+X <span style="color: #666666">:=</span> <span style="color: #666666">0</span> <span style="color: #666666">;</span>
+<span style="color: #008000; font-weight: bold">for</span> Y from <span style="color: #666666">1</span> <span style="color: #008000; font-weight: bold">to</span> N <span style="color: #008000; font-weight: bold">do</span>
+    X <span style="color: #666666">:=</span> X <span style="color: #666666">+</span> Y
+<span style="color: #008000; font-weight: bold">end</span> <span style="color: #666666">;</span>
+output X
+</pre><p>Nessa linguagem, o símbolo <code class="language-text">:=</code> representa uma atribuição, assim
+escrevemos <code class="language-text">X := 0</code>, quando normalmente escreveríamos X $\gets$ 0 nos
+nossos algoritmos anteriores. A linguagem pode ter várias estruturas
+de controle, como a estrutura que começa com <code class="language-text">for</code>, que realiza um
+conjunto de instruções um determinado número de vezes.</p>
+<p>Além disso, a ordem com que os símbolos e palavras chaves aparecem é
+de fundamental importância. Essa ordem é determinada pela sintaxe.
+Nessa linguagem hipotética retirada da bibliografia, a sintaxe é
+definida pelo seguinte diagrama</p>
+<img src="figs/syntax_diagram.png" style="width: 100%; max-width: 500px;">
+<p>Repare que depois de <code class="language-text">for</code> esperamos uma variável, depois a
+palavra-chave <code class="language-text">for</code> e assim por diante. Portanto, se tivéssemos escrito</p>
+<pre class="highlightlanguage-pascal">input N <span style="color: #666666">;</span>
+X <span style="color: #666666">:=</span> <span style="color: #666666">0</span> <span style="color: #666666">;</span>
+<span style="color: #008000; font-weight: bold">for</span> Y <span style="color: #008000; font-weight: bold">to</span> N from <span style="color: #666666">1</span> <span style="color: #008000; font-weight: bold">do</span>
+    X <span style="color: #666666">:=</span> X <span style="color: #666666">+</span> Y
+<span style="color: #008000; font-weight: bold">end</span> <span style="color: #666666">;</span>
+output X
+</pre><p>o computador se recusaria a continuar, acusando um erro de sintaxe!
+Existem várias outras maneiras de representar a sintaxe de uma
+linguagem de programação, mas não precisamos delas agora.</p>
+<p>A maioria das linguagens utilizam apenas símbolos e palavras-chaves
+para determinar sua sintaxe. Assim, o conjunto de instruções que
+correspondem a uma iteração do <code class="language-text">for</code> acima é terminado com a
+palavra-chave <code class="language-text">end</code>. Algumas linguagens, no entanto, utilizam outros
+mecanismos. Por exemplo, um código em Python correspondente seria</p>
+<pre class="highlightlanguage-python">N <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">input</span>())
+X <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+<span style="color: #008000; font-weight: bold">for</span> Y <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, N <span style="color: #666666">+</span> <span style="color: #666666">1</span>):
+    X <span style="color: #666666">=</span> X <span style="color: #666666">+</span> Y
+<span style="color: #008000">print</span>(X)
+</pre><p>Enquanto esses algoritmos são equivalentes, a sintaxe das linguagens
+de programação diferentes levaram a programas muito diferentes.
+Observe que o conjunto de instruções de uma iteração do <code class="language-text">for</code> nesse
+caso é identificado por meio do recuo (ou indentação). Além disso,
+utilizamos um símbolo diferente para representar atribuição: ao invés
+de <code class="language-text">:=</code>, utilizamos <code class="language-text">=</code>. A escrever ou ler um programa, é
+<strong>imprescindível</strong> atentar-se à sintaxe da linguagem de programação!</p>
+<h1 id="semantica">Semântica</h1>
+<p>Além da sintaxe, uma linguagem de programação deve definir uma
+<strong>semântica</strong> inambígua, isso é, a linguagem de programação deve
+definir o que <em>significa</em> cada uma das frases permitidas. Se a sintaxe
+não tivesse acompanhada de semântica, então o segmento</p>
+<pre class="highlightlanguage-pascal"><span style="color: #008000; font-weight: bold">for</span> Y from <span style="color: #666666">1</span> <span style="color: #008000; font-weight: bold">to</span> N <span style="color: #008000; font-weight: bold">do</span>
+</pre><p>poderia muito bem significar &quot;subtraia Y de 1 e armazene o resultado
+em N&quot;. Nada garante, por exemplo, que as palavras <code class="language-text">for</code>, <code class="language-text">to</code> e <code class="language-text">from</code>
+tenham o mesmo significado que em inglês. Quem garante que que <code class="language-text">:=</code>
+significa atribuição, ou mesmo que <code class="language-text">+</code> é o operador de soma? É
+a semântica que determina o que significa cada frase escrita
+em uma linguagem de programação.</p>
+<p>Mais do que isso, a semântica deve ser precisa e completa. Mesmo que
+as palavras-chaves tenham o significado usual em inglês, pode haver
+instruções que são ambíguas ou indefinidas. Por exemplo, se N é um
+número inteiro positivo 10, então é razoável presumir que a iteração
+do <code class="language-text">for</code> acima irá executar 10 vezes, com valores de Y = 1, 2, ...,
+10. Mas se N for -314.1592? O corpo do laço não deve ser executado,
+ou será que ele deve ser executado para valores 1, 0, −1, −2, ...,
+-313, and -314?</p>
+<p>Enquanto a definição do que é um programa válido sintaticamente é
+normalmente fácil e, em geral, definido por gramáticas precisas e
+outros tipos de especificação, como os diagramas acima, definir a
+semântica de uma linguagem de programação não é uma tarefa trivial.
+Ela é normalmente definida na <strong>documentação</strong> fornecida, normalmente
+nos <strong>manuais de linguagem</strong>, que são compostos por capítulos e
+capítulos de descrição. Pode ser surpreendente descobrir que mesmo
+linguagens de programação modernas ainda não tenham uma semântica
+completamente definida.</p>
+<h1 id="compilacao">Compilação</h1>
+<p>Uma vez que temos um algoritmo escrito em uma linguagem de
+programação, ainda precisamos de um processo chamado de
+<strong>compilação</strong>, que é responsável por converter nosso programa de uma
+linguagem de programação de alto nível para a linguagem de montagem.
+Já falamos um pouco antes sobre a linguagem de montagem; essa
+linguagem contém instruções muito simples e análogas à linguagem de
+máquina. Ela contém instruções como ler ou armazenar uma palavra na
+memória, fazer operações aritméticas, desviar o fluxo de execução
+(<em>goto</em> ou <em>if-then</em>) etc.</p>
+<p>Por exemplo, um programa típico</p>
+<pre class="highlightlanguage-pascal"><span style="color: #008000; font-weight: bold">for</span> Y from <span style="color: #666666">1</span> <span style="color: #008000; font-weight: bold">to</span> N <span style="color: #008000; font-weight: bold">do</span>
+    <span style="color: #408080; font-style: italic">{corpo do laço}</span>
+<span style="color: #008000; font-weight: bold">end</span>
+</pre><p>seria traduzido um código em linguagem de montagem que se parece com</p>
+<pre class="highlightlanguage-asm">
+        <span style="color: #0000FF">MVC</span> <span style="color: #666666">0</span>, <span style="color: #880000">Y</span>   <span style="color: #408080; font-style: italic"># guarda a constante 0 na posição Y</span>
+<span style="color: #A0A000">LOOP:</span>   <span style="color: #0000FF">CMP</span> <span style="color: #880000">N</span> , <span style="color: #880000">Y</span>  <span style="color: #408080; font-style: italic"># compara os valores nas posições N e Y</span>
+        <span style="color: #0000FF">JEQ</span> <span style="color: #880000">REST</span>   <span style="color: #408080; font-style: italic"># se forem iguais, pula à instrução rotulada REST</span>
+        <span style="color: #0000FF">ADC</span> <span style="color: #666666">1</span>, <span style="color: #880000">Y</span>   <span style="color: #408080; font-style: italic"># adiciona a constante 1 ao valor na posição Y</span>
+
+        <span style="color: #408080; font-style: italic"># ... corpo do laço traduzido ...</span>
+
+        <span style="color: #0000FF">JMP</span> <span style="color: #880000">LOOP</span>   <span style="color: #408080; font-style: italic"># volta à instrução rotulada LOOP</span>
+
+<span style="color: #A0A000">REST:</span>   <span style="color: #408080; font-style: italic"># ... restante do programa ...</span>
+
+</pre><p>Essa tarefa de tradução de uma linguagem de programação de alto nível
+para uma linguagem de programação de baixo nível é realizada por um
+programa bem sofisticado chamado <strong>compilador</strong>. O compilador é
+normalmente fornecido pelo desenvolvedor da linguagem ou pelo vendedor
+do hardware e deve ser específico para cada processador. Depois de
+obtido um programa em linguagem de montagem, ainda é necessário
+convertê-lo em linguagem de máquina. Isso normalmente é feito
+automaticamente pelo compilador, que invoca uma série de programas de
+sistemas (o chamado <em>system software</em>), como montadores, carregadores
+etc.</p>
+<p>Esses programas de sistema têm uma série de funções, com o papel de
+facilitar um conjunto de modos de operação de alto nível do
+computador. Isso permite isolar o usuários de vários detalhes de baixo
+nível envolvidos. Um dos principais programas de sistema é o chamado
+<strong>sistema operacional</strong>, que é responsável por gerenciar recursos e
+periféricos, fornecendo ao programa de usuário nesses modos de
+operação de alto nível. Simplificadamente, podemos então entender a
+execução de um programa em camadas, em que camadas mais acima têm
+abstrações de alto nível, enquanto camadas mais abaixo tem abstrações
+mais próximas do hardware.</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Programas de Aplicação</td>
+</tr>
+<tr>
+<td align="center">Compiladores</td>
+</tr>
+<tr>
+<td align="center">Sistema operacional</td>
+</tr>
+<tr>
+<td align="center">Hardware</td>
+</tr>
+</tbody></table><h1 id="interpretacao-e-execucao-imediata">Interpretação e execução imediata</h1>
+<p>Existe ainda uma outra maneira de executar programas escritos em uma
+determinada linguagem de programação. Ao invés de converter o
+código-fonte do programa em uma linguagem de máquina, para depois
+executar o programa traduzido, podemos executar cada instrução da
+linguagem de programação de alto nível assim que ela for reconhecida.
+Assim, ao invés de usarmos um compilador, usamos um programa que é
+responsável por essa <em>tradução local e execução imediada</em>, chamado de
+interpretador.</p>
+<p>A forma com que cada interpretador é criado pode variar bastante de
+implementação para implementação. Em muitos casos, você pode imaginar
+simplesmente que o interpretador realiza todo o processo de compilação
+e executa o programa obtido diretamente, sem a necessidade de
+invocá-lo. Algumas vezes, no entanto, as instruções são executadas à
+medida em que as escrevemos. Isso acontece, por exemplo, quando
+utilizamos o modo interativo de linguagens de programação de script,
+como Python, Ruby, etc.</p>
+<p>Existem algumas razões para se criar um interpretador ao invés de um
+compilador, entre as quais:</p>
+<ul>
+<li>
+<p>normalmente é mais fácil escrever um interpretador para uma
+linguagem de programação, do que um compilador completo;</p>
+</li>
+<li>
+<p>é mais fácil entender o que está acontecendo durante a execução do
+programa em linguagens interpretadas, particularmente quando
+trabalhando interativamente através de um um terminal conectado a
+tela do computador.</p>
+</li>
+</ul>
+<h1 id="do-problema-a-execucao">Do problema à execução</h1>
+<p>Desde o conhecimento do problema até a execução do programa no
+computador para obter uma solução, existe um processo que passa por
+diversas etapas. Por isso, é importante entender bem esse processo e
+realizar bem cada uma das etapas, sem tentar pular passos. Assim,
+faça sempre o seguinte:</p>
+<ol>
+<li>
+<p>Entenda o problema! Descreva qual é o conjunto de entradas válidas
+e qual é o conjunto de saídas. Procure especificar também qual
+saída deve corresponder a cada entrada válida.</p>
+</li>
+<li>
+<p>Estude o problema e tente resolver algumas instâncias desse
+problema. Tome nota de que passos você realiza. Com isso, você terá
+uma ideia de como resolver uma instância <em>genérica</em> do problema.</p>
+</li>
+<li>
+<p>Tente expressar suas ideias na forma de um algoritmo. Lembre-se de
+sempre de utilizar apenas instruções elementares. Também, sempre
+teste seu algoritmo para instâncias pequenas, até se convencer de
+que ele está correto.</p>
+</li>
+<li>
+<p>Apenas depois de ter escrito e testado seu pequeno algoritmo,
+reescreva-o em uma linguagem de programação.</p>
+</li>
+<li>
+<p>Você irá compilar o código-fonte e executar o programa criado, ou
+irá interpretar o código-fonte diretamente, dependendo da
+linguagem. Você pode encontrar uma série de erros:</p>
+<ul>
+<li>
+<p>Muitas vezes, haverá <strong>erros de sintaxe</strong> e você precisará
+corrigir seu programa para que ele seja um texto válido.</p>
+</li>
+<li>
+<p>Outras vezes, embora o programa seja válido sintaticamente,
+ocorrerão erros. Isso pode acontecer por uma série de motivos.
+Esses são chamados <strong>erros de execução</strong>. Você precisará revisar
+seu código-fonte e voltar ao passo 4.</p>
+</li>
+<li>
+<p>Finalmente, pode ser que você não encontre nenhum erro, mas os
+resultados obtidos pelo seu programa não estejam corretos. Esses
+são os chamados <strong>erros de lógica</strong>. Isso pode acontecer porque
+você escreveu um código-fonte que não corresponde ao seu
+algoritmo, ou porque seu algoritmo está incorreto. Nesse caso,
+será preciso voltar ao passo 3.</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>A figura extraída do livro representa o processo de compilação e execução.</p>
+<img src="figs/compilacao.png" style="width: 100%; max-width: 500px;">
+
+
+        <!-- Navigation buttons -->
+<div role="navigation" class="row justify-content-between">
+
+  <div class="col-12 col-sm-5 col-lg-4">
+    <a class="btn btn-primary w-100 mt-1 mt-sm-0" href="02-escrevendo-algoritmos.html">
+      &larr; Anterior
+    </a>
+  </div>
+
+  <div class="col-12 d-none d-lg-inline-block col-lg-4">
+    <a class="btn btn-secondary w-100" href="../index.html">
+      Voltar
+    </a>
+  </div>
+
+  <div class="col-12 col-sm-5 col-lg-4">
+    <a class="btn btn-primary w-100 mt-1 mt-sm-0" href="04-estruturas-elementares.html">
+      Próxima &rarr;
+    </a>
+  </div>
+
+</div>      </div>
+    </div>
+</article>
+
+<hr />
+
+
+<!-- Footer -->
+<footer>
+  <p class="copyright text-muted">
+    <a href="https://www.ic.unicamp.br/~lehilton/" title="Página pessoal">
+      Copyright &copy; 2020
+    </a>
+  </p>
+</footer>
+<!-- Bootstrap core JavaScript -->
+<script src="../dist/vendor/jquery/jquery.min.js"></script>
+<script src="../dist/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="../dist/vendor/prism/prism.js"></script> -->
+
+<!-- Custom scripts for this template -->
+<script src="../dist/js/main.min.js"></script>
+
+<!-- Mathjax setup -->
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+  };
+</script>
+<script src="../dist/vendor/mathjax/tex-chtml.js" id="MathJax-script" async></script>
+
+
+
+  </body>
+
+</html>

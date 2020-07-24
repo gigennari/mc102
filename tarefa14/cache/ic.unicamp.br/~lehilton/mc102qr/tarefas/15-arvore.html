@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    Algoritmos e Programação de Computadores
+    - Árvore
+  </title>
+
+  <meta name="keywords" content="MC102, Algoritmos e Programação de Computadores, Python">
+  <meta name="description" content="Página da disciplina de MC102 para turma QR">
+  <meta name="author" content="Lehilton Pedrosa">
+
+  <!-- Bootstrap core CSS -->
+  <link href="../dist/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Theme css -->
+  <link href="../dist/css/main.min.css" rel="stylesheet">
+
+  <!-- Prism -->
+  <!-- <link href="../dist/vendor/prism/prism.css" rel="stylesheet" /> -->
+</head>
+<body >
+
+  <body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="../index.html">MC102</a>
+
+
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+      aria-label="Toggle navigation">
+      Menu
+      <i>&#9776;</i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item top back-to-top-link">
+          <a class="nav-link" href="#"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>topo</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="../index.html">voltar</a>
+        </li>
+
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Header -->
+<header class="masthead"   style="background-image: url('../images/home-bg.jpg')" >
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-heading">
+
+          <h1 >Árvore</h1>
+
+
+          <span class="meta">Domingo, 12 de julho de 2020</span>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+
+
+      <div class="col-lg-8 col-md-10 mx-auto">
+
+        <p><strong>Atenção:</strong> Esta tarefa também será corrigida manualmente. Depois de
+terminada e corrigida automaticamente, você deve apresentar sua tarefa
+a um monitor em algum horário de atendimento. Você poderá pedir
+recorreção, mas o conceito da recorreção será no máximo B.</p>
+<h1 id="arvore">Árvore</h1>
+<p>Uma página HTML pode conter links para outras páginas. Queremos
+entender a hierarquia entre elas se começarmos a visitar um website a
+partir de uma determinada página. Faça um programa que recebe o link
+de uma página inicial e mostra a hierarquia entre as páginas que podem
+ser alcançadas a partir da inicial.</p>
+<p>Dizemos que essa hierarquia forma uma <em>árvore</em> em que cada nó
+corresponde a uma página distinta. A raiz da árvore é a página
+inicial. Os filhos de um nó da árvore são as páginas HTML que são
+acessíveis a partir daquele nó. Por exemplo, se começássemos a navegar
+a partir de <code class="language-text">http://exemplo.com/index.html</code>, poderíamos criar uma
+árvore como a seguinte.</p>
+<img src="figs/arvore-links.png" style="width: 100%; max-width: 500px;">
+<p>Visitamos os links na ordem em que os encontramos nas páginas. Assim,
+ao visitar a página raiz, encontrarmos um link para o índice do blog,
+onde encontramos um link para o primeiro post e assim por diante.
+Repare que uma página pode ser acessada através de várias outras
+páginas, mas ela aparecerá na árvore apenas uma vez. Por exemplo, o
+índice do blog pode conter um link para o segundo post, mas como já
+tínhamos visto esse link antes, não o visitamos de novo.</p>
+<h2 id="analisando-uma-pagina">Analisando uma página</h2>
+<p>Para descobrir os links, você deve analisar o conteúdo de cada página
+visitada e listar os links que ela possui. Uma página HTML nada mais é
+do que um arquivo de texto escrito em uma linguagem de marcação de
+estrutura e formato.</p>
+<p>O arquivo é formado por uma sequência de <em>tags</em> balanceadas. Para
+descobrir os links, basta que você conheça o formato das tags de
+links. A seguir, há um exemplo de um link que você estará procurando.</p>
+<pre class="highlightlanguage-HTML">&lt;<span style="color: #008000; font-weight: bold">a</span> <span style="color: #7D9029">href</span><span style="color: #666666">=</span><span style="color: #BA2121">&quot;https://ic.unicamp.br/graduacao/engenharia-da-computacao/&quot;</span>&gt;
+  Engenharia da Computação
+&lt;/<span style="color: #008000; font-weight: bold">a</span>&gt;
+</pre><p>Essa tag define um link com o texto <code class="language-text">Engenharia da Computação</code> que, se
+clicado, vai para a URL escrita. A parte que interessa é a propriedade
+<code class="language-text">href</code>. Fazer uma análise completa de um arquivo HTML que funcione
+para qualquer página da internet não é uma tarefa trivial, mas, algumas
+vezes, simplificações são suficientes para o que queremos.</p>
+<p>Nesta tarefa, você deve supor que todo link corresponde a uma
+substring com a forma <code class="language-text">href=&quot;[URL DA PÁGINA]&quot;</code>, então basta procurar
+por substrings com esse formato e extrair URL entre as aspas duplas.</p>
+<p>Não é difícil escrever um algoritmo para encontrar expressões como
+essa em uma string. Encontrar um padrão em uma string é uma tarefa tão
+comum que existe uma ferramenta especializada para ajudar: as
+expressões regulares. <em>Se</em> você preferir, poderá utilizá-las para
+encontrar os links presentes na página</p>
+<p>Uma expressão regular é uma sequência de símbolos que representa um
+determinado padrão. Cada símbolo tem um significado especial. Abaixo,
+temos um exemplo de uma expressão regular que corresponde a um número
+telefônico. O padrão é definido como dois números entre parênteses
+seguidos de quatro ou cinco números, um traço e mais quatro números.
+Podemos utilizar o módulo <code class="language-text">re</code> para definir e utilizar expressões
+regulares em Python.</p>
+<pre class="highlightlanguage-pycon"><span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">re</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>regex <span style="color: #666666">=</span> <span style="color: #BA2121">r&quot;\(\d</span><span style="color: #BB6688; font-weight: bold">{2}</span><span style="color: #BA2121">\) \d{4,5}-\d</span><span style="color: #BB6688; font-weight: bold">{4}</span><span style="color: #BA2121">&quot;</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>texto <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;Esse é o meu número (00) 12345-6789&quot;</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>texto <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;Ligue para (00) 2345-6789 ou para (01) 12345-4321&quot;</span>
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>telefones <span style="color: #666666">=</span> re<span style="color: #666666">.</span>findall(regex, texto)
+<span style="color: #000080; font-weight: bold">&gt;&gt;&gt; </span>telefones
+<span style="color: #888888">[&#39;(00) 2345-6789&#39;, &#39;(19) 12345-4321&#39;]</span>
+</pre><p>Neste <a href="https://www.w3schools.com/python/python_regex.asp">link</a> você
+pode encontrar vários exemplos interativos de como definir e utilizar
+expressões regulares. Entender como as expressões regulares mais
+sofisticadas funcionam é um assunto complicado que você só aprenderá
+ao estudar compiladores, mas aprender a usar os padrões mais simples
+pode ser útil. Não gaste muito tempo tentando aprender tudo.</p>
+<h2 id="modulo-auxiliar">Módulo auxiliar</h2>
+<p>No diretório, você encontrará um arquivo auxiliar <code class="language-text">modulo.py</code> com
+várias funções já prontas para facilitar o desenvolvimento da tarefa.
+Há funções para para normalizar o formato das URLs, verificar se as
+URLs encontradas são válidas e para carregar páginas HTML. Essas
+funções ajudam nas tarefas descritas a seguir.</p>
+<h3 id="resolvendo-urls">Resolvendo URLs</h3>
+<p>Ao visitar uma página, podemos encontrar endereços relativos ao
+diretório atual. Por exemplo, na página</p>
+<pre class="highlight">https://ic.unicamp.br/~lehilton/mc102qr/unidades/10-eficiencia.html
+</pre><p>encontramos um link para</p>
+<pre class="highlight">../fixacao/07-ordenacao.html#exercicios-criativos
+</pre><p>Nesse caso, a URL do link deve ser resolvida para</p>
+<pre class="highlight">https://ic.unicamp.br/~lehilton/mc102qr/fixacao/07-ordenacao.html
+</pre><h3 id="controlando-o-tamanho-da-arvore">Controlando o tamanho da árvore</h3>
+<p>Se visitarmos todos os links que encontrarmos, pode acontecer de
+visitarmos milhões de páginas. Para evitar que isso aconteça, vamos
+restringir os links de interesse.</p>
+<p><strong>Primeiro</strong>, não queremos visitar links para imagens, documentos PDF
+ou outros objetos. Assim, só visitaremos URLs que:</p>
+<ol>
+<li>ou terminem com <code class="language-text">/</code>, i.e., correspondem ao índice de um diretório;</li>
+<li>ou terminem com extensão <code class="language-text">.htm</code> ou <code class="language-text">.html</code>, i.e., são arquivos HTML.</li>
+</ol>
+<p><strong>Além disso</strong>, só visitaremos páginas que estejam no mesmo diretório
+ou em subdiretórios da página inicial. Por exemplo, se a página
+inicial é</p>
+<pre class="highlight">https://ic.unicamp.br/~lehilton/mc102qr/unidades/11-recursao.html
+</pre><p>podemos visitar</p>
+<pre class="highlight">https://ic.unicamp.br/~lehilton/mc102qr/unidades/10-eficiencia.html
+</pre><p>mas não iremos visitar</p>
+<pre class="highlight">https://ic.unicamp.br/~lehilton/mc102qr/fixacao/11-eficiencia.html
+</pre><p>tampouco visitaremos</p>
+<pre class="highlight">https://www.youtube.com/channel/UC81VD6eeuLLSfyY_D-N8sVw
+</pre><p>mesmo que esses links apareçam no código HTML.</p>
+<h3 id="baixando-arquivos-html">Baixando arquivos HTML</h3>
+<p>Há uma função no módulo que recebe uma URL e baixa o arquivo HTML em
+um diretório de cache. Por exemplo, se você encontrar o link</p>
+<pre class="highlight">https://ic.unicamp.br/~lehilton/mc102qr/index.html
+</pre><p>então a função baixará esse arquivo da Web e o guardará em um arquivo
+dentro do diretório local chamado</p>
+<pre class="highlight">cache/ic.unicamp.br/~lehilton/mc102qr/index.html
+</pre><p>A função devolverá uma string com todo o conteúdo do arquivo local se
+conseguir baixar, ou devolverá <code class="language-text">None</code> se não tiver sido possível
+baixar ou se o conteúdo baixado não for um arquivo HTML.</p>
+<p>Para os casos de teste desta tarefa, você já receberá uma cópia de
+páginas do site <code class="language-text">ic.unicamp.br</code> junto do seu repositório, assim não é
+necessário estar conectado à internet enquanto estiver testando. Não
+altere, nem atualize esses arquivos. Se desejar testar com outras
+páginas, então você deve ter o módulo <code class="language-text">requests</code> instalado.</p>
+<h2 id="entrada-e-saida">Entrada e saída</h2>
+<p>Você deve criar um programa chamado <code class="language-text">arvore.py</code>.</p>
+<h3 id="entrada">Entrada</h3>
+<p>Uma linha com a URL correspondente à página inicial.</p>
+<pre class="highlight">https://ic.unicamp.br/~lehilton/mc102qr/index.html
+</pre><h3 id="saida">Saída</h3>
+<p>Seu programa irá mostrar a árvore. Cada subnível da hierarquia é
+distinguido com um nível de recuo, utilizando 2 espaços.</p>
+<pre class="highlight">https://ic.unicamp.br/~lehilton/mc102qr/index.html
+  https://ic.unicamp.br/~lehilton/mc102qr/apresentacao.html
+  https://ic.unicamp.br/~lehilton/mc102qr/fixacao.html
+    https://ic.unicamp.br/~lehilton/mc102qr/fixacao/00-algoritmo.html
+      https://ic.unicamp.br/~lehilton/mc102qr/fixacao/01-variaveis.html
+        https://ic.unicamp.br/~lehilton/mc102qr/fixacao/02-condicional.html
+          https://ic.unicamp.br/~lehilton/mc102qr/fixacao/03-repeticao.html
+            https://ic.unicamp.br/~lehilton/mc102qr/fixacao/04-funcoes.html
+              https://ic.unicamp.br/~lehilton/mc102qr/fixacao/05-praticas.html
+                https://ic.unicamp.br/~lehilton/mc102qr/fixacao/06-listas.html
+                  https://ic.unicamp.br/~lehilton/mc102qr/fixacao/07-ordenacao.html
+                    https://ic.unicamp.br/~lehilton/mc102qr/fixacao/08-matrizes.html
+                      https://ic.unicamp.br/~lehilton/mc102qr/fixacao/09-arquivos.html
+                        https://ic.unicamp.br/~lehilton/mc102qr/fixacao/10-colecoes.html
+                          https://ic.unicamp.br/~lehilton/mc102qr/fixacao/11-eficiencia.html
+                            https://ic.unicamp.br/~lehilton/mc102qr/fixacao/12-recursao.html
+  https://ic.unicamp.br/~lehilton/mc102qr/unidades/01-problemas-algoritmos.html
+    https://ic.unicamp.br/~lehilton/mc102qr/unidades/02-escrevendo-algoritmos.html
+      https://ic.unicamp.br/~lehilton/mc102qr/unidades/03-linguagens-programacao.html
+        https://ic.unicamp.br/~lehilton/mc102qr/unidades/04-estruturas-elementares.html
+          https://ic.unicamp.br/~lehilton/mc102qr/unidades/05-listas.html
+            https://ic.unicamp.br/~lehilton/mc102qr/unidades/06-funcoes.html
+              https://ic.unicamp.br/~lehilton/mc102qr/unidades/07-algortimos-iterativos.html
+                https://ic.unicamp.br/~lehilton/mc102qr/unidades/08-matrizes.html
+                  https://ic.unicamp.br/~lehilton/mc102qr/unidades/09-colecoes.html
+                    https://ic.unicamp.br/~lehilton/mc102qr/unidades/10-eficiencia.html
+                      https://ic.unicamp.br/~lehilton/mc102qr/unidades/11-recursao.html
+                        https://ic.unicamp.br/~lehilton/mc102qr/tarefas/14-recursao.html
+                          https://ic.unicamp.br/~lehilton/mc102qr/tarefas/13-algoritmos-eficientes.html
+                            https://ic.unicamp.br/~lehilton/mc102qr/tarefas/12-colecoes-dinamicas.html
+                              https://ic.unicamp.br/~lehilton/mc102qr/tarefas/11-dicionarios-e-tuplas.html
+                                https://ic.unicamp.br/~lehilton/mc102qr/tarefas/10-imagens-binarias.html
+                                  https://ic.unicamp.br/~lehilton/mc102qr/tarefas/09-conceito-frequencia.html
+                                    https://ic.unicamp.br/~lehilton/mc102qr/tarefas/08-funcoes.html
+                                      https://ic.unicamp.br/~lehilton/mc102qr/tarefas/07-percorrer-listas.html
+                                        https://ic.unicamp.br/~lehilton/mc102qr/tarefas/06-listas.html
+                                          https://ic.unicamp.br/~lehilton/mc102qr/tarefas/05-condicional.html
+                                            https://ic.unicamp.br/~lehilton/mc102qr/tarefas/04-entendendo-algoritmos.html
+                                              https://ic.unicamp.br/~lehilton/mc102qr/tarefas/03-estruturas-controle.html
+                                                https://ic.unicamp.br/~lehilton/mc102qr/tarefas/02-problemas-algoritmos.html
+                                                  https://ic.unicamp.br/~lehilton/mc102qr/tarefas/01-primeira-tarefa.html
+</pre>
+
+        <!-- Navigation buttons -->
+<div role="navigation" class="row justify-content-between">
+
+  <div class="col-12 col-sm-5 col-lg-4">
+    <a class="btn btn-primary w-100 mt-1 mt-sm-0" href="14-recursao.html">
+      &larr; Anterior
+    </a>
+  </div>
+
+  <div class="col-12 d-none d-lg-inline-block col-lg-4">
+    <a class="btn btn-secondary w-100" href="../index.html">
+      Voltar
+    </a>
+  </div>
+
+  <div class="col-12 col-sm-5 col-lg-4">
+  </div>
+
+</div>      </div>
+    </div>
+</article>
+
+<hr />
+
+
+<!-- Footer -->
+<footer>
+  <p class="copyright text-muted">
+    <a href="https://www.ic.unicamp.br/~lehilton/" title="Página pessoal">
+      Copyright &copy; 2020
+    </a>
+  </p>
+</footer>
+<!-- Bootstrap core JavaScript -->
+<script src="../dist/vendor/jquery/jquery.min.js"></script>
+<script src="../dist/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="../dist/vendor/prism/prism.js"></script> -->
+
+<!-- Custom scripts for this template -->
+<script src="../dist/js/main.min.js"></script>
+
+<!-- Mathjax setup -->
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+  };
+</script>
+<script src="../dist/vendor/mathjax/tex-chtml.js" id="MathJax-script" async></script>
+
+
+
+  </body>
+
+</html>

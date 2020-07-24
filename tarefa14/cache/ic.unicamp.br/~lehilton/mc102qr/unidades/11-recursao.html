@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    Algoritmos e Programação de Computadores
+    - Recursão
+  </title>
+
+  <meta name="keywords" content="MC102, Algoritmos e Programação de Computadores, Python">
+  <meta name="description" content="Página da disciplina de MC102 para turma QR">
+  <meta name="author" content="Lehilton Pedrosa">
+
+  <!-- Bootstrap core CSS -->
+  <link href="../dist/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Theme css -->
+  <link href="../dist/css/main.min.css" rel="stylesheet">
+
+  <!-- Prism -->
+  <!-- <link href="../dist/vendor/prism/prism.css" rel="stylesheet" /> -->
+</head>
+<body >
+
+  <body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="../index.html">MC102</a>
+
+
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+      aria-label="Toggle navigation">
+      Menu
+      <i>&#9776;</i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item top back-to-top-link">
+          <a class="nav-link" href="#"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>topo</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="../index.html">voltar</a>
+        </li>
+
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Header -->
+<header class="masthead"   style="background-image: url('../images/home-bg.jpg')" >
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-heading">
+
+          <h1 >Recursão</h1>
+
+
+          <span class="meta">Quinta, 25 de junho de 2020</span>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+
+
+      <div class="col-lg-8 col-md-10 mx-auto">
+
+        <p>Construir algoritmos do jeito que fizemos até agora é algo intuitivo:
+repetimos um conjunto de instruções até que obtenhamos uma resposta
+desejada. Se você parar para pensar, a própria definição que fizemos
+no início do curso sugere que devemos escrever algoritmos assim: uma
+<em>sequência</em> de passos bem definidos para se resolver um determinado
+problema. Mais tarde, quando você estudar linguagens de programação,
+descobrirá que estamos falando de linguagens imperativas.</p>
+<p>Para resolvermos problemas mais complicados de maneira estruturada,
+definimos laços e aprendemos a escrever algoritmos iterativos. Assim,
+temos que estabelecer um subconjunto de instruções, chamado de
+<em>iteração</em>, que altera os dados de entrada sucessivamente. Isso nos
+obriga a pensar em um resultado intermediário dessas operações, ao
+invés de pensar no resultado do algoritmo. Por exemplo, para
+multiplicar uma lista de números, precisamos definir uma variável
+acumuladora que, em cada iteração, guarda o produto dos primeiros
+números da lista.</p>
+<p>Essa não é a única maneira de se resolver esse problema. Iremos
+aprender que recursão é uma estratégia para se pensar e escrever
+algoritmos que utiliza a estrutura recursiva do problema. Hum, antes
+de podermos explicar o que é recursão, precisamos entender o que é
+recursão.</p>
+<h2 id="introducao">Introdução</h2>
+<p>Observe a figura a seguir. Provavelmente você já construiu uma
+estrutura parecida. Ela é a foto de um castelo de cartas.</p>
+<img src="figs/house-of-cards-fragile-patience-sensitive.jpg" style="width: 100%; max-width: 400px;">
+<p>Repare que os alicerces do castelo são, eles mesmo, castelos de carta.
+Assim, antes de construir um castelo com 4 andares, tivemos antes que
+construir um castelo com 3 andares e assim por diante. A estrutura
+desse castelo na verdade inclui diversos outros castelos menores.
+Podemos desenhar alguns.</p>
+<img src="figs/triangulos-grade4.png" style="width: 100%; max-width: 300px;">
+<img src="figs/triangulos-grade4-subs.png" style="width: 100%; max-width: 280px;">
+<p>Podemos então fazer a seguinte pergunta.</p>
+<blockquote>
+<p>Quantos castelos há em um castelo de cartas com quatro andares?</p>
+</blockquote>
+<p>Para formalizar o nosso problema, vamos definir uma grade de
+triângulos como a figura definida à esquerda, que tem altura quatro. O
+nosso objetivo é contar o número de triângulos que tem a base na
+posição inferior (ver exemplos coloridos). Há alguns outros triângulos
+de ponta a cabeça, mas eles não são castelos de carta e não estamos
+interessados neles. Denotemos por $t(n)$ o número de triângulos de pé
+em um castelo de altura $n$.</p>
+<p>Para o castelo de quatro andares, há muitos triângulos escondidos. Mas
+quando estamos começando a construir o castelo, é fácil contar
+diretamente.</p>
+<img src="figs/triangulos-grade12.png" style="width: 100%; max-width: 300px;">
+<p>Para um castelo de altura um, temos somente um triângulo e para um
+castelo de altura dois, temos quatro triângulos, três pequenos e um
+grande. Assim, sabemos que $t(1) = 1$ e $t(2) = 4$. Mas, à medida em
+que os castelos crescem, essa contagem torna-se mais difícil.</p>
+<p>Para contar os triângulos de um castelo de altura $n = 4$, precisamos
+de um pouco mais de cuidado. Podemos pensar na estrutura que sustenta
+as duas cartas superiores e lembrar que um castelo é fundado sobre
+outros castelos menores. Se quisermos contar apenas os triângulos com
+a ponta no parte superior, teremos $4$ triângulos.</p>
+<img src="figs/triangulos-ponta.png" style="width: 100%; max-width: 200px;">
+<p>Além desses, ainda faltam os triângulos do lado esquerdo e do lado
+direito. Vamos colori-los para poder enxergar melhor.</p>
+<img src="figs/triangulos-subproblemas.png" style="width: 100%; max-width: 400px;">
+<p>Assim, precisamos somar os triângulos pintados de laranja e os
+pintados de verde. Há alguns triângulos que pintamos duas vezes, então
+também precisamos remover da conta os triângulos pintados de rosa.</p>
+<img src="figs/triangulos-soma.png" style="width: 100%; max-width: 650px;">
+<p>Mas como calcular $t(3)$? Caímos no mesmo problema anterior, mas agora
+para uma instância menor! De maneira mais geral, podemos escrever</p>
+<p>$$
+t(n) =
+\begin{cases}
+1                    &amp;  \text{se } n = 1   \\
+4                    &amp;  \text{se } n = 2   \\
+n + 2\cdot t(n-1) - t(n-2) &amp;  \text{se } n \ge 3 \\
+\end{cases}
+$$</p>
+<p>Agora fica mais fácil calcular $t(4)$? Vamos supor que já conhecemos o
+valor de $t(m)$ para cada número $m &lt; 4$, ou seja, suponha que já
+sabemos quanto vale $t(1), t(2)$ e $t(3)$. Você pode pensar que
+conhecemos um oráculo que nos dá o valor correto de $t(m)$ sempre que
+$m$ seja <strong>estritamente menor</strong> que $4$. Assim, $$ t(4) = 4 + 2 \cdot
+t(3) - t(2) = 4 + 2 \cdot 10 - 4 = 20. $$</p>
+<p>A maneira com que o oráculo descobre o valor de $t(3)$ ou de $t(2)$ é
+indiferente, contando que ele nos dê uma resposta correta. Assim,
+digamos que o oráculo é uma função <code class="language-text">oraculo(m)</code> que devolve o número
+de triângulos de um castelo de cartas de altura $m &lt; n$. Se você
+confia que essa função <code class="language-text">oraculo</code> está correta, então podemos escrever
+uma função para calcular o número de triângulos de um castelo de
+cartas de altura $n$. Para testar, vamos imprimir uma
+tabela com os $10$ primeiros valores de $t(n)$.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">triangulos</span>(n):
+    <span style="color: #008000; font-weight: bold">if</span> n <span style="color: #666666">==</span> <span style="color: #666666">1</span>:
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">1</span>
+    <span style="color: #008000; font-weight: bold">elif</span> n <span style="color: #666666">==</span> <span style="color: #666666">2</span>:
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">4</span>
+    <span style="color: #008000; font-weight: bold">else</span>:
+        <span style="color: #008000; font-weight: bold">return</span> n <span style="color: #666666">+</span> <span style="color: #666666">2</span> <span style="color: #666666">*</span> oraculo(n <span style="color: #666666">-</span> <span style="color: #666666">1</span>) <span style="color: #666666">-</span> oraculo(n <span style="color: #666666">-</span> <span style="color: #666666">2</span>)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">main</span>():
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, <span style="color: #666666">11</span>):
+        <span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;t(</span><span style="color: #BB6688; font-weight: bold">{i}</span><span style="color: #BA2121">) = {triangulos(i)}&quot;</span>)
+
+main()
+</pre><p>Se tentarmos executar, não vai dar certo.</p>
+<pre class="highlightlanguage-console"><span style="color: #000080; font-weight: bold">user@notebook:~/ra123456/recursao$</span> python3 triangulos.py
+<span style="color: #888888">t(1) = 1</span>
+<span style="color: #888888">t(2) = 4</span>
+<span style="color: #888888">Traceback (most recent call last):</span>
+<span style="color: #888888">  File &quot;triangulos.py&quot;, line 13, in &lt;module&gt;</span>
+<span style="color: #888888">    main()</span>
+<span style="color: #888888">  File &quot;triangulos.py&quot;, line 11, in main</span>
+<span style="color: #888888">    print(f&quot;t({i}) = {triangulos(i)}&quot;)</span>
+<span style="color: #888888">  File &quot;triangulos.py&quot;, line 7, in triangulos</span>
+<span style="color: #888888">    return n + 2 * oraculo(n - 1) - oraculo(n - 2)</span>
+<span style="color: #888888">NameError: name &#39;oraculo&#39; is not defined</span>
+</pre><p>É claro que para podemos executar esse programa, precisamos
+implementar a função <code class="language-text">oraculo</code>. Vejamos o que é preciso: queremos uma
+função para calcular o número de triângulos de um castelo de cartas de
+altura $m$. Mas essa é justamente a descrição da função <code class="language-text">triangulos</code>
+que estamos construindo! Vamos substituir <code class="language-text">oraculo</code> por <code class="language-text">triangulos</code>.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">triangulos</span>(n):
+    <span style="color: #008000; font-weight: bold">if</span> n <span style="color: #666666">==</span> <span style="color: #666666">1</span>:
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">1</span>
+    <span style="color: #008000; font-weight: bold">elif</span> n <span style="color: #666666">==</span> <span style="color: #666666">2</span>:
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">4</span>
+    <span style="color: #008000; font-weight: bold">else</span>:
+        <span style="color: #008000; font-weight: bold">return</span> n <span style="color: #666666">+</span> <span style="color: #666666">2</span> <span style="color: #666666">*</span> triangulos(n <span style="color: #666666">-</span> <span style="color: #666666">1</span>) <span style="color: #666666">-</span> triangulos(n <span style="color: #666666">-</span> <span style="color: #666666">2</span>)
+</pre><p>Pronto! Agora o interpretador Python não poderá reclamar que a função
+chamada não existe.</p>
+<pre class="highlightlanguage-console"><span style="color: #000080; font-weight: bold">user@notebook:~/ra123456/recursao$</span> python3 triangulos.py
+<span style="color: #888888">t(1) = 1</span>
+<span style="color: #888888">t(2) = 4</span>
+<span style="color: #888888">t(3) = 10</span>
+<span style="color: #888888">t(4) = 20</span>
+<span style="color: #888888">t(5) = 35</span>
+<span style="color: #888888">t(6) = 56</span>
+<span style="color: #888888">t(7) = 84</span>
+<span style="color: #888888">t(8) = 120</span>
+<span style="color: #888888">t(9) = 165</span>
+<span style="color: #888888">t(10) = 220</span>
+</pre><p>E funciona! Na primeira vez que vemos isso, pode ser que pareça
+mágica, mas há um nome mais apropriado. Observe que a função
+<code class="language-text">triangulos</code> chama a própria função <code class="language-text">triangulos</code>. Chamamos isso de
+<strong>recursão</strong>.</p>
+<h2 id="recursao">Recursão</h2>
+<img src="figs/matrioshka.jpg" style="width: 100%; max-width: 400px;">
+<p>Recursão é a estratégia para se resolver um problema da seguinte
+maneira:</p>
+<ol>
+<li>
+<p>Começamos identificando <strong>casos básicos</strong> e computando suas
+soluções diretamente.</p>
+</li>
+<li>
+<p>Em seguida, tentamos resolver um <strong>caso geral</strong> fazendo o seguinte:</p>
+<p>a) primeiro construímos uma ou mais instâncias menores do mesmo
+problema;</p>
+<p>b) depois, obtemos soluções para essas instâncias fazendo chamadas
+recursivas;</p>
+<p>c) finalmente, transformamos as soluções para as instâncias
+menores a fim de se obter um resultado do problema original.</p>
+</li>
+</ol>
+<p>Vamos ver um exemplo. Você deve se lembrar de que o fatorial de um
+número $n$ é o produto $1 \cdot 2 \cdot \ldots \cdot (n-1) \cdot n$.
+Se escrevermos esse produto com parênteses, podemos ver que para
+calcular o fatorial de $n$, precisamos antes calcular o fatorial de
+$n - 1$:</p>
+<p>\[
+n! = \big(1 \cdot 2 \cdot \ldots \cdot (n - 1)\big) \cdot n = (n-1)! \cdot n
+\]</p>
+<p>Na verdade, quando definimos o fatorial de $n$ de uma maneira mais
+formal, fazemos isso recursivamente:</p>
+<p>$$
+n! =
+\begin{cases}
+1               &amp;      \mbox{se } n = 0 \\
+n \cdot (n-1)!  &amp;      \mbox{se } n &gt; 0.
+\end{cases}
+$$</p>
+<p>Com essa definição, é trivial escrever um programa recursivo para
+calcular o fatorial de um número. Vamos fazer isso destacando cada
+parte da estratégia recursiva descrita acima.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fatorial</span>(n):
+    <span style="color: #408080; font-style: italic"># 1 caso básico</span>
+    <span style="color: #008000; font-weight: bold">if</span> n <span style="color: #666666">==</span> <span style="color: #666666">0</span>:
+        resposta <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+
+    <span style="color: #408080; font-style: italic"># 2. caso geral</span>
+    <span style="color: #008000; font-weight: bold">else</span>:
+        <span style="color: #408080; font-style: italic"># a) instância menor</span>
+        m <span style="color: #666666">=</span> n <span style="color: #666666">-</span> <span style="color: #666666">1</span>
+
+        <span style="color: #408080; font-style: italic"># b) chamada recursiva</span>
+        solucao <span style="color: #666666">=</span> fatorial(m)
+
+        <span style="color: #408080; font-style: italic"># c) transformando a solução</span>
+        resposta <span style="color: #666666">=</span> n <span style="color: #666666">*</span> solucao
+
+    <span style="color: #008000; font-weight: bold">return</span> resposta
+</pre><p>Normalmente escolhemos como casos básicos as instâncias irredutíveis,
+isso é, cujo o tamanho não podemos diminuir. Nesse exemplo, só há um
+caso básico, que corresponde à entrada $n = 0$. O caso geral
+corresponde a uma entrada arbitrária $n$ tal que $n &gt; 0$. O fato de
+que no caso geral $n$ é diferente de zero é importante para que
+possamos construir uma instância menor do problema, $m = n - 1$.
+Resolvemos o subproblema recursivamente e obtemos uma solução para a
+instância menor. Finalmente, transformamos a solução da instância
+menor e obtemos a resposta do problema original.</p>
+<p>Na função acima, criamos diversas variáveis para explicitar que
+estamos utilizando uma estratégia recursiva. Mas muitas pessoas
+escreveriam menos.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fatorial</span>(n):
+    <span style="color: #008000; font-weight: bold">if</span> n <span style="color: #666666">==</span> <span style="color: #666666">0</span>:
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">0</span>
+    <span style="color: #008000; font-weight: bold">else</span>:
+        <span style="color: #008000; font-weight: bold">return</span> fatorial(n <span style="color: #666666">-</span> <span style="color: #666666">1</span>) <span style="color: #666666">*</span> n
+</pre><p>Com o tempo, você irá preferir essa segunda versão.</p>
+<h2 id="pensando-recursivamente">Pensando recursivamente</h2>
+<p>Vamos ver mais um exemplo para praticar.</p>
+<blockquote>
+<p>Suponha que queremos cortar um pedaço de papel retangular, digamos,
+para fazer um cartão ou um bilhete. É bem provável que não exista
+folha disponível na papelaria com exatamente esse tamanho. Então
+precisamos descobrir qual o <strong>menor</strong> formato de papel em que cabe
+nosso retângulo.</p>
+</blockquote>
+<p>O formato de papel mais utilizado no Brasil (e no mundo) é o formato
+A4. Na verdade, esse é apenas um formato de uma série cuidadosamente
+pensada, A0, A1, A2... Uma das vantagens dessa série é que podemos
+cortar uma folha A0 no meio e obter duas folhas A1 e assim por diante.
+Todas as medida são em milímetros, então descartamos a fração de
+milímetro quando dividirmos um número ímpar por dois.</p>
+<p>O maior formato da série é o A0, que tem $841mm$ de largura e $1189mm$
+de altura. Se dividirmos o maior lado de uma folha sucessivamente,
+podemos construir uma tabela com as dimensões dos primeiros formatos.</p>
+<table>
+<thead>
+<tr>
+<th>Formato</th>
+<th>Largura</th>
+<th>Altura</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A0</td>
+<td>841</td>
+<td>1189</td>
+</tr>
+<tr>
+<td>A1</td>
+<td>594</td>
+<td>841</td>
+</tr>
+<tr>
+<td>A2</td>
+<td>420</td>
+<td>594</td>
+</tr>
+<tr>
+<td>A3</td>
+<td>297</td>
+<td>420</td>
+</tr>
+<tr>
+<td>A4</td>
+<td>210</td>
+<td>297</td>
+</tr>
+<tr>
+<td>A5</td>
+<td>148</td>
+<td>210</td>
+</tr>
+</tbody></table><p>Podemos fazer um desenho para visualizar os vários tamanhos.</p>
+<img src="figs/papel-seriea.png" style="width: 100%; max-width: 500px;">
+<p>Agora podemos tentar resolver nosso problema. Não é muito difícil
+resolver esse problema iterativamente, mas nesse exemplo queremos
+insistir numa solução recursiva. Utilizar recursão nem sempre é
+trivial como foi para a função fatorial, cuja a definição é ela mesma
+recursiva. Então, pode não parecer intuitivo tentar resolver esse
+problema de maneira recursiva. De qualquer forma, vamos tentar.</p>
+<p>Suponha que recebemos uma folha de papel A0 e nos perguntam qual o
+menor subtipo de A0 em que cabe o retângulo? Vamos supor que o
+retângulo recebido cabe na folha A0, já que do contrário não há muito
+o que fazer. Será que a folha em mãos é de fato a menor possível? Se o
+retângulo não couber em uma folha A1, então a reposta é sim, a folha
+A0 é o menor subtipo. Mas se ele couber, então podemos voltar a nos
+perguntar: qual o menor subtipo de A1 em que cabe o retângulo? Repare
+que fizemos a mesma pergunta, mas agora para uma folha A1.</p>
+<p>A primeira coisa para se escrever uma função recursiva — ou qualquer
+outra — é entender exatamente que problema queremos resolver. Aqui,
+queremos responder qual o menor subtipo de um papel A$n$ em que cabe o
+retângulo. Com isso, não é difícil escrever a seguinte função
+recursiva.</p>
+<pre class="highlightlanguage-python">LARGURA_A0 <span style="color: #666666">=</span> <span style="color: #666666">841</span>
+ALTURA_A0 <span style="color: #666666">=</span> <span style="color: #666666">1189</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">menor_subtipo</span>(larg_folha, alt_folha, tipo_folha, larg_retangulo, alt_retangulo):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    Devolve o menor subtipo da folha em que cabe o retângulo.</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+
+    <span style="color: #408080; font-style: italic"># cria instância menor</span>
+    larg_menor <span style="color: #666666">=</span> alt_folha <span style="color: #666666">//</span> <span style="color: #666666">2</span>
+    alt_menor <span style="color: #666666">=</span> larg_folha
+    tipo_menor <span style="color: #666666">=</span> tipo_folha <span style="color: #666666">+</span> <span style="color: #666666">1</span>
+
+    <span style="color: #408080; font-style: italic"># se não cabe na folha menor</span>
+    <span style="color: #008000; font-weight: bold">if</span> larg_retangulo <span style="color: #666666">&gt;</span> larg_menor <span style="color: #AA22FF; font-weight: bold">or</span> alt_retangulo <span style="color: #666666">&gt;</span> alt_menor:
+        <span style="color: #008000; font-weight: bold">return</span> tipo_folha
+    <span style="color: #008000; font-weight: bold">else</span>:
+        <span style="color: #008000; font-weight: bold">return</span> menor_subtipo(larg_menor, alt_menor, tipo_menor, larg_retangulo, alt_retangulo)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">main</span>():
+    larg_retangulo <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">input</span>(<span style="color: #BA2121">&quot;digite a largura do retângulo: &quot;</span>))
+    alt_retangulo <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">input</span>(<span style="color: #BA2121">&quot;digite a altura do retângulo: &quot;</span>))
+
+    tipo <span style="color: #666666">=</span> menor_subtipo(LARGURA_A0, ALTURA_A0, <span style="color: #666666">0</span>, larg_retangulo, alt_retangulo)
+
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;Utilize um papel A</span><span style="color: #BB6688; font-weight: bold">{tipo}</span><span style="color: #BA2121">&quot;</span>)
+
+main()
+</pre><p>Escrever algoritmos recursivos não é um aprendizado que ganhamos de
+graça, principalmente porque primeiro aprendemos algoritmos
+iterativos. Essa dificuldade inicial vale a pena porque normalmente os
+algoritmos recursivos que construímos são muito mais simples do que
+alguns algoritmos iterativos. Mais importante, talvez, é que é muito
+mais fácil nos convencermos de que os algoritmos recursivos estão
+corretos.</p>
+<p>Como não podemos deixar de praticar, vamos resolver mais um problema.</p>
+<blockquote>
+<p>Suponha que queremos construir nossa própria série de papeis
+quadrados, a série Q1, Q2, etc. Dessa vez, quanto maior o número do
+tipo, maior o papel. Construímos essa série assim, os papeis Q1 e Q2
+são iguais e têm $1mm$ de lado. Para definir Q3, reusamos o lado de
+Q1 e Q2, formando um quadrado de lado $2mm$. Para construir Q4,
+usamos o lado de Q2 e Q3 e assim por diante, como na figura. Qual o
+lado do papel Q$n$?</p>
+<img src="figs/papel-serieq.png" style="width: 100%; max-width: 500px;">
+</blockquote>
+<p>Você consegue identificar essa série? Implemente uma função recursiva
+para resolver esse problema.</p>
+<h2 id="pilha-de-chamadas">Pilha de chamadas</h2>
+<p>Depois que já nos acostumamos a escrever funções recursivas, podemos
+tentar investigar a dinâmica de execução de uma função recursiva.
+Quando estudamos funções, descobrimos que existe um mecanismo para
+executar e retornar de uma função. O mesmo mecanismo funciona para
+funções recursivas, não há nada de especial para elas.</p>
+<p>Vamos simular uma chamada à primeira função <code class="language-text">fatorial</code> definida
+antes. Copiamos e adicionamos uma função <code class="language-text">main</code> para teste.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fatorial</span>(n):
+    <span style="color: #008000; font-weight: bold">if</span> n <span style="color: #666666">==</span> <span style="color: #666666">0</span>:
+        resposta <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+    <span style="color: #008000; font-weight: bold">else</span>:
+        m <span style="color: #666666">=</span> n <span style="color: #666666">-</span> <span style="color: #666666">1</span>
+        solucao <span style="color: #666666">=</span> fatorial(m)
+        resposta <span style="color: #666666">=</span> n <span style="color: #666666">*</span> solucao
+    <span style="color: #008000; font-weight: bold">return</span> resposta
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">main</span>():
+    resultado <span style="color: #666666">=</span> fatorial(<span style="color: #666666">4</span>)
+    <span style="color: #008000">print</span>(resultado)
+
+main()
+</pre><p>A primeira instrução a ser executada nesse programa é uma chamada a
+função <code class="language-text">main</code>. Sempre que fazemos uma chamada, criamos um novo escopo
+para a chamada. Logo em seguida, é feita uma chamada a <code class="language-text">fatorial(4)</code> e
+a mesma coisa acontece: criamos um novo escopo para a chamada e
+associamos os parâmetros. Assim, imediatamente antes da chamada
+<code class="language-text">fatorial(4)</code> começar a executar, a memória do computador deve se
+parecer com a seguinte figura.</p>
+<img src="figs/fatorial-chamada1.png" style="width: 100%; max-width: 500px;">
+<p>Como nesse caso $n = 4$, é executado o ramo do else que define uma
+nova variável $m = 3$ e é feita uma nova chamada <code class="language-text">fatorial(3)</code>.
+Toda vez que chamamos uma função, criamos um novo escopo e
+associamos os parâmetros, então não é diferente para essa.
+Esse processo se repete até que $n$ seja igual a $0$, quando
+chegamos a um caso básico.</p>
+<img src="figs/fatorial-chamada2.png" style="width: 100%; max-width: 500px;">
+<p>No momento em que a chamada <code class="language-text">fatorial(0)</code> retorna, o seu escopo é
+destruído e o valor devolvido é guardado na variável <code class="language-text">solucao</code> da
+chamada <code class="language-text">fatorial(1)</code>. Essa chamada calcula o resultado, a execução
+retorna à chamada <code class="language-text">fatorial(2)</code> e assim ocorre sucessivamente. Por
+exemplo, logo depois que a chamada <code class="language-text">fatorial(2)</code> termina, a memória do
+programa estaria assim:</p>
+<img src="figs/fatorial-chamada3.png" style="width: 100%; max-width: 500px;">
+<p>Quando a última chamada termina, a execução continua na função <code class="language-text">main</code>,
+que recebe o resultado e o mostra na tela.</p>
+<p>Entender o mecanismo que faz uma função recursiva funcionar é
+importante quando queremos avaliar o impacto de usar recursão ou
+quando queremos descobrir um erro em nosso programa. Mas quando
+estivermos criando um algoritmo recursivo para um problema <strong>não</strong>
+devemos nos preocupar com todas essas chamadas. Em outras palavras,
+quando estivermos pensando recursivamente, devemos nos concentrar
+somente no escopo da chamada inicial.</p>
+<h2 id="estruturas-recursivas">Estruturas recursivas</h2>
+<p>Algumas vezes, tratamos de objetos que têm estruturas recursivas.
+Essas estruturas podem representar as soluções de algum problema, ou
+podem ser algum objetos concretos. Por exemplo, os ramos e sub-ramos
+de algumas plantas podem ter a mesma estrutura que a planta inteira.</p>
+<img src="figs/Fractal-plant.svg" style="width: 100%; max-width: 500px;">
+<p>Entre as estruturas recursivas bem estudadas estão os fractais. Vamos
+tentar desenhar alguns fractais usando recursão. Antes, vamos aprender
+a usar um módulo de Python chamado
+<a href="https://docs.python.org/3/library/turtle.html"><code class="language-text">turtle</code></a>, que foi
+feito para ensinar programação para crianças. Para usar esse módulo,
+você precisa ter instalado Python com o módulo de interfaces gráficas
+tk.</p>
+<p>Imagine uma grande tela de pintura e, sobre ela, uma tartaruga
+carregando uma caneta. Essa tartaruga é treinada e responde a alguns
+comandos simples, como andar por uma certa distância e virar à
+esquerda ou à direita por um certo número de graus. Mas não sabe fazer
+muito mais do que isso.</p>
+<p>Podemos ensinar a tartaruga a desenhar um quadrado na tela. Vejamos.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">turtle</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+
+PASSO <span style="color: #666666">=</span> <span style="color: #666666">100</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">quadrado</span>():
+    forward(PASSO)
+    right(<span style="color: #666666">90</span>)
+    forward(PASSO)
+    right(<span style="color: #666666">90</span>)
+    forward(PASSO)
+    right(<span style="color: #666666">90</span>)
+    forward(PASSO)
+    right(<span style="color: #666666">90</span>)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">main</span>():
+    pensize(<span style="color: #666666">3</span>)
+    shapesize(<span style="color: #666666">2</span>)
+    color(<span style="color: #BA2121">&quot;green&quot;</span>)
+    speed(<span style="color: #666666">3</span>)
+
+    quadrado()
+
+    done()
+
+main()
+</pre><p>Deve ser fácil descobrir o que cada uma das instruções faz. Para ter
+certeza, executamos e vemos que uma janela é aberta. A tartaruga anda,
+vagarosamente, desenhando um quadrado verde na tela.</p>
+<img src="figs/tartaruga-quadrado1.png" style="width: 100%; max-width: 300px;">
+<img src="figs/tartaruga-quadrado2.png" style="width: 100%; max-width: 300px;">
+<img src="figs/tartaruga-quadrado3.png" style="width: 100%; max-width: 300px;">
+<img src="figs/tartaruga-quadrado4.png" style="width: 100%; max-width: 300px;">
+<p>É importante perceber que a tartaruga está em determinada
+posição virada em alguma direção. Então, se pedirmos
+para a tartaruga desenhar dois quadrados em seguida, ela obedecerá, mas
+o resultado não vai ser muito mais interessante.</p>
+<img src="figs/tartaruga-quadrado5.png" style="width: 100%; max-width: 300px;">
+<img src="figs/tartaruga-quadrado6.png" style="width: 100%; max-width: 300px;">
+<p>Então vamos prestar atenção na posição inicial e na posição final da
+tartaruga. Essas posições fazem parte da descrição do problema sendo
+resolvido pela função de desenho.</p>
+<p>Em seguida, faremos algumas figuras mais interessantes desenhadas por
+<a href="https://pt.wikipedia.org/wiki/Curva_de_Koch">Koch</a>.</p>
+<img src="figs/tartaruga-koch.png" style="width: 100%; max-width: 500px;">
+<p>Repare que, para desenhar $K_2$, substituímos cada risco de $K_1$ por
+uma cópia de $K_1.$ Podemos fazer uma função que recebe um parâmetro
+$n = 0, 1 , 2$ e faz o desenho correspondente.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">koch</span>(n):
+    <span style="color: #008000; font-weight: bold">if</span> n <span style="color: #666666">==</span> <span style="color: #666666">0</span>:
+        forward(PASSO)
+    <span style="color: #008000; font-weight: bold">elif</span> n <span style="color: #666666">==</span> <span style="color: #666666">1</span>:
+        forward(PASSO)
+        left(<span style="color: #666666">60</span>)
+        forward(PASSO)
+        right(<span style="color: #666666">120</span>)
+        forward(PASSO)
+        left(<span style="color: #666666">60</span>)
+        forward(PASSO)
+    <span style="color: #008000; font-weight: bold">elif</span> n <span style="color: #666666">==</span> <span style="color: #666666">2</span>:
+        koch(<span style="color: #666666">1</span>)
+        left(<span style="color: #666666">60</span>)
+        koch(<span style="color: #666666">1</span>)
+        right(<span style="color: #666666">120</span>)
+        koch(<span style="color: #666666">1</span>)
+        left(<span style="color: #666666">60</span>)
+        koch(<span style="color: #666666">1</span>)
+</pre><p>Qual seria a figura correspondente à $K_3$? Ou melhor, como será a
+figura $K_n$, para um $n$ arbitrário? A estrutura recursiva pode ser
+visualizada nas figuras, mas é mais interessante que a descubramos
+olhando o código da função. Olhando com atenção, perceberemos que para
+obter uma figura $K_n$, temos que fazer quatro figuras $K_{n-1}$.
+Assim, podemos fazer uma implementação recursiva.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">koch</span>(n):
+    <span style="color: #008000; font-weight: bold">if</span> n <span style="color: #666666">==</span> <span style="color: #666666">0</span>:
+        forward(PASSO)
+    <span style="color: #008000; font-weight: bold">else</span>:
+        koch(n <span style="color: #666666">-</span> <span style="color: #666666">1</span>)
+        left(<span style="color: #666666">60</span>)
+        koch(n <span style="color: #666666">-</span> <span style="color: #666666">1</span>)
+        right(<span style="color: #666666">120</span>)
+        koch(n <span style="color: #666666">-</span> <span style="color: #666666">1</span>)
+        left(<span style="color: #666666">60</span>)
+        koch(n <span style="color: #666666">-</span> <span style="color: #666666">1</span>)
+</pre><p>Executamos <code class="language-text">koch(3)</code> ajustando o tamanho do passo apropriadamente.</p>
+<img src="figs/tartaruga-koch3.png" style="width: 100%; max-width: 300px;">
+<p>Experimente outros parâmetros. Como a figura cresce muito à medida em
+que $n$ aumenta, pode ser útil aumentar a velocidade da tartaruga. A
+instrução <code class="language-text">speed(10)</code> pede para que a tartaruga ande o mais rápido
+possível.</p>
+<p>Vamos desenhar mais um fractal, chamado de
+<a href="https://pt.wikipedia.org/wiki/Tri%C3%A2ngulo_de_Sierpinski">triângulo de Sierpinski</a>.
+A primeira imagem da sequência do fractal é um triângulo equilátero.
+Para obter o n-ésimo elemento da sequência, fazemos três cópias da
+figura anterior, uma em cada ponta de um triângulo. Veja os exemplos.</p>
+<img src="figs/tartaruga-sierpinski.png" style="width: 100%; max-width: 500px;">
+<p>Nesse exemplo, vamos ter que tomar cuidado redobrado com as posições
+de início e de fim da figura. Por exemplo, suponha que para desenhar
+$S_3$, primeiro fazemos duas cópias de $S_2$, como na figura abaixo.</p>
+<img src="figs/tartaruga-sierpinski-posicao.png" style="width: 100%; max-width: 300px;">
+<p>Para desenhar a terceira cópia de $S_2$, precisamos posicionar a
+tartaruga acima do segundo $S_2$. Como sempre que nossa tartaruga
+anda, ela deixa sua marca, vamos girar a cabeça da tartaruga e desenhar
+mais duas cópias de $S_2$ em sequência.</p>
+<img src="figs/tartaruga-sierpinski-posicao2.png" style="width: 100%; max-width: 300px;">
+<p>Nesse momento já desenhamos $S_3$, então podemos escrever a seguinte
+função recursiva.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">sierpinski</span>(n):
+    <span style="color: #008000; font-weight: bold">if</span> n <span style="color: #666666">==</span> <span style="color: #666666">1</span>:
+        forward(PASSO)
+        left(<span style="color: #666666">120</span>)
+        forward(PASSO)
+        left(<span style="color: #666666">120</span>)
+        forward(PASSO)
+        left(<span style="color: #666666">120</span>)
+        forward(PASSO)
+    <span style="color: #008000; font-weight: bold">else</span>:
+        sierpinski(n<span style="color: #666666">-1</span>)
+        sierpinski(n<span style="color: #666666">-1</span>)
+        left(<span style="color: #666666">120</span>)
+        sierpinski(n<span style="color: #666666">-1</span>)
+        sierpinski(n<span style="color: #666666">-1</span>)
+</pre><p>Mas essa função recursiva tem um erro crucial, você sabe identificar
+qual é? Vamos testar executando <code class="language-text">sierpinski(3)</code>.</p>
+<img src="figs/tartaruga-sierpinski-erro.png" style="width: 100%; max-width: 300px;">
+<p>Nós não cumprimos o combinado na definição do problema! Quando fizemos
+uma chamada recursiva para a instância de tamanho $n-1$, supusemos que
+tartaruga terminaria o desenho na ponta inferior direita, mas nós não
+garantimos esse propriedade para a instância de tamanho $n$. Podemos
+entender recursão como um contrato: se exigimos alguma propriedade da
+solução obtida na chamada recursiva, então também nós devemos garantir
+essa propriedade na solução que construirmos.</p>
+<p>Nesse exemplo, você deve se convencer de que basta repetir as
+instruções para que a tartaruga termine na ponta inferior direita.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">sierpinski</span>(n):
+    <span style="color: #008000; font-weight: bold">if</span> n <span style="color: #666666">==</span> <span style="color: #666666">1</span>:
+        forward(PASSO)
+        left(<span style="color: #666666">120</span>)
+        forward(PASSO)
+        left(<span style="color: #666666">120</span>)
+        forward(PASSO)
+        left(<span style="color: #666666">120</span>)
+        forward(PASSO)
+    <span style="color: #008000; font-weight: bold">else</span>:
+        sierpinski(n<span style="color: #666666">-1</span>)
+        sierpinski(n<span style="color: #666666">-1</span>)
+        left(<span style="color: #666666">120</span>)
+        sierpinski(n<span style="color: #666666">-1</span>)
+        sierpinski(n<span style="color: #666666">-1</span>)
+        left(<span style="color: #666666">120</span>)
+        sierpinski(n<span style="color: #666666">-1</span>)
+        sierpinski(n<span style="color: #666666">-1</span>)
+        left(<span style="color: #666666">120</span>)
+        sierpinski(n<span style="color: #666666">-1</span>)
+        sierpinski(n<span style="color: #666666">-1</span>)
+</pre><p>Parece um exagero termos oito chamadas recursivas, enquanto a
+definição do triângulo de Sierpinski fala apenas em três cópias. Mas
+funciona.</p>
+<img src="figs/tartaruga-sierpinski-corrigido.png" style="width: 100%; max-width: 300px;">
+<p>O que talvez seja frustrante é que o tempo que essa função leva é
+muito muito grande — e não podemos culpar a tartaruga por isso.</p>
+<h2 id="tempo-de-execucao-e-sobreposicao-de-problemas">Tempo de execução e sobreposição de problemas</h2>
+<p>A razão pela qual nossa função recursão demora tanto é que ela realiza
+uma série de passos desnecessários. Quando para resolver um problema
+recursivamente resolvemos várias vezes uma mesma instância menor do
+problema, dizemos que há sobreposição do problema. No caso da função
+<code class="language-text">sierpinski</code>, o desenho de uma chamada literalmente sobrepõe-se ao
+outro.</p>
+<p>Uma consequência é que o tempo de funções com várias chamadas
+recursivas pode ser proibitivamente alto. Por exemplo, vamos executar
+nosso programa que imprime a tabela de número de triângulos no castelo
+de carta, mas agora queremos uma tabela com 40 linhas. Depois
+de ajustar a função <code class="language-text">main</code>, esperamos</p>
+<pre class="highlightlanguage-console"><span style="color: #000080; font-weight: bold">user@notebook:~/ra123456/recursao$</span> python3 triangulos.py
+<span style="color: #888888">t(1) = 1</span>
+<span style="color: #888888">t(2) = 4</span>
+<span style="color: #888888">t(3) = 10</span>
+<span style="color: #888888">...</span>
+<span style="color: #888888">t(29) = 4495</span>
+<span style="color: #888888">t(30) = 4960</span>
+<span style="color: #888888">t(31) = 5456</span>
+<span style="color: #888888">t(32) = 5984</span>
+<span style="color: #888888">t(33) = 6545</span>
+<span style="color: #888888">t(34) = 7140</span>
+<span style="color: #888888">t(35) = 7770</span>
+<span style="color: #888888">t(36) = 8436</span>
+<span style="color: #888888">t(37) = 9139</span>
+<span style="color: #888888">t(38) = 9880</span>
+<span style="color: #888888">t(39) = 10660</span>
+<span style="color: #888888">t(40) = 11480</span>
+</pre><p>No meu computador isso demorou pouco menos de um minuto. A partir de
+linha <code class="language-text">t(30) = 4960</code>, já é possível contar o tempo que a função
+<code class="language-text">triangulos</code> demora para executar — o que praticamente dobra a cada
+nova linha. Para entender porque essa função demora tanto, vamos fazer
+um desenho que representa as chamadas da função quando a chamada
+inicial é <code class="language-text">triangulos(6)</code>.</p>
+<img src="figs/triangulos-arvore-chamadas.png" style="width: 100%; max-width: 550px;">
+<p>Se fizermos as contas, descobriremos que o número de chamadas cresce
+exponencialmente com o valor de $n$. Mas, na grande maioria das vezes,
+executamos a função passando os mesmos valores de entrada.</p>
+<p>Uma maneira de evitar fazer chamadas desnecessárias é guardar os
+resultados em uma tabela. Repare que se não fizermos uma chamada de
+função na segunda vez em que fôssemos executar <code class="language-text">triangulos(3)</code>, então
+evitaríamos também as chamadas a <code class="language-text">triangulos(2)</code> e <code class="language-text">triangulos(1)</code>.</p>
+<p>A estratégia de guardar o resultado das chamadas da função em uma
+tabela para evitar o recálculo é chamada de <strong>memorização</strong> ou
+<strong>memoização</strong>. Como os valores de entradas da função $t$ são números de
+$1$ a $n$, podemos representar essa tabela usando uma lista. Para
+inicializar essa lista, precisamos de uma função auxiliar, que será
+a função chamada pela <code class="language-text">main</code>. A função recursiva agora, além
+da entrada do problema, receberá a tabela de valores.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">triangulos_rec</span>(n, t):
+    <span style="color: #008000; font-weight: bold">if</span> t[n] <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #008000; font-weight: bold">None</span>:
+        <span style="color: #008000; font-weight: bold">if</span> n <span style="color: #666666">==</span> <span style="color: #666666">1</span>:
+            t[n] <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+        <span style="color: #008000; font-weight: bold">elif</span> n <span style="color: #666666">==</span> <span style="color: #666666">2</span>:
+            t[n] <span style="color: #666666">=</span> <span style="color: #666666">4</span>
+        <span style="color: #008000; font-weight: bold">else</span>:
+            t[n] <span style="color: #666666">=</span> n <span style="color: #666666">+</span> <span style="color: #666666">2</span> <span style="color: #666666">*</span> triangulos_rec(n <span style="color: #666666">-</span> <span style="color: #666666">1</span>, t) <span style="color: #666666">-</span> triangulos_rec(n <span style="color: #666666">-</span> <span style="color: #666666">2</span>, t)
+    <span style="color: #008000; font-weight: bold">return</span> t[n]
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">triangulos</span>(n):
+    <span style="color: #408080; font-style: italic"># cria tabela com índices de 0 a n</span>
+    t <span style="color: #666666">=</span> [<span style="color: #008000; font-weight: bold">None</span> <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n <span style="color: #666666">+</span> <span style="color: #666666">1</span>)]
+    <span style="color: #008000; font-weight: bold">return</span> triangulos_rec(n, t)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">main</span>():
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, <span style="color: #666666">41</span>):
+        <span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;t(</span><span style="color: #BB6688; font-weight: bold">{i}</span><span style="color: #BA2121">) = {triangulos(i)}&quot;</span>)
+
+main()
+</pre><p>Na função <code class="language-text">triangulos</code> criamos uma tabela <code class="language-text">t</code> com $n+1$ elementos.
+Inicializamos todos os valores dessa lista com <code class="language-text">None</code> para representar
+que ainda não computamos a função para um determinado índice.
+Executando a versão atualizada, toda a tabela é impressa
+imediatamente.</p>
+<p>Já que, para calcular $t(n)$, precisamos preencher toda entrada da
+tabela, não é necessário chamar a função <code class="language-text">triangulos</code> para cada valor
+de $i$. Modifique o programa de forma a fazer uso dessa ideia.</p>
+<h2 id="comparando-funcoes-recursivas-e-iterativas">Comparando funções recursivas e iterativas</h2>
+<p>Já vimos implementações iterativas e recursivas da função fatorial e
+da função de Fibonacci. Assim, você pode se perguntar se deve usar
+recursão ou iteração. Como esperado, não existe resposta universal,
+então essa é uma pergunta que iremos nos fazer para cada problema
+encontrado.</p>
+<p>Algumas vezes, pensamos primeiro em um algoritmo iterativo para o
+problema, particularmente quando ainda estamos começando a entender
+recursão. Mas, muitas vezes, é mais fácil e mais simples escrever uma
+função recursiva, principalmente quando o problema sendo resolvido é
+definido recursivamente, ou tem alguma estrutura recursiva. Também,
+pode acontecer de só sabermos resolver um determinado problema de
+maneira recursiva.</p>
+<p>Muitas pessoas alegam que funções recursivas são mais elegantes. Por
+exemplo, podemos comparar duas implementações da função de Fibonacci,
+uma iterativa e outra recursiva.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fibonacci</span>(n):
+    a <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+    b <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+    <span style="color: #008000; font-weight: bold">for</span> _ <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">2</span>, n):
+        c <span style="color: #666666">=</span> a <span style="color: #666666">+</span> b
+        a <span style="color: #666666">=</span> b
+        b <span style="color: #666666">=</span> c
+    <span style="color: #008000; font-weight: bold">return</span> a
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fibonacci</span>(n):
+    <span style="color: #008000; font-weight: bold">if</span> n <span style="color: #666666">==</span> <span style="color: #666666">1</span> <span style="color: #AA22FF; font-weight: bold">or</span> n <span style="color: #666666">==</span> <span style="color: #666666">2</span>:
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">1</span>
+    <span style="color: #008000; font-weight: bold">else</span>:
+        <span style="color: #008000; font-weight: bold">return</span> fibonacci(n <span style="color: #666666">-</span> <span style="color: #666666">1</span>) <span style="color: #666666">+</span> fibonacci(n <span style="color: #666666">-</span> <span style="color: #666666">2</span>)
+</pre><p>Eu não sei você, mas eu acho a segunda versão muito mais bonita. Mas
+um algoritmo mais simples não é questão meramente cosmética. Quanto
+mais simples, mais fácil é entender o algoritmo e mais fácil é
+convencer alguém de que ele não contém erros. Ah, você testou a função
+iterativa acima?</p>
+<p>O principal motivo para preferirmos uma versão iterativa quando temos
+uma versão recursiva mais simples é o tempo de execução. A função de
+Fibonacci recursiva gasta um tempo muito grande — e, de fato, sabemos
+que o tempo cresce exponencialmente com $n$. Podemos utilizar
+memorização, o que resolve grande parte da lentidão. Ainda assim, a
+versão iterativa será bem mais rápida por causa da sobrecarga das
+chamadas de função.</p>
+<p>Tudo é uma questão de escolhas e balanceamento (ou em inglês,
+<em>tradeoff</em>). Uma estratégia é escrever uma versão recursiva sempre que
+for mais fácil resolver o problema assim. Se por um acaso essa função
+for uma função crítica para o desempenho, então tentamos reescrevê-la
+de maneira iterativa depois.</p>
+<h2 id="funcoes-co-recursivas">Funções co-recursivas</h2>
+<p>Vamos voltar ao problema do triangulo de Sierpinski. Nesse caso,
+tentar usar memorização não irá evitar que o tempo que a tartaruga
+gasta desenhando cresça rapidamente, já que o número de riscos de uma
+figura da sequência cresce exponencialmente. Mas podemos pelo menos
+tentar evitar repetir os mesmos riscos.</p>
+<p>Repensar a nossa estratégia pode ajudar a escrever um algoritmo mais
+rápido. Não vamos escrever um algoritmo iterativo; pode existir vários
+algoritmos recursivos que resolvem o mesmo problema. Na função
+<code class="language-text">sierpinski(n)</code> acima, primeiro desenhamos uma cópia de $S_{n-1}$ à
+esquerda, depois desenhamos uma cópia à direita.</p>
+<img src="figs/tartaruga-sierpinski-posicao-problema.png" style="width: 100%; max-width: 300px;">
+<p>Só depois, desenhamos a cópia de cima. O motivo por que redesenhamos
+$S_{n-1}$ à direita foi para que a tartaruga se deslocasse à posição
+de um vértice da cópia superior de $S_{n-1}$. Para melhorar, podemos
+primeiro desenhar o triangulo de baixo à esquerda, depois o triângulo
+de cima e depois o triângulo de baixo à direita.</p>
+<img src="figs/tartaruga-sierpinski-ordem.png" style="width: 100%; max-width: 300px;">
+<p>Para isso, depois de desenhar o primeiro triângulo, precisamos que a
+tartaruga termine em um vértice do triângulo de cima. Uma ideia é
+girar a tartaruga antes de desenhar o primeiro triângulo.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">sierpinski</span>(n):
+    <span style="color: #008000; font-weight: bold">if</span> n <span style="color: #666666">==</span> <span style="color: #666666">1</span>:
+        forward(PASSO)
+        left(<span style="color: #666666">120</span>)
+        forward(PASSO)
+        left(<span style="color: #666666">120</span>)
+        forward(PASSO)
+        left(<span style="color: #666666">120</span>)
+        forward(PASSO)
+    <span style="color: #008000; font-weight: bold">else</span>:
+        left(<span style="color: #666666">60</span>)
+        sierpinski(n <span style="color: #666666">-</span> <span style="color: #666666">1</span>)
+        right(<span style="color: #666666">60</span>)
+        sierpinski(n <span style="color: #666666">-</span> <span style="color: #666666">1</span>)
+        right(<span style="color: #666666">60</span>)
+        sierpinski(n <span style="color: #666666">-</span> <span style="color: #666666">1</span>)
+        left(<span style="color: #666666">60</span>)
+</pre><p>Executando para $n = 2$.</p>
+<img src="figs/tartaruga-sierpinski-erro-direcao.png" style="width: 100%; max-width: 300px;">
+<p>O problema é que, embora garantimos que a tartaruga será posicionada
+corretamente antes e depois de cada chamada recursiva, os triângulos
+da esquerda e da direita estão desenhados no lado oposto ao que
+precisávamos. Isso sugere que precisamos tanto de uma função que
+desenha o triângulo de Sierpinski virado cima, quanto de uma função
+que o desenha virado para baixo.</p>
+<img src="figs/tartaruga-sierpinski-direcoes-opostas.png" style="width: 100%; max-width: 300px;">
+<p>Suponha que existe uma função <code class="language-text">sierpinski_baixo</code> que desenha o
+triângulo de Sierpinski virado para baixo. Então podemos escrever a
+seguinte função.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">sierpinski_cima</span>(n):
+    <span style="color: #008000; font-weight: bold">if</span> n <span style="color: #666666">==</span> <span style="color: #666666">1</span>:
+        forward(PASSO)
+        left(<span style="color: #666666">120</span>)
+        forward(PASSO)
+        left(<span style="color: #666666">120</span>)
+        forward(PASSO)
+        left(<span style="color: #666666">120</span>)
+        forward(PASSO)
+    <span style="color: #008000; font-weight: bold">else</span>:
+        left(<span style="color: #666666">60</span>)
+        sierpinski_baixo(n <span style="color: #666666">-</span> <span style="color: #666666">1</span>)
+        right(<span style="color: #666666">60</span>)
+        sierpinski_cima(n <span style="color: #666666">-</span> <span style="color: #666666">1</span>)
+        right(<span style="color: #666666">60</span>)
+        sierpinski_baixo(n <span style="color: #666666">-</span> <span style="color: #666666">1</span>)
+        left(<span style="color: #666666">60</span>)
+</pre><p>Para de fato completar o programa, precisamos implementar
+<code class="language-text">sierpinski_baixo</code>. Usando uma ideia simétrica da função anterior,
+não é difícil escrever o seguinte.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">sierpinski_baixo</span>(n):
+    <span style="color: #008000; font-weight: bold">if</span> n <span style="color: #666666">==</span> <span style="color: #666666">1</span>:
+        forward(PASSO)
+        right(<span style="color: #666666">120</span>)
+        forward(PASSO)
+        right(<span style="color: #666666">120</span>)
+        forward(PASSO)
+        right(<span style="color: #666666">120</span>)
+        forward(PASSO)
+    <span style="color: #008000; font-weight: bold">else</span>:
+        right(<span style="color: #666666">60</span>)
+        sierpinski_cima(n <span style="color: #666666">-</span> <span style="color: #666666">1</span>)
+        left(<span style="color: #666666">60</span>)
+        sierpinski_baixo(n <span style="color: #666666">-</span> <span style="color: #666666">1</span>)
+        left(<span style="color: #666666">60</span>)
+        sierpinski_cima(n <span style="color: #666666">-</span> <span style="color: #666666">1</span>)
+        right(<span style="color: #666666">60</span>)
+</pre><p>Se exercutarmos agora <code class="language-text">sierpinski_cima(3)</code>, deve ser gratificante ver
+como a tartaruga desenha o triângulo de Sirpinski muito mais rápido e
+ordenadamente.</p>
+<p>O curioso é que a função <code class="language-text">sierpinski_cima</code> utiliza a função
+<code class="language-text">sierpinski_baixo</code> e a função <code class="language-text">sierpinski_baixo</code> utiliza a função
+<code class="language-text">sierpinski_cima</code>. Esse é um tipo de recursão indireta. Chamamos essas
+funções de co-recursivas. Não há nada que impeça que tenhamos mais do
+que duas funções co-recursivas. Além disso, o relacionamento entre
+essas chamadas pode ser tão sofisticado quanto necessário.</p>
+<p>Algoritmos baseados em funções co-recursivas aparecem quando há dois
+ou mais problemas intimamente relacionados (muitas vezes, um é uma
+pequena modificação de outro). Eles não são tão frequentes quanto
+algoritmos recursivos em geral, então você não deverá escrever muitos
+deles. Mas há pelo menos uma aplicação em que algoritmos co-recursivos
+são imbatíveis: implementar um analisador sintático de um compilador.</p>
+<h2 id="generalizando-problemas">Generalizando problemas</h2>
+<p>Considere o seguinte quebra-cabeça.</p>
+<blockquote>
+<p>A torre de Hanói é um brinquedo com três estacas A, B e C e discos
+de tamanhos diferentes. O objetivo é mover todos os discos da estaca
+A para a estaca C respeitando as seguintes regras:</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>Apenas um disco pode ser movido de cada vez.</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>Um disco só pode ser colocado sobre um disco maior.</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>Queremos realizar o menor número de movimentos possível.</li>
+</ul>
+</blockquote>
+<blockquote>
+<img src="figs/hanoi.jpeg" style="width: 100%; max-width: 550px;">
+</blockquote>
+<p>Você talvez já tenha ouvido falar das
+<a href="https://pt.wikipedia.org/wiki/Torre_de_Han%C3%B3i">torres de Hanoi</a>
+ou talvez já tenha ate tido a oportunidade de manuseá-las. Se não,
+então tente resolver esse quebra-cabeça antes de continuar lendo.
+Você pode clicar
+<a href="https://www.webgamesonline.com/towers-of-hanoi/">aqui</a> ou procurar
+alguma outra versão interativa na internet.</p>
+<p>Sempre devemos prestar atenção na definição do problema que queremos
+resolver. Para definir um problema precisamente, precisamos descrever
+a entrada e a saída. Enquanto isso é claro na maioria dos exemplos que
+estudamos, nesse exemplo nosso objetivo é descrito apenas como “mover
+todos os discos da estaca A para a estaca C”. Como não temos
+disponível alguma máquina que mova os discos para nós, diremos que a
+saída do problema é uma sequência de instruções para se resolver o
+quebra-cabeça. Como entrada, vamos receber um número $n$, que é toda
+a informação de que precisamos para descrever uma instância do
+problema.</p>
+<p>Como de costume, podemos esboçar o nosso programa criando um stub da
+função que resolve o problema e uma função principal.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">hanoi</span>(n):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    Imprime uma sequência de instruções para mover n discos</span>
+<span style="color: #BA2121; font-style: italic">    da estaca A para a estaca C com ajuda da estaca B.</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">pass</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">main</span>():
+    n <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">input</span>(<span style="color: #BA2121">&quot;Digite o número de discos: &quot;</span>))
+    hanoi(n)
+
+main()
+</pre><p>Veja que a documentação da função descreve o problema precisamente.</p>
+<p>Primeiro, é sempre bom tentar resolver instâncias pequenas. Se só
+temos um disco, então tudo que precisamos fazer é mover um disco da
+estaca A para a estaca C. Se tivermos dois discos, também não é
+difícil se convencer de que a forma mais rápida de resolver o
+quebra-cabeça é movendo um disco de A para B, depois de A para C e
+depois de B para C.</p>
+<p>Para encontrar um algoritmo para uma instância geral, devemos partir
+de uma torre inicial com $n$ discos, digamos $5$. Como temos que
+retirar todos os discos da estaca $A$, em particular, precisamos
+retirar o maior disco. A primeira regra diz que só podemos mover um
+disco de cada vez, então no momento em que formos mover o maior disco,
+todos os outro discos estarão na estaca B ou na estaca C. Mas a
+segunda regra diz que só podemos colocar um disco sobre um disco
+maior, então nesse momento todos os outros discos estarão <strong>somente</strong>
+na estaca B, ou <strong>somente</strong> estaca C.</p>
+<img src="figs/hanoi-todos-estacab.png" style="width: 100%; max-width: 350px;">
+<p>Como queremos utilizar a menor quantidade de movimentos possível, o
+que queremos é <em>mover $n-1$ discos da estaca A para a estaca B usando
+a estaca C como auxiliar</em>. Essa é exatamente a descrição do problema
+que estamos tentando resolver, com a exceção de que as estacas B e C
+estão com papeis trocados. Por esse motivo, não podemos simplesmente
+fazer uma chamada recursiva a <code class="language-text">hanoi(n-1)</code> para resolver o
+subproblema, já que isso moveria os discos para a estaca C.</p>
+<p>Para utilizar recursão, poderíamos criar uma outra função co-recursiva
+que resolve esse problema um pouco diferente, como fizemos antes.
+Dessa vez, é mais fácil adotar uma ideia diferente e <strong>generalizar</strong> o
+problema. Generalizar um problema significa que aumentamos o conjunto
+de entradas válidas. Nesse caso, iremos fazer o seguinte.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">hanoi</span>(n, origem, destino, auxiliar):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    Imprime uma sequência de instruções para mover n discos</span>
+<span style="color: #BA2121; font-style: italic">    da estaca origem para a estaca destino com ajuda</span>
+<span style="color: #BA2121; font-style: italic">    da estaca auxiliar.</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">pass</span>
+</pre><p>A generalização é um problema novo, mas que contém o problema
+original. Para resolver o problema original, podemos chamar
+<code class="language-text">hanoi(n, &#39;A&#39;, &#39;C&#39;, &#39;B&#39;)</code>, mas agora podemos resolver vários outros
+problemas ligeiramente distintos, dependendo da escolha das estacas.
+Assim, primeiro podemos mover $n-1$ discos da estaca de origem
+para a estaca auxiliar.</p>
+<img src="figs/hanoi-passo1.png" style="width: 100%; max-width: 350px;">
+<p>Depois, movemos o maior disco da estaca de origem para a
+estaca de destino.</p>
+<img src="figs/hanoi-passo2.png" style="width: 100%; max-width: 350px;">
+<p>Finalmente, movemos $n-1$ discos da estaca auxiliar
+para a estaca de destino.</p>
+<img src="figs/hanoi-passo3.png" style="width: 100%; max-width: 350px;">
+<p>Agora fica fácil terminar nosso programa.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">hanoi</span>(n, origem, destino, auxiliar):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    Imprime uma sequência de instruções para mover n discos</span>
+<span style="color: #BA2121; font-style: italic">    da estaca origem para a estaca destino com ajuda</span>
+<span style="color: #BA2121; font-style: italic">    da estaca auxiliar.</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">if</span> n <span style="color: #666666">&gt;</span> <span style="color: #666666">0</span>:
+        hanoi(n <span style="color: #666666">-</span> <span style="color: #666666">1</span>, origem, auxiliar, destino)
+        <span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;Mova um disco de </span><span style="color: #BB6688; font-weight: bold">{origem}</span><span style="color: #BA2121"> para </span><span style="color: #BB6688; font-weight: bold">{destino}</span><span style="color: #BA2121">&quot;</span>)
+        hanoi(n <span style="color: #666666">-</span> <span style="color: #666666">1</span>, auxiliar, destino, origem)
+</pre><p>Leia e releia o algoritmo com atenção. Uma pergunta que você pode se
+fazer é quais são os casos básicos da função <code class="language-text">hanoi</code>? Uma outra
+pergunta é se essa função realmente realiza o menor número de
+movimentos.</p>
+<h2 id="divisao-e-conquista">Divisão e conquista</h2>
+<p>Parte importante da estratégia recursiva é decompor a instância do
+problema em uma ou mais instâncias menores. Intuitivamente, quanto
+menor for a instância, mais fácil é o problema. Uma forma de recursão
+recorrente é a <strong>divisão e conquista</strong>. Nela, queremos dividir os
+dados da entrada em instâncias do problema substancialmente menores.</p>
+<p>Por exemplo, vamos considerar o problema de multiplicar os elementos
+de uma lista de números. Primeiro, vamos relembrar um algoritmo iterativo.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">multiplicar</span>(lista):
+    produto <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+    <span style="color: #008000; font-weight: bold">for</span> valor <span style="color: #AA22FF; font-weight: bold">in</span> lista:
+        produto <span style="color: #666666">=</span> produto <span style="color: #666666">*</span> valor
+    <span style="color: #008000; font-weight: bold">return</span> produto
+</pre><p>Não é muito difícil escrever um algoritmo recursivo para esse
+problema.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">multiplicar</span>(lista, n):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    Devolve o produto dos n primeiros elementos de lista.</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">if</span> n <span style="color: #666666">==</span> <span style="color: #666666">1</span>:
+        <span style="color: #008000; font-weight: bold">return</span> lista[<span style="color: #666666">0</span>]
+    <span style="color: #008000; font-weight: bold">else</span>:
+        <span style="color: #008000; font-weight: bold">return</span> lista[n <span style="color: #666666">-</span> <span style="color: #666666">1</span>] <span style="color: #666666">*</span> multiplicar(lista, n <span style="color: #666666">-</span> <span style="color: #666666">1</span>)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">main</span>():
+    lista <span style="color: #666666">=</span> [<span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">3</span>, <span style="color: #666666">4</span>, <span style="color: #666666">5</span>]
+    produto <span style="color: #666666">=</span> multiplicar(lista, <span style="color: #008000">len</span>(lista))
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;O produto é </span><span style="color: #BB6688; font-weight: bold">{produto}</span><span style="color: #BA2121">&quot;</span>)
+
+main()
+</pre><p>Identifique o caso básico e o caso geral. Nós alteramos os parâmetros
+de entrada para permitir distinguir entre os subproblemas. Repare que
+o problema que queremos resolver é multiplicar os $n$ primeiros
+elementos da lista e a instância menor do problema a que reduzimos a
+instância original corresponde a multiplicar os $n - 1$ primeiros
+elementos da lista.</p>
+<p>Para poder fazer uma chamada recursiva, basta diminuir o tamanho da
+instância. Enquanto a função acima cria um subproblema de tamanho uma
+unidade menor, poderíamos também considerar dois subproblemas, cujo
+tamanho de cada um corresponde a metade do tamanho da instância
+original.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">multiplicar</span>(lista, inicio, fim):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    Devolve o produto dos elementos de lista[inicio:fim].</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">if</span> inicio <span style="color: #666666">==</span> fim:
+        <span style="color: #008000; font-weight: bold">return</span> lista[inicio]
+    <span style="color: #008000; font-weight: bold">else</span>:
+        meio <span style="color: #666666">=</span> (inicio <span style="color: #666666">+</span> fim) <span style="color: #666666">//</span> <span style="color: #666666">2</span>
+        <span style="color: #008000; font-weight: bold">return</span> (multiplicar(lista, inicio, meio) <span style="color: #666666">*</span>
+                multiplicar(lista, meio <span style="color: #666666">+</span> <span style="color: #666666">1</span>, fim))
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">main</span>():
+    lista <span style="color: #666666">=</span> [<span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">3</span>, <span style="color: #666666">4</span>, <span style="color: #666666">5</span>]
+    produto <span style="color: #666666">=</span> multiplicar(lista, <span style="color: #666666">0</span>, <span style="color: #008000">len</span>(lista) <span style="color: #666666">-</span> <span style="color: #666666">1</span>)
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;O produto é </span><span style="color: #BB6688; font-weight: bold">{produto}</span><span style="color: #BA2121">&quot;</span>)
+
+main()
+</pre><p>Mudamos a entrada do problema para que pudéssemos representar
+subproblemas mais convenientemente. Vamos chamar os parâmetros
+<code class="language-text">inicio</code> e <code class="language-text">fim</code> de guardas da sublista.</p>
+<p>Dessa vez, criamos subproblemas muito menores do que a instância
+original. Para o problema de multiplicar elementos de uma lista, ambas
+as funções recursivas irão executar exatamente o mesmo número de
+multiplicações que a função iterativa, então não há vantagem em
+utilizar recursão nesse caso. Mas a segunda função recursiva é um
+exemplo simples de como podemos resolver um problema usando divisão e
+conquista.</p>
+<p>Um caso em que é vantajoso usar divisão e conquista ocorre quando não
+precisemos resolver um dos subproblemas. Por exemplo, se todos os
+números da lista são iguais a um número $b$, então o produto calculado
+corresponderá à potência $b^n$. Nesse caso, podemos evitar uma
+das chamadas recursivas, diminuindo significativamente o número de
+multiplicações quando comparado com o algoritmo iterativo. Esse
+algoritmo é chamado de algoritmo de potenciação rápida.</p>
+<p>Em um outro exemplo, suponha que queremos encontrar um elemento em uma
+lista ordenada. Relembre que na busca binária, sempre dividimos essa
+lista em duas partes. Esse algoritmo de busca binária pode ser
+implementado como um algoritmo recursivo de divisão e coquista, em que
+cada metade da lista corresponde a um subproblema.</p>
+<p><a href="../tarefas/14-recursao.html">Implemente</a> funções recursivas para a
+potenciação rápida e busca binária!</p>
+<p>Na prática, utilizamos divisão e conquista quando for mais fácil
+combinar o resultado de subproblemas menores ou quando for mais rápido
+resolver subproblemas muito menores. Para ver isso, vamos voltar ao
+problema da ordenação. Vamos ver que usando divisão e conquista
+obtemos um algoritmo muito mais rápido do que os algoritmos de
+ordenação que já conhecemos.</p>
+<p>Para podermos comparar, aqui está o algoritmo de ordenação por
+inserção, na versão mais rápida que conseguimos.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">insertion_sort</span>(lista):
+    n <span style="color: #666666">=</span> <span style="color: #008000">len</span>(lista)
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, n):
+        chave <span style="color: #666666">=</span> lista[i]
+        j <span style="color: #666666">=</span> i <span style="color: #666666">-</span> <span style="color: #666666">1</span>
+        <span style="color: #008000; font-weight: bold">while</span> j <span style="color: #666666">&gt;=</span> <span style="color: #666666">0</span> <span style="color: #AA22FF; font-weight: bold">and</span> lista[j] <span style="color: #666666">&gt;</span> chave:
+            lista[j <span style="color: #666666">+</span> <span style="color: #666666">1</span>] <span style="color: #666666">=</span> lista[j]
+            j <span style="color: #666666">=</span> j <span style="color: #666666">-</span> <span style="color: #666666">1</span>
+        lista[j <span style="color: #666666">+</span> <span style="color: #666666">1</span>] <span style="color: #666666">=</span> chave
+</pre><p>Primeiro, vamos criar uma lista de números razoavelmente grande. Para
+termos um tempo base com o que comparar, vamos executar o algoritmo de
+ordenação por inserção com essa lista.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">ler_arquivo</span>(nome_arquivo):
+    <span style="color: #008000; font-weight: bold">with</span> <span style="color: #008000">open</span>(nome_arquivo) <span style="color: #008000; font-weight: bold">as</span> arquivo:
+        lista <span style="color: #666666">=</span> []
+        <span style="color: #008000; font-weight: bold">for</span> linha <span style="color: #AA22FF; font-weight: bold">in</span> arquivo:
+            numero <span style="color: #666666">=</span> <span style="color: #008000">int</span>(linha)
+            lista<span style="color: #666666">.</span>append(numero)
+        <span style="color: #008000; font-weight: bold">return</span> lista
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">guardar_arquivo</span>(nome_arquivo, lista):
+    <span style="color: #008000; font-weight: bold">with</span> <span style="color: #008000">open</span>(nome_arquivo, <span style="color: #BA2121">&quot;w&quot;</span>) <span style="color: #008000; font-weight: bold">as</span> arquivo:
+        <span style="color: #008000; font-weight: bold">for</span> valor <span style="color: #AA22FF; font-weight: bold">in</span> lista:
+            <span style="color: #008000">print</span>(valor, file<span style="color: #666666">=</span>arquivo)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">main</span>():
+    lista <span style="color: #666666">=</span> ler_arquivo(<span style="color: #BA2121">&quot;muitos.txt&quot;</span>)
+    insertion_sort(lista)
+    guardar_arquivo(<span style="color: #BA2121">&quot;muitos_ordenados.txt&quot;</span>, lista)
+
+main()
+</pre><p>Damos uma olhada no arquivo, contamos o número de linhas e em seguida
+executamos esse programa com ajuda do comando <code class="language-text">time</code>.</p>
+<pre class="highlightlanguage-console"><span style="color: #000080; font-weight: bold">user@notebook:~/ra123456/recursao$</span> head muitos.txt
+<span style="color: #888888">5164</span>
+<span style="color: #888888">9405</span>
+<span style="color: #888888">3687</span>
+<span style="color: #888888">8847</span>
+<span style="color: #888888">4689</span>
+<span style="color: #888888">4362</span>
+<span style="color: #888888">3895</span>
+<span style="color: #888888">6247</span>
+<span style="color: #888888">5601</span>
+<span style="color: #888888">6540</span>
+<span style="color: #000080; font-weight: bold">user@notebook:~/ra123456/recursao$</span> wc -l muitos.txt
+<span style="color: #888888">100000 muitos.txt</span>
+<span style="color: #000080; font-weight: bold">user@notebook:~/ra123456/recursao$</span> <span style="color: #008000">time</span> python3 insertion_sort.py
+
+<span style="color: #888888">real	4m44,423s</span>
+<span style="color: #888888">user	4m44,409s</span>
+<span style="color: #888888">sys	0m0,040s</span>
+</pre><p>Vamos utilizar índices de guarda para representar as sublistas sendo
+ordenadas.</p>
+<div tabindex="0" class="pdfjs-wrapper" data-pdfjs-src="slides/sort_merge.pdf">
+  <div class="pdfjs-holder">
+    <canvas id="canvas2"></canvas>
+  </div>
+  <div role="navigation" class="row justify-content-between">
+    <div class="col-12 col-sm-5 col-lg-4">
+      <div class="btn btn-secondary w-100 mt-1 mt-sm-0 pdfjs-prev">
+        &larr;
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-5 col-lg-4">
+      <div class="btn btn-secondary w-100 mt-0 mt-sm-0 pdfjs-next">
+        &rarr;
+      </div>
+    </div>
+  </div>
+</div><p>A animação acima sugere um algoritmo de divisão e conquista. Vamos
+detalhar esse algoritmo. Primeiro, precisamos definir um caso básico.
+Assim como no algoritmo <code class="language-text">multiplicar_lista</code>, definiremos como caso
+básico as instâncias do problema em que <code class="language-text">inicio == fim</code>. Nesses casos,
+a sublista contém apenas um elemento, então não há nada a ser feito.
+As instâncias menores são duas, a primeira e a segunda metades da
+lista. Resolvemos essas duas instâncias recursivamente e, para
+combinar as soluções dos subproblemas, basta intercalar as sublistas
+ordenadas.</p>
+<p>Por causa da forma com que combinamos as soluções dos subproblemas,
+chamamos esse algoritmo de ordenação por intercalação ou <strong>merge
+sort</strong>. Podemos esboçar uma implementação.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">intercalar</span>(lista, inicio, meio, fim):
+    <span style="color: #008000; font-weight: bold">pass</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">merge_sort</span>(lista, inicio, fim):
+    <span style="color: #008000; font-weight: bold">if</span> inicio <span style="color: #666666">&lt;</span> fim:
+        meio <span style="color: #666666">=</span> (inicio <span style="color: #666666">+</span> fim) <span style="color: #666666">//</span> <span style="color: #666666">2</span>
+        merge_sort(lista, inicio, meio)
+        merge_sort(lista, meio <span style="color: #666666">+</span> <span style="color: #666666">1</span>, fim)
+        intercalar(lista, inicio, meio, fim)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">main</span>():
+    lista <span style="color: #666666">=</span> ler_arquivo(<span style="color: #BA2121">&quot;muitos.txt&quot;</span>)
+    merge_sort(lista, <span style="color: #666666">0</span>, <span style="color: #008000">len</span>(lista) <span style="color: #666666">-</span> <span style="color: #666666">1</span>)
+    guardar_arquivo(<span style="color: #BA2121">&quot;muitos_ordenados.txt&quot;</span>, lista)
+
+main()
+</pre><p>No fundo, todo o trabalho de ordenação é feito pela função
+<code class="language-text">intercalar</code>, então é importante que ela seja implementada com
+cuidado. <a href="../tarefas/14-recursao.html">Faça</a> isso.</p>
+<p>Depois de já termos resolvido o problema e implementado a função
+recursiva, podemos entender melhor as instruções sendo executadas
+investigando as chamadas recursivas. Na etapa de divisão, cada chamada
+de <code class="language-text">merge_sort</code> realiza duas outras chamadas recursivas.</p>
+<img src="figs/mergesort-chamadas.png" style="width: 100%; max-width: 550px;">
+<p>Cada retângulo da figura corresponde a uma sub-instância do problema
+de ordenação a ser resolvida recursivamente. Há 19 retângulos; você
+consegue dizer a ordem em que essas chamadas são realizadas? Além
+disso, cada chamada que não corresponde a um caso básico realiza uma
+operação de intercalação; quantas vezes a função <code class="language-text">intercalar</code> é
+chamada?</p>
+<p>Finalmente, podemos ordenar nossa lista de números pelo
+algoritmo de ordenação por intercalação utilizando o programa
+que acabamos de implementar.</p>
+<pre class="highlightlanguage-console"><span style="color: #000080; font-weight: bold">user@notebook:~/ra123456/recursao$</span> <span style="color: #008000">time</span> python3 merge_sort.py
+
+<span style="color: #888888">real	0m0,453s</span>
+<span style="color: #888888">user	0m0,445s</span>
+<span style="color: #888888">sys	0m0,008s</span>
+</pre><p>Mais de 600 vezes mais rápido! Nunca nos esqueçamos da estratégia de
+divisão e conquista.</p>
+
+
+        <!-- Navigation buttons -->
+<div role="navigation" class="row justify-content-between">
+
+  <div class="col-12 col-sm-5 col-lg-4">
+    <a class="btn btn-primary w-100 mt-1 mt-sm-0" href="10-eficiencia.html">
+      &larr; Anterior
+    </a>
+  </div>
+
+  <div class="col-12 d-none d-lg-inline-block col-lg-4">
+    <a class="btn btn-secondary w-100" href="../index.html">
+      Voltar
+    </a>
+  </div>
+
+  <div class="col-12 col-sm-5 col-lg-4">
+  </div>
+
+</div>      </div>
+    </div>
+</article>
+
+<hr />
+
+
+<!-- Footer -->
+<footer>
+  <p class="copyright text-muted">
+    <a href="https://www.ic.unicamp.br/~lehilton/" title="Página pessoal">
+      Copyright &copy; 2020
+    </a>
+  </p>
+</footer>
+<!-- Bootstrap core JavaScript -->
+<script src="../dist/vendor/jquery/jquery.min.js"></script>
+<script src="../dist/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="../dist/vendor/prism/prism.js"></script> -->
+
+<!-- Custom scripts for this template -->
+<script src="../dist/js/main.min.js"></script>
+
+<!-- Mathjax setup -->
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+  };
+</script>
+<script src="../dist/vendor/mathjax/tex-chtml.js" id="MathJax-script" async></script>
+
+<script type="text/javascript" src="../dist/vendor/pdfjs/pdf.js"></script>
+<script type="text/javascript" src="../dist/vendor/pdfjs/pdf.worker.js"></script>
+<script type="text/javascript" src="../dist/js/renderPDF.min.js"></script>
+
+</script>
+
+
+  </body>
+
+</html>

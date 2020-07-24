@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    Algoritmos e Programação de Computadores
+    - Eficiência de algoritmos
+  </title>
+
+  <meta name="keywords" content="MC102, Algoritmos e Programação de Computadores, Python">
+  <meta name="description" content="Página da disciplina de MC102 para turma QR">
+  <meta name="author" content="Lehilton Pedrosa">
+
+  <!-- Bootstrap core CSS -->
+  <link href="../dist/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Theme css -->
+  <link href="../dist/css/main.min.css" rel="stylesheet">
+
+  <!-- Prism -->
+  <!-- <link href="../dist/vendor/prism/prism.css" rel="stylesheet" /> -->
+</head>
+<body >
+
+  <body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="../index.html">MC102</a>
+
+
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+      aria-label="Toggle navigation">
+      Menu
+      <i>&#9776;</i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item top back-to-top-link">
+          <a class="nav-link" href="#"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>topo</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="../index.html">voltar</a>
+        </li>
+
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Header -->
+<header class="masthead"   style="background-image: url('../images/home-bg.jpg')" >
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-heading">
+
+          <h1 >Eficiência de algoritmos</h1>
+
+
+          <span class="meta">Terça, 9 de junho de 2020</span>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+
+
+      <div class="col-lg-8 col-md-10 mx-auto">
+
+        <p>Se compararmos os primeiros computadores digitais com os computadores
+de hoje, iremos descobrir que os supercomputadores antigos, que
+ocupavam várias salas de um andar de um prédio são muito mais lentos
+do que os celulares que hoje seguramos em nossas mãos. Isso é um feito
+extraordinário, que merece ser contemplado. O computador em que
+escrevo este texto tem na verdade quatro processadores, cada um
+executando 1,8 bilhão de instruções elementares por segundo. Esse
+número é tão grande, que a ideia de que o poder computacional das
+máquinas atuais é ilimitado é bastante sedutora.</p>
+<p>A realidade, no entanto, não demorou em bater na nossa porta e nem
+precisamos tentar resolver problemas muito complicados para descobrir
+que, mais vezes sim do que não, os nossos programas demoram mais do
+que gostaríamos. Foi assim quando tentamos estimar o número de passos
+no programa da <a href="07-algortimos-iterativos.html">tartaruga</a> e
+descobrimos que melhor que ela more perto de casa. Foi assim quando
+percebemos que procurar uma palavra em uma <a href="09-colecoes.html">lista</a>
+de tamanho moderado não é uma tarefa trivial. Vai ser assim
+quando você tentar <a href="../fixacao/07-ordenacao.html">ordenar</a> mais do que
+umas centenas de números com os algoritmos que já aprendemos, vai ser
+assim quando você tentar realizar alguma operação em uma
+<a href="../fixacao/08-matrizes.html">matriz</a> que representa uma imagem de
+alta resolução...</p>
+<p>Ao relembrarmos o que estudamos desde o início do semestre, vamos
+perceber que sempre repetimos as mesmas atividades: dado um problema,
+com entrada e saída bem definidas, primeiro queremos escrever um
+<a href="01-problemas-algoritmos.html">algoritmo</a> que resolva o problema e,
+depois, queremos implementar esse algoritmo em uma
+<a href="03-linguagens-programacao.html">linguagem de programação</a>. Pode ser
+frustrante, portanto, descobrir que isso não é suficiente para
+encontrar uma solução do problema.</p>
+<p>Por mais que nosso algoritmo esteja correto e que tenhamos uma
+implementação impecável desse algoritmo, não resolveremos um problema
+se o programa implementado precisar de mais memória do que temos
+disponível, ou se ele gastar vários anos executando. Se quisermos
+controlar e utilizar os computadores eficientemente, precisamos
+compreender e identificar quais problemas nossos algoritmos podem
+resolver — e quais eles não podem. Para isso, precisamos descobrir de
+que recursos nossos que algoritmos precisam e estimar em que
+quantidades eles são necessários. Em seguida, vamos começar a estudar
+o principal recurso utilizado por um algoritmo: o tempo.</p>
+<h1 id="uma-lista-de-numeros-primos">Uma lista de números primos</h1>
+<p>Para discutir melhor sobre o tempo de execução, vamos voltar
+a um tema recorrente na nossa disciplina.</p>
+<blockquote>
+<p>Escreva um programa que, dado um número inteiro $n$, liste e conte
+todos os números primos que estão entre $0$ e $n - 1$.</p>
+</blockquote>
+<p>A primeira missão é dar uma estimativa grosseira de quanto tempo é
+necessário para resolver o problema. Antes disso, precisamos construir
+e implementar algum algoritmo. Se não conhecermos algum algoritmo, não
+haverá muito o que discutir. Já conversamos várias vezes sobre como
+decidir se um número é primo ou não, então eu omitirei o algoritmo em
+português.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">eh_primo</span>(p):
+    <span style="color: #008000; font-weight: bold">if</span> p <span style="color: #666666">==</span> <span style="color: #666666">0</span> <span style="color: #AA22FF; font-weight: bold">or</span> p <span style="color: #666666">==</span> <span style="color: #666666">1</span>:
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">False</span>
+
+    tem_divisor <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">False</span>
+    <span style="color: #008000; font-weight: bold">for</span> divisor <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">2</span>, p):
+        <span style="color: #008000; font-weight: bold">if</span> p <span style="color: #666666">%</span> divisor <span style="color: #666666">==</span> <span style="color: #666666">0</span>:
+            tem_divisor <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">True</span>
+
+    <span style="color: #008000; font-weight: bold">if</span> tem_divisor:
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">False</span>
+    <span style="color: #008000; font-weight: bold">else</span>:
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">True</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">contar_primos</span>(n):
+    m <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    <span style="color: #008000; font-weight: bold">for</span> p <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n):
+        <span style="color: #008000; font-weight: bold">if</span> eh_primo(p):
+            <span style="color: #008000">print</span>(p)
+            m <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+
+    <span style="color: #008000; font-weight: bold">return</span> m
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">main</span>():
+    n <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">input</span>(<span style="color: #BA2121">&quot;Digite o número n: &quot;</span>))
+    m <span style="color: #666666">=</span> contar_primos(n)
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;Há </span><span style="color: #BB6688; font-weight: bold">{m}</span><span style="color: #BA2121"> primos de 0 até {n-1}&quot;</span>)
+
+main()
+</pre><p>Se testarmos esse programa digitando <code class="language-text">10</code>, iremos ver que ele devolve
+uma resposta imediatamente após pressionarmos enter.</p>
+<pre class="highlightlanguage-console"><span style="color: #000080; font-weight: bold">user@notebook:~/ra123456/eficiencia$</span> python3 primos.py
+<span style="color: #888888">Digite o número n: 10</span>
+<span style="color: #888888">2</span>
+<span style="color: #888888">3</span>
+<span style="color: #888888">5</span>
+<span style="color: #888888">7</span>
+<span style="color: #888888">Há 4 primos de 0 até 9</span>
+</pre><p>Como estamos suficientemente confiantes de que esse programa está
+correto, podemos remover ou comentar a linha <code class="language-text">print(p)</code>. Podemos
+executar o programa passando valores de $n$ cada vez maiores. Se
+fizermos isso, o tempo de resposta do programa aumentará
+sucessivamente, até que consigamos perceber alguma demora.</p>
+<pre class="highlightlanguage-console"><span style="color: #000080; font-weight: bold">user@notebook:~/ra123456/eficiencia$</span> python3 primos.py
+<span style="color: #888888">Digite o número n: 100</span>
+<span style="color: #888888">Há 25 primos de 0 até 99</span>
+<span style="color: #000080; font-weight: bold">user@notebook:~/ra123456/eficiencia$</span> python3 primos.py
+<span style="color: #888888">Digite o número n: 1000</span>
+<span style="color: #888888">Há 168 primos de 0 até 999</span>
+<span style="color: #000080; font-weight: bold">user@notebook:~/ra123456/eficiencia$</span> python3 primos.py
+<span style="color: #888888">Digite o número n: 10000</span>
+<span style="color: #888888">Há 1229 primos de 0 até 9999</span>
+<span style="color: #000080; font-weight: bold">user@notebook:~/ra123456/eficiencia$</span> python3 primos.py
+<span style="color: #888888">Digite o número n: 100000</span>
+<span style="color: #888888">^CTraceback (most recent call last):</span>
+<span style="color: #888888">  File &quot;primos.py&quot;, line 32, in &lt;module&gt;</span>
+<span style="color: #888888">    main()</span>
+<span style="color: #888888">  File &quot;primos.py&quot;, line 28, in main</span>
+<span style="color: #888888">    m = contar_primos(n)</span>
+<span style="color: #888888">  File &quot;primos.py&quot;, line 19, in contar_primos</span>
+<span style="color: #888888">    if eh_primo(p):</span>
+<span style="color: #888888">  File &quot;primos.py&quot;, line 7, in eh_primo</span>
+<span style="color: #888888">    if p % divisor == 0:</span>
+<span style="color: #888888">KeyboardInterrupt</span>
+</pre><p>Para $n = 100000$ a demora do programa é suficientemente grande para
+que eu tenha perdido a paciência e interrompido a execução. Assim,
+poderíamos dizer que para valores de $n$ até $10000$ o programa
+executou rápidamente, enquanto para $n = 100000$ a execução foi lenta.
+Essa noção de rapidez não é muito melhor do que tentarmos decidir se
+alguém tem febre encostando a mão em sua testa. Para medir
+temperatura, usamos um termômetro; para medir tempo, usamos um
+cronômetro. É claro que o tempo que eu demoro para acionar ou parar um
+cronômetro é significativo, então vamos utilizar uma ferramenta
+chamada <code class="language-text">time</code>, que é um comando comum para executar outros programas
+e medir o tempo de execução.</p>
+<pre class="highlightlanguage-console"><span style="color: #000080; font-weight: bold">user@notebook:~/ra123456/eficiencia$</span> <span style="color: #008000">time</span> python3 primos.py
+<span style="color: #888888">Digite o número n: 100</span>
+<span style="color: #888888">Há 25 primos de 0 até 99</span>
+
+<span style="color: #888888">real	0m5,203s</span>
+<span style="color: #888888">user	0m0,026s</span>
+<span style="color: #888888">sys	0m0,008s</span>
+</pre><p>Além da saída normal de nosso programa, o comando <code class="language-text">time</code> mostra três
+medidas de tempo. O tempo de sistema (indicado por <code class="language-text">sys</code>) é o tempo
+que o sistema operacional utilizou para responder a chamadas de nosso
+programa; isso inclui, por exemplo, o tempo para carregar o programa
+na memória. O tempo <code class="language-text">real</code> é o tempo total gasto, como se de fato
+tivéssemos utilizando um cronômetro para medir o tempo de execução do
+programa. Isso inclui o tempo em que gastei para ler a mensagem na
+tela, digitar o número e apertar a tecla enter. Durante esse tempo, o
+programa estava parado esperando alguma entrada. O tempo em que de
+fato instruções de nosso programa estavam sendo executadas corresponde
+ao tempo indicado por <code class="language-text">user</code>. Portanto, é essa a medida que iremos
+utilizar para estimar quanto tempo gasta nosso algoritmo.</p>
+<p>Se executarmos outra vez, podemos ter uma surpresa.</p>
+<pre class="highlightlanguage-console"><span style="color: #000080; font-weight: bold">user@notebook:~/ra123456/eficiencia$</span> <span style="color: #008000">time</span> python3 primos.py
+<span style="color: #888888">Digite o número n: 100</span>
+<span style="color: #888888">Há 25 primos de 0 até 99</span>
+
+<span style="color: #888888">real	0m0,833s</span>
+<span style="color: #888888">user	0m0,052s</span>
+<span style="color: #888888">sys	0m0,005s</span>
+</pre><p>O tempo devolvido por <code class="language-text">time</code> dobrou, mesmo que a sequência de
+instruções executadas seja exatamente a mesma. Será que o processador
+ficou mais preguiçoso? Há muitos fatores que influenciam o tempo de
+execução medido. Por exemplo, além de nosso programa, há diversos
+outros processos executando ao mesmo tempo e, como o número de
+processadores é pequeno, o sistema operacional alterna sucessivamente
+a lista de processos sendo executados. Isso pode afetar o tempo que
+cada instrução gasta, por causa do tempo que gastamos para carregar um
+dado a partir da memória, entre outras razões. Pode ser que a bateria
+esteja acabando e a velocidade do processador foi reduzida. Muita
+coisa pode interferir nos valores medidos.</p>
+<p>O fato é que <code class="language-text">time</code> não fornece um tempo preciso. Mas como ele é a
+única ferramenta que conhecemos até agora, vamos utilizar algumas
+estratégias experimentais para melhorar nossas medidas. Primeiro vamos
+substituir o comando <code class="language-text">input()</code> por uma atribuição <code class="language-text">n = ...</code>, assim a
+variação do tempo gasto digitando não irá atrapalhar a medição.
+Depois, vamos manter constante todos os outros fatores que pudermos
+controlar (como número de processos executando, etc.) e calcular a
+mediana dos tempos de três execuções para cada valor de $n$.
+Poderíamos também usar a média dos tempos, mas a primeira execução de
+um programa costuma ser muito mais lenta, pois o arquivo precisa ser
+lido do disco e carregado na memória RAM. Obtemos uma tabela.</p>
+<table>
+<thead>
+<tr>
+<th>n</th>
+<th>tempo 1</th>
+<th>tempo 2</th>
+<th>tempo 3</th>
+<th>mediana</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2000</td>
+<td>0,111s</td>
+<td>0,104s</td>
+<td>0,107s</td>
+<td>0,107s</td>
+</tr>
+<tr>
+<td>3000</td>
+<td>0,234s</td>
+<td>0,215s</td>
+<td>0,210s</td>
+<td>0,215s</td>
+</tr>
+<tr>
+<td>4000</td>
+<td>0,383s</td>
+<td>0,386s</td>
+<td>0,365s</td>
+<td>0,383s</td>
+</tr>
+<tr>
+<td>5000</td>
+<td>0,567s</td>
+<td>0,554s</td>
+<td>0,557s</td>
+<td>0,557s</td>
+</tr>
+<tr>
+<td>6000</td>
+<td>0,825s</td>
+<td>0,833s</td>
+<td>0,827s</td>
+<td>0,827s</td>
+</tr>
+<tr>
+<td>7000</td>
+<td>1,111s</td>
+<td>1,104s</td>
+<td>1,078s</td>
+<td>1,104s</td>
+</tr>
+<tr>
+<td>8000</td>
+<td>1,422s</td>
+<td>1,409s</td>
+<td>1,410s</td>
+<td>1,410s</td>
+</tr>
+<tr>
+<td>9000</td>
+<td>1,787s</td>
+<td>1,800s</td>
+<td>1,815s</td>
+<td>1,815s</td>
+</tr>
+<tr>
+<td>10000</td>
+<td>2,240s</td>
+<td>2,256s</td>
+<td>2,215s</td>
+<td>2,240s</td>
+</tr>
+<tr>
+<td>15000</td>
+<td>5,070s</td>
+<td>5,175s</td>
+<td>5,223s</td>
+<td>5,175s</td>
+</tr>
+</tbody></table><p>É muito mais fácil entender esses dados plotando um gráfico.</p>
+<img src="figs/tempos.png" style="width: 100%; max-width: 500px;">
+<p>Essa figura se parece muito com uma parábola. É tentador fazer uma
+regressão sobre esse gráfico, mas adivinhar o tipo de função e ajustar
+os parâmetros não é uma boa prática. Precismos antes investigar quais
+elementos afetam o tempo de execução. Só depois de termos evidências
+podemos dizer que essa função cresce dessa ou daquela maneira.</p>
+<p>Como o número de instruções é finito, deve haver algumas que executam
+muitas vezes. Queremos saber qual instrução executa mais vezes. Já
+fizemos isso antes e descobrimos que as instruções executadas dentro
+dos laços são sempre suspeitas. Nesse algoritmo, é fácil descobrir que
+o teste <code class="language-text">if p % divisor == 0</code> é a linha que mais vezes é executada. Em
+aplicações complexas, pode ser que precisemos utilizar algumas
+ferramentas chamadas <em>profilers</em>, mas não precisamos delas nessa
+disciplina.</p>
+<p>Vamos tentar contar quantas vezes executamos essa linha. Primeiro,
+observamos que a função <code class="language-text">eh_primo</code> é chamada para $p$ variando de $0$
+até $n - 1$. Para cada uma dessas chamadas, contamos o número de vezes,
+começando do $0$.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>p</strong></td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>...</td>
+<td>n - 1</td>
+</tr>
+<tr>
+<td><strong># iterações/chamada</strong></td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>...</td>
+<td>n - 3</td>
+</tr>
+</tbody></table><p>Olhando a linha de baixo, identificamos uma progressão aritmética (PA)
+que começa em $1$ e termina em $n-3$. Assim, para descobrir o número
+de vezes que a linha é executada no total, basta fazer a soma. Podemos
+consultar a fórmula da soma em uma tabela — ou podemos nós mesmos
+deduzi-la.</p>
+<p>$$
+\text{# iterações} = \frac{(n - 3) (n - 2)}{2} = \frac{n^2 - 5 n + 6}{2} \approx \frac{n^2}{2}.
+$$</p>
+<p>O valor exato da soma não interessa; só precisávamos de alguma
+evidência para que pudéssemos afirmar que o gráfico acima é de fato
+uma parábola. Se todo o tempo do programa fosse gasto somente nessa
+linha, então isso era tudo que precisaríamos. Acontece que nosso
+programa realiza diversas outras atividades. Por exemplo, o
+interpretador gasta um tempo considerável analisando o código fonte e
+transformando-o em alguma representação executável pelo processador.</p>
+<p>Para que nossa estimativa faça sentido, precisamos garantir que a
+maior parte do tempo de execução é realmente gasta executando o laço
+dessa linha em particular. Como os valores testados de $n$ são
+razoavelmente grandes, temos confiança de que isso é verdade e essa
+simplificação não é tão ruim assim. Então, podemos dividir o tempo
+total de execução para um certo $n$ e dividir por $n^2/2$. Isso deve
+dar uma estimativa (bastante grosseira) de quanto tempo uma iteração
+da linha <code class="language-text">if p % divisor == 0</code> leva para executar. Testamos para o
+tempo de $n = 15000$:</p>
+<p>$$
+\text{tempo/iteração} = \frac{\text{tempo}}{\frac{n^2}{2}} =  \frac{5{,}175s}{\frac{15000^2}{2}} = 0{,}000000046 s = 46ns
+$$</p>
+<p>Ou seja, o tempo gasto por iteração é cerca de 46 nanosegundos. Agora,
+se formos executar nosso programa para $n = 30000$, temos pelo menos
+alguma estimativa de quanto tempo o programa irá levar, mesmo que
+tenhamos feito diversas simplificações.</p>
+<p>$$
+\begin{aligned}
+\text{tempo}
+&amp;= (\text{# iterações}) \cdot (\text{tempo/iteração}) \\
+&amp;= \frac{30000^2}{2} \cdot 46ns = 20{,}7s
+\end{aligned}
+$$</p>
+<p>Talvez seja mais fácil pensar que, se dobrarmos o valor de $n$, então
+quadruplicaremos o tempo de execução.</p>
+<pre class="highlightlanguage-console"><span style="color: #000080; font-weight: bold">user@notebook:~/ra123456/eficiencia$</span> <span style="color: #008000">time</span> python3 primos.py
+<span style="color: #888888">Há 3245 primos de 0 até 29999</span>
+
+<span style="color: #888888">real	0m20,706s</span>
+<span style="color: #888888">user	0m20,700s</span>
+<span style="color: #888888">sys	0m0,004s</span>
+</pre><p>Voilà. O fato de termos acertado o tempo exatamente é mera
+coincidência, juro!</p>
+<h2 id="comparando-algoritmos">Comparando algoritmos</h2>
+<p>O algoritmo anterior é bom? Se só conhecermos um algoritmo, então não
+podemos dizer muito, além de estimar quanto tempo iremos esperar
+sofrendo. Quando tempo eu iria esperar se não tivesse interrompido a
+execução quando testei o programa para $n = 100000$?</p>
+<p>Só podemos dizer que algoritmo é bom ou ruim, se estivermos comparando
+com algum outro algoritmo. Pode ser que listar números primos seja um
+problema tão difícil que podemos sentar resignados de que o algoritmo
+anterior era o melhor a ser feito. Mas você já deve ter percebido que
+esse algoritmo é, na verdade, bem ruim. O motivo de sua certeza é que
+há várias formas de melhorá-lo a fim de torná-lo (muito) mais rápido.</p>
+<p>Por exemplo, é claro que um número par maior do que dois não é primo,
+mas ainda assim a função <code class="language-text">eh_primo</code> acima insiste em testar números
+pares. Mais do que isso, já vimos que, se um número não tem divisores
+maiores que um e menores ou iguais à raiz, então ele só pode ser
+primo! Nós chamamos esses tipos de alterações de <strong>otimizações</strong>,
+porque, em certo sentido, são alterações que deixam o algoritmo mais
+próximo de “ótimo”. Há muitas outras otimizações possíveis, mas por
+ora vamos nos concentrar nessas duas.</p>
+<p>Sempre que possível, não faça várias otimizações de uma só vez. Ou
+melhor, nunca tente fazer duas alterações quaisquer no seu programa de
+uma só vez. É muito mais fácil pensarmos numa coisa só por vez. Se a
+alteração não der certo, então sabemos exatamente o que aconteceu.
+Mais importante, fazendo alterações incrementais, podemos medir e
+verificar se cada uma delas teve o efeito esperado. Primeiro, vamos
+parar de testar números pares maiores do que dois, adicionado
+algumas linhas no início da função <code class="language-text">eh_primo</code></p>
+<pre class="highlightlanguage-python">    <span style="color: #008000; font-weight: bold">if</span> p <span style="color: #666666">&gt;</span> <span style="color: #666666">2</span> <span style="color: #AA22FF; font-weight: bold">and</span> p <span style="color: #666666">%</span> <span style="color: #666666">2</span> <span style="color: #666666">==</span> <span style="color: #666666">0</span>:
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">False</span>
+</pre><p>Testamos, novamente para $n = 30000$.</p>
+<pre class="highlightlanguage-console"><span style="color: #000080; font-weight: bold">user@notebook:~/ra123456/eficiencia$</span> <span style="color: #008000">time</span> python3 primos.py
+<span style="color: #888888">Há 3245 primos de 0 até 29999</span>
+
+<span style="color: #888888">real	0m10,402s</span>
+<span style="color: #888888">user	0m10,395s</span>
+<span style="color: #888888">sys	0m0,004s</span>
+</pre><p>O tempo praticamente diminui pela metade. Isso era esperado, afinal,
+deixamos de verificar se metade dos números era primo ou não. Mas esse
+algoritmo ainda parece insatisfatório, então vamos implementar a
+segunda otimização sugerida, que parece um pouco mais promissora.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">math</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">eh_primo</span>(p):
+    <span style="color: #008000; font-weight: bold">if</span> p <span style="color: #666666">==</span> <span style="color: #666666">0</span> <span style="color: #AA22FF; font-weight: bold">or</span> p <span style="color: #666666">==</span> <span style="color: #666666">1</span>:
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">False</span>
+
+    <span style="color: #008000; font-weight: bold">if</span> p <span style="color: #666666">&gt;</span> <span style="color: #666666">2</span> <span style="color: #AA22FF; font-weight: bold">and</span> p <span style="color: #666666">%</span> <span style="color: #666666">2</span> <span style="color: #666666">==</span> <span style="color: #666666">0</span>:
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">False</span>
+
+    raiz <span style="color: #666666">=</span> <span style="color: #008000">int</span>(math<span style="color: #666666">.</span>sqrt(p))
+
+    tem_divisor <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">False</span>
+    <span style="color: #008000; font-weight: bold">for</span> divisor <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">2</span>, raiz <span style="color: #666666">+</span> <span style="color: #666666">1</span>):
+        <span style="color: #008000; font-weight: bold">if</span> p <span style="color: #666666">%</span> divisor <span style="color: #666666">==</span> <span style="color: #666666">0</span>:
+            tem_divisor <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">True</span>
+
+    <span style="color: #008000; font-weight: bold">if</span> tem_divisor:
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">False</span>
+    <span style="color: #008000; font-weight: bold">else</span>:
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">True</span>
+</pre><p>Na função atualizada, precisamos gastar algum tempo calculando a raiz
+de $p$, mas a esperança é que esse tempo seja bem menor do que o tempo
+que economizaremos nas iterações. O motivo de somarmos um à raiz nos
+limites de <code class="language-text">range(2, raiz + 1)</code> é que precisamos testar os divisores
+até a raiz, inclusive.</p>
+<pre class="highlightlanguage-console"><span style="color: #000080; font-weight: bold">user@notebook:~/ra123456/eficiencia$</span> <span style="color: #008000">time</span> python3 primos.py
+<span style="color: #888888">Há 3245 primos de 0 até 29999</span>
+
+<span style="color: #888888">real	0m0,104s</span>
+<span style="color: #888888">user	0m0,101s</span>
+<span style="color: #888888">sys	0m0,004s</span>
+</pre><p>Isso foi rápido! Mas não vamos comemorar ainda. Se os números em que
+estamos interessados não são muito maiores do 30000, então não há
+muito mais o que melhorar, vida que segue. Mas se os números forem cem
+mil, ou, quem sabe, um milhão? Vamos tentar com $n = 1000000$.</p>
+<pre class="highlightlanguage-console"><span style="color: #000080; font-weight: bold">user@notebook:~/ra123456/eficiencia$</span> <span style="color: #008000">time</span> python3 primos.py
+<span style="color: #888888">Há 78498 primos de 0 até 999999</span>
+
+<span style="color: #888888">real	0m14,418s</span>
+<span style="color: #888888">user	0m14,413s</span>
+<span style="color: #888888">sys	0m0,005s</span>
+</pre><h2 id="comparando-algoritmos-nao-implementacoes">Comparando algoritmos, não implementações</h2>
+<p>Sem ideias para melhorar, podemos apelar e reescrever o mesmo
+algoritmo em uma linguagem de programação “mais rápida”. Mas não
+podemos misturar bananas com laranjas, ou podemos?</p>
+<p>Você deve se lembrar de que Python é uma linguagem interpretada de
+alto nível. Isso traz algumas vantagens, como a facilidade de uso,
+tempos de desenvolvimento e teste mais curtos, menos problemas de
+sintaxe e uma série de outras vantagens.</p>
+<p>Enquanto as abstrações de uma linguagem de alto nível são úteis,
+algumas vezes elas podem sobrecarregar a execução do programa. O
+motivo é que elas escondem diversas instruções que devem ser
+executadas, como verificar se índices de uma lista estão dentro dos
+limites, gerenciar e liberar a memória de objetos etc. Em Python, tudo
+isso é feito automaticamente. Quando escrevemos em uma linguagem de
+mais baixo nível, esses detalhes devem ser explicitados. Embora
+preocupar-se com eles traga mais responsabilidades para o programador
+— e mais possibilidades de erro, essas diferenças permitem controlar
+melhor a execução do programa. Em certos casos, evitamos algumas
+operações desnecessárias e diminuímos o tempo de execução.</p>
+<p>Isso quase nunca é verdade para aplicações e algoritmos complexos, mas
+para algoritmos simples como esse pode fazer diferença. Para tirar à
+prova, eu reescrevi o algoritmo anterior, dessa vez na linguagem de
+programação C.</p>
+<pre class="highlightlanguage-c"><span style="color: #BC7A00">#include</span> <span style="color: #408080; font-style: italic">&lt;math.h&gt;</span><span style="color: #BC7A00"></span>
+<span style="color: #BC7A00">#include</span> <span style="color: #408080; font-style: italic">&lt;stdio.h&gt;</span><span style="color: #BC7A00"></span>
+
+<span style="color: #B00040">int</span> <span style="color: #0000FF">eh_primo</span>(<span style="color: #B00040">int</span> p) {
+    <span style="color: #008000; font-weight: bold">if</span> (p <span style="color: #666666">==</span> <span style="color: #666666">0</span> <span style="color: #666666">||</span> p <span style="color: #666666">==</span> <span style="color: #666666">1</span>)
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">0</span>;
+
+    <span style="color: #008000; font-weight: bold">if</span> (p <span style="color: #666666">&gt;</span> <span style="color: #666666">2</span> <span style="color: #666666">&amp;&amp;</span> p <span style="color: #666666">%</span> <span style="color: #666666">2</span> <span style="color: #666666">==</span> <span style="color: #666666">0</span>)
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">0</span>;
+
+    <span style="color: #B00040">int</span> raiz <span style="color: #666666">=</span> sqrt(p);
+
+    <span style="color: #B00040">int</span> tem_divisor <span style="color: #666666">=</span> <span style="color: #666666">0</span>;
+    <span style="color: #008000; font-weight: bold">for</span> (<span style="color: #B00040">int</span> divisor <span style="color: #666666">=</span> <span style="color: #666666">2</span>; divisor <span style="color: #666666">&lt;</span> raiz <span style="color: #666666">+</span> <span style="color: #666666">1</span>; divisor <span style="color: #666666">+=</span> <span style="color: #666666">1</span>) {
+        <span style="color: #008000; font-weight: bold">if</span> (p <span style="color: #666666">%</span> divisor <span style="color: #666666">==</span> <span style="color: #666666">0</span>)
+            tem_divisor <span style="color: #666666">=</span> <span style="color: #666666">1</span>;
+    }
+
+    <span style="color: #008000; font-weight: bold">if</span> (tem_divisor)
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">0</span>;
+    <span style="color: #008000; font-weight: bold">else</span>
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">1</span>;
+}
+
+<span style="color: #B00040">int</span> <span style="color: #0000FF">contar_primos</span>(<span style="color: #B00040">int</span> n) {
+    <span style="color: #B00040">int</span> m <span style="color: #666666">=</span> <span style="color: #666666">0</span>;
+    <span style="color: #008000; font-weight: bold">for</span> (<span style="color: #B00040">int</span> p <span style="color: #666666">=</span> <span style="color: #666666">0</span>; p <span style="color: #666666">&lt;</span> n; p<span style="color: #666666">++</span>) {
+        <span style="color: #008000; font-weight: bold">if</span> (eh_primo(p)) {
+            m <span style="color: #666666">+=</span> <span style="color: #666666">1</span>;
+        }
+    }
+    <span style="color: #008000; font-weight: bold">return</span> m;
+}
+
+<span style="color: #B00040">int</span> <span style="color: #0000FF">main</span>() {
+    <span style="color: #B00040">int</span> n <span style="color: #666666">=</span> <span style="color: #666666">1000000</span>;
+    <span style="color: #B00040">int</span> m <span style="color: #666666">=</span> contar_primos(n);
+    printf(<span style="color: #BA2121">&quot;Há %d primos de 0 até %d</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>, m, n<span style="color: #666666">-1</span>);
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">0</span>;
+}
+</pre><p>Você não precisa entendê-lo, mas como esse algoritmo é muito simples,
+não é difícil vislumbrar o que cada instrução faz. O importante aqui é
+que esse programa implementa o mesmo algoritmo que o programa
+anterior. Vamos executá-lo.</p>
+<pre class="highlightlanguage-console"><span style="color: #000080; font-weight: bold">user@notebook:~/ra123456/eficiencia$</span> gcc -o primos primos.c -lm
+<span style="color: #000080; font-weight: bold">user@notebook:~/ra123456/eficiencia$</span> <span style="color: #008000">time</span> ./primos
+<span style="color: #888888">Há 78498 primos de 0 até 999999</span>
+
+<span style="color: #888888">real	0m0,799s</span>
+<span style="color: #888888">user	0m0,799s</span>
+<span style="color: #888888">sys	0m0,000s</span>
+</pre><p>Eita! Para tarefas fundamentais em nossas aplicações, que são
+realizadas milhares e milhares de vezes, reescrever o algoritmo em uma
+linguagem de mais baixo nível e evitar os custos escondidos nas
+abstrações de alto nível pode valer a pena. Mas esse não é o caso de
+nosso problema. Percebemos isso tão logo tentamos executar o programa
+para valores de $n$ muito maiores. Mudamos o programa fazendo
+<code class="language-text">n = 4000000</code>, compilamos e executamos novamente.</p>
+<pre class="highlightlanguage-console"><span style="color: #000080; font-weight: bold">user@notebook:~/ra123456/eficiencia$</span> gcc -o primos primos.c -lm
+<span style="color: #000080; font-weight: bold">user@notebook:~/ra123456/eficiencia$</span> <span style="color: #008000">time</span> ./primos
+<span style="color: #888888">Há 283146 primos de 0 até 3999999</span>
+
+<span style="color: #888888">real	0m6,215s</span>
+<span style="color: #888888">user	0m6,215s</span>
+<span style="color: #888888">sys	0m0,001s</span>
+</pre><p>É um tempo razoável, mas ainda na ordem de alguns segundos. Se me
+perguntarem porque o programa demora tanto, já não poderei culpar a
+linguagem de programação. Terei que admitir que meu algoritmo não é
+bom.</p>
+<p>Podemos ainda fazer várias outras otimizações, mas dessa vez vamos
+mudar nossa estratégia de contagem. Para isso, perceba que na primeira
+otimização, evitamos testar múltiplos de 2 maiores de 2. Do mesmo
+modo, poderíamos evitar múltiplos de 3 maiores que 3 e assim por
+diante. Isso sugere o seguinte algoritmo, que é chamado de crivo de
+Eratóstenes desde há muito tempo.</p>
+<ol>
+<li>escreva os números de $0$ até $n -1$.</li>
+<li>risque os números $0$ e $1$, que não são primos</li>
+<li>
+para cada número $p$ da lista:<ul>
+<li>
+se o número $p$ não estiver riscado<ul>
+<li>adicione $p$ à lista de primos</li>
+<li>risque cada múltiplo $2p , 3p, 4p, 5p, \dots$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>devolva os números primos encontrados</li>
+</ol>
+<p>Para representar os números riscados e não riscados, podemos utilizar
+uma lista de booleanos. Adicionamos a função seguinte.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">contar_crivo_estatostenes</span>(n):
+    m <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    riscados <span style="color: #666666">=</span> [<span style="color: #008000; font-weight: bold">False</span>] <span style="color: #666666">*</span> n
+
+    riscados[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">True</span>
+    riscados[<span style="color: #666666">1</span>] <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">True</span>
+
+    <span style="color: #008000; font-weight: bold">for</span> p <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n):
+        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #AA22FF; font-weight: bold">not</span> riscados[p]:
+            m <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+            <span style="color: #008000; font-weight: bold">for</span> q <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">2*</span>p, n, p):
+                riscados[q] <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">True</span>
+
+    <span style="color: #008000; font-weight: bold">return</span> m
+</pre><p>Ajustando a função <code class="language-text">main</code> e executando o programa em Python,</p>
+<pre class="highlightlanguage-console"><span style="color: #000080; font-weight: bold">user@notebook:~/ra123456/eficiencia$</span> <span style="color: #008000">time</span> python3 primos.py
+<span style="color: #888888">Há 283146 primos de 0 até 3999999</span>
+
+<span style="color: #888888">real	0m0,960s</span>
+<span style="color: #888888">user	0m0,925s</span>
+<span style="color: #888888">sys	0m0,036s</span>
+</pre><p>Muito mais rápido que o algoritmo anterior, mesmo quando comparando
+com a versão em C. É claro que a linguagem de programação é importante
+para o tempo que um algoritmo leva, mas a escolha da linguagem de
+programação não é desculpa para escrever algoritmos ruins.</p>
+<h1 id="jogos">Jogos</h1>
+<p>Vamos parar de resolver problemas por um momento e tentar nos entreter
+com alguns jogos. Sua amiga Diná não está para brincadeira e decide
+apostar valendo.</p>
+<blockquote>
+<p>Diná pensa em um número e diz:</p>
+<p>— Se você acertar o número que estou pensando, ganha <span>R$</span>
+10,00, mas, se errar, paga <span>R$</span> 1,00.</p>
+<p>Você responde:</p>
+<p>— Não! Nem sei quais números são permitidos. Se for um número
+de 0 até 9, então eu jogo.</p>
+<p>— Aí também não. Penso em um número de 0 até 99.</p>
+<p>— Pode ser. Sou sortudo.</p>
+<p>Você é muito insistente, então pensa em jogar até acertar.</p>
+</blockquote>
+<p>Se você deveria ou não apostar em jogos de azar é uma questão. Outra
+questão é se você ganhará ou perderá com esse jogo. Vamos criar um
+programa para simulá-lo. Um otimista escreveria o seguinte.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">random</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">jogar</span>(numero):
+    pago <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    recebido <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    <span style="color: #008000; font-weight: bold">while</span> <span style="color: #008000; font-weight: bold">True</span>:
+        chute <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">input</span>(<span style="color: #BA2121">&quot;Qual é seu chute? &quot;</span>))
+        <span style="color: #008000; font-weight: bold">if</span> chute <span style="color: #666666">==</span> numero:
+            recebido <span style="color: #666666">+=</span> <span style="color: #666666">10</span>
+            <span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;O número é o </span><span style="color: #BB6688; font-weight: bold">{chute}</span><span style="color: #BA2121">. Você acertou!&quot;</span>)
+            <span style="color: #008000; font-weight: bold">break</span>
+        <span style="color: #008000; font-weight: bold">else</span>:
+            pago <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+            <span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;Não é o </span><span style="color: #BB6688; font-weight: bold">{chute}</span><span style="color: #BA2121">.&quot;</span>)
+
+    <span style="color: #008000; font-weight: bold">return</span> recebido <span style="color: #666666">-</span> pago
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">main</span>():
+    numero <span style="color: #666666">=</span> random<span style="color: #666666">.</span>randint(<span style="color: #666666">0</span>, <span style="color: #666666">99</span>)
+    ganho <span style="color: #666666">=</span> jogar(numero)
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;Ganhei </span><span style="color: #BB6688; font-weight: bold">{ganho}</span><span style="color: #BA2121"> reais!!!&quot;</span>)
+
+main()
+</pre><p>Eu disse otimista por causa da mensagem de saída. O número pensado por
+Diná é simulado por um número sorteado aleatoriamente. Vamos ver
+quanto você irá “ganhar”.</p>
+<pre class="highlightlanguage-console"><span style="color: #000080; font-weight: bold">user@notebook:~/ra123456/eficiencia$</span> python3 adivinhacao.py
+<span style="color: #888888">Qual é seu chute? 5</span>
+<span style="color: #888888">Não é o 5.</span>
+<span style="color: #888888">Qual é seu chute? 86</span>
+<span style="color: #888888">Não é o 86.</span>
+<span style="color: #888888">Qual é seu chute? 67</span>
+<span style="color: #888888">Não é o 67.</span>
+<span style="color: #888888">Qual é seu chute? 58</span>
+<span style="color: #888888">Não é o 58.</span>
+<span style="color: #888888">Qual é seu chute? 65</span>
+<span style="color: #888888">Não é o 65.</span>
+<span style="color: #888888">Qual é seu chute? 48</span>
+<span style="color: #888888">Não é o 48.</span>
+<span style="color: #888888">Qual é seu chute? 29</span>
+<span style="color: #888888">Não é o 29.</span>
+<span style="color: #888888">Qual é seu chute? 99</span>
+<span style="color: #888888">Não é o 99.</span>
+<span style="color: #888888">Qual é seu chute? 85</span>
+<span style="color: #888888">Não é o 85.</span>
+<span style="color: #888888">Qual é seu chute? 11</span>
+<span style="color: #888888">Não é o 11.</span>
+<span style="color: #888888">Qual é seu chute? 15</span>
+<span style="color: #888888">Não é o 15.</span>
+<span style="color: #888888">Qual é seu chute? 24</span>
+<span style="color: #888888">Não é o 24.</span>
+<span style="color: #888888">Qual é seu chute? 93</span>
+<span style="color: #888888">Não é o 93.</span>
+<span style="color: #888888">Qual é seu chute? 72</span>
+<span style="color: #888888">Não é o 72.</span>
+<span style="color: #888888">Qual é seu chute? 10</span>
+<span style="color: #888888">Não é o 10.</span>
+<span style="color: #888888">Qual é seu chute? 61</span>
+<span style="color: #888888">Não é o 61.</span>
+<span style="color: #888888">Qual é seu chute? 78</span>
+<span style="color: #888888">Não é o 78.</span>
+<span style="color: #888888">Qual é seu chute? 51</span>
+<span style="color: #888888">Não é o 51.</span>
+<span style="color: #888888">Qual é seu chute? 84</span>
+<span style="color: #888888">Não é o 84.</span>
+<span style="color: #888888">Qual é seu chute? 69</span>
+<span style="color: #888888">Não é o 69.</span>
+<span style="color: #888888">Qual é seu chute? 13</span>
+<span style="color: #888888">Não é o 13.</span>
+<span style="color: #888888">Qual é seu chute? 32</span>
+<span style="color: #888888">Não é o 32.</span>
+<span style="color: #888888">Qual é seu chute? 83</span>
+<span style="color: #888888">Não é o 83.</span>
+<span style="color: #888888">Qual é seu chute? 96</span>
+<span style="color: #888888">Não é o 96.</span>
+<span style="color: #888888">Qual é seu chute? 17</span>
+<span style="color: #888888">Não é o 17.</span>
+<span style="color: #888888">Qual é seu chute? 1</span>
+<span style="color: #888888">Não é o 1.</span>
+<span style="color: #888888">Qual é seu chute? 64</span>
+<span style="color: #888888">Não é o 64.</span>
+<span style="color: #888888">Qual é seu chute? 8</span>
+<span style="color: #888888">Não é o 8.</span>
+<span style="color: #888888">Qual é seu chute? 35</span>
+<span style="color: #888888">Não é o 35.</span>
+<span style="color: #888888">Qual é seu chute? 95</span>
+<span style="color: #888888">Não é o 95.</span>
+<span style="color: #888888">Qual é seu chute? 2</span>
+<span style="color: #888888">Não é o 2.</span>
+<span style="color: #888888">Qual é seu chute? 75</span>
+<span style="color: #888888">Não é o 75.</span>
+<span style="color: #888888">Qual é seu chute? 49</span>
+<span style="color: #888888">Não é o 49.</span>
+<span style="color: #888888">Qual é seu chute? 53</span>
+<span style="color: #888888">Não é o 53.</span>
+<span style="color: #888888">Qual é seu chute? 70</span>
+<span style="color: #888888">Não é o 70.</span>
+<span style="color: #888888">Qual é seu chute? 4</span>
+<span style="color: #888888">Não é o 4.</span>
+<span style="color: #888888">Qual é seu chute? 68</span>
+<span style="color: #888888">Não é o 68.</span>
+<span style="color: #888888">Qual é seu chute? 14</span>
+<span style="color: #888888">Não é o 14.</span>
+<span style="color: #888888">Qual é seu chute? 50</span>
+<span style="color: #888888">Não é o 50.</span>
+<span style="color: #888888">Qual é seu chute? 18</span>
+<span style="color: #888888">Não é o 18.</span>
+<span style="color: #888888">Qual é seu chute? 34</span>
+<span style="color: #888888">Não é o 34.</span>
+<span style="color: #888888">Qual é seu chute? 9</span>
+<span style="color: #888888">Não é o 9.</span>
+<span style="color: #888888">Qual é seu chute? 71</span>
+<span style="color: #888888">Não é o 71.</span>
+<span style="color: #888888">Qual é seu chute? 28</span>
+<span style="color: #888888">Não é o 28.</span>
+<span style="color: #888888">Qual é seu chute? 38</span>
+<span style="color: #888888">Não é o 38.</span>
+<span style="color: #888888">Qual é seu chute? 19</span>
+<span style="color: #888888">Não é o 19.</span>
+<span style="color: #888888">Qual é seu chute? 37</span>
+<span style="color: #888888">Não é o 37.</span>
+<span style="color: #888888">Qual é seu chute? 33</span>
+<span style="color: #888888">Não é o 33.</span>
+<span style="color: #888888">Qual é seu chute? 90</span>
+<span style="color: #888888">Não é o 90.</span>
+<span style="color: #888888">Qual é seu chute? 42</span>
+<span style="color: #888888">Não é o 42.</span>
+<span style="color: #888888">Qual é seu chute? 73</span>
+<span style="color: #888888">Não é o 73.</span>
+<span style="color: #888888">Qual é seu chute? 88</span>
+<span style="color: #888888">Não é o 88.</span>
+<span style="color: #888888">Qual é seu chute? 22</span>
+<span style="color: #888888">Não é o 22.</span>
+<span style="color: #888888">Qual é seu chute? 59</span>
+<span style="color: #888888">Não é o 59.</span>
+<span style="color: #888888">Qual é seu chute? 54</span>
+<span style="color: #888888">Não é o 54.</span>
+<span style="color: #888888">Qual é seu chute? 97</span>
+<span style="color: #888888">Não é o 97.</span>
+<span style="color: #888888">Qual é seu chute? 92</span>
+<span style="color: #888888">Não é o 92.</span>
+<span style="color: #888888">Qual é seu chute? 77</span>
+<span style="color: #888888">Não é o 77.</span>
+<span style="color: #888888">Qual é seu chute? 0</span>
+<span style="color: #888888">Não é o 0.</span>
+<span style="color: #888888">Qual é seu chute? 55</span>
+<span style="color: #888888">Não é o 55.</span>
+<span style="color: #888888">Qual é seu chute? 26</span>
+<span style="color: #888888">Não é o 26.</span>
+<span style="color: #888888">Qual é seu chute? 27</span>
+<span style="color: #888888">Não é o 27.</span>
+<span style="color: #888888">Qual é seu chute? 39</span>
+<span style="color: #888888">Não é o 39.</span>
+<span style="color: #888888">Qual é seu chute? 87</span>
+<span style="color: #888888">Não é o 87.</span>
+<span style="color: #888888">Qual é seu chute? 82</span>
+<span style="color: #888888">Não é o 82.</span>
+<span style="color: #888888">Qual é seu chute? 91</span>
+<span style="color: #888888">Não é o 91.</span>
+<span style="color: #888888">Qual é seu chute? 40</span>
+<span style="color: #888888">Não é o 40.</span>
+<span style="color: #888888">Qual é seu chute? 81</span>
+<span style="color: #888888">Não é o 81.</span>
+<span style="color: #888888">Qual é seu chute? 43</span>
+<span style="color: #888888">Não é o 43.</span>
+<span style="color: #888888">Qual é seu chute? 74</span>
+<span style="color: #888888">Não é o 74.</span>
+<span style="color: #888888">Qual é seu chute? 56</span>
+<span style="color: #888888">Não é o 56.</span>
+<span style="color: #888888">Qual é seu chute? 31</span>
+<span style="color: #888888">Não é o 31.</span>
+<span style="color: #888888">Qual é seu chute? 45</span>
+<span style="color: #888888">O número é o 45. Você acertou!</span>
+<span style="color: #888888">Ganhei -62 reais!!!</span>
+</pre><p>Um belo de um prejuízo. Se o número pensado por Diná é mesmo
+aleatório, poderíamos muito bem testar cada um dos números de 0 a 99
+em ordem que ainda teríamos a mesma chance de acerto.</p>
+<pre class="highlightlanguage-console"><span style="color: #000080; font-weight: bold">user@notebook:~/ra123456/eficiencia$</span> python3 adivinhacao.py
+<span style="color: #888888">Qual é seu chute? 0</span>
+<span style="color: #888888">Não é o 0.</span>
+<span style="color: #888888">Qual é seu chute? 1</span>
+<span style="color: #888888">Não é o 1.</span>
+<span style="color: #888888">Qual é seu chute? 2</span>
+<span style="color: #888888">Não é o 2.</span>
+<span style="color: #888888">Qual é seu chute? 3</span>
+<span style="color: #888888">Não é o 3.</span>
+<span style="color: #888888">Qual é seu chute? 4</span>
+<span style="color: #888888">Não é o 4.</span>
+<span style="color: #888888">Qual é seu chute? 5</span>
+<span style="color: #888888">Não é o 5.</span>
+<span style="color: #888888">Qual é seu chute? 6</span>
+<span style="color: #888888">Não é o 6.</span>
+<span style="color: #888888">Qual é seu chute? 7</span>
+<span style="color: #888888">Não é o 7.</span>
+<span style="color: #888888">Qual é seu chute? 8</span>
+<span style="color: #888888">Não é o 8.</span>
+<span style="color: #888888">Qual é seu chute? 9</span>
+<span style="color: #888888">Não é o 9.</span>
+<span style="color: #888888">Qual é seu chute? 10</span>
+<span style="color: #888888">Não é o 10.</span>
+<span style="color: #888888">Qual é seu chute? 11</span>
+<span style="color: #888888">Não é o 11.</span>
+<span style="color: #888888">Qual é seu chute? 12</span>
+<span style="color: #888888">Não é o 12.</span>
+<span style="color: #888888">Qual é seu chute? 13</span>
+<span style="color: #888888">Não é o 13.</span>
+<span style="color: #888888">Qual é seu chute? 14</span>
+<span style="color: #888888">Não é o 14.</span>
+<span style="color: #888888">Qual é seu chute? 15</span>
+<span style="color: #888888">Não é o 15.</span>
+<span style="color: #888888">Qual é seu chute? 16</span>
+<span style="color: #888888">Não é o 16.</span>
+<span style="color: #888888">Qual é seu chute? 17</span>
+<span style="color: #888888">Não é o 17.</span>
+<span style="color: #888888">Qual é seu chute? 18</span>
+<span style="color: #888888">Não é o 18.</span>
+<span style="color: #888888">Qual é seu chute? 19</span>
+<span style="color: #888888">Não é o 19.</span>
+<span style="color: #888888">Qual é seu chute? 20</span>
+<span style="color: #888888">Não é o 20.</span>
+<span style="color: #888888">Qual é seu chute? 21</span>
+<span style="color: #888888">Não é o 21.</span>
+<span style="color: #888888">Qual é seu chute? 22</span>
+<span style="color: #888888">Não é o 22.</span>
+<span style="color: #888888">Qual é seu chute? 23</span>
+<span style="color: #888888">Não é o 23.</span>
+<span style="color: #888888">Qual é seu chute? 24</span>
+<span style="color: #888888">Não é o 24.</span>
+<span style="color: #888888">Qual é seu chute? 25</span>
+<span style="color: #888888">Não é o 25.</span>
+<span style="color: #888888">Qual é seu chute? 26</span>
+<span style="color: #888888">Não é o 26.</span>
+<span style="color: #888888">Qual é seu chute? 27</span>
+<span style="color: #888888">Não é o 27.</span>
+<span style="color: #888888">Qual é seu chute? 28</span>
+<span style="color: #888888">Não é o 28.</span>
+<span style="color: #888888">Qual é seu chute? 29</span>
+<span style="color: #888888">Não é o 29.</span>
+<span style="color: #888888">Qual é seu chute? 30</span>
+<span style="color: #888888">Não é o 30.</span>
+<span style="color: #888888">Qual é seu chute? 31</span>
+<span style="color: #888888">Não é o 31.</span>
+<span style="color: #888888">Qual é seu chute? 32</span>
+<span style="color: #888888">Não é o 32.</span>
+<span style="color: #888888">Qual é seu chute? 33</span>
+<span style="color: #888888">Não é o 33.</span>
+<span style="color: #888888">Qual é seu chute? 34</span>
+<span style="color: #888888">Não é o 34.</span>
+<span style="color: #888888">Qual é seu chute? 35</span>
+<span style="color: #888888">Não é o 35.</span>
+<span style="color: #888888">Qual é seu chute? 36</span>
+<span style="color: #888888">Não é o 36.</span>
+<span style="color: #888888">Qual é seu chute? 37</span>
+<span style="color: #888888">Não é o 37.</span>
+<span style="color: #888888">Qual é seu chute? 38</span>
+<span style="color: #888888">Não é o 38.</span>
+<span style="color: #888888">Qual é seu chute? 39</span>
+<span style="color: #888888">Não é o 39.</span>
+<span style="color: #888888">Qual é seu chute? 40</span>
+<span style="color: #888888">Não é o 40.</span>
+<span style="color: #888888">Qual é seu chute? 41</span>
+<span style="color: #888888">Não é o 41.</span>
+<span style="color: #888888">Qual é seu chute? 42</span>
+<span style="color: #888888">Não é o 42.</span>
+<span style="color: #888888">Qual é seu chute? 43</span>
+<span style="color: #888888">Não é o 43.</span>
+<span style="color: #888888">Qual é seu chute? 44</span>
+<span style="color: #888888">Não é o 44.</span>
+<span style="color: #888888">Qual é seu chute? 45</span>
+<span style="color: #888888">Não é o 45.</span>
+<span style="color: #888888">Qual é seu chute? 46</span>
+<span style="color: #888888">Não é o 46.</span>
+<span style="color: #888888">Qual é seu chute? 47</span>
+<span style="color: #888888">Não é o 47.</span>
+<span style="color: #888888">Qual é seu chute? 48</span>
+<span style="color: #888888">Não é o 48.</span>
+<span style="color: #888888">Qual é seu chute? 49</span>
+<span style="color: #888888">Não é o 49.</span>
+<span style="color: #888888">Qual é seu chute? 50</span>
+<span style="color: #888888">Não é o 50.</span>
+<span style="color: #888888">Qual é seu chute? 51</span>
+<span style="color: #888888">O número é o 51. Você acertou!</span>
+<span style="color: #888888">Ganhei -41 reais!!!</span>
+</pre><p>Agora pelo menos não precisamos anotar os palpites. Só mais uma vez.
+Estou sentindo que a sorte vai chegar.</p>
+<pre class="highlightlanguage-console"><span style="color: #000080; font-weight: bold">user@notebook:~/ra123456/eficiencia$</span> python3 adivinhacao.py
+<span style="color: #888888">Qual é seu chute? 0</span>
+<span style="color: #888888">Não é o 0.</span>
+<span style="color: #888888">Qual é seu chute? 1</span>
+<span style="color: #888888">Não é o 1.</span>
+<span style="color: #888888">Qual é seu chute? 2</span>
+<span style="color: #888888">Não é o 2.</span>
+<span style="color: #888888">Qual é seu chute? 3</span>
+<span style="color: #888888">Não é o 3.</span>
+<span style="color: #888888">Qual é seu chute? 4</span>
+<span style="color: #888888">Não é o 4.</span>
+<span style="color: #888888">Qual é seu chute? 5</span>
+<span style="color: #888888">Não é o 5.</span>
+<span style="color: #888888">Qual é seu chute? 6</span>
+<span style="color: #888888">Não é o 6.</span>
+<span style="color: #888888">Qual é seu chute? 7</span>
+<span style="color: #888888">Não é o 7.</span>
+<span style="color: #888888">Qual é seu chute? 8</span>
+<span style="color: #888888">Não é o 8.</span>
+<span style="color: #888888">Qual é seu chute? 9</span>
+<span style="color: #888888">Não é o 9.</span>
+<span style="color: #888888">Qual é seu chute? 10</span>
+<span style="color: #888888">Não é o 10.</span>
+<span style="color: #888888">Qual é seu chute? 11</span>
+<span style="color: #888888">Não é o 11.</span>
+<span style="color: #888888">Qual é seu chute? 12</span>
+<span style="color: #888888">Não é o 12.</span>
+<span style="color: #888888">Qual é seu chute? 13</span>
+<span style="color: #888888">Não é o 13.</span>
+<span style="color: #888888">Qual é seu chute? 14</span>
+<span style="color: #888888">Não é o 14.</span>
+<span style="color: #888888">Qual é seu chute? 15</span>
+<span style="color: #888888">Não é o 15.</span>
+<span style="color: #888888">Qual é seu chute? 16</span>
+<span style="color: #888888">Não é o 16.</span>
+<span style="color: #888888">Qual é seu chute? 17</span>
+<span style="color: #888888">Não é o 17.</span>
+<span style="color: #888888">Qual é seu chute? 18</span>
+<span style="color: #888888">Não é o 18.</span>
+<span style="color: #888888">Qual é seu chute? 19</span>
+<span style="color: #888888">Não é o 19.</span>
+<span style="color: #888888">Qual é seu chute? 20</span>
+<span style="color: #888888">Não é o 20.</span>
+<span style="color: #888888">Qual é seu chute? 21</span>
+<span style="color: #888888">Não é o 21.</span>
+<span style="color: #888888">Qual é seu chute? 22</span>
+<span style="color: #888888">O número é o 22. Você acertou!</span>
+<span style="color: #888888">Ganhei -12 reais!!!</span>
+</pre><blockquote>
+<p>— Cansei! Vamos jogar outro. Te dou uma sacola com números.
+Você escolhe um. Eu tenho que acertar.</p>
+<p>Diná, indiferente:</p>
+<p>— Se você prefere...</p>
+</blockquote>
+<p>Para justificar a indiferença de sua amiga, vamos mais uma vez simular
+o jogo.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">random</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">criar_sacola</span>(n):
+    sacola <span style="color: #666666">=</span> []
+    <span style="color: #008000; font-weight: bold">for</span> _ <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n):
+        sacola<span style="color: #666666">.</span>append(random<span style="color: #666666">.</span>randint(<span style="color: #666666">1</span>, <span style="color: #666666">5000</span>))
+    <span style="color: #008000; font-weight: bold">return</span> sacola
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">jogar_sacola</span>(sacola, numero):
+    pago <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    recebido <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    <span style="color: #008000; font-weight: bold">for</span> chute <span style="color: #AA22FF; font-weight: bold">in</span> sacola:
+        <span style="color: #008000; font-weight: bold">if</span> chute <span style="color: #666666">==</span> numero:
+            recebido <span style="color: #666666">+=</span> <span style="color: #666666">10</span>
+            <span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;O número é o </span><span style="color: #BB6688; font-weight: bold">{chute}</span><span style="color: #BA2121">. Você acertou!&quot;</span>)
+            <span style="color: #008000; font-weight: bold">break</span>
+        <span style="color: #008000; font-weight: bold">else</span>:
+            pago <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+            <span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;Não é o </span><span style="color: #BB6688; font-weight: bold">{chute}</span><span style="color: #BA2121">.&quot;</span>)
+
+    <span style="color: #008000; font-weight: bold">return</span> recebido <span style="color: #666666">-</span> pago
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">main</span>():
+    sacola <span style="color: #666666">=</span> criar_sacola(<span style="color: #666666">100</span>)
+    numero <span style="color: #666666">=</span> random<span style="color: #666666">.</span>choice(sacola)
+    ganho <span style="color: #666666">=</span> jogar_sacola(sacola, numero)
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;Ganhei </span><span style="color: #BB6688; font-weight: bold">{ganho}</span><span style="color: #BA2121"> reais!!!&quot;</span>)
+
+main()
+</pre><p>Criamos uma lista com 100 números aleatórios entre 1 e 5000 e depois
+selecionamos um número aleatório dessa lista com
+<code class="language-text">random.choice(sacola)</code>. Ele representa o número pensado por Diná.
+Você deveria ter percebido que a chance de ganhar alguma coisa é a
+mesma que antes, mas a vontade de jogar é mania incontrolável.</p>
+<pre class="highlightlanguage-console"><span style="color: #000080; font-weight: bold">user@notebook:~/ra123456/eficiencia$</span> python3 adivinhacao.py
+<span style="color: #888888">Não é o 1353.</span>
+<span style="color: #888888">Não é o 4843.</span>
+<span style="color: #888888">Não é o 2722.</span>
+<span style="color: #888888">Não é o 1692.</span>
+<span style="color: #888888">Não é o 2487.</span>
+<span style="color: #888888">Não é o 569.</span>
+<span style="color: #888888">Não é o 1969.</span>
+<span style="color: #888888">Não é o 2223.</span>
+<span style="color: #888888">Não é o 3901.</span>
+<span style="color: #888888">Não é o 3010.</span>
+<span style="color: #888888">Não é o 3808.</span>
+<span style="color: #888888">Não é o 2159.</span>
+<span style="color: #888888">Não é o 3159.</span>
+<span style="color: #888888">Não é o 4547.</span>
+<span style="color: #888888">Não é o 1138.</span>
+<span style="color: #888888">Não é o 1366.</span>
+<span style="color: #888888">Não é o 700.</span>
+<span style="color: #888888">Não é o 1332.</span>
+<span style="color: #888888">Não é o 2385.</span>
+<span style="color: #888888">Não é o 4670.</span>
+<span style="color: #888888">Não é o 3527.</span>
+<span style="color: #888888">Não é o 3780.</span>
+<span style="color: #888888">Não é o 1607.</span>
+<span style="color: #888888">Não é o 4930.</span>
+<span style="color: #888888">Não é o 1334.</span>
+<span style="color: #888888">Não é o 1796.</span>
+<span style="color: #888888">Não é o 1733.</span>
+<span style="color: #888888">Não é o 1001.</span>
+<span style="color: #888888">Não é o 2469.</span>
+<span style="color: #888888">Não é o 1238.</span>
+<span style="color: #888888">Não é o 1674.</span>
+<span style="color: #888888">Não é o 510.</span>
+<span style="color: #888888">Não é o 1079.</span>
+<span style="color: #888888">Não é o 127.</span>
+<span style="color: #888888">Não é o 2963.</span>
+<span style="color: #888888">Não é o 1418.</span>
+<span style="color: #888888">Não é o 4096.</span>
+<span style="color: #888888">Não é o 751.</span>
+<span style="color: #888888">Não é o 4093.</span>
+<span style="color: #888888">Não é o 3611.</span>
+<span style="color: #888888">Não é o 77.</span>
+<span style="color: #888888">Não é o 4378.</span>
+<span style="color: #888888">O número é o 2557. Você acertou!</span>
+<span style="color: #888888">Ganhei -32 reais!!!</span>
+</pre><blockquote>
+<p>— Ah... também não gostei. Vou mudar o jogo. Agora temos
+as seguintes regras:</p>
+<ol>
+<li>a lista de números que te dou estará <strong>ordenada</strong>;</li>
+<li>para cada chute, você me dirá se ele é <strong>menor</strong> ou <strong>maior</strong>
+que o número pensado.</li>
+</ol>
+<p>— Ok, mas eu mesma irei criar a lista e você
+deverá adivinhar a posição do número!</p>
+<p>— Combinado.</p>
+</blockquote>
+<p>Vacinado, você já sabe que testar todos os números sequencialmente não
+irá melhorar sua sorte. O fato de não conhecer a lista e ter que
+adivinhar a posição do número não lhe assusta. Ao menos, agora saberá
+quando der um bom chute.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">random</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">criar_sacola</span>(n):
+    sacola <span style="color: #666666">=</span> []
+    <span style="color: #008000; font-weight: bold">for</span> _ <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n):
+        sacola<span style="color: #666666">.</span>append(random<span style="color: #666666">.</span>randint(<span style="color: #666666">1</span>, <span style="color: #666666">5000</span>))
+    sacola<span style="color: #666666">.</span>sort()
+    <span style="color: #008000; font-weight: bold">return</span> sacola
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">jogar_sacola</span>(sacola, numero):
+    pago <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    recebido <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    <span style="color: #008000; font-weight: bold">while</span> <span style="color: #008000; font-weight: bold">True</span>:
+        chute <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">input</span>(<span style="color: #BA2121">&quot;Em que posição está o número? &quot;</span>))
+        <span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;Na posição </span><span style="color: #BB6688; font-weight: bold">{chute}</span><span style="color: #BA2121"> o valor é </span><span style="color: #BB6688; font-weight: bold">{sacola[chute]}</span><span style="color: #BA2121">, &quot;</span>, end<span style="color: #666666">=</span><span style="color: #BA2121">&quot;&quot;</span>)
+        <span style="color: #008000; font-weight: bold">if</span> sacola[chute] <span style="color: #666666">==</span> numero:
+            recebido <span style="color: #666666">+=</span> <span style="color: #666666">10</span>
+            <span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;e pensei nesse número mesmo. Você o encontrou!&quot;</span>)
+            <span style="color: #008000; font-weight: bold">break</span>
+        <span style="color: #008000; font-weight: bold">elif</span> sacola[chute] <span style="color: #666666">&lt;</span> numero:
+            pago <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+            <span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;mas pensei em um número maior.&quot;</span>)
+        <span style="color: #008000; font-weight: bold">else</span>:
+            pago <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+            <span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;mas pensei em um número menor.&quot;</span>)
+        <span style="color: #008000">print</span>()
+
+    <span style="color: #008000; font-weight: bold">return</span> recebido <span style="color: #666666">-</span> pago
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">main</span>():
+    sacola <span style="color: #666666">=</span> criar_sacola(<span style="color: #666666">100</span>)
+    numero <span style="color: #666666">=</span> random<span style="color: #666666">.</span>choice(sacola)
+    ganho <span style="color: #666666">=</span> jogar_sacola(sacola, numero)
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;Ganhei </span><span style="color: #BB6688; font-weight: bold">{ganho}</span><span style="color: #BA2121"> reais!!!&quot;</span>)
+
+main()
+</pre><p>Ordenamos a sacola de números antes de começar a jogar. Nesse
+programa, voltamos a pedir ao usuário que digite um chute; dessa vez,
+estamos interessados na <strong>posição</strong> do número pensado. Vamos tentar
+uma vez, para aprender as regras.</p>
+<pre class="highlightlanguage-console"><span style="color: #000080; font-weight: bold">user@notebook:~/ra123456/eficiencia$</span> python3 adivinhacao.py
+<span style="color: #888888">Em que posição está o número? 50</span>
+<span style="color: #888888">Na posição 50 o valor é 2383, mas pensei em um número maior.</span>
+
+<span style="color: #888888">Em que posição está o número? 90</span>
+<span style="color: #888888">Na posição 90 o valor é 4605, mas pensei em um número menor.</span>
+
+<span style="color: #888888">Em que posição está o número? 40</span>
+<span style="color: #888888">Na posição 40 o valor é 2043, mas pensei em um número maior.</span>
+
+<span style="color: #888888">Em que posição está o número? 80</span>
+<span style="color: #888888">Na posição 80 o valor é 4049, mas pensei em um número menor.</span>
+
+<span style="color: #888888">Em que posição está o número? 55</span>
+<span style="color: #888888">Na posição 55 o valor é 2825, mas pensei em um número maior.</span>
+
+<span style="color: #888888">Em que posição está o número? 70</span>
+<span style="color: #888888">Na posição 70 o valor é 3638, mas pensei em um número menor.</span>
+
+<span style="color: #888888">Em que posição está o número? 60</span>
+<span style="color: #888888">Na posição 60 o valor é 3164, mas pensei em um número maior.</span>
+
+<span style="color: #888888">Em que posição está o número? 65</span>
+<span style="color: #888888">Na posição 65 o valor é 3480, mas pensei em um número maior.</span>
+
+<span style="color: #888888">Em que posição está o número? 69</span>
+<span style="color: #888888">Na posição 69 o valor é 3537, e pensei nesse número mesmo. Você o encontrou!</span>
+<span style="color: #888888">Ganhei 2 reais!!!</span>
+</pre><p>O nervosismo pode deixar as pessoas desatentas. Vamos analisar os
+chutes com cuidado. De nada adiantou tentar a posição <code class="language-text">40</code> no terceiro
+chute, pois já sabíamos que o número pensado era maior do que o valor
+da posição <code class="language-text">50</code> e, mais do que isso, que a lista de números estava
+ordenada. De fato, toda vez que Diná diz maior, descobrimos um
+<strong>limitante inferior</strong> para a posição do número pensado e toda vez que
+Diná diz menor, descobrimos um <strong>limitante superior</strong>. Isso lhe dá uma
+ideia para melhorar sua estratégia.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">jogar_sacola</span>(sacola, numero):
+    pago <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    recebido <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+
+    limitante_inferior <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    limitante_superior <span style="color: #666666">=</span> <span style="color: #008000">len</span>(sacola) <span style="color: #666666">-</span> <span style="color: #666666">1</span>
+
+    <span style="color: #008000; font-weight: bold">while</span> <span style="color: #008000; font-weight: bold">True</span>:
+        chute <span style="color: #666666">=</span> (limitante_inferior <span style="color: #666666">+</span> limitante_superior) <span style="color: #666666">//</span> <span style="color: #666666">2</span>
+        <span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;Na posição </span><span style="color: #BB6688; font-weight: bold">{chute}</span><span style="color: #BA2121"> o valor é </span><span style="color: #BB6688; font-weight: bold">{sacola[chute]}</span><span style="color: #BA2121">, &quot;</span>, end<span style="color: #666666">=</span><span style="color: #BA2121">&quot;&quot;</span>)
+        <span style="color: #008000; font-weight: bold">if</span> sacola[chute] <span style="color: #666666">==</span> numero:
+            recebido <span style="color: #666666">+=</span> <span style="color: #666666">10</span>
+            <span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;e pensei nesse número mesmo. Você o encontrou!&quot;</span>)
+            <span style="color: #008000; font-weight: bold">break</span>
+        <span style="color: #008000; font-weight: bold">elif</span> sacola[chute] <span style="color: #666666">&lt;</span> numero:
+            pago <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+            <span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;mas pensei em um número maior.&quot;</span>)
+            limitante_inferior <span style="color: #666666">=</span> chute <span style="color: #666666">+</span> <span style="color: #666666">1</span>
+        <span style="color: #008000; font-weight: bold">else</span>:
+            pago <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+            <span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;mas pensei em um número menor.&quot;</span>)
+            limitante_superior <span style="color: #666666">=</span> chute <span style="color: #666666">-</span> <span style="color: #666666">1</span>
+        <span style="color: #008000">print</span>()
+
+    <span style="color: #008000; font-weight: bold">return</span> recebido <span style="color: #666666">-</span> pago
+</pre><p>Repare como escolhemos a posição de chute como uma posição
+intermediária entre os limitantes conhecidos. Observe também como
+atualizamos os limitantes sempre que fazemos algum chute. Parece que
+sua sorte finalmente está mudando. Vamos jogar.</p>
+<pre class="highlightlanguage-console"><span style="color: #000080; font-weight: bold">user@notebook:~/ra123456/eficiencia$</span> python3 adivinhacao.py
+<span style="color: #888888">Na posição 49 o valor é 2591, mas pensei em um número maior.</span>
+
+<span style="color: #888888">Na posição 74 o valor é 3733, mas pensei em um número menor.</span>
+
+<span style="color: #888888">Na posição 61 o valor é 3109, mas pensei em um número maior.</span>
+
+<span style="color: #888888">Na posição 67 o valor é 3324, mas pensei em um número maior.</span>
+
+<span style="color: #888888">Na posição 70 o valor é 3450, mas pensei em um número maior.</span>
+
+<span style="color: #888888">Na posição 72 o valor é 3548, e pensei nesse número mesmo. Você o encontrou!</span>
+<span style="color: #888888">Ganhei 5 reais!!!</span>
+</pre><blockquote>
+<p>Diná se estremece.</p>
+<p>— Também quero mudar.</p>
+<p>— Como?</p>
+<p>— Simples, a lista agora terá 1000 números.</p>
+</blockquote>
+<p>Já sem dinheiro na carteira, melhor você pensar duas vezes antes de
+aceitar essa proposta. Você aceitará?</p>
+<h1 id="buscas">Buscas</h1>
+<p>Os jogos acima ilustram duas tarefas muito comuns em computação. A
+primeira tarefa corresponde ao problema de, dada uma lista de valores,
+encontrar um determinado elemento. A segunda tarefa corresponde ao
+problema de, dada uma lista de valores <strong>ordenada</strong>, encontrar um
+determinado elemento.</p>
+<h2 id="busca-sequencial">Busca sequencial</h2>
+<p>Em diversas situações precisamos fazer buscas sequênciais. Já fizemos
+isso várias vezes, como quando tivemos que procurar uma palavra em um
+conjunto de palavras, ou quando procuramos a posição de inserção no vetor
+para o algoritmo insertion-sort. Recorrentemente, uma função que implementa
+uma busca sequencial será parecida com a seguinte.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">busca_sequencial</span>(lista, valor_procurado):
+    <span style="color: #008000; font-weight: bold">for</span> i, valor <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(lista):
+        <span style="color: #008000; font-weight: bold">if</span> valor <span style="color: #666666">==</span> valor_procurado:
+            <span style="color: #008000; font-weight: bold">return</span> i
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">None</span>
+</pre><p>Nessa função, devolvemos <code class="language-text">None</code> quando não existe um elemento na lista
+de valor <code class="language-text">valor_procurado</code>. Dependendo da situação, pode ser mais
+conveniente levantar uma exceção quando isso acontece.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">busca_sequencial</span>(lista, valor_procurado):
+    <span style="color: #008000; font-weight: bold">for</span> i, valor <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(lista):
+        <span style="color: #008000; font-weight: bold">if</span> valor <span style="color: #666666">==</span> valor_procurado:
+            <span style="color: #008000; font-weight: bold">return</span> i
+    <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #D2413A; font-weight: bold">ValueError</span>(<span style="color: #BA2121">f&quot;Valor </span><span style="color: #BB6688; font-weight: bold">{valor_procurado}</span><span style="color: #BA2121"> não existe na lista.&quot;</span>)
+</pre><p>A diferença é que, na segunda versão, faz parte das premissas da
+função que o valor procurado esteja de fato na lista.</p>
+<p>Na verdade, não necessariamente realizamos buscas sequenciais apenas
+em dados armazenados em uma lista. Por exemplo, para encontrar o
+máximo de vários números digitados no teclado, não conhecemos todos os
+números a priori e nem temos controle sobre quais valores serão
+digitados.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">descobrir_maximo</span>(n):
+    maximo <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">input</span>())
+    <span style="color: #008000; font-weight: bold">for</span> _ <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, n):
+        numero <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">input</span>())
+        <span style="color: #008000; font-weight: bold">if</span> numero <span style="color: #666666">&gt;</span> maximo:
+            maximo <span style="color: #666666">=</span> numero
+    <span style="color: #008000; font-weight: bold">return</span> maximo
+</pre><p>Enquanto muitas vezes queremos buscar o valor de um elemento, em
+outras vezes estamos interessados no índice em que o elemento está.
+Também, pode ser que não queiramos encontrar um valor exato, mas o
+primeiro elemento da lista que é maior ou igual a esse número. São
+diversas as tarefas que resolvemos percorrendo linearmente uma lista
+de elementos.</p>
+<p>Quanto tempo gastamos para procurar um elemento sequencialmente em uma
+lista depende de quantos elementos há na lista e de onde esse elemento
+está na lista. Quando temos azar, pode ser que o elemento não esteja
+presente ou que ele esteja apenas na última posição. Nesses casos, que
+chamamos de <strong>piores casos</strong>, temos que acessar todos os elementos.</p>
+<h2 id="busca-binaria">Busca binária</h2>
+<p>Algumas vezes temos alguma informação adicional sobre a lista da
+entrada e sabemos que os elementos estão ordenados. Nesses casos,
+não precisamos necessariamente acessar todos os elementos da lista
+para descobrir a posição de um algum valor.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">busca_binaria</span>(lista, valor_procurado):
+    limitante_inferior <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    limitante_superior <span style="color: #666666">=</span> <span style="color: #008000">len</span>(lista) <span style="color: #666666">-</span> <span style="color: #666666">1</span>
+    <span style="color: #008000; font-weight: bold">while</span> limitante_inferior <span style="color: #666666">&lt;=</span> limitante_superior:
+        m <span style="color: #666666">=</span> (limitante_inferior <span style="color: #666666">+</span> limitante_superior) <span style="color: #666666">//</span> <span style="color: #666666">2</span>
+        <span style="color: #008000; font-weight: bold">if</span> lista[m] <span style="color: #666666">==</span> valor_procurado:
+            <span style="color: #008000; font-weight: bold">return</span> m
+        <span style="color: #008000; font-weight: bold">elif</span> lista[m] <span style="color: #666666">&lt;</span> valor_procurado:
+            limitante_inferior <span style="color: #666666">=</span> m <span style="color: #666666">+</span> <span style="color: #666666">1</span>
+        <span style="color: #008000; font-weight: bold">else</span>:
+            limitante_superior <span style="color: #666666">=</span> m <span style="color: #666666">-</span> <span style="color: #666666">1</span>
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">None</span>
+</pre><p>Não tem nada em particular nesse código que nos restrinja a números. A
+única restrição é de que os elementos sejam comparáveis. Assim
+podemos comparar strings, tuplas, ou mesmo utilizar uma função
+particular para comparação como discutido quando falamos de
+<a href="07-algortimos-iterativos.html">ordenção</a>.</p>
+<p>Quanto tempo gasta a função <code class="language-text">busca_binaria</code> quando passamos uma lista
+de tamanho $n$? Se você prestar atenção, perceberá que toda vez que
+atualizamos um limitante, descartamos pelo menos metade das
+possibilidades. Quantas vezes podemos dividir uma lista em $2$ para
+que reste apenas um elemento? Essa é justamente a definição do
+logaritmo na base $2$. Portanto, o número de vezes que testamos alguma
+posição até encontrar o elemento procurado é no máximo $\log_2 n$.
+Você pode agora decidir com mais tranquilidade se aceita ou não a
+última proposta de Diná.</p>
+<p>Na verdade, a busca binária é apenas um exemplo de uma estratégia mais
+geral bastante útil. Para utilizar busca binária em uma sequência,
+basta que:</p>
+<ol>
+<li>
+<p>conheçamos limitantes inferiores e superiores para a posição de
+alguma estrutura procurada;</p>
+</li>
+<li>
+<p>dada uma posição, podemos decidir se existe uma estrutura antes ou
+depois dessa posição.</p>
+</li>
+</ol>
+<p>Um exemplo dessa ideia pode ser encontrado no chamado <strong>método da
+bissecção</strong>, cujo objetivo é encontrar uma aproximação de uma raiz de
+uma função contínua $f(x)$. Suponha que sabemos que $f(a) &lt; 0$ e que
+$f(b) &gt; 0$. Como $f$ é contínua, deve haver algum valor $x$ tal que
+$f(x) = 0$. A função <code class="language-text">metodo_bisseccao</code> a seguir encontra um valor $y$
+tal que $f(y)$ está muito muito próximo de $0$.</p>
+<pre class="highlightlanguage-python">ERRO <span style="color: #666666">=</span> <span style="color: #666666">0.00000001</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
+    <span style="color: #008000; font-weight: bold">return</span> x<span style="color: #666666">**2</span> <span style="color: #666666">-</span> <span style="color: #666666">2</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">metodo_bisseccao</span>(a, b, funcao):
+    <span style="color: #008000; font-weight: bold">while</span> b <span style="color: #666666">-</span> a <span style="color: #666666">&gt;</span> ERRO:
+        m <span style="color: #666666">=</span> (a <span style="color: #666666">+</span> b) <span style="color: #666666">/</span> <span style="color: #666666">2</span>
+        <span style="color: #008000; font-weight: bold">if</span> funcao(m) <span style="color: #666666">&lt;</span> <span style="color: #666666">0</span>:
+            a <span style="color: #666666">=</span> m
+        <span style="color: #008000; font-weight: bold">else</span>:
+            b <span style="color: #666666">=</span> m
+    <span style="color: #008000; font-weight: bold">return</span> m
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">main</span>():
+    a <span style="color: #666666">=</span> <span style="color: #666666">0.0</span>
+    b <span style="color: #666666">=</span> <span style="color: #666666">4.0</span>
+    y <span style="color: #666666">=</span> metodo_bisseccao(a, b, f)
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;f(</span><span style="color: #BB6688; font-weight: bold">{y}</span><span style="color: #BA2121">) = {f(y)}&quot;</span>)
+
+main()
+</pre><p>Para a função $f$ definida nesse exemplo, uma solução é $\sqrt{2}$.
+Esse programa nos dá uma aproximação dessa raiz.</p>
+<pre class="highlightlanguage-console"><span style="color: #000080; font-weight: bold">user@notebook:~/ra123456/eficiencia$</span> python3 bisseccao.py
+<span style="color: #888888">f(1.4142135605216026) = -5.236811428943611e-09</span>
+</pre><p>Um outro exemplo de aplicação de busca binária é dado no exercício
+sobre os sentidos das ruas na <a href="../fixacao/11-eficiencia.html">lista</a>
+de exercícios de fixação.</p>
+
+
+        <!-- Navigation buttons -->
+<div role="navigation" class="row justify-content-between">
+
+  <div class="col-12 col-sm-5 col-lg-4">
+    <a class="btn btn-primary w-100 mt-1 mt-sm-0" href="09-colecoes.html">
+      &larr; Anterior
+    </a>
+  </div>
+
+  <div class="col-12 d-none d-lg-inline-block col-lg-4">
+    <a class="btn btn-secondary w-100" href="../index.html">
+      Voltar
+    </a>
+  </div>
+
+  <div class="col-12 col-sm-5 col-lg-4">
+    <a class="btn btn-primary w-100 mt-1 mt-sm-0" href="11-recursao.html">
+      Próxima &rarr;
+    </a>
+  </div>
+
+</div>      </div>
+    </div>
+</article>
+
+<hr />
+
+
+<!-- Footer -->
+<footer>
+  <p class="copyright text-muted">
+    <a href="https://www.ic.unicamp.br/~lehilton/" title="Página pessoal">
+      Copyright &copy; 2020
+    </a>
+  </p>
+</footer>
+<!-- Bootstrap core JavaScript -->
+<script src="../dist/vendor/jquery/jquery.min.js"></script>
+<script src="../dist/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="../dist/vendor/prism/prism.js"></script> -->
+
+<!-- Custom scripts for this template -->
+<script src="../dist/js/main.min.js"></script>
+
+<!-- Mathjax setup -->
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+  };
+</script>
+<script src="../dist/vendor/mathjax/tex-chtml.js" id="MathJax-script" async></script>
+
+
+
+  </body>
+
+</html>

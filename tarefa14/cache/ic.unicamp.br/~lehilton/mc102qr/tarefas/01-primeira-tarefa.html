@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    Algoritmos e Programação de Computadores
+    - Primeiros passos
+  </title>
+
+  <meta name="keywords" content="MC102, Algoritmos e Programação de Computadores, Python">
+  <meta name="description" content="Página da disciplina de MC102 para turma QR">
+  <meta name="author" content="Lehilton Pedrosa">
+
+  <!-- Bootstrap core CSS -->
+  <link href="../dist/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Theme css -->
+  <link href="../dist/css/main.min.css" rel="stylesheet">
+
+  <!-- Prism -->
+  <!-- <link href="../dist/vendor/prism/prism.css" rel="stylesheet" /> -->
+</head>
+<body >
+
+  <body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="../index.html">MC102</a>
+
+
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+      aria-label="Toggle navigation">
+      Menu
+      <i>&#9776;</i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item top back-to-top-link">
+          <a class="nav-link" href="#"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>topo</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="../index.html">voltar</a>
+        </li>
+
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Header -->
+<header class="masthead"   style="background-image: url('../images/home-bg.jpg')" >
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-heading">
+
+          <h1 >Primeiros passos</h1>
+
+
+          <span class="meta">Segunda, 9 de março de 2020</span>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+
+
+      <div class="col-lg-8 col-md-10 mx-auto">
+
+        <h1 id="linha-de-comando">Linha de comando</h1>
+<p>Para fazer as tarefas que são solicitadas nessa disciplina, você deve se familiarizar com a interação com o computador através de linha de comando. No GNU/Linux, uma dos interpretadores de comando mais utilizado é o <a href="https://www.gnu.org/software/bash/">Bash</a>. Nessa tarefa, iremos ver como dar comando ao computador utilizando o Bash. Caso queira, você poderá utilizar outros interpretadores de comando.</p>
+<p>Se você não tem uma distribuição GNU/Linux instalada em seu computador, consulte <a href="https://ubuntu.com/download/desktop">aqui</a> como instalar o Ubuntu. Você também pode instalar o Ubuntu (ou outras distribuições GNU/Linux no Windows). Clique <a href="https://docs.microsoft.com/pt-br/windows/wsl/install-win10">aqui</a> para mais informações.</p>
+<p>A primeira atividade é criar um diretório e ver o seu conteúdo. Para isso, abra o terminal e execute o comando abaixo.</p>
+<pre class="highlightlanguage-console"><span style="color: #888888">mkdir diretorio</span>
+</pre><p>Para navegar para esse diretório, podemos utilizar o comando <code class="language-text">cd</code>.</p>
+<pre class="highlightlanguage-console"><span style="color: #888888">cd diretorio</span>
+</pre><p>Agora, liste o conteúdo desse diretório.</p>
+<pre class="highlightlanguage-console"><span style="color: #888888">ls</span>
+</pre><p>O nosso diretório contém apenas os diretórios padrões <code class="language-text">.</code> e <code class="language-text">..</code>. O primeiro corresponde ao diretório atual e o segundo ao diretório pai.</p>
+<p>Para vermos os comandos para copiar e mover arquivos, crie um arquivo nesse diretório utilizando o comando <code class="language-text">touch</code>. Será criado um arquivo sem conteúdo.</p>
+<pre class="highlightlanguage-console"><span style="color: #888888">touch arquivo.txt</span>
+</pre><p>Se você listar o conteúdo desse diretório, deverá ver o arquivo que acabou de criar.</p>
+<p>Agora, crie um subdiretório.</p>
+<pre class="highlightlanguage-console"><span style="color: #888888">mkdir sub-dir</span>
+</pre><p>Copie o arquivo <code class="language-text">arquivo.txt</code> para esse subdiretório com o comando <code class="language-text">cp</code>.</p>
+<pre class="highlightlanguage-console"><span style="color: #888888">cp arquivo.txt sub-dir/</span>
+</pre><p>Crie um novo arquivo.</p>
+<pre class="highlightlanguage-console"><span style="color: #888888">touch arquivo2.txt</span>
+</pre><p>Move esse novo arquivo para o subdiretório com o comando <code class="language-text">mv</code>.</p>
+<pre class="highlightlanguage-console"><span style="color: #888888">mv arquivo2.txt sub-dir/</span>
+</pre><p>Navegue para o subdiretório e liste o seu conteúdo.</p>
+<pre class="highlightlanguage-console"><span style="color: #888888">cd sub-dir</span>
+<span style="color: #888888">ls</span>
+</pre><p>Para remover um arquivo, utilize o comando <code class="language-text">rm</code>.</p>
+<pre class="highlightlanguage-console"><span style="color: #888888">rm arquivo.txt</span>
+</pre><p>Volte para o diretório pai e remova o subdiretório com <em>todo</em> o seu
+conteúdo.</p>
+<pre class="highlightlanguage-console"><span style="color: #888888">cd ..</span>
+<span style="color: #888888">rm -r sub-dir</span>
+</pre><h1 id="instalando-o-python">Instalando o Python</h1>
+<p>No Ubuntu, e em distribuições GNU/Linux baseadas, você pode instalar o Python 3.x com os comandos abaixo.</p>
+<pre class="highlightlanguage-console"><span style="color: #888888">sudo apt update</span>
+<span style="color: #888888">sudo apt install python3</span>
+</pre><p>Execute <code class="language-text">python3 --version</code> para ver a versão instalada.</p>
+<p>Para outras distribuições, você pode consultar o site oficial do <a href="https://realpython.com/installing-python/">Python</a>.</p>
+<p>Para o Windows, você pode seguir esse <a href="https://realpython.com/installing-python/">tutorial</a>.</p>
+<h1 id="usando-o-git">Usando o Git</h1>
+<p>O Git é uma ferramenta de controle de versão distribuída. Para mais detalhes, ou para a instalação em um sistema operacional diferente, leia
+o tutorial <a href="https://www.hostinger.com.br/tutoriais/tutorial-do-git-basics-introducao/">Introdução ao GIT</a>.</p>
+<p>No contexto da disciplina, o Git é uma ferramenta para o acompanhamento das tarefas feitas
+durante o semestre. A partir dele, @s estudantes terão acesso a uma série de tarefas que
+servirão de avaliação.</p>
+<p>Antes de começar é preciso instalar o Git para torná-lo disponível em seu computador.
+Abra o terminal e execute o comando abaixo.</p>
+<pre class="highlightlanguage-console"><span style="color: #888888">sudo apt install git</span>
+</pre><p>Verifique se a instalação ocorreu com sucesso com o camando <code class="language-text">git --version</code>.</p>
+<h2 id="clonando-seu-repositorio-pessoal">Clonando seu repositório pessoal</h2>
+<p>Na primeira aula, o professor irá criar um repositório no <a href="https://gitlab.ic.unicamp.br">Gitlab do IC</a> para cada estudante. Antes de ser possível criar o repositório, é necessário que cada estudante entre <a href="https://gitlab.ic.unicamp.br">https://gitlab.ic.unicamp.br</a>) e realize o login pela primeira vez.</p>
+<p>Uma vez criado o repositório, é possível cloná-lo para a sua máquina, realizar alterações e depois sincronizá-lo com o repositório remoto.</p>
+<p>Na página principal do seu repositório, clique no botão <code class="language-text">Clone</code> e copie a URL sobre <code class="language-text">Clone with HTTPS</code>.</p>
+<p>Abra o terminal dentro do diretório que ficará o repositório e digite <code class="language-text">git clone</code> e cole a URL copiada anteriomente.</p>
+<pre class="highlightlanguage-console"><span style="color: #888888">git clone https://gitlab.ic.unicamp.br/mc102-2020/raXXXXXX.git</span>
+</pre><p>Pressione <strong>Enter</strong> e realize a autenticação.</p>
+<p>Dentro da pasta que você acabou de criar, deve haver um diretório <code class="language-text">tarefa01</code>. Se não, espere alguns minutos e digite <code class="language-text">git pull</code> dentro do pasta <code class="language-text">raXXXXXX</code> criada.</p>
+<h1 id="submissao-de-tarefas">Submissão de tarefas</h1>
+<p>Durante o semestre, serão realizadas diversas tarefas. A maioria delas consiste em escrever um ou mais programas em Python que resolvem determinados problema. Vamos ver um exemplo:</p>
+<p>Escreva um programa chamado <code class="language-text">bomdia.py</code> que lê um nome no terminal e dá bom dia.</p>
+<h2 id="entrada">Entrada</h2>
+<p>A entrada do programa é o que o usuário irá digitar quando executa o programa. Nesse exemplo, é apenas um nome de uma pessoa.</p>
+<pre class="highlight">Maria
+</pre><h2 id="saida">Saída</h2>
+<p>A saída o programa é o que o programa irá imprimir na tela após o usuário digitar a entrada.
+Nesse exemplo, para a entrada acima queremos que o programa tenha a saída:</p>
+<pre class="highlight">Bom dia, Maria.
+</pre><h2 id="resolvendo-o-exercicio">Resolvendo o exercício</h2>
+<p>Para resolver essa tarefa, precisamos criar um script em Python que faz o solicitado.
+Para isso, você pode utilizar qualquer editor de texto. Uma sugestão é utilizar
+os <a href="https://code.visualstudio.com/">VC Code</a>, que já deve estar instalado nas máquinas
+do IC. Para isso, vá até o diretório da tarefa correspondente no seu diretório,
+crie um arquivo bomdia.py (se já não existir) e execute o editor.</p>
+<pre class="highlightlanguage-console"><span style="color: #888888">cd raXXXXXX/tarefa01</span>
+<span style="color: #888888">touch bomdia.py</span>
+<span style="color: #888888">code bomdia.py</span>
+</pre><p>Em tarefas futuras, você deverá criar todo o programa. Nesse primeiro dia,
+vamos apenas copiar código abaixo e salvar o arquivo <code class="language-text">bomdia.py</code>.</p>
+<pre class="highlightlanguage-python">
+nome <span style="color: #666666">=</span> <span style="color: #008000">input</span>()
+
+<span style="color: #008000">print</span>(<span style="color: #BA2121">f&#39;Bom dia, </span><span style="color: #BB6688; font-weight: bold">{nome}</span><span style="color: #BA2121">.&#39;</span>)
+</pre><h2 id="testando-o-exercicio">Testando o exercício</h2>
+<p>Para executar o programa que você criou, vá até a linha de comandos e digite</p>
+<pre class="highlightlanguage-console"><span style="color: #888888">python3 bomdia.py</span>
+</pre><p>O console vai ficar piscando esperando que você digite algo. Digite seu nome e aperte Enter. Deve aparecer uma mensagem de bom dia! Se não, verifique se não fez todos os passos acima.</p>
+<p>Você acabou de testar manualmente o seu programa. No mundo real, é importante criar testes automatizados. Na nossa disciplina, em cada tarefas haverá um arquivo <code class="language-text">testar.py</code> que serve para você testar a sua tarefa localmente. Esse arquivo é incluído no diretório da tarefa. Para testar usando o script, abra o terminal dentro do diretório que contém o arquivo python e digite</p>
+<pre class="highlightlanguage-console"><span style="color: #888888">python3 testar.py</span>
+</pre><p>Ele deve dar uma mensagem falando que o teste do exercício <code class="language-text">bomdia.py</code> passou. Esse é um bom momento para você salvar as suas alterações!</p>
+<h2 id="sincronizando-repositorios">Sincronizando repositórios</h2>
+<p>As alterações realizadas anteriormente foram no repositório local. Agora é necessário &quot;enviá-las&quot; ao repositório remoto.</p>
+<p>No terminal, digite <code class="language-text">git add .</code> para adicionar as alterações à &quot;área de preparação&quot;. Depois precisamos registrar (&quot;commit&quot;) essas alterações.</p>
+<p>Antes do primeiro &quot;commit&quot; é necessário definir seu endereço de e-mail e nome de usuário conforme o exemplo a seguir. Certifique-se de usar sempre o mesmo endereço de e-mail.</p>
+<pre class="highlightlanguage-console"><span style="color: #888888">git config --global user.email &quot;you@example.com&quot;</span>
+<span style="color: #888888">git config --global user.name &quot;Your Name&quot;</span>
+</pre><p>O proximo passo é confirmar as alterações, ou seja, fazer um commit.</p>
+<pre class="highlightlanguage-console"><span style="color: #888888">git commit -m &quot;comentário sobre as alterações&quot;</span>
+</pre><p>As alterações ainda não foram enviadas para o repositório remoto. Por último, é necessário executar o comando <code class="language-text">git push</code> no terminal e realizar a autenticação.</p>
+<h2 id="boa-noite">Boa noite</h2>
+<p>Quando você executou o programa <code class="language-text">testar.py</code> deve ter percebido que algum teste falhou. Isso é porque pode haver mais de um exercício por tarefa. Para concluir a primeira tarefa, faça um programa <code class="language-text">boanoite.py</code> que lê vários nomes e dá boa noite, conforme entrada e saída a seguir.</p>
+<h2 id="entrada">Entrada</h2>
+<pre class="highlight">3
+José
+Maria
+Manuela
+</pre><h2 id="saida">Saída</h2>
+<pre class="highlight">Boa noite, José.
+Boa noite, Maria.
+Boa noite, Manuela.
+</pre><p>Para isso, crie um arquivo de texto chamado <code class="language-text">boanoite.py</code> copiando o exemplo abaixo:</p>
+<pre class="highlightlanguage-python">n <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">input</span>())
+
+<span style="color: #008000; font-weight: bold">for</span> _ <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n):
+    nome <span style="color: #666666">=</span> <span style="color: #008000">input</span>()
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">f&#39;Boa noite, </span><span style="color: #BB6688; font-weight: bold">{nome}</span><span style="color: #BA2121">.&#39;</span>)
+</pre><p>Após concluir, e testar, envie suas alterações para o repositório remoto.</p>
+<h2 id="verificando-sua-tarefas">Verificando sua tarefas</h2>
+<p>Vocês devem ter recebido um e-mail com uma chave longa. Essa chave é para vocês verificarem a correção das tarefas e não pode ser alterada. Por isso, não percam ou mostrem essa chave para ninguém. Se não recebeu, converse com o professor ou monitor.</p>
+<p>Para consultar o resultado da correção automática da sua submissão, <a href="https://mc102qr.ic.unicamp.br/entrar/">clique aqui</a>.</p>
+
+
+        <!-- Navigation buttons -->
+<div role="navigation" class="row justify-content-between">
+
+  <div class="col-12 col-sm-5 col-lg-4">
+  </div>
+
+  <div class="col-12 d-none d-lg-inline-block col-lg-4">
+    <a class="btn btn-secondary w-100" href="../index.html">
+      Voltar
+    </a>
+  </div>
+
+  <div class="col-12 col-sm-5 col-lg-4">
+    <a class="btn btn-primary w-100 mt-1 mt-sm-0" href="02-problemas-algoritmos.html">
+      Próxima &rarr;
+    </a>
+  </div>
+
+</div>      </div>
+    </div>
+</article>
+
+<hr />
+
+
+<!-- Footer -->
+<footer>
+  <p class="copyright text-muted">
+    <a href="https://www.ic.unicamp.br/~lehilton/" title="Página pessoal">
+      Copyright &copy; 2020
+    </a>
+  </p>
+</footer>
+<!-- Bootstrap core JavaScript -->
+<script src="../dist/vendor/jquery/jquery.min.js"></script>
+<script src="../dist/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="../dist/vendor/prism/prism.js"></script> -->
+
+<!-- Custom scripts for this template -->
+<script src="../dist/js/main.min.js"></script>
+
+
+
+
+  </body>
+
+</html>

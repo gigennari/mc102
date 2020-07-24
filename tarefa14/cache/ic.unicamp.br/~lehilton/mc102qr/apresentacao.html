@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    Algoritmos e Programação de Computadores
+    - Apresentação da disciplina
+  </title>
+
+  <meta name="keywords" content="MC102, Algoritmos e Programação de Computadores, Python">
+  <meta name="description" content="Página da disciplina de MC102 para turma QR">
+  <meta name="author" content="Lehilton Pedrosa">
+
+  <!-- Bootstrap core CSS -->
+  <link href="dist/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Theme css -->
+  <link href="dist/css/main.min.css" rel="stylesheet">
+
+  <!-- Prism -->
+  <!-- <link href="dist/vendor/prism/prism.css" rel="stylesheet" /> -->
+</head>
+<body  data-spy="scroll" data-target="#toc" >
+
+  <body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">MC102</a>
+
+
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+      aria-label="Toggle navigation">
+      Menu
+      <i>&#9776;</i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item top back-to-top-link">
+          <a class="nav-link" href="#"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>topo</a>
+        </li>
+
+
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Header -->
+<header class="masthead"   style="background-image: url('images/home-bg.jpg')" >
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="page-heading">
+
+          <h1 data-toc-skip>Apresentação da disciplina</h1>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Page Content -->
+<div class="container">
+  <div class="row">
+
+    <!-- left toc -->
+    <div class="col-sm-3">
+      <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+    </div>
+
+    <div class="col-lg-8 col-md-10 mx-auto">
+
+      <table>
+<thead>
+<tr>
+<th>Instituto de Computação — Universidade de Campinas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Algoritmos e Programação de Computadores</td>
+</tr>
+<tr>
+<td>Primeiro Semestre de 2020 – MC102QR</td>
+</tr>
+<tr>
+<td>Prof. <em>Lehilton Lelis Chaves Pedrosa</em></td>
+</tr>
+<tr>
+<td>Monitores <em>Italos, Welverton</em> (PED) e <em>Andreis, Rafael, Rodrigo</em> (PAD)</td>
+</tr>
+</tbody></table><h2 id="adequacao-das-atividades">Adequação das atividades</h2>
+<p>Considerando a situação excepcional, devido à pandemia do novo
+coronavírus, e as instruções da reitoria da Unicamp, as atividades de
+ensino-aprendizagem devem continuar, adequando as atividades que
+originalmente foram planejadas para serem realizadas nas salas de aula
+e de laboratório. Tenham em mente que isso poderá implicar prejuízo no
+aprendizado, então é importante que tod@s estudantes se mantenham
+interessad@s e dedicad@s à disciplina.</p>
+<h3 id="recursos-necessarios">Recursos necessários</h3>
+<p>Para a realização das atividades não presenciais, cada estudante
+deverá ter acesso, em casa ou no local em que preferir trabalhar, aos
+seguintes recursos:</p>
+<ul>
+<li>
+<p>Um computador desktop ou laptop, com sistema operacional Windows ou
+Unix-like (Linux/MacOS) em que seja possível instalar Python 3 e Git</p>
+</li>
+<li>
+<p>Acesso a Internet com conexão estável nos horários de atendimento
+programados. Não é necessário ter conexão de alta velocidade.</p>
+</li>
+</ul>
+<h3 id="plano-alternativo">Plano alternativo</h3>
+<p>Caso algum@ estudante não tenha acesso aos recursos necessários, ou
+não possa realizar as atividades programadas por questões pessoais,
+deve-se enviar um e-mail diretamente para o professor explicando os
+motivos. Será proposto um plano alternativo adequado a cada caso.</p>
+<h3 id="chat-e-atendimento">Chat e atendimento</h3>
+<p>Foi criado uma sala para conversas e dúvidas na plataforma:</p>
+<p><a href="http://chat.google.com/">http://chat.google.com/</a></p>
+<p>É recomendável acessar esse site utilizando um computador, mas também
+é possível baixar e instalar o aplicativo de celular disponível.
+Procurem por <strong>Hangouts Chat</strong>.</p>
+<p>Para acessar, é necessário fazer login com a conta coorporativa da
+Unicamp, i.e., seu e-mail que tem o formato parecido com
+<code class="language-text">a123456@dac.unicamp.br</code>. Uma vez logado no aplicativo, procure pela
+sala chamada MC102QR.</p>
+<p>Todos podem escrever e ler as mensagens nessa sala, assim você pode
+fazer perguntas ou mesmo responder dúvidas de colegas. O professor e
+os monitores acompanharão as conversas e tentarão responder sempre que
+possível. Pelo menos um monitor ficará disponível no chat nos horários
+de atendimento marcados abaixo:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>segunda</th>
+<th>terça</th>
+<th>quarta</th>
+<th>quinta</th>
+<th>sexta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10h - 11h</td>
+<td></td>
+<td>professor</td>
+<td></td>
+<td>professor</td>
+<td></td>
+</tr>
+<tr>
+<td>14h - 16h</td>
+<td>atendimento</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>16h - 18h</td>
+<td>atendimento</td>
+<td>atendimento</td>
+<td>atendimento</td>
+<td>atendimento</td>
+<td>atendimento</td>
+</tr>
+</tbody></table><p>Esses horários podem sofre alterações de acordo com a demanda de
+estudantes e disponibilidade dos monitores.</p>
+<p><strong>ATENÇÃO:</strong> Se após 15 min após o início da sessão de atendimento não
+houver nenhum estudante solicitando ajuda, os monitores poderão
+desconectar-se do chat. Nesse caso, estudantes que precisarem de
+atendimento poderão devem mandar um e-mail para os monitores em
+<a href="mailto:monitores-mc102@googlegroups.com">monitores-mc102@googlegroups.com</a>.</p>
+<h3 id="adequacao-das-aulas">Adequação das aulas</h3>
+<p>Não haverá aulas de laboratório.As aulas expositivas serão
+substituídas por leituras do material disponível no site e posterior
+realização de exercícios de fixação. O professor irá utilizar os
+horários das aulas expositivas para tirar dúvidas ou resolver
+exercícios de fixação <em>a respeito do último conteúdo ministrado</em>.</p>
+<p>No início do horário de atendimento do professor, será disponibilizado
+um link de uma videoconferência no chat. Os alunos podem participar
+dessa chamada clicando no link. Será compartilhado o vídeo da tela com
+o conteúdo e as explicações serão feitas por áudio.</p>
+<h3 id="adequacao-de-avaliacao">Adequação de avaliação</h3>
+<p>As tarefas seguirão o mesmo fluxo definido anteriormente. As tarefas
+verificadoras ainda devem ser apresentadas aos monitores. Para isso, é
+necessário entrar no Chat em algum dos horários de atendimento e
+informar que deseja apresentar sua tarefa. O monitor incluirá você na
+fila em <em>ordem de submissão</em>. Assim que disponível, o monitor enviará
+um link em particular para uma videoconferência.</p>
+<p><em>Nessa videoconferência, você precisará compartilhar a tela do seu
+computador e precisará ter microfone e alto-falante funcionando e
+corretamente configurados</em>. Caso não seja possível, o monitor ainda
+terá acesso a sua tarefa pelo repositório e dará o feedback de maneira
+escrita; no entanto, isso tornará o processo mais lento e trabalhoso.</p>
+<p>Tenha em mente que a apresentação da tarefa consiste de uma conversa
+de 5 a 10 min com o monitor, com perguntas, para observar erros e
+fazer correções eventuais. Se houver muit@s estudantes na fila, pode
+ser necessário voltar em outro horário de atendimento.</p>
+<p>Não será realizado controle de presença (presencial ou virtual) e
+todos estudantes terão 100% de frequência.</p>
+<h3 id="adequacao-de-exame">Adequação de exame</h3>
+<p>O exame será substituído por uma atividade de programação com prazo de
+entrega de 24h seguida de uma entrevista com o professor via
+videoconferência sobre essa tarefa, agendada em comum acordo com @
+estudante.</p>
+<h2 id="introducao">Introdução</h2>
+<p>Este é o plano de desenvolvimento da disciplina e um guia de estudos. Leia-o com
+atenção e consulte este documento durante todo o semestre. Também, sempre
+acompanhe os avisos na página da disciplina.</p>
+<h3 id="objetivos">Objetivos</h3>
+<p>Ao final do curso, @ estudante deverá ser capaz de:</p>
+<ul>
+<li>descrever problemas computacionais, computabilidade e limitações;</li>
+<li>descrever organização básica de computadores e de sistemas de software;</li>
+<li>utilizar estruturas de dados elementares: variável, lista, matriz</li>
+<li>implementar e testar programas escritos em Python.</li>
+<li>escrever algoritmos iterativos e recursivos;</li>
+</ul>
+<h3 id="pre-requisitos">Pré-requisitos</h3>
+<p>A disciplina não tem pré-requisitos formais. O foco será em problemas
+computacionais e algoritmos, então ter tido uma experiência anterior com
+programação pode ajudar a desenvolver as atividades ministradas, mas não
+substitui nem é necessário para o bom andamento da disciplina.</p>
+<p>Ao início do curso, é recomendável que @ estudante seja capaz de:</p>
+<ul>
+<li>desenvolver e executar um cronograma de estudo contínuo;</li>
+<li>interpretar e descrever problemas e situações textualmente;</li>
+<li>consultar, organizar e resumir fontes de pesquisa diversas (bibliotecas e internet).</li>
+</ul>
+<h2 id="atividades">Atividades</h2>
+<h3 id="aula-expositiva">Aula expositiva</h3>
+<p>Durante as aulas, @s estudantes devem participar levantando dúvidas, sugestões,
+ou possivelmente resolvendo os problemas solicitados. A qualquer momento @
+estudante pode e deve tirar dúvidas com o professor. Sempre que adequado, serão
+propostos exercícios que <em>devem ser feitos</em> em sala. Durante a aula expositiva o
+uso de qualquer equipamento eletrônico (celular, tablet, notebook etc.) é
+permitido somente nos momentos em que houver <em>autorização expressa</em> do
+professor.</p>
+<h3 id="aula-no-laboratorio">Aula no laboratório</h3>
+<p>As tarefas da disciplina deverão ser feitas em casa e, principalmente, durante
+as aulas de laboratório. Nessas aulas, há o atendimento direto dos monitores,
+que poderão auxiliar no entendimento do enunciado, dúvidas específicas sobre o
+conteúdo e outros assuntos. A participação nas atividade de laboratório é
+obrigatória. Além disso, o horário das aulas de laboratório corresponde ao
+horário reservado para a apresentação das tarefas (veja abaixo).</p>
+<h2 id="tarefas">Tarefas</h2>
+<p>Haverá uma série de tarefas que servirão de avaliação da disciplina. Cada tarefa
+é um conjunto de uma ou mais atividades, podendo conter questões dissertativas,
+exercícios de programação ou trabalhos mais elaborados.</p>
+<h3 id="repositorio-e-dinamica-de-trabalhos">Repositório e dinâmica de trabalhos</h3>
+<p>Todas as tarefas devem ser desenvolvidas em um repositório de controle de
+versões Git, utilizando a infraestrutura do IC no grupo
+<a href="https://gitlab.ic.unicamp.br/mc102-2020">https://gitlab.ic.unicamp.br/mc102-2020</a>. Para criar uma conta, logue-se no
+sistema utilizando a senha fornecida pelo IC. Cada estudante terá um repositório
+de nome <code class="language-text">raNNNNNN</code>, em que <code class="language-text">NNNNNN</code> corresponde ao número de RA.</p>
+<p>A sequência das atividades será a seguinte:</p>
+<ol>
+<li>
+<p>A tarefa é publicada na página da disciplina após ou simultaneamente os
+conteúdos correspondentes serem ministrados.</p>
+</li>
+<li>
+<p>Um conjunto de arquivos auxiliares da tarefa será inserido automaticamente no
+repositório pessoal em um diretório de nome <code class="language-text">tarefaNN</code>, onde <code class="language-text">NN</code> é o número da
+tarefa. Esse arquivos auxiliares podem ser acessados bastando executar o comando
+<code class="language-text">git pull</code> na cópia de trabalho pessoal.</p>
+</li>
+<li>
+<p>@ estudante realiza os vários exercícios da tarefa, alterando ou incluindo
+novos arquivos no repositório correspondente. À medida em que cada pequeno passo
+for realizado, deve-se fazer um <code class="language-text">git commit</code> com uma mensagem adequada. É
+importante que todo o desenvolvimento da tarefa seja registrado passo a passo
+utilizando o controle de versões. Não serão aceitas tarefas que sigam outro
+fluxo ou submetidas por outros meios.</p>
+</li>
+<li>
+<p>A cada pequena parte implementada, deve-se testar o programa. Para isso,
+pode-se executar em um terminal <code class="language-text">python3 testar.py</code>, o que executará um script
+de teste fornecido juntamente com os arquivos auxiliares. Além desses, pode ser
+necessário criar outros testes.</p>
+</li>
+<li>
+<p>Terminada a hora de trabalho, @ estudante executa o comando <code class="language-text">git push</code>. Isso
+enviará as alterações para o repositório remoto. Além disso, ativará um script
+de correção, que testará automaticamente a tarefa (utilizando os mesmos arquivos
+auxiliares e/ou outros testes). O resultado dessa correção ficará anotada na
+planilha de notas disponibilizada para cada aluno.</p>
+</li>
+</ol>
+<h3 id="tipos-de-tarefa">Tipos de tarefa</h3>
+<p>As tarefas serão classificadas em dois tipos.</p>
+<ol>
+<li>
+<p><strong>Tarefas regulares</strong>: Essas são tarefas mais simples e serão corrigidas
+apenas pelo script de correção automático, que poderá verificar desde a mera
+inclusão dos arquivos solicitados até a verificação de casos de testes mais
+elaborados.</p>
+</li>
+<li>
+<p><strong>Tarefas de verificação</strong>: Essas são tarefas de verificação de aprendizado
+(<em>checkpoints</em>) e servem para verificar o aprendizado de um conteúdo ou conjunto
+de conteúdos anteriores. Essas tarefas podem ter formato aberto. Após a
+submissão e verificação automática de cada uma dessas tarefas, ela deve ser
+<em>apresentada pessoalmente</em> e sucintamente para algum monitor no horário das
+aulas de laboratório (ou no horário de atendimento se não houver tempo durante a
+aula).</p>
+</li>
+</ol>
+<h3 id="prazos">Prazos</h3>
+<p>A disciplina adotará um método de avaliação contínua e individualizado. Assim,
+as tarefas serão divulgadas continuamente, de acordo com os conteúdos
+ministrados, mas cada um@ poderá levar mais tempo ou menos tempo para
+executá-las, de acordo com seu aprendizado sobre o conteúdo. As regras são as
+seguintes:</p>
+<ul>
+<li>Todas as tarefas são <strong>obrigatórias</strong> e devem ser entregues até <strong>5/7/2020</strong>.</li>
+<li>Uma tarefá só será corrigida após as tarefas anteriores terem sido
+realizadas corretamente.</li>
+</ul>
+<p>É responsabilidade de cada um@ organizar e dividir o tempo para realizar cada
+atividade. Recomenda-se fortemente que se realize a maior parte dos exercícios
+possível durante as aulas de laboratório e não se deixem tarefas pendentes
+acumuladas.</p>
+<h2 id="avaliacao">Avaliação</h2>
+<p>A cada tarefa será atribuído um conceito com os seguintes
+valores e significados:</p>
+<ul>
+<li><strong>A</strong> (valor 10): a tarefa foi executada satisfatoriamente;
+deve-se prosseguir à proxima atividade;</li>
+<li><strong>B</strong> (valor 7): os objetivos mínimos foram alcançados, mas
+há questões pontuais que podem ser melhoradas; deve-se prosseguir
+à proxima atividade;</li>
+<li><strong>C</strong> (valor 5): nem todos os objetivos mínimos foram alcançados;
+a tarefa é considerada aprovada, mas recomenda-se corrigi-la e submeter
+novamente;</li>
+<li><strong>D</strong> (valor 0): a tarefa não foi realizada, ou os objetivos não foram
+satisfeitos; é obrigatório refazer a tarefa.</li>
+</ul>
+<p>Serão calculadas as médias aritméticas dos valores atribuídos a todas as
+tarefas, <em>M</em>. @ estudante será aprovad@ com nota de aproveitamento <em>A := M</em> se
+satisfizer todos os critérios abaixo:</p>
+<ol>
+<li>ter 75% de frequência;</li>
+<li>obter conceito pelo menos <strong>C</strong> em todas as tarefas.</li>
+</ol>
+<p>Do contrário, a nota de aproveitamento do semestre será <em>A := mínimo {4, M}</em>.</p>
+<p><strong>Observação:</strong> A frequência será controlada por listas de presença ou pela
+participação nas avaliações. É obrigatória a presença nas aulas teóricas e de
+laboratório. Não poderá assinar a lista @ estudante que chegar com 20 min de
+atraso ou sair com 20 min de antecedência; em caso de atestado, envie uma cópia
+por e-mail ao professor no prazo de 15 dias e mantenha o documento original.
+Estudantes que, justificadamente, não puderem comparecer a pelo menos 75% das
+aulas devem conversar com o professor no início do semestre. <strong>Importante:</strong> Em
+qualquer momento, se tiver dúvidas ou tiver dificuldade em cumprir os critérios,
+procure o professor (o quanto antes!).</p>
+<h3 id="exame">Exame</h3>
+<p>Poderá realizar exame, com nota E, entre 0 e 10, no dia 14/7/2020, @
+estudante com 75% de frequência e nota <em>A ≥ 2,5</em>. Se @ estudante
+fizer o exame, a nota final será <em>mínimo {5, (A+E)/2}</em>, senão a nota
+final será <em>A</em>.</p>
+<h3 id="fraude">Fraude</h3>
+<p>Em caso de fraude (plágio, atestado falso, assinar lista por colegas, abandonar
+aula após assinar, usar bibliotecas não permitidas, copiar quaisquer trechos da
+internet sem autorização expressa, mostrar ou distribuir laboratório de
+programação individual, cola ou consulta a material proibido etc.), os
+envolvidos serão reprovados com nota 0 e será registrada a ocorrência no
+histórico escolar. Fique atento:</p>
+<ul>
+<li>
+<p>Cada um@ é responsável por manter seguros os arquivos de seu repositório. Não
+compartilhe sua senha nem deixe cópias de arquivos em computadores
+compartilhados. <strong>Todas</strong> as tarefas são individuais. As tarefas em que for
+permitido compartilhar ou utilizar trechos de código de outras fontes irão
+indicar isso explicitamente.</p>
+</li>
+<li>
+<p>O material disponibilizado e os trabalhos apresentados nas avaliações são para
+uso exclusivo da disciplina. Não compartilhem seus trabalhos mesmo após o
+término da disciplina. Se desejar publicar algum trabalho que realizou, converse
+antes com o professor.</p>
+</li>
+</ul>
+<h2 id="conteudo-e-bibliografia">Conteúdo e bibliografia</h2>
+<p>A disciplina não seguirá nenhum livro específico. Serão utilizadas diversas
+fontes bibliográficas, a depender do conteúdo. A parte introdutória da
+disciplina abordará conceitos fundamentais para algoritmos e será baseada
+principalmente nos capítulos introdutórios das referências [1] e [2]. Essas
+referências estão em inglês, mas as principais definições serão resumidas em
+português na página da disciplina.</p>
+<ol>
+<li>D. Harel. <em>Algorithmics</em>, Addison Wesley, 3ª edição, 2004.</li>
+<li>D. Harel. <em>Computers Ltd.: what they really can't do</em>, Oxford Univ. Press, 2000.</li>
+</ol>
+<p>As fases seguintes abordarão as principais construções da linguagem de
+programação Python e serão baseadas principalmente no tutorial disponibilizado
+na documentação oficial do Python. O tutorial original é escrito em inglês [3],
+mas a versão traduzida é atualizada e igualmente recomendada [4].</p>
+<ol start="3">
+<li><em>The Python Tutorial</em>, <a href="https://docs.python.org/3/tutorial/">https://docs.python.org/3/tutorial/</a></li>
+<li><em>O Tutorial Python</em>, <a href="https://docs.python.org/pt-br/3/tutorial/">https://docs.python.org/pt-br/3/tutorial/</a></li>
+</ol>
+<p>Alguns conteúdos e definições mais formais serão extraídos da referência [5],
+particularmente a respeito de teste e práticas de programação. Também, vários
+exemplos e exercícios podem ser extraídos da referência [6], embora não
+abordaremos alguns assuntos mais avançados desse livro.</p>
+<ol start="5">
+<li>Guttag, John V. <em>Introduction to computation and programming using Python</em>,
+Mit Press, 2013.</li>
+<li>Sedgewick, Robert, Kevin Wayne, and Robert Dondero. <em>Introduction to
+programming in Python: An interdisciplinary approach</em>, Addison-Wesley
+Professional, 2015.</li>
+</ol>
+<p>Além das referências anteriores, pesquisar com cuidado na internet também é um
+bom jeito de aprender. Se você é proficiente em inglês e gosta de realizar
+atividades online, então pode ser divertido seguir o livro interativo [7], mas
+ele segue uma ordem um pouco diferente da adotada na disciplina. Existe uma
+tradução em português desse livro [8] disponibilizada pelo IME/USP, mas ela não
+está tão atualizada e contém alguns problemas nos códigos interativos.</p>
+<ol start="7">
+<li>Miller, B. et al. <em>How to Think Like a Computer Scientist: Interactive Edition</em>,
+<a href="https://runestone.academy/runestone/static/thinkcspy/index.html">https://runestone.academy/runestone/static/thinkcspy/index.html</a></li>
+<li>Miller, B. et al. <em>Aprendendo com Python: Edição interativa</em>,
+<a href="https://panda.ime.usp.br/pensepy/static/pensepy/index.html">https://panda.ime.usp.br/pensepy/static/pensepy/index.html</a></li>
+</ol>
+<p>Nesta disciplina, usaremos principalmente lápis e papel para simular e entender
+trechos de código, mas algumas vezes pode ser conveniente utilizar alguma
+ferramenta interativa, como [9]. Ferramentas como essa devem ser utilizadas
+apenas no início do curso para trechos muito curtos de código; com o decorrer do
+tempo, utilizaremos ferramentas de teste e depuração.</p>
+<ol start="9">
+<li>Philip J. Guo. <em>Online Python Tutor: Embeddable Web-Based Program
+Visualization for CS Education</em>. In: SIGCSE, 2013.
+<a href="http://pythontutor.com/visualize.html">http://pythontutor.com/visualize.html</a></li>
+</ol>
+<h2 id="material-didatico">Material didático</h2>
+<p>A página da disciplina conterá um material de apoio, incluindo uma breve
+discussão sobre cada unidade, algumas definições e exemplos utilizados em aula.
+Esse material <strong>não</strong> é uma referência completa do conteúdo e existe apenas para
+auxilar o professor durante as aulas expositivas ou, depois, para relembrar o
+que foi discutido em sala. Para o estudo, é recomendado que @ estudante,
+principalmente, pratique programação resolvendo e implementando os exercícios
+propostos e, além disso, busque e estude exemplos de código-fonte nos capítulos
+correspondentes dos livros-textos.</p>
+<p>O template da página da disciplina foi adaptado de
+<a href="https://startbootstrap.com/themes/clean-blog/">startbootstrap.com</a></p>
+<h2 id="horario-e-local">Horário e local</h2>
+<p>As aulas teóricas serão ministradas das 10 às 12h na sala CB02 às
+terças e quintas-feiras. As práticas de laboratório serão ministradas
+pelo docente e pelos monitores no IC3, sala CC00, às segundas-feiras
+das 14 às 16h (turma Q) e das 16 às 18h (turma R).</p>
+<h2 id="atendimento">Atendimento</h2>
+<p>Sempre que possível, o professor reservará um momento no final das aulas
+teóricas para uma sessão breve de dúvidas. Se for necessário, pode-se combinar
+um atendimento presencial; para isso, envie um e-mail ao professor com
+antecedência. @s estudantes são fortemente encorajados a procurar monitoria,
+tirando dúvidas sobre o conteúdo e exercícios. Os horários de atendimento serão
+divulgados na página da disciplina.</p>
+<p>Além disso, se não for possível sanar as dúvidas no horário de atendimento, @s
+estudantes podem contatar os monitores por e-mail
+<a href="mailto:monitores-mc102@googlegroups.com">monitores-mc102@googlegroups.com</a>. Sempre que for compartilhar trechos de
+código do laboratório, certifique-se de que apenas os monitores recebam o
+código.</p>
+
+
+    </div>
+  </div>
+</div>
+
+<hr />
+
+
+<!-- Footer -->
+<footer>
+  <p class="copyright text-muted">
+    <a href="https://www.ic.unicamp.br/~lehilton/" title="Página pessoal">
+      Copyright &copy; 2020
+    </a>
+  </p>
+</footer>
+<!-- Bootstrap core JavaScript -->
+<script src="dist/vendor/jquery/jquery.min.js"></script>
+<script src="dist/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="dist/vendor/prism/prism.js"></script> -->
+
+<!-- Custom scripts for this template -->
+<script src="dist/js/main.min.js"></script>
+
+
+
+<!-- left toc -->
+<script src="dist/js/bootstrap-toc.min.js"></script>
+
+  </body>
+
+</html>

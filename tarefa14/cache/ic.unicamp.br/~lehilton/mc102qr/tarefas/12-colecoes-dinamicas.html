@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    Algoritmos e Programação de Computadores
+    - Coleções dinâmicas
+  </title>
+
+  <meta name="keywords" content="MC102, Algoritmos e Programação de Computadores, Python">
+  <meta name="description" content="Página da disciplina de MC102 para turma QR">
+  <meta name="author" content="Lehilton Pedrosa">
+
+  <!-- Bootstrap core CSS -->
+  <link href="../dist/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Theme css -->
+  <link href="../dist/css/main.min.css" rel="stylesheet">
+
+  <!-- Prism -->
+  <!-- <link href="../dist/vendor/prism/prism.css" rel="stylesheet" /> -->
+</head>
+<body >
+
+  <body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="../index.html">MC102</a>
+
+
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+      aria-label="Toggle navigation">
+      Menu
+      <i>&#9776;</i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item top back-to-top-link">
+          <a class="nav-link" href="#"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>topo</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="../index.html">voltar</a>
+        </li>
+
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Header -->
+<header class="masthead"   style="background-image: url('../images/home-bg.jpg')" >
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-heading">
+
+          <h1 >Coleções dinâmicas</h1>
+
+
+          <span class="meta">Quarta, 10 de junho de 2020</span>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+
+
+      <div class="col-lg-8 col-md-10 mx-auto">
+
+        <p><strong>Atenção:</strong> Esta tarefa também será corrigida manualmente. Depois de
+terminada e corrigida automaticamente, você deve apresentar sua tarefa
+a um monitor em algum horário de atendimento. Você poderá pedir
+recorreção, mas o conceito da recorreção será no máximo B.</p>
+<h1 id="agenda">Agenda</h1>
+<p>Nesta tarefa você deve implementar um aplicativo de agenda em modo
+texto. O usuário do aplicativo pode criar um evento, alterar as
+informações de um evento, remover um evento e listar todos os eventos
+de um dia. As informações que um evento tem são: <em>identificador</em>,
+<em>nome</em>, <em>descrição</em>, <em>data</em> e <em>hora</em>.</p>
+<h2 id="argumentos-por-linha-de-comando">Argumentos por linha de comando</h2>
+<p>A interação do usuário será feita passando argumentos pela linha de
+comando. Quando executamos um processo no sistema operacional, além do
+nome do programa, passamos algumas informações adicionais, como
+variáveis de ambiente e argumentos. Para acessar os argumentos em
+Python, podemos acessar a variável <code class="language-text">sys.argv</code>, que é uma lista de
+strings com os argumentos. Por exemplo, o programa <code class="language-text">argumentos.py</code> a
+seguir lista todos os argumentos passados na chamada.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">main</span>():
+   <span style="color: #008000; font-weight: bold">for</span> i, argumento <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(sys<span style="color: #666666">.</span>argv):
+      <span style="color: #008000">print</span>(<span style="color: #BA2121">f&quot;Argumento </span><span style="color: #BB6688; font-weight: bold">{i}</span><span style="color: #BA2121">: </span><span style="color: #BB6688; font-weight: bold">{argumento}</span><span style="color: #BA2121">&quot;</span>)
+
+main()
+</pre><p>Uma execução possível é a seguinte.</p>
+<pre class="highlightlanguage-console"><span style="color: #000080; font-weight: bold">user@notebook$</span> python3 argumentos.py argumento outro <span style="color: #BA2121">&quot;argumento com espaços&quot;</span> -o
+<span style="color: #888888">Argumento 0: argumentos.py</span>
+<span style="color: #888888">Argumento 1: argumento</span>
+<span style="color: #888888">Argumento 2: outro</span>
+<span style="color: #888888">Argumento 3: argumento com espaços</span>
+<span style="color: #888888">Argumento 4: -o</span>
+</pre><p>Os argumentos são úteis quando um programa puder executar uma série de
+atividades diferentes: assim como uma função recebe parâmetros, um
+programa pode receber argumentos e opções. Na prática, utilizamos um
+módulo que facilita o uso de argumentos. Por exemplo, podemos utilizar
+o <code class="language-text">argparse</code>.</p>
+<p>O <code class="language-text">argparse</code> é um módulo da biblioteca padrão do Python que ajuda com
+a criação de interfaces de linha de comando amigáveis. Nós definimos os
+argumentos esperados e como eles devem ser formatados e deixamos que o
+<code class="language-text">argparse</code> os trate fazendo todas as verificações necessárias.</p>
+<p>A seguir, vamos ver um exemplo no qual temos um programa que calcula o
+logaritmo de um número. O usuário pode escolher a base, mas se não
+informar nenhuma, o programa deve utilizar a base 10.</p>
+<p>Primeiro, precisamos definir um parser.</p>
+<pre class="highlightlanguage-python">parser <span style="color: #666666">=</span> argparse<span style="color: #666666">.</span>ArgumentParser()
+</pre><p>Em seguida, definimos cada um dos argumentos esperados. Abaixo,
+estamos definindo um argumento de posição chamado <code class="language-text">numero</code> e um
+argumento opcional chamado <code class="language-text">base</code>. Caso um valor para o segundo
+argumento não seja informado, ele receberá o valor padrão de <code class="language-text">10.0</code>.</p>
+<pre class="highlightlanguage-python">parser<span style="color: #666666">.</span>add_argument(<span style="color: #BA2121">&quot;numero&quot;</span>, help<span style="color: #666666">=</span><span style="color: #BA2121">&quot;número para calcular o logaritmo.&quot;</span>, <span style="color: #008000">type</span><span style="color: #666666">=</span><span style="color: #008000">float</span>)
+parser<span style="color: #666666">.</span>add_argument(<span style="color: #BA2121">&quot;-b&quot;</span>, <span style="color: #BA2121">&quot;--base&quot;</span>, help<span style="color: #666666">=</span><span style="color: #BA2121">&quot;base do logaritmo.&quot;</span>, default<span style="color: #666666">=10.0</span>, <span style="color: #008000">type</span><span style="color: #666666">=</span><span style="color: #008000">float</span>)
+</pre><p>Após definir os argumentos, transformamos os argumentos de acordo com o parser.</p>
+<pre class="highlightlanguage-python">args <span style="color: #666666">=</span> parser<span style="color: #666666">.</span>parse_args()
+</pre><p>Podemos então pegar os valores dos argumentos da seguinte forma:</p>
+<pre class="highlightlanguage-python">resultado <span style="color: #666666">=</span> math<span style="color: #666666">.</span>log(args<span style="color: #666666">.</span>numero, args<span style="color: #666666">.</span>base)
+</pre><p>Para o usuário ver a lista de parâmEtros e suas descrições, ele deve
+executar o programa com o parâmetro <code class="language-text">-h</code> ou <code class="language-text">--help</code>.</p>
+<pre class="highlightlanguage-console"><span style="color: #000080; font-weight: bold">user@notebook$</span> python3 logaritmo.py -h
+</pre><p>Para calcular o logaritmo do número 16 na base 2:</p>
+<pre class="highlightlanguage-console"><span style="color: #000080; font-weight: bold">user@notebook$</span> python3 logaritmo.py <span style="color: #666666">16</span> -b <span style="color: #666666">2</span>
+</pre><h1 id="persistencia-de-dados">Persistência de dados</h1>
+<p>Os eventos da agenda que esta tarefa manipulará devem ser guardados em
+um arquivo texto no formato
+<a href="https://pt.wikipedia.org/wiki/Comma-separated_values">CSV</a>, de forma
+que as informações sejam persistentes entre as várias vezes que
+executamos o programa. Quando o usuário desejar realizar alguma
+operação sobre sua agenda, ele irá executar o aplicativo passando uma
+opção <code class="language-text">-a</code> com o nome do arquivo CSV da agenda e passando como
+argumento do programa a ação correspondente para a agenda,
+<code class="language-text">inicializar</code>, <code class="language-text">criar</code>, <code class="language-text">alterar</code>, <code class="language-text">remover</code> ou <code class="language-text">listar</code>.</p>
+<p>Por exemplo, para inicializar uma nova agenda vazia, pode-se digitar</p>
+<pre class="highlightlanguage-console"><span style="color: #000080; font-weight: bold">user@notebook$</span> python3 agenda.py -a agenda.csv inicializar
+<span style="color: #888888">Uma agenda vazia `agenda.csv` foi criada!</span>
+</pre><p>O programa mostrará uma mensagem informando que a ação foi realizada.
+Com exceção da ação <code class="language-text">listar</code>, você pode escolher a mensagem para o
+usuário que melhor entender. Para a ação <code class="language-text">listar</code>, a saída deve ser
+compatível com os exemplos dos casos de teste.</p>
+<h2 id="operacoes-sobre-a-agenda">Operações sobre a agenda</h2>
+<p>As operações sobre uma agenda existente são descritas a seguir.</p>
+<h3 id="criar-evento">Criar evento</h3>
+<p>Para criar um evento, o usuário irá executar o programa passando como
+<strong>argumento</strong> as informações do evento que deseja criar.</p>
+<p>Um exemplo de uso:</p>
+<pre class="highlightlanguage-console"><span style="color: #000080; font-weight: bold">user@notebook$</span> python3 agenda.py -a agenda.csv criar --nome <span style="color: #BA2121">&quot;MC102&quot;</span> --descricao <span style="color: #BA2121">&quot;Aula de laboratório&quot;</span> --data <span style="color: #BA2121">&quot;01/06/2020&quot;</span> --hora <span style="color: #BA2121">&quot;14:00&quot;</span>
+<span style="color: #888888">Foi adicionado evento 3.</span>
+</pre><p>O identificador do evento é um número inteiro. Esse número é
+determinado pela seguinte regra. Se a agenda estiver vazia, então o
+evento criado terá identificador 1. Se não, então o identificador do
+novo evento será o maior identificador armazenado na agenda <strong>mais</strong>
+um.</p>
+<h3 id="alterar-evento">Alterar evento</h3>
+<p>O usuário pode alterar informações de eventos criados. Para isso, ele
+informará por argumento qual evento e qual informação deja alterar.</p>
+<p>Exemplo de uso:</p>
+<pre class="highlightlanguage-console"><span style="color: #000080; font-weight: bold">user@notebook$</span> python3 agenda.py -a agenda.csv alterar --evento <span style="color: #666666">1</span> --hora <span style="color: #BA2121">&quot;16:00&quot;</span>
+<span style="color: #888888">Alguma mensagem de retorno para o usuário.</span>
+</pre><h3 id="remover-evento">Remover evento</h3>
+<p>Para remover um evento, o usuário deve informar qual evento deve ser
+removido.</p>
+<p>Exemplo de uso:</p>
+<pre class="highlightlanguage-console"><span style="color: #000080; font-weight: bold">user@notebook$</span> python3 agenda.py -a agenda.csv remover --evento <span style="color: #666666">1</span>
+<span style="color: #888888">Alguma mensagem de retorno para o usuário.</span>
+</pre><h3 id="listar-eventos">Listar eventos</h3>
+<p>O usuário pode listar todos os eventos de um dia, para isso deve
+executar o programa informando por argumento a data. Os eventos são
+apresentados na ordem de criação.</p>
+<p>Exemplo de uso:</p>
+<pre class="highlightlanguage-console"><span style="color: #000080; font-weight: bold">user@notebook$</span> python3 agenda.py -a agenda.csv listar --data <span style="color: #BA2121">&quot;13/06/2020&quot;</span>
+<span style="color: #888888">Eventos do dia 13/06/2020</span>
+<span style="color: #888888">-----------------------------------------------</span>
+<span style="color: #888888">Evento 1 - MC102</span>
+<span style="color: #888888">Descrição: Aula de laboratório</span>
+<span style="color: #888888">Data: 01/06/2020</span>
+<span style="color: #888888">Hora: 16:50</span>
+<span style="color: #888888">-----------------------------------------------</span>
+</pre><p>Se não houver eventos no dia, então deve ser mostrada uma mensagem
+informando isso.</p>
+<pre class="highlightlanguage-console"><span style="color: #000080; font-weight: bold">user@notebook$</span> python3 agenda.py -a agenda.csv listar --data <span style="color: #BA2121">&quot;13/06/2020&quot;</span>
+<span style="color: #888888">Não existem eventos para o dia 13/06/2020!</span>
+</pre><h2 id="documentacao">Documentação</h2>
+<p>Além de escrever um programa, você deverá criar um arquivo <code class="language-text">README.md</code>
+documentando o seu programa. Nesse arquivo, você deverá descrever
+<strong>sucintamente</strong> (no mínimo 300 palavras e no máximo 500 palavras).</p>
+<ol>
+<li>
+<p>O formato do seu arquivo CSV. Você deve deixar claro quais colunas
+o arquivo tem, se há cabeçalho e nomes, tipo de separadores, etc.</p>
+</li>
+<li>
+<p>A estrutura de dados que representa a agenda. Você deve explicar
+qual estrutura escolhida para representar a coleção de eventos e
+quais são os dados que representam um dado evento.</p>
+</li>
+</ol>
+
+
+        <!-- Navigation buttons -->
+<div role="navigation" class="row justify-content-between">
+
+  <div class="col-12 col-sm-5 col-lg-4">
+    <a class="btn btn-primary w-100 mt-1 mt-sm-0" href="11-dicionarios-e-tuplas.html">
+      &larr; Anterior
+    </a>
+  </div>
+
+  <div class="col-12 d-none d-lg-inline-block col-lg-4">
+    <a class="btn btn-secondary w-100" href="../index.html">
+      Voltar
+    </a>
+  </div>
+
+  <div class="col-12 col-sm-5 col-lg-4">
+    <a class="btn btn-primary w-100 mt-1 mt-sm-0" href="13-algoritmos-eficientes.html">
+      Próxima &rarr;
+    </a>
+  </div>
+
+</div>      </div>
+    </div>
+</article>
+
+<hr />
+
+
+<!-- Footer -->
+<footer>
+  <p class="copyright text-muted">
+    <a href="https://www.ic.unicamp.br/~lehilton/" title="Página pessoal">
+      Copyright &copy; 2020
+    </a>
+  </p>
+</footer>
+<!-- Bootstrap core JavaScript -->
+<script src="../dist/vendor/jquery/jquery.min.js"></script>
+<script src="../dist/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="../dist/vendor/prism/prism.js"></script> -->
+
+<!-- Custom scripts for this template -->
+<script src="../dist/js/main.min.js"></script>
+
+<!-- Mathjax setup -->
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+  };
+</script>
+<script src="../dist/vendor/mathjax/tex-chtml.js" id="MathJax-script" async></script>
+
+
+
+  </body>
+
+</html>
