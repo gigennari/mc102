@@ -26,21 +26,43 @@ vai fazer com 2, soma == 0
 devolve o 102
 """
 
+
+
 def combinacoes(n_digitos, soma):
-    pass
+    lista = []
+    if n_digitos == 2:
+        for i in range(0,10):
+            k = soma - i
+            if k in range(0, 10):
+                numero = str(i) + str(k)
+                lista.append(numero)
+    else:
+        for i in range(0, 10):
+            if soma - i >= 0:
+                for possibilidade in combinacoes(n_digitos - 1, soma - i):
+                    numero = str(i) + str(possibilidade)
+                    lista.append(numero)
+    return lista
 
-def imprimir_ordem_crescente(lista):
-    """ Imprime todas as combinações, uma por linha, em ordem crescente """ 
-    lista = lista.sort()
+def imprimir(lista_combinacoes, n_digitos):
+    lista_sem_zeros = []
+    for combinacao in lista_combinacoes:
+        valor = int(combinacao)
+        string = str(valor)
+        if len(string) < n_digitos:
+            pass
+        else:
+            print(combinacao)
 
-    for numero in lista:
-        print(numero)
+            
+
 
 def main():
     entrada = input().split()
     n_digitos = int(entrada[0])
     soma = int(entrada[1])
 
-    combinacoes(n_digitos, soma)
+    lista_combinacoes = combinacoes(n_digitos, soma)
+    imprimir(lista_combinacoes, n_digitos)
 
 main()
