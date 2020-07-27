@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    Algoritmos e Programação de Computadores
+    - Estruturas iterativas
+  </title>
+
+  <meta name="keywords" content="MC102, Algoritmos e Programação de Computadores, Python">
+  <meta name="description" content="Página da disciplina de MC102 para turma QR">
+  <meta name="author" content="Lehilton Pedrosa">
+
+  <!-- Bootstrap core CSS -->
+  <link href="../dist/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Theme css -->
+  <link href="../dist/css/main.min.css" rel="stylesheet">
+
+  <!-- Prism -->
+  <!-- <link href="../dist/vendor/prism/prism.css" rel="stylesheet" /> -->
+</head>
+<body >
+
+  <body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="../index.html">MC102</a>
+
+
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+      aria-label="Toggle navigation">
+      Menu
+      <i>&#9776;</i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item top back-to-top-link">
+          <a class="nav-link" href="#"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>topo</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="../fixacao.html">voltar</a>
+        </li>
+
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Header -->
+<header class="masthead"   style="background-image: url('../images/home-bg.jpg')" >
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-heading">
+
+          <h1 >Estruturas iterativas</h1>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+
+
+      <div class="col-lg-8 col-md-10 mx-auto">
+
+        <h2 id="estruturas-iterativas">Estruturas iterativas</h2>
+<ol>
+<li>
+<p>Uma pergunta fundamental é um expressão aritmética com dois
+operandos inteiros não negativos, cujas operações permitidas são
+soma (+), subtração(-), multiplicação (*) e divisão (/) e que
+cujo resultado é 42. Escreva um programa que só termine quando o
+usuário digitar uma pergunta fundamental (um operando, um operador
+aritmético e outro operando).</p>
+<p>Exemplo de execução:</p>
+<pre class="highlight">Digite uma pergunta fundamental: 2 + 2
+Essa não é uma pergunta fundamental, tente de novo: 1 * 44
+Essa não é uma pergunta fundamental, tente de novo: 0 - 42
+Essa não é uma pergunta fundamental, tente de novo: 84 / 2
+Obrigado!
+</pre></li>
+<li>
+<p>Coelhos:</p>
+<p>a) Um homem quer começar a criar coelhos e quer saber quantos
+coelhos ele terá depois de $n$ meses. Suponha que no primeiro mês
+ele compra uma parelha de coelhos jovens, que as parelhas
+amadurecem e reproduzem-se apenas após o segundo mês de vida sem
+problemas de cruzamento consanguíneo e em todos os meses. Também
+supunha que cada parelha fértil dá a luz a uma nova parelha e que
+os coelhos nunca morrem.</p>
+<p>Assim, no primeiro mês ele terá uma parelha, no segundo ainda 1,
+no terceiro 2, no quarto 3 e assim por diante. Essa é a sequência
+de Fibonacci.</p>
+<p>Escreva um programa que leia um número $n$ e devolva o número de
+parelhas após $n$ meses.</p>
+<p>b) Essa sequência é chamada de sequência de Fibonacci, que tem a
+seguinte lei de formação:</p>
+<p>$$F_{i} = F_{i-1} + F_{i-2} \mbox{ e } F_1, F_2 = 1$$</p>
+<p>Assim,</p>
+<p>$$F = (1, 1, 2, 3, 5, 8, 13, 21, 34, 55, ...)$$</p>
+<p>Faça um algoritmo que imprima os 20 primeiros termos da sequência
+de Fibonacci.</p>
+</li>
+<li>
+<p>Você possui um vergalhão de ferro de $L$ centímetros e deseja
+construir a estrutura de uma caixa. A estrutura conterá um pedaço
+de vergalhão em cada aresta da caixa. Para evitar desperdício, a
+caixa deverá usar <span> <strong>todo</strong></span> o vergalhão, mas ficará em
+um recinto de volume <span><strong>no máximo</strong></span> $V\,\mbox{cm}^3$.
+Faça um programa que imprima todas as dimensões inteiras em
+centímetros possíveis para essa caixa.</p>
+</li>
+<li>
+<p>Relembre que capicuas são números que lidos da esquerda para a
+direita é o mesmo que quando lido da direita para a esquerda.
+Exemplos:</p>
+<ul>
+<li>10201</li>
+<li>2002</li>
+<li>565</li>
+<li>99</li>
+<li>7</li>
+</ul>
+<p>Faça agora um algoritmo que verifique se um número é capicua
+independente do número de dígitos.</p>
+</li>
+<li>
+<p>Faça um algoritmo que, para cada número inteiro de 1 até 100,
+imprima &quot;tic&quot; se esse número for múltiplo de 3 e imprima &quot;toc&quot; se
+for múltiplo de &quot;5&quot;.</p>
+</li>
+<li>
+<p>Faça um programa que imprima um menu de 4 pratos na tela e uma
+quinta opção para sair do programa. O programa deve imprimir o
+prato solicitado. O programa deve terminar quando for escolhido a
+quinta opção.</p>
+</li>
+<li>
+<p>Faça um programa que lê dois números inteiros positivos a e b.
+Utilizando laços, o seu programa deve calcular e imprimir o valor
+$a^b$.</p>
+</li>
+<li>
+<p>Séries:</p>
+<p>a) Faça um programa que lê um número n e que compute e imprima o
+valor</p>
+<p>$$
+\sum_{i=1}^n i.
+$$</p>
+<p>Não use formúlas como a da soma de uma P.A. Depois faça uma versão
+que usa uma fórmula fechada para a soma acima. Qual versão executa
+mais rapidamente? Por quê?</p>
+<p>b) Agora, faça um programa que lê um número $n$ e imprima os
+valores da soma</p>
+<p>$$
+\sum_{i=1}^j i
+$$</p>
+<p>para $j$ de 1 até $n$. Você usaria uma fórmula fechada para
+imprimir cada elemento da série?</p>
+</li>
+<li>
+<p>Faça um programa que lê um número n e imprima os valores entre 2 e
+n, que são divisores de n.</p>
+</li>
+<li>
+<p>No exemplo dos números primos visto em aula, não precisamos testar
+todos os números entre $2, \dots, (n−1)$, para verificar se
+dividem ou não n. Basta testarmos até n/2. Por quê? Qual o maior
+divisor possível de $n$? Na verdade basta testarmos os números
+$2,\dots, \sqrt{n}$. Por quê?</p>
+</li>
+<li>
+<p>Considere um programa para determinar se uma sequência de n
+números digitados pelo usuário está ordenada ou não. Implemente um
+programa usando uma variável contadora.</p>
+</li>
+<li>
+<p>Escreva um programa que lê um número n, e então imprime o menor
+número primo que é maior ou igual n, e imprime o maior primo que é
+menor ou igual a n. 1</p>
+</li>
+<li>
+<p>O que será impresso pelo programa abaixo? Assuma que o valor de D
+na declaração de x é o valor do último dígito do seu RA. Faça um
+teste de mesa, isso é, execute usando lápis e papel. Depois
+verifique sua resposta usando um computador. Finalmente, simule o
+algoritmo passo a passo utilizando um <em>debugger</em> e configurando
+<em>breakpoints</em> no início de cada iteração. Se não souber como
+utilizar um debugger, procure ajuda de um monitor.</p>
+<pre class="highlightlanguage-python">x <span style="color: #666666">=</span> <span style="color: #666666">5</span> <span style="color: #666666">+</span> D
+y <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+<span style="color: #008000; font-weight: bold">while</span> x <span style="color: #666666">!=</span> <span style="color: #666666">0</span>:
+    y <span style="color: #666666">=</span> (x <span style="color: #666666">%</span> <span style="color: #666666">2</span>) <span style="color: #666666">+</span> <span style="color: #666666">10</span> <span style="color: #666666">*</span> y
+    x <span style="color: #666666">=</span> x <span style="color: #666666">//</span> <span style="color: #666666">2</span>
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">f&#39;x = </span><span style="color: #BB6688; font-weight: bold">{x}</span><span style="color: #BA2121">, y = </span><span style="color: #BB6688; font-weight: bold">{y}</span><span style="color: #BA2121">&#39;</span>)
+<span style="color: #008000; font-weight: bold">while</span> y <span style="color: #666666">!=</span> <span style="color: #666666">0</span>:
+    x <span style="color: #666666">=</span> y <span style="color: #666666">%</span> <span style="color: #666666">100</span>
+    y <span style="color: #666666">=</span> y <span style="color: #666666">//</span> <span style="color: #666666">10</span>
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">f&#39;x = </span><span style="color: #BB6688; font-weight: bold">{x}</span><span style="color: #BA2121">, y = </span><span style="color: #BB6688; font-weight: bold">{y}</span><span style="color: #BA2121">&#39;</span>)
+</pre></li>
+<li>
+<p>Escreva um programa para ler n números do tipo float e imprimir
+quantos deles estão nos seguintes intervalos: [0 . . . 25],
+[26 . . . 50], [51 . . . 75] e [76 . . . 100]. Por exemplo, para n
+= 10 e os seguintes dez números 2.0, 61.5, −1.0, 0.0, 88.7, 94.5,
+55.0, 3.1415, 25.5, 75.0, seu programa deve imprimir:</p>
+<pre class="highlight">Intervalo [0..25]: 3
+Intervalo [26..50]: 0
+Intervalo [51..75]: 3
+Intervalo [76..100]: 2
+</pre></li>
+<li>
+<p>Elabore um programa para calcular a raiz quadrada de um número
+positivo, usando o roteiro abaixo, baseado no método de
+aproximações sucessivas de Newton. O algoritmo deverá prover 20
+aproximações. Seja $Y$ o número:</p>
+<p>a) a primeira aproximação para a raiz quadrada de $Y$ é $X_1 = \frac{Y}{2}$</p>
+<p>b) as sucessivas aproximações serão $X_{n+1} = \frac{X^2_n + Y}{2 X_n}$.</p>
+</li>
+<li>
+<p>Faça um algoritmo para calcular e escrever o fatorial de um
+determinado número lido.</p>
+</li>
+<li>
+<p>A conversão de graus Farenheit para centígrados é obtida por:</p>
+<p>$C= \frac{5}{9} (F – 32)$</p>
+<p>Faça um algoritmo que calcule e escreva uma tabela de centígrados
+em função de Farenheit, que variam de 50 a 150 de 1 a 1.</p>
+</li>
+<li>
+<p>Considere o programa para determinar se uma sequência de n números
+digitados pelo usuário está ordenada ou não.</p>
+</li>
+<li>
+<p>Múltiplas sequências:</p>
+<ol>
+<li>
+<p>Faça um algoritmo que calcule e escreva o valor de S:</p>
+<p>$$
+S= \frac{1}{1} +
+\frac{3}{2}  +
+\frac{5}{3}  +
+\frac{7}{4}  +
+\dots +
+\frac{99}{50}
+$$</p>
+</li>
+<li>
+<p>Faça um algoritmo que calcule e escreva o valor de S:</p>
+<p>$$
+S=
+\frac{2^1}{50} +
+\frac{2^2}{49}  +
+\frac{2^3}{48}  +
+\frac{2^4}{47}  +
+\dots +
+\frac{2^{50}}{1}
+$$</p>
+</li>
+<li>
+<p>Faça um algoritmo que calcule o valor de S:</p>
+<p>$$
+S= \frac{1}{1} -
+\frac{2}{4}  +
+\frac{3}{9}  -
+\frac{4}{16}  +
+\dots -
+\frac{10}{100}
+$$</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Faça um algoritmo que leia o nome de cinco alunos, as notas de
+português, matemática e física de cada um deles, calcule a média de
+cada uma das disciplinas e a média geral. Escreva as médias de
+português, matemática, física e média geral.</p>
+</li>
+<li>
+<p>Seja S um texto formado por letras maiúsculas, vírgulas, pontos e
+brancos, terminado pelo caractere ‘#‘ (que somente ocorre no fim do
+texto). Escreva um programa que leia os caracteres de S, um por vez, e
+imprima o número de palavras com comprimento menor ou igual a 5.</p>
+</li>
+<li>
+<p>Escreva um programa que leia um número inteiro positivo n e em
+seguida imprima n linhas do chamado triângulo de Floyd. O exemplo abaixo
+mostra o triângulo de Floyd com 6 linhas.</p>
+<pre class="highlight">1
+2 3
+4 5 6
+7 8 9 10
+11 12 13 14 15
+16 17 18 19 20 21
+</pre></li>
+<li>
+<p>Escreva um programa que leia um número inteiro n e escreva uma
+figura similar à seguinte, mas com n linhas.</p>
+<pre class="highlight">...*......*...
+..***....***..
+.*****..*****.
+**************
+</pre></li>
+<li>
+<p>Escreva um programa que imprima uma tabela de números ímpares com
+$m$ linhas e $n$ colunas ($m$ e $n$ são lidos do teclado) como no
+seguinte formato de exemplo (para $m = 3$ e $n = 4$).</p>
+<pre class="highlight">01 03 05 07
+15 13 11 09
+17 19 21 23
+</pre></li>
+</ol>
+
+
+        <!-- Navigation buttons -->
+<div role="navigation" class="row justify-content-between">
+
+  <div class="col-12 col-sm-5 col-lg-4">
+    <a class="btn btn-primary w-100 mt-1 mt-sm-0" href="02-condicional.html">
+      &larr; Anterior
+    </a>
+  </div>
+
+  <div class="col-12 d-none d-lg-inline-block col-lg-4">
+    <a class="btn btn-secondary w-100" href="../fixacao.html">
+      Voltar
+    </a>
+  </div>
+
+  <div class="col-12 col-sm-5 col-lg-4">
+    <a class="btn btn-primary w-100 mt-1 mt-sm-0" href="04-funcoes.html">
+      Próxima &rarr;
+    </a>
+  </div>
+
+</div>      </div>
+    </div>
+</article>
+
+<hr />
+
+
+<!-- Footer -->
+<footer>
+  <p class="copyright text-muted">
+    <a href="https://www.ic.unicamp.br/~lehilton/" title="Página pessoal">
+      Copyright &copy; 2020
+    </a>
+  </p>
+</footer>
+<!-- Bootstrap core JavaScript -->
+<script src="../dist/vendor/jquery/jquery.min.js"></script>
+<script src="../dist/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="../dist/vendor/prism/prism.js"></script> -->
+
+<!-- Custom scripts for this template -->
+<script src="../dist/js/main.min.js"></script>
+
+<!-- Mathjax setup -->
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+  };
+</script>
+<script src="../dist/vendor/mathjax/tex-chtml.js" id="MathJax-script" async></script>
+
+
+
+  </body>
+
+</html>

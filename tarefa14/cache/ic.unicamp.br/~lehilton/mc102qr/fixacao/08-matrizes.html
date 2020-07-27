@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    Algoritmos e Programação de Computadores
+    - Matrizes
+  </title>
+
+  <meta name="keywords" content="MC102, Algoritmos e Programação de Computadores, Python">
+  <meta name="description" content="Página da disciplina de MC102 para turma QR">
+  <meta name="author" content="Lehilton Pedrosa">
+
+  <!-- Bootstrap core CSS -->
+  <link href="../dist/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Theme css -->
+  <link href="../dist/css/main.min.css" rel="stylesheet">
+
+  <!-- Prism -->
+  <!-- <link href="../dist/vendor/prism/prism.css" rel="stylesheet" /> -->
+</head>
+<body >
+
+  <body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="../index.html">MC102</a>
+
+
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+      aria-label="Toggle navigation">
+      Menu
+      <i>&#9776;</i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item top back-to-top-link">
+          <a class="nav-link" href="#"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>topo</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="../fixacao.html">voltar</a>
+        </li>
+
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Header -->
+<header class="masthead"   style="background-image: url('../images/home-bg.jpg')" >
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-heading">
+
+          <h1 >Matrizes</h1>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+
+
+      <div class="col-lg-8 col-md-10 mx-auto">
+
+        <h1 id="matrizes">Matrizes</h1>
+<ol>
+<li>
+<p>O que o código abaixo imprime?</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">mostrar_matriz</span>(matriz):
+    <span style="color: #008000; font-weight: bold">for</span> linha <span style="color: #AA22FF; font-weight: bold">in</span> matriz:
+        <span style="color: #008000; font-weight: bold">for</span> celula <span style="color: #AA22FF; font-weight: bold">in</span> linha:
+            <span style="color: #008000">print</span>(celula, end<span style="color: #666666">=</span><span style="color: #BA2121">&#39; &#39;</span>)
+        <span style="color: #008000">print</span>()
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">main</span>():
+    matriz <span style="color: #666666">=</span> [[<span style="color: #666666">0</span>, <span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">3</span>, <span style="color: #666666">4</span>, <span style="color: #666666">5</span>, <span style="color: #666666">6</span>, <span style="color: #666666">7</span>, <span style="color: #666666">8</span>, <span style="color: #666666">9</span>],
+        [<span style="color: #666666">10</span>, <span style="color: #666666">11</span>, <span style="color: #666666">12</span>, <span style="color: #666666">13</span>, <span style="color: #666666">14</span>, <span style="color: #666666">15</span>, <span style="color: #666666">16</span>, <span style="color: #666666">17</span>, <span style="color: #666666">18</span>, <span style="color: #666666">19</span>],
+        [<span style="color: #666666">20</span>, <span style="color: #666666">21</span>, <span style="color: #666666">22</span>, <span style="color: #666666">23</span>, <span style="color: #666666">24</span>, <span style="color: #666666">25</span>, <span style="color: #666666">26</span>, <span style="color: #666666">27</span>, <span style="color: #666666">28</span>, <span style="color: #666666">29</span>],
+        [<span style="color: #666666">30</span>, <span style="color: #666666">31</span>, <span style="color: #666666">32</span>, <span style="color: #666666">33</span>, <span style="color: #666666">34</span>, <span style="color: #666666">35</span>, <span style="color: #666666">36</span>, <span style="color: #666666">37</span>, <span style="color: #666666">38</span>, <span style="color: #666666">39</span>],
+        [<span style="color: #666666">40</span>, <span style="color: #666666">41</span>, <span style="color: #666666">42</span>, <span style="color: #666666">43</span>, <span style="color: #666666">44</span>, <span style="color: #666666">45</span>, <span style="color: #666666">46</span>, <span style="color: #666666">47</span>, <span style="color: #666666">48</span>, <span style="color: #666666">49</span>],
+        [<span style="color: #666666">50</span>, <span style="color: #666666">51</span>, <span style="color: #666666">52</span>, <span style="color: #666666">53</span>, <span style="color: #666666">54</span>, <span style="color: #666666">55</span>, <span style="color: #666666">56</span>, <span style="color: #666666">57</span>, <span style="color: #666666">58</span>, <span style="color: #666666">59</span>]]
+    mostrar_matriz(matriz)
+    <span style="color: #008000; font-weight: bold">return</span>
+
+main()
+</pre></li>
+<li>
+<p>Escreva uma função iterativa para decidir se uma matriz é simétrica.</p>
+</li>
+<li>
+<p>Escreva uma função iterativa que, dada uma matriz real, calcule a
+matriz transposta.</p>
+</li>
+<li>
+<p>Escreva uma função iterativa que, dada uma matriz complexa,
+calcule a matriz conjugada transposta.</p>
+</li>
+<li>
+<p>Escreva uma função que calcule o determinante de uma matriz $3
+\times 3$. (Iremos ver um algoritmo para calcular o determinante de
+uma matriz $n\times n$ em geral depois, mas um algoritmo mais
+eficiente é conteúdo de disciplinas de Álgebra Linear.)</p>
+</li>
+<li>
+<p>Escreva um algoritmo que lê uma matriz $M$ e calcula as
+somas:</p>
+<p>a) da primeira coluna</p>
+<p>b) da diagonal principal</p>
+<p>c) da diagonal secundária</p>
+<p>d) de todos os elementos da matriz M</p>
+</li>
+<li>
+<p>Projete uma função que receba uma matriz $M$ representada como
+listas de listas e um valor $a$. A função deve devolver uma nova
+matriz obtida pelo produto escalar de $a$ por $M$, i.e., $aM$.</p>
+<p>a) Escreva uma versão em que a matriz de saída é representada
+de maneira convencional, usando uma lista de linhas.</p>
+<p>b) Escreva uma versão em que a matriz de saída é representada
+usando lista de colunas.</p>
+<p>c) Escreva uma versão em que a matriz de saída é representada por
+uma única lista de escalares, i.e., se a matriz tem dimensões $m
+\times n$, então a lista de escalares correspondente terá tamanho
+$m \cdot n$. A lista deve respeitar a ordem da matriz quando a
+percorremos linha a linha.</p>
+</li>
+<li>
+<p>Escreva uma função que receba um número inteiro $a$ e uma matriz
+$M$.</p>
+<p>a) E conte quantos valores iguais a $a$ estão na matriz.</p>
+<p>b) E devolva uma nova matriz indicadora, isso é, uma matriz de
+mesma dimensão, mas com $1$ nas posições em que $M$ tem $a$ e $0$
+nas demais.</p>
+</li>
+<li>
+<p>Um elemento $A_{ij}$ de uma matriz $A$ é dito ponto de sela da
+matriz $A$ se, e somente se, $A_{ij}$ for ao mesmo tempo o menor
+elemento da linha $i$ e o maior elemento da coluna $j$. Faça uma
+função que verifique se a matriz possui ponto de sela e devolva
+uma tupla $(i,j)$ com sua localização, ou <code class="language-text">None</code> caso não possua.</p>
+</li>
+<li>
+<p>Uma matriz $A$ quadrada $n \times n$ é chamada de:</p>
+<ul>
+<li>triangular superior sempre que $a_{ij} = 0$ para todo $i &gt; j$;</li>
+<li>triangular inferior sempre que $a_{ij} = 0$ para todo $i &lt; j$;</li>
+<li>diagonal sempre que for triangular superior e inferior.</li>
+</ul>
+<p>Faça uma função que classifique uma matriz.</p>
+</li>
+<li>
+<p>Uma matriz de elementos inteiros é um quadrado mágico se a soma dos
+elementos de cada linha, a soma dos elementos de cada coluna e a soma
+dos elementos das diagonais principal e secundária são todas iguais.
+Exemplo: a matriz abaixo é um quadrado mágico.</p>
+<p>$$
+A =
+\begin{bmatrix}
+8 &amp; 0 &amp; 7\\
+4 &amp; 5 &amp; 6\\
+3 &amp; 10 &amp; 2\\
+\end{bmatrix}
+$$</p>
+<p>Escreva uma função que verifique se uma matriz de inteiros é um
+quadrado mágico.</p>
+</li>
+<li>
+<p>Diz a lenda que César foi um dos primeiros a codificar mensagens.
+Ele reorganizava o texto de suas mensagens de maneira que o texto
+parecia não ter sentido. Cada mensagem sempre possuía uma contagem
+de letras cujo total equivalia a um quadrado perfeito, dependendo
+de quanto César tivesse que escrever. Assim, uma mensagem com 16
+caracteres usava um quadrado de quatro por quatro; se fossem 25
+caracteres, seria cinco por cinco; 100 caracteres requeriam um
+quadrado de dez por dez, etc. Seus oficiais sabiam que deviam
+transcrever o texto preenchendo as casas do quadrado sempre que
+uma mensagem aleatória chegasse. Ao fazerem isso, podiam ler a
+mensagem na vertical e seu sentido se tornaria claro.</p>
+<p>Escreva um programa que lê o tamanho de uma string e a string.
+Depois o programa escreve a mensagem decifrada.</p>
+<p>Exemplo:</p>
+<pre class="highlight">36
+MEEUMOCSHMSC1T*AGU0A***L2****T*****A
+</pre><p>Esta mensagem pode ser transcrita em um quadrado perfeito 6x6.</p>
+<pre class="highlight">M E E U M O
+C S H M S C
+1 T * A G U
+0 A * * * L
+2 * * * * T
+* * * * * A
+</pre><p>Lendo cada coluna da matriz (desconsiderando o char ’*’), a saída
+deverá conter: MC102 ESTA EH UMA MSG OCULTA.</p>
+</li>
+<li>
+<p>Sudoku é jogado numa malha de 9x9 quadrados, dividida em sub-malhas
+de 3x3 quadrados, chamada &quot;quadrantes&quot;. O objetivo do jogo é
+preencher os quadrados com números entre 1 e 9 de acordo com as
+seguintes regras:</p>
+<ul>
+<li>
+<p>Cada número pode aparecer apenas uma vez em cada linha.</p>
+</li>
+<li>
+<p>Cada número pode aparacer apenas uma vez em cada coluna.</p>
+</li>
+<li>
+<p>Cada número pode aparecer apenas uma vez em cada quadrante.</p>
+</li>
+</ul>
+<p>Exemplo
+<img src="figs/sudoku.png" alt="image" /></p>
+<p>Escreva um programa que lê um jogo de Sodoku (matriz 9x9, toda
+preenchida com números de 1 a 9) e verifica se é um jogo válido ou
+não. Um jogo válido respeita as três regras acima.</p>
+</li>
+<li>
+<p>Vamos fazer pixel art!</p>
+<p>a) Desenhar é fácil. Escolha as suas figuras favoritas abaixo ou
+de sua preferência e faça um programa que as desenhe.</p>
+<p>b) Reconhecer é difícil. Escreva um programa que leia alguma
+das figuras descritas abaixo e determine qual delas foi lida.</p>
+<p>Retângulo de altura = 3 e largura = 7:</p>
+<pre class="highlight">#######
+#     #
+#######
+</pre><p>Triângulo retângulo de lado = 7:</p>
+<pre class="highlight">#
+##
+# #
+#  #
+#   #
+#    #
+#######
+</pre><p>Triângulo isósceles de altura = 5:</p>
+<pre class="highlight">     #
+    # #
+   #   #
+  #     #
+ #########
+</pre><p>Hexágono de lado = 3:</p>
+<pre class="highlight">  ###
+ #   #
+#     #
+ #   #
+  ###
+</pre><p>Quadriculado de lado = 4, largura = 4 e altura = 3</p>
+<pre class="highlight">#############
+#  #  #  #  #
+#  #  #  #  #
+#############
+#  #  #  #  #
+#  #  #  #  #
+#############
+#  #  #  #  #
+#  #  #  #  #
+#############
+</pre></li>
+<li>
+<p>Permutações</p>
+<p>a) Faça uma função que receba como parâmetros uma matriz quadrada
+de largura $n$ e dois inteiros $i,j$. A função deve trocar os
+conteúdos das linhas $i$ e $j$ desta matriz entre si. Esta é uma
+operação de matrizes conhecida como permutação de linhas.</p>
+<p>b) A matriz identidade $I$ é uma matriz quadrada cujos elementos da diagonal
+valem $1$ e os demais valem $0$. Assim, multiplicando-se $I \times A$, obtemos
+a própria matriz $A$. Modifique a matriz $I$ de forma a obter uma
+matriz $P$ tal que $P \times A$ é a matriz $A$ com as linhas $i$ e $j$ trocadas.</p>
+<p>c) De maneira geral, uma matriz $P$ quadrada que só contém $0$ e
+$1$ tal que cada linha ou coluna só contenha um elemento não nulo
+é chamada de matriz de permutação. Crie uma função que receba $P$
+e $A$ e calcule o produto $P \times A$. Use o fato de que $P$ é
+matriz de permutação para evitar fazer calculo de somas e
+produtos.</p>
+</li>
+</ol>
+<h1 id="exercicios-criativos">Exercícios criativos</h1>
+<ol>
+<li>
+<p>Os gifs animados fizeram a alegria do início da Web e voltaram a
+fazer sucesso nos dias de hoje! Na sua forma mais simples, os
+gifs são uma sequência imagens bitmaps. Vamos implementar um
+efeito de máscara sobre um gif.</p>
+<p><img src="figs/train.png" alt="image" /> <img src="figs/mask.png" alt="image" /> <img src="figs/clip.png" alt="image" /></p>
+<p>a) Descreva uma estrutura para representar um gif.</p>
+<p>b) Escreva uma <strong>função</strong> que leia um gif do teclado (número de
+imagens, largura e altura e sequência de pixels de cada imagem)
+devolva um ponteiro para um gif alocado dinamicamente.</p>
+<p>c) Escreva uma função para liberar a memória alocada para um gif.</p>
+<p>d) Escreva uma função que receba <strong>uma imagem</strong> e uma máscara
+(imagem binária em branco e preto do mesmo tamanho) e aplique a
+máscara na imagem. A imagem deve ser alterada para manter apenas a
+parte correspondente aos pixels brancos da máscara, como no
+exemplo.</p>
+<p>e) Escreva uma função para aplicar uma máscara em um gif.</p>
+</li>
+<li>
+<p><strong>Um desafio:</strong> Um quadrado latino de ordem $n$ é uma matriz em
+que cada elemento é um número de $1$ até $n$ e cada número aparece
+no máximo uma vez por linha e no máximo uma vez por coluna.</p>
+<pre class="highlight">10     1     9     2     8     3     7     4     6     5
+ 7     8     6     9     5    10     4     1     3     2
+ 9    10     8     1     7     2     6     3     5     4
+ 5     6     4     7     3     8     2     9     1    10
+ 1     2    10     3     9     4     8     5     7     6
+ 2     3     1     4    10     5     9     6     8     7
+ 8     9     7    10     6     1     5     2     4     3
+ 3     4     2     5     1     6    10     7     9     8
+ 4     5     3     6     2     7     1     8    10     9
+ 6     7     5     8     4     9     3    10     2     1
+</pre><p>a) É fácil verificar se uma matriz é um quadrado latino. O que
+parece não ser tão fácil é construir um quadrado latino. Faça uma
+função que receba uma inteiro $n$ e devolva um quadrado latino de
+tamanho $n \times n$.</p>
+<p>b) Uma vez que você obteve um quadrado latino, encontrar outro é
+bem mais fácil. Faça uma função que receba uma matriz quadrada $n
+\times n$ totalmente preenchida com zeros, com exceção de
+duas posições. Essas posições foram copiadas de algum quadrado latino.
+Seu desafio é descobrir algum quadrado latino que tenha respeite essas
+posições. Por exemplo, se a entrada for a matriz</p>
+<pre class="highlight"> 0     0     0     0     0     0     0     0     0     0
+ 0     0     0     0     0     0     0     0     0     0
+ 0     0     0     0     0     0     0     0     0     0
+ 0     0     0     0     0     0     0     0     0     0
+ 0     0     0     0     0     0     0     0     0     0
+ 0     0     0     0     0     0     0     0     0     0
+ 0     0     0     0     0     0     0     2     0     0
+ 0     0     0     0     0     0     0     0     0     0
+ 0     0     0     6     0     0     0     0     0     0
+ 0     0     0     0     0     0     0     0     0     0
+</pre><p>então uma resposta válida poderia ser o quadrado latino dado
+acima, já que ele respeita os valores 2 e 6 das posições não
+nulas. Qualquer outro quadrado latino com esses valores nessas
+posições também é permitido como saída.</p>
+</li>
+</ol>
+
+
+        <!-- Navigation buttons -->
+<div role="navigation" class="row justify-content-between">
+
+  <div class="col-12 col-sm-5 col-lg-4">
+    <a class="btn btn-primary w-100 mt-1 mt-sm-0" href="07-ordenacao.html">
+      &larr; Anterior
+    </a>
+  </div>
+
+  <div class="col-12 d-none d-lg-inline-block col-lg-4">
+    <a class="btn btn-secondary w-100" href="../fixacao.html">
+      Voltar
+    </a>
+  </div>
+
+  <div class="col-12 col-sm-5 col-lg-4">
+    <a class="btn btn-primary w-100 mt-1 mt-sm-0" href="09-arquivos.html">
+      Próxima &rarr;
+    </a>
+  </div>
+
+</div>      </div>
+    </div>
+</article>
+
+<hr />
+
+
+<!-- Footer -->
+<footer>
+  <p class="copyright text-muted">
+    <a href="https://www.ic.unicamp.br/~lehilton/" title="Página pessoal">
+      Copyright &copy; 2020
+    </a>
+  </p>
+</footer>
+<!-- Bootstrap core JavaScript -->
+<script src="../dist/vendor/jquery/jquery.min.js"></script>
+<script src="../dist/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="../dist/vendor/prism/prism.js"></script> -->
+
+<!-- Custom scripts for this template -->
+<script src="../dist/js/main.min.js"></script>
+
+<!-- Mathjax setup -->
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+  };
+</script>
+<script src="../dist/vendor/mathjax/tex-chtml.js" id="MathJax-script" async></script>
+
+
+
+  </body>
+
+</html>

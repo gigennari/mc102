@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    Algoritmos e Programação de Computadores
+    - Funções
+  </title>
+
+  <meta name="keywords" content="MC102, Algoritmos e Programação de Computadores, Python">
+  <meta name="description" content="Página da disciplina de MC102 para turma QR">
+  <meta name="author" content="Lehilton Pedrosa">
+
+  <!-- Bootstrap core CSS -->
+  <link href="../dist/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Theme css -->
+  <link href="../dist/css/main.min.css" rel="stylesheet">
+
+  <!-- Prism -->
+  <!-- <link href="../dist/vendor/prism/prism.css" rel="stylesheet" /> -->
+</head>
+<body >
+
+  <body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="../index.html">MC102</a>
+
+
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+      aria-label="Toggle navigation">
+      Menu
+      <i>&#9776;</i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item top back-to-top-link">
+          <a class="nav-link" href="#"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>topo</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="../fixacao.html">voltar</a>
+        </li>
+
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Header -->
+<header class="masthead"   style="background-image: url('../images/home-bg.jpg')" >
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-heading">
+
+          <h1 >Funções</h1>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+
+
+      <div class="col-lg-8 col-md-10 mx-auto">
+
+        <h1 id="funcoes">Funções</h1>
+<ol>
+<li>
+<p>Lembre-se de que é importante sempre verificar se suas funções
+estão devolvendo algum valor. O que o código abaixo imprime?</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">soma1</span>(A, B):
+    C <span style="color: #666666">=</span> A <span style="color: #666666">+</span> B
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">soma2</span>(A, B):
+    <span style="color: #008000; font-weight: bold">return</span> A <span style="color: #666666">+</span> B
+
+A <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+B <span style="color: #666666">=</span> <span style="color: #666666">2</span>
+
+<span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;Soma 1a:&quot;</span>, soma1(A, B))
+
+C <span style="color: #666666">=</span> soma1(A,B)
+<span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;Soma 1b:&quot;</span>,C)
+
+<span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;Soma 2a:&quot;</span>, soma2(A, B))
+
+D <span style="color: #666666">=</span> soma2(A,B)
+<span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;Soma 2b:&quot;</span>, D)
+</pre></li>
+<li>
+<p>Produtos de primos:</p>
+<p>a) Escreva uma função que decida se um número é produto de dois
+números ímpares. Se for, a função deverá devolver esses dois
+números, do contrário, deverá devolver <code class="language-text">None</code>.</p>
+<p>b) Escreva uma função que decida se um número é produto de quatro
+números ímpares. Se for, a função deverá retornar os números em
+variáveis passadas por referência. Tente utilizar a função
+anterior.</p>
+</li>
+<li>
+<p>Escreva uma função que computa a potência $a^b$ para valores $a$
+(<code class="language-text">float</code>) e $b$ (<code class="language-text">int</code>) passados por parâmetro (não use
+bibliotecas como math ou operador de exponenciação <code class="language-text">**</code>). Use a
+função anterior e crie um programa que imprima todas as potências:
+$2^0, 2^2, \dots, 3^0, 3^1, \dots, 10^{10}$.</p>
+</li>
+<li>
+<p>Escreva uma função que computa o fatorial de um número inteiro $n$
+passado por parâmetro. Use a função anterior e crie um programa que
+imprima os valores de $n!$ para $n = 1, 2, \dots, 20$.</p>
+</li>
+<li>
+<p>Escreva uma função que receba um número inteiro e imprima o mês
+correspondente ao número. Por exemplo, 2 corresponde à “fevereiro”.
+A função deve mostrar uma mensagem de erro caso o número recebido
+não faça sentido.</p>
+</li>
+<li>
+<p>Faça uma função que inverta os elementos de uma lista. Sua função
+não deve usar outras listas além da recebida como parâmetro.</p>
+</li>
+<li>
+<p>Escreva uma função que receba um número arábico inteiro e imprima o
+corresponde número em romano. Por exemplo, para 5 a saída desejada
+é 'V'. A função deve ser capaz de gerar o número romano para os 50
+primeiros inteiros. Uma mensagem de erro deve ser mostrada caso um
+número fora dessa faixa seja recebido.</p>
+</li>
+<li>
+<p>Escreva uma função que receba um número inteiro. Esta função deve
+verificar se tal número é primo. No caso positivo, a função deve
+retornar <code class="language-text">True</code>, caso contrário, <code class="language-text">False</code>.</p>
+</li>
+<li>
+<p>Casamento de padrões: dadas duas sequências de caracteres, uma
+chamada <code class="language-text">texto</code> e outra chamada <code class="language-text">padrao</code>, faça uma função que
+verifique se existe uma ocorrência de <code class="language-text">padrao</code> no <code class="language-text">texto</code>. Caso
+exista uma ocorrência, a função retorna a posição inicial do texto
+onde ocorre o padrão, caso contrário, retorna -1.</p>
+</li>
+<li>
+<p>Crie uma função que calcule e retorne o número de arranjos de $n$
+elementos $p$ a $p$. A fórmula do arranjo é a seguinte:</p>
+<p>$$
+A^n_p = \frac{n!}{(n-p)!}
+$$</p>
+<p>Obs.: Devem ser feitas duas funções, uma que use uma função para
+calcula o fatorial e uma que não use. Responda: Para você é melhor
+refazer o código ou utilizar uma função já existente?</p>
+</li>
+<li>
+<p>Faça uma função que calcule a aproximação para a integral:</p>
+<p>$$
+\int_0^x e^{-u^2} =
+x -
+\frac{x^3}{3 \cdot 1!} +
+\frac{x^5}{5 \cdot 2!} -
+\frac{x^7}{7 \cdot 3!} +
+\dots
+$$</p>
+<p>Sua função deverá ter a seguinte definição:</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">aprox_int</span>(x, cte):
+</pre><p>onde <code class="language-text">x</code> é um float e o mesmo <code class="language-text">x</code> da fórmula acima e <code class="language-text">cte</code> é um
+valor inteiro utilizado como critério de parada da aproximação,
+isto é, sua função deverá interromper o cálculo quando o <code class="language-text">i</code>-ésimo
+termo, em valor absoluto, ficar menor que <code class="language-text">cte</code>.</p>
+</li>
+<li>
+<p>Escreva uma função que computa a potência $a^b$ para valores $a$
+(double) e $b$ (int) passados por parâmetro (não use bibliotecas
+como math.h). Use a função anterior e crie um programa que imprima
+todas as potências:</p>
+<p>$$
+2^0,2^1,...,2^{10},3^0,...,3^{10},...,10^{10}.
+$$</p>
+</li>
+<li>
+<p>Escreva uma função que recebe um número inteiro $n$ passado por
+parâmetro e devolve o maior número primo que é menor ou igual a
+$n$.</p>
+</li>
+<li>
+<p>Escreva uma função que recebe um número ponto flutuante $n$
+passado por parâmetro e devolve a raiz quadrada de $n$. Use o
+método de Newton, encontrando o zero da função: $f(x) = x^2 - n$.</p>
+</li>
+<li>
+<p>Escreva uma função chamada <code class="language-text">teste</code> que recebe um valor inteiro
+positivo $n$ como parâmetro. Sua função deve retornar um valor
+inteiro $b$ tal que $b^k= n$ para algum inteiro $k$, e $b$ seja o
+menor possível.</p>
+</li>
+<li>
+<p>Escreva uma função chamada <code class="language-text">teste</code> que recebe um valor inteiro $n$
+(positivo ou negativo) como parâmetro. Sua função deve imprimir
+todos os valores $a$ e $b$ (inclusive negativos) tais que $a*b=
+n$.</p>
+</li>
+<li>
+<p>Notas:</p>
+<p>a) Escreva uma função que leia do teclado o número de questões de
+uma prova e o valor de cada uma das questões. A função deve
+retornar a nota da prova.</p>
+<p>b) Escreva uma função que receba como parâmetro um número de
+provas e leia do teclado o número de questões e os valores das
+questões de cada prova. A função deve retornar a média das provas.</p>
+<p>c) Escreva um programa que leia do teclado um número de provas
+dadas em um semestre, o número de alunos matriculados e o número
+de questões e os valores das questões da cada prova de cada aluno.
+O programa deve imprimir a razão entre a média das notas dos
+alunos que tiraram pelo menos 5 e a média das notas dos alunos que
+tiraram abaixo de 5.</p>
+</li>
+<li>
+<p>As vezes em python, por facilidade ou legibilidade, precisamos
+nomear as variáveis que estamos passando. Veja esse exemplo e
+indique a saída.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">divisao</span>(v1, v2):
+    <span style="color: #008000; font-weight: bold">return</span> v1<span style="color: #666666">/</span>v2
+
+<span style="color: #008000">print</span>(divisao(<span style="color: #666666">3</span>,<span style="color: #666666">4</span>))
+<span style="color: #008000">print</span>(divisao(v2 <span style="color: #666666">=</span> <span style="color: #666666">3</span>, v1 <span style="color: #666666">=</span> <span style="color: #666666">4</span>))
+</pre></li>
+<li>
+<p>Em vários momentos, precisamos retornar vários valores distintos. É
+possível fazer isso de várias maneiras. Uma delas é usando o que
+chamamos de tupla, veja o exemplo abaixo. Podemos devolver qualquer
+tipo de estrutura.</p>
+<pre class="highlightlanguage-python"> <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">funcao</span>():
+     texto <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;dois&quot;</span>
+     numero <span style="color: #666666">=</span> <span style="color: #666666">2</span>
+     <span style="color: #008000; font-weight: bold">return</span> texto, numero
+
+ tupla <span style="color: #666666">=</span> funcao()
+ <span style="color: #008000">print</span>(tupla[<span style="color: #666666">1</span>])
+
+ texto, numero <span style="color: #666666">=</span> funcao()
+ <span style="color: #008000">print</span>(texto)
+</pre><p>Faça uma função que leia uma lista de $n$ inteiros (com repetição)
+e retorne uma tupla $(a, m)$, em que $A$ é o número com maior
+número de repetições e $m$ o número de repetições desse elemento.</p>
+</li>
+<li>
+<p>O resultado de uma função pode ser utilizado em uma expressão,
+inclusive como parâmetros para outras funções. Analise o código
+abaixo e faça um teste de mesa, i.e., simule usando papel. Qual o
+resultado impresso?</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">soma</span>(A,B):
+    <span style="color: #008000; font-weight: bold">return</span> A <span style="color: #666666">+</span> B
+
+<span style="color: #008000">print</span>(soma(<span style="color: #666666">1</span>, soma(<span style="color: #666666">2</span>, soma(<span style="color: #666666">3</span>, <span style="color: #666666">4</span>))))
+</pre></li>
+</ol>
+<h1 id="funcao-como-parametro">Função como parâmetro</h1>
+<ol>
+<li>
+<p>Em Python, uma função é uma variável e pode ser inclusive
+passada como parâmetro. Veja o exemplo abaixo</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">media_aritmetica</span>(a, b):
+    <span style="color: #008000; font-weight: bold">return</span> (a <span style="color: #666666">+</span> b) <span style="color: #666666">/</span> <span style="color: #666666">2</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">calcular_medias</span>(provas, exercicios, funcao):
+
+    finais <span style="color: #666666">=</span> []
+    n <span style="color: #666666">=</span> <span style="color: #008000">len</span>(provas)
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">len</span>(n):
+        nota_final <span style="color: #666666">=</span> funcao(provas[i], exercicios[i])
+        finais<span style="color: #666666">.</span>append(nota_final)
+
+    <span style="color: #008000; font-weight: bold">return</span> finais
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">main</span>():
+    provas <span style="color: #666666">=</span> [<span style="color: #666666">3.5</span>, <span style="color: #666666">7.5</span>, <span style="color: #666666">10</span>]
+    exercicios <span style="color: #666666">=</span> [<span style="color: #666666">7.0</span>, <span style="color: #666666">6.0</span>, <span style="color: #666666">9.8</span>]
+
+    finais <span style="color: #666666">=</span> calcular_medias(provas, exercicios, media_aritmetica)
+
+    <span style="color: #008000">print</span>(finais)
+</pre><p>Modifique o programa, de forma a utilizar a média geométrica,
+ao invés da média aritmética.</p>
+</li>
+<li>
+<p>Escreva uma função que recebe um intervalo $[a,b]$ e uma função
+real $f$ passada por parâmetro e devolva uma aproximação da raiz
+da a equação $f(x) = 0$. Essa função passada recebe um número de
+ponto flutuante e devolve outro número. Suponha que a função que
+ela calcula é contínua e que existe uma única raiz para nesse
+intervalo. Uma aproximação da raiz é qualquer número $x'$ tal que
+$|x - x'| &lt; \epsilon$ para $\epsilon$ escolhido (digamos,
+$10^{-6}$).</p>
+</li>
+<li>
+<p>Modificando o comportamento de funções:</p>
+<p>a) Escreva uma função que devolve 1 se uma palavra termina com
+<code class="language-text">s</code>, e 0 caso contrário.</p>
+<p>b) Escreva uma função que conta o número de palavras que terminam
+com $s$ em um texto.</p>
+<p>c) Reescreva uma função que conta o número de palavras terminadas
+com $s$ em um texto, mas use a primeira função como rotina. Você
+pode redefinir a assinatura da primeira função para torná-la mais
+conveniente.</p>
+<p>d) Reescreva a função anterior para que ela conte as palavras de
+interesse. As palavras de interesse são identificadas por uma
+função indicadora passada por parâmetro (isso é, uma função que
+devolve <code class="language-text">True</code> se for de interesse, e <code class="language-text">False</code> caso contrário).</p>
+</li>
+</ol>
+<h1 id="escopo-e-visibilidade">Escopo e visibilidade</h1>
+<ol>
+<li>
+<p>Algo muito importante em python é entender como funções modificam
+listas e outras estruturas. Veja o código abaixo e determine o que
+é impresso. Depois, teste no computador. O resultado deu diferente
+do que esperado?</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">mudaVar</span>(variavel):
+    variavel <span style="color: #666666">=</span> <span style="color: #666666">5</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">mudaLista</span>(lista):
+    lista<span style="color: #666666">.</span>append(<span style="color: #666666">5</span>)
+
+A <span style="color: #666666">=</span> <span style="color: #666666">3</span>
+B <span style="color: #666666">=</span> [<span style="color: #666666">3</span>]
+mudaVar(A)
+mudaLista(B)
+<span style="color: #008000">print</span>(A)
+<span style="color: #008000">print</span>(B)
+</pre></li>
+<li>
+<p>Uma parte importante de programação é controlar a visibilidade,
+isso é, o que cada uma das funções “enxerga”. Isso é
+particularmente importante quando trabalhamos com vários arquivos.
+Para isso, temos alguns modificadores, que são palavras chaves
+especiais como <code class="language-text">global</code> (<strong>nunca</strong> use essa palavra na prática).
+Fazer declarações de funções e variáveis com esses modificadores
+pode implicar em maneiras diferentes da organização da memória.</p>
+<p>lib.py:</p>
+<pre class="highlightlanguage-python">a <span style="color: #666666">=</span> <span style="color: #666666">21</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f1</span>():
+    <span style="color: #008000">print</span>(a)
+    <span style="color: #008000; font-weight: bold">global</span> c
+    c <span style="color: #666666">=</span> <span style="color: #666666">77</span>;
+    <span style="color: #008000">print</span>(c)
+    <span style="color: #008000; font-weight: bold">return</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f3</span>():
+    f2(<span style="color: #666666">1</span>,<span style="color: #666666">2</span>)
+    <span style="color: #008000">print</span>(c)
+    <span style="color: #008000; font-weight: bold">return</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f2</span>(a, b):
+    <span style="color: #008000">print</span>(a <span style="color: #666666">+</span> b)
+    f1()
+    <span style="color: #008000">print</span>(c)
+    <span style="color: #008000; font-weight: bold">return</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f4</span>():
+    c <span style="color: #666666">=</span> <span style="color: #666666">14</span>
+    <span style="color: #008000">print</span>(c)
+    f3()
+    <span style="color: #008000">print</span>(c)
+    <span style="color: #008000; font-weight: bold">return</span>
+</pre><p>main.py:</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">lib</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">main</span>():
+    e <span style="color: #666666">=</span> <span style="color: #666666">3</span>
+    lib<span style="color: #666666">.</span>f4()
+    <span style="color: #008000">print</span>(lib<span style="color: #666666">.</span>c)
+    <span style="color: #008000; font-weight: bold">return</span>
+
+ main()
+</pre><p>a) Para cada função, descreva as variáveis visíveis e funções
+visíveis. Diga quais variáveis são locais ou não.</p>
+<p>b) Faça um desenho da organização da memória no momento em que a
+função <code class="language-text">f2</code> estiver executando.</p>
+<p>c) Como você faria para contar o número de vezes que uma função é
+chamada em um programa?</p>
+</li>
+<li>
+<p>Considere o código em Python abaixo:</p>
+<pre class="highlightlanguage-python">i <span style="color: #666666">=</span> <span style="color: #666666">10</span>
+j <span style="color: #666666">=</span> <span style="color: #666666">20</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">main</span>():
+    p <span style="color: #666666">=</span> <span style="color: #666666">10</span>
+    ra <span style="color: #666666">=</span> <span style="color: #666666">5</span>
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">3</span>):
+        k <span style="color: #666666">=</span> soma1(ra, p)
+        ra <span style="color: #666666">=</span> soma2(k)
+        <span style="color: #008000">print</span>(ra, k)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">soma1</span>(q, c):
+   <span style="color: #008000; font-weight: bold">return</span> q <span style="color: #666666">+</span> i <span style="color: #666666">+</span> c
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">soma2</span>(ra):
+   k <span style="color: #666666">=</span> j
+   ra <span style="color: #666666">=</span> ra <span style="color: #666666">+</span> k
+   <span style="color: #008000; font-weight: bold">return</span> ra
+
+main()
+</pre><p>a) Determine quais são as variáveis locais e globais deste
+programa, identificando a que função pertence cada variável local.</p>
+<p>b) Mostre o que será impresso na tela do computador quando este
+programa for executado.</p>
+</li>
+</ol>
+
+
+        <!-- Navigation buttons -->
+<div role="navigation" class="row justify-content-between">
+
+  <div class="col-12 col-sm-5 col-lg-4">
+    <a class="btn btn-primary w-100 mt-1 mt-sm-0" href="03-repeticao.html">
+      &larr; Anterior
+    </a>
+  </div>
+
+  <div class="col-12 d-none d-lg-inline-block col-lg-4">
+    <a class="btn btn-secondary w-100" href="../fixacao.html">
+      Voltar
+    </a>
+  </div>
+
+  <div class="col-12 col-sm-5 col-lg-4">
+    <a class="btn btn-primary w-100 mt-1 mt-sm-0" href="05-praticas.html">
+      Próxima &rarr;
+    </a>
+  </div>
+
+</div>      </div>
+    </div>
+</article>
+
+<hr />
+
+
+<!-- Footer -->
+<footer>
+  <p class="copyright text-muted">
+    <a href="https://www.ic.unicamp.br/~lehilton/" title="Página pessoal">
+      Copyright &copy; 2020
+    </a>
+  </p>
+</footer>
+<!-- Bootstrap core JavaScript -->
+<script src="../dist/vendor/jquery/jquery.min.js"></script>
+<script src="../dist/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="../dist/vendor/prism/prism.js"></script> -->
+
+<!-- Custom scripts for this template -->
+<script src="../dist/js/main.min.js"></script>
+
+<!-- Mathjax setup -->
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+  };
+</script>
+<script src="../dist/vendor/mathjax/tex-chtml.js" id="MathJax-script" async></script>
+
+
+
+  </body>
+
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    Algoritmos e Programação de Computadores
+    - Arquivos
+  </title>
+
+  <meta name="keywords" content="MC102, Algoritmos e Programação de Computadores, Python">
+  <meta name="description" content="Página da disciplina de MC102 para turma QR">
+  <meta name="author" content="Lehilton Pedrosa">
+
+  <!-- Bootstrap core CSS -->
+  <link href="../dist/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Theme css -->
+  <link href="../dist/css/main.min.css" rel="stylesheet">
+
+  <!-- Prism -->
+  <!-- <link href="../dist/vendor/prism/prism.css" rel="stylesheet" /> -->
+</head>
+<body >
+
+  <body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="../index.html">MC102</a>
+
+
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+      aria-label="Toggle navigation">
+      Menu
+      <i>&#9776;</i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item top back-to-top-link">
+          <a class="nav-link" href="#"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>topo</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="../fixacao.html">voltar</a>
+        </li>
+
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Header -->
+<header class="masthead"   style="background-image: url('../images/home-bg.jpg')" >
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-heading">
+
+          <h1 >Arquivos</h1>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+
+
+      <div class="col-lg-8 col-md-10 mx-auto">
+
+        <h1 id="arquivos-de-texto">Arquivos de texto</h1>
+<ol>
+<li>
+<p>Faça um programa que leia um arquivo texto contendo números
+inteiros, um número por linha, ordene os inteiros e escreva o
+resultado da ordenação em um arquivo texto novo, um número por
+linha.</p>
+</li>
+<li>
+<p>Escreva um programa que leia um arquivo chamado <code class="language-text">palavras.txt</code> e
+escreva as palavras que terminam com <code class="language-text">&quot;s&quot;</code> em um arquivo chamado
+<code class="language-text">plurais.txt</code> e as demais em um arquivo chamado <code class="language-text">singulares.txt</code>.</p>
+</li>
+<li>
+<p>Escreva um programa que leia um arquivo que contém uma sequência
+de números naturais. O arquivo deverá fazer contagem de cada
+número e gerar um arquivo de saída como no exemplo.</p>
+<p>Entrada:</p>
+<pre class="highlight">10
+1 2 1 3 2 2 6 2 1 6
+</pre><p>Saída</p>
+<pre class="highlight">Número de vezes 1: 3
+Número de vezes 2: 4
+Número de vezes 3: 1
+Número de vezes 6: 2
+</pre></li>
+<li>
+<p>Escreva um programa que leia dois arquivos de inteiros <em>ordenados</em>
+e escreva um novo arquivo com todos os inteiros <em>ordenados</em>. Depois
+responda.</p>
+<p>a) Vale a pena colocar o conteúdo dos arquivos de entrada em duas
+listas?</p>
+<p>b) O que você faria se tivesse quatro arquivos de inteiros
+ordenados.</p>
+</li>
+</ol>
+<h1 id="exercicios-criativos">Exercícios criativos</h1>
+<ol>
+<li>
+<p>A cifra de César é um esquema de criptografia, em que cada letra
+de uma mensagem é trocada pela letra a sucede em $k$ posições. A
+correspondência entre as letras é determinada utilizando duas
+rodas como da figura.</p>
+<img src="figs/800px-CipherDisk2000.jpg" style="width: 100%; max-width: 400px;">
+<p>Para encriptar uma mensagem, primeiro alinhamos as letras da roda
+interna com a roda externa, de depois giramos a roda interna em
+$k$ posições para a direita. Finalmente, substituímos cada letra
+da roda interna pela letra correspondente na roda externa. Somente
+quem conhece o segredo, o número $k$, poderá recuperar a mensagem
+original.</p>
+<p>Nessa foto, temos $k = 13$, assim a palavra <code class="language-text">&quot;AJUDA&quot;</code> seria
+transformada em <code class="language-text">&quot;NETKN&quot;</code>.</p>
+<p>a) Escreva uma função
+<code class="language-text">cifrar_cesar(arquivo_mensagem, arquivo_cifrado, k)</code> que leia um
+arquivo texto e escreva a cifra de César correspondente em um
+outro arquivo texto.</p>
+<p>b) Escreva uma função
+<code class="language-text">decifrar_cesar(arquivo_cifrado, arquivo_mensagem, k)</code> que realize a
+operação inversa.</p>
+<p>c) Um problema desse esquema é que como só há $26$ valores possíveis
+para $k$, não parece muito difícil decifrar uma mensagem. Como você
+faria isso?</p>
+</li>
+<li>
+<p>Um arquivo do tipo CSV (<em>comma separated values</em>) é um formato não
+padronizado para armazenar uma tabela em um arquivo de texto. Cada
+linha da tabela é uma linha do arquivo e os elementos de uma linha
+são separados por um caractere especial. Dependendo da aplicação, a
+especificação do formato muda, mas muitas vezes a primeira linha
+contém os títulos das colunas e o separador utilizado é uma
+vírgula.</p>
+<p>a) Suponha que nos é dado um arquivo <code class="language-text">lista_compras.csv</code></p>
+<pre class="highlightlanguage-csv"><span style="color: #666666">Item</span>,<span style="color: #666666">Categoria</span>,<span style="color: #008000; font-weight: bold">Quantidade</span>,<span style="color: #880000">Valor unitário</span>
+<span style="color: #666666">banana</span>,<span style="color: #666666">alimentação</span>,<span style="color: #008000; font-weight: bold">1</span>,<span style="color: #880000">3.5</span>
+<span style="color: #666666">carne</span>,<span style="color: #666666">alimentação</span>,<span style="color: #008000; font-weight: bold">0.5</span>,<span style="color: #880000">25.7</span>
+<span style="color: #666666">sabão em pó</span>,<span style="color: #666666">limpeza</span>,<span style="color: #008000; font-weight: bold">1</span>,<span style="color: #880000">10.0</span>
+<span style="color: #666666">álcool em gel</span>,<span style="color: #666666">limpeza</span>,<span style="color: #008000; font-weight: bold">2</span>,<span style="color: #880000">5.0</span>
+<span style="color: #666666">sandálias</span>,<span style="color: #666666">vestuário</span>,<span style="color: #008000; font-weight: bold">1</span>,<span style="color: #880000">15.0</span>
+</pre><p>Crie um programa que leia um arquivo CSV como acima e calcule o
+valor total por categoria. Enquanto nessa questão você irá
+interpretar o arquivo CSV diretamente, normalmente utilizamos um
+módulo especializado já pronto, como o módulo <code class="language-text">csv</code>.</p>
+<p>b) Analise o
+<a href="https://covid.ourworldindata.org/data/owid-covid-data.csv">arquivo csv</a>
+de casos do novo Coronavírus. Você pode abrir esse arquivo usando
+um editor de texto ou um editor de planilhas. Depois crie um
+programa que descubra todos os países que têm mais casos por
+habitante do que o Brasil até determinada data. Se desejar,
+utilize o módulos
+<a href="https://docs.python.org/3/library/csv.html"><code class="language-text">csv</code></a> para ler o
+arquivo e o módulo
+<a href="https://docs.python.org/pt-br/3/tutorial/stdlib.html#dates-and-times"><code class="language-text">datetime</code></a>
+para tratar e comparar datas.</p>
+</li>
+</ol>
+<h1 id="arquivos-binarios">Arquivos binários</h1>
+<p><strong>Atenção</strong>: as questões abaixo tratam de conteúdos que não discutimos
+em sala e estão disponíveis apenas para referência.</p>
+<ol>
+<li>
+<p>Suponha que um arquivo binário tem exatamente 1001 inteiros
+ordenados. Escreva um programa para ler o arquivo e mostrar a
+mediana. É necessário percorrer todo o arquivo? E se fosse um
+arquivo de texto?</p>
+</li>
+<li>
+<p>Neste exercício, use um arquivo binário para armazenar as
+informações nome, salário e número de identificação. Estas
+informações são usadas para controlar os empregados de uma
+empresa. Para cada empregado, use a estrutura a seguir:</p>
+<pre class="highlightlanguage-c"><span style="color: #008000; font-weight: bold">struct</span> empregado {
+    <span style="color: #B00040">int</span> id;
+    <span style="color: #B00040">char</span> nome[<span style="color: #666666">50</span>];
+    <span style="color: #B00040">double</span> salario;
+};
+</pre><p>O formato do arquivo é simplesmente uma sequência de registros
+como esse. Implemente as seguintes funções:</p>
+<p>a) <code class="language-text">adicionar_registro(arquivo, id, nome, salario)</code> que acrescenta
+um empregados no final do arquivo binário</p>
+<p>b) <code class="language-text">aumenta_salario(arquivo, percentual)</code> que aumenta o salário
+de todos os empregados pelo percentual dado</p>
+<p>c) <code class="language-text">buscar_empregado(arquivo, nome)</code> que devolve um registro
+com todas as informações contidas no arquivo</p>
+</li>
+</ol>
+
+
+        <!-- Navigation buttons -->
+<div role="navigation" class="row justify-content-between">
+
+  <div class="col-12 col-sm-5 col-lg-4">
+    <a class="btn btn-primary w-100 mt-1 mt-sm-0" href="08-matrizes.html">
+      &larr; Anterior
+    </a>
+  </div>
+
+  <div class="col-12 d-none d-lg-inline-block col-lg-4">
+    <a class="btn btn-secondary w-100" href="../fixacao.html">
+      Voltar
+    </a>
+  </div>
+
+  <div class="col-12 col-sm-5 col-lg-4">
+    <a class="btn btn-primary w-100 mt-1 mt-sm-0" href="10-colecoes.html">
+      Próxima &rarr;
+    </a>
+  </div>
+
+</div>      </div>
+    </div>
+</article>
+
+<hr />
+
+
+<!-- Footer -->
+<footer>
+  <p class="copyright text-muted">
+    <a href="https://www.ic.unicamp.br/~lehilton/" title="Página pessoal">
+      Copyright &copy; 2020
+    </a>
+  </p>
+</footer>
+<!-- Bootstrap core JavaScript -->
+<script src="../dist/vendor/jquery/jquery.min.js"></script>
+<script src="../dist/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="../dist/vendor/prism/prism.js"></script> -->
+
+<!-- Custom scripts for this template -->
+<script src="../dist/js/main.min.js"></script>
+
+<!-- Mathjax setup -->
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+  };
+</script>
+<script src="../dist/vendor/mathjax/tex-chtml.js" id="MathJax-script" async></script>
+
+
+
+  </body>
+
+</html>

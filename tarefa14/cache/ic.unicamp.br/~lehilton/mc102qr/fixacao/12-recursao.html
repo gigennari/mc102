@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    Algoritmos e Programação de Computadores
+    - Recursão
+  </title>
+
+  <meta name="keywords" content="MC102, Algoritmos e Programação de Computadores, Python">
+  <meta name="description" content="Página da disciplina de MC102 para turma QR">
+  <meta name="author" content="Lehilton Pedrosa">
+
+  <!-- Bootstrap core CSS -->
+  <link href="../dist/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Theme css -->
+  <link href="../dist/css/main.min.css" rel="stylesheet">
+
+  <!-- Prism -->
+  <!-- <link href="../dist/vendor/prism/prism.css" rel="stylesheet" /> -->
+</head>
+<body >
+
+  <body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="../index.html">MC102</a>
+
+
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+      aria-label="Toggle navigation">
+      Menu
+      <i>&#9776;</i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item top back-to-top-link">
+          <a class="nav-link" href="#"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>topo</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="../fixacao.html">voltar</a>
+        </li>
+
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Header -->
+<header class="masthead"   style="background-image: url('../images/home-bg.jpg')" >
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-heading">
+
+          <h1 >Recursão</h1>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+
+
+      <div class="col-lg-8 col-md-10 mx-auto">
+
+        <h1 id="recursoes-simples">Recursões simples</h1>
+<p>Pode ser que um algoritmo recursivo tenha apenas uma chamada
+recursiva. Muitas vezes, dependo de quando essa chamada é realizada
+(se no início ou no final do corpo da função), essas funções podem ser
+reescritas de maneira iterativa. Ainda assim, é muito mais fácil
+pensar recursivamente!</p>
+<ol>
+<li>
+<p>Trabalhando com listas:</p>
+<p>a) Defina uma função recursiva para somar os elementos de uma lista.</p>
+<p>b) Faça uma função recursiva que calcula o elemento máximo em um
+vetor.</p>
+<p>c) Faça uma função recursiva que calcula o elemento mínimo em um
+vetor.</p>
+<p>d) Faça uma função recursiva que calcula a média dos elementos de um
+vetor.</p>
+</li>
+<li>
+<p>Trabalhando com matrizes:</p>
+<p>a) Escreva uma função recursiva para decidir se uma matriz é
+simétrica.</p>
+<p>b) Escreva uma função recursiva para transpor uma
+matriz quadrada.</p>
+</li>
+<li>
+<p>Trabalhando com strings:</p>
+<p>a) Faça uma função recursiva para decidir se uma palavra é
+palíndroma (exemplos de palíndromos são osso, somos, radar).</p>
+<p>b) Faça uma função recursiva que receba uma string com valores
+separados por vírgula, e devolva uma lista. Por exemplo, para a
+string <code class="language-text">&quot;ana,beto,carla&quot;</code>, a função deverá devolver
+<code class="language-text">[&quot;ana&quot;, &quot;beto&quot;, &quot;carla&quot;]</code>.</p>
+</li>
+<li>
+<p>Vamos mostrar uma tabela de valores de funções definidas recursivamente:</p>
+<p>a) Defina uma função recursiva para mostrar na tela os valores do
+fatorial, começando de $1$ até um dado $n$.</p>
+<p>b) Defina uma função recursiva para mostrar na tela os $n$
+primeiros termos da sequência de Fibonacci.</p>
+</li>
+<li>
+<p>Faça um programa em Python que calcule o máximo divisor comum
+(MDC) de dois números $m$, $n$. Você deve utilizar a seguinte
+regra do cálculo do MDC com $m \ge n$</p>
+<p>$$
+mdc(m, n) =
+\begin{cases}
+m               &amp; \text{ se } n = 0 \text{ e }\\
+mdc(n, m \% n) &amp; \text{ se } n &gt; 0.
+\end{cases}
+$$</p>
+</li>
+<li>
+<p>Escreva uma função para calcular $a \cdot b$ usando ap adição,
+onde $a$ e $b$ são inteiros não negativos.</p>
+</li>
+</ol>
+<h1 id="lendo-e-simulando">Lendo e simulando</h1>
+<p>Pensar recursivamente não é algo gratuito. Isso requer muita prática,
+tanto na resolução de problemas, quanto na leitura de algoritmos
+recursivos. Por isso, é importante que as questões seguintes sejam
+respondidas sem um computador.</p>
+<ol>
+<li>
+<p>Vamos simular funções. Sem o auxílio do computador, desenhe a pilha
+de chamadas com os valores das variáveis locais para <em>cada chamada</em>
+quando a função a seguir é executada com ${a = 48 + X + Y}$ e $b =
+37$, onde $X$ corresponde aos dois últimos dígitos de seu RA e $Y$
+aos dois primeiros. Descreva o que ela faz e dê um nome adequado.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">misterio</span>(a, b):
+    <span style="color: #008000; font-weight: bold">if</span> (a <span style="color: #666666">&lt;</span> b):
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">0</span>
+    <span style="color: #008000; font-weight: bold">else</span>:
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">1</span> <span style="color: #666666">+</span> misterio(a <span style="color: #666666">-</span> b, b)
+</pre></li>
+<li>
+<p>Agora vamos ler funções. Para cada uma das funções abaixo,
+explique o que ela faz, claro, sem utilizar um computador! Se
+conseguir descobrir o que elas fazem rapidamente, você não
+precisará fazer testes de mesa, mas sempre pode ser útil simular
+as primeiras chamadas.</p>
+<p>a) Uma operação binária.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">calcular</span>(a, b):
+    <span style="color: #008000; font-weight: bold">if</span> (b <span style="color: #666666">==</span> <span style="color: #666666">1</span>):
+        <span style="color: #008000; font-weight: bold">return</span> a
+    <span style="color: #008000; font-weight: bold">else</span>:
+        <span style="color: #008000; font-weight: bold">return</span> a <span style="color: #666666">*</span> calcular(a, b <span style="color: #666666">-</span> <span style="color: #666666">1</span>)
+</pre><p>b) Outra operação binária.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">calcular</span>(a, b):
+    <span style="color: #008000; font-weight: bold">if</span> (b <span style="color: #666666">==</span> <span style="color: #666666">1</span>):
+        <span style="color: #008000; font-weight: bold">return</span> a
+    <span style="color: #008000; font-weight: bold">else</span>:
+        <span style="color: #008000; font-weight: bold">return</span> a <span style="color: #666666">+</span> calcular(a, b <span style="color: #666666">-</span> <span style="color: #666666">1</span>)
+</pre><p>c) Não sei lidar com esse inteiro, tente você.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">eu</span>(n):
+    <span style="color: #008000; font-weight: bold">if</span> n <span style="color: #666666">==</span> <span style="color: #666666">0</span>:
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">True</span>
+    <span style="color: #008000; font-weight: bold">else</span>:
+        <span style="color: #008000; font-weight: bold">return</span> voce(n <span style="color: #666666">-</span> <span style="color: #666666">1</span>)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">voce</span>(n):
+    <span style="color: #008000; font-weight: bold">if</span> n <span style="color: #666666">==</span> <span style="color: #666666">1</span>:
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">True</span>
+    <span style="color: #008000; font-weight: bold">else</span>:
+        <span style="color: #008000; font-weight: bold">return</span> eu(n <span style="color: #666666">-</span> <span style="color: #666666">1</span>)
+</pre><p>d) Muitos bits pra mim.</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">agregar</span>(lista, n):
+    <span style="color: #008000; font-weight: bold">if</span> n <span style="color: #666666">==</span> <span style="color: #666666">0</span>:
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">0</span>
+    <span style="color: #008000; font-weight: bold">else</span>:
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">2</span> <span style="color: #666666">*</span> agregar(lista, n <span style="color: #666666">-</span> <span style="color: #666666">1</span>) <span style="color: #666666">+</span> lista[n<span style="color: #666666">-1</span>]
+</pre><p>e) Sou o primeiro.</p>
+<pre class="highlightlanguage-python"> <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">pintar</span>(matriz, i, j, n):
+     <span style="color: #008000; font-weight: bold">if</span> n <span style="color: #666666">&lt;=</span> <span style="color: #666666">2</span>:
+         matriz[i][j] <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+         matriz[i][j <span style="color: #666666">+</span> <span style="color: #666666">1</span>] <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+         matriz[i <span style="color: #666666">+</span> <span style="color: #666666">1</span>][j] <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+         matriz[i <span style="color: #666666">+</span> <span style="color: #666666">1</span>][j <span style="color: #666666">+</span> <span style="color: #666666">1</span>] <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+     <span style="color: #008000; font-weight: bold">else</span>:
+         m <span style="color: #666666">=</span> n <span style="color: #666666">//</span> <span style="color: #666666">2</span>
+         pintar(matriz, i, j, m)
+         pintar(matriz, i, j <span style="color: #666666">+</span> m, m)
+         pintar(matriz, i <span style="color: #666666">+</span> m, j, m)
+         pintar(matriz, i <span style="color: #666666">+</span> m, j <span style="color: #666666">+</span> m, m)
+</pre></li>
+<li>
+<p>Pilha de chamadas:</p>
+<p>a) Considere a seguinte implementação de fatorial:</p>
+<pre class="highlightlanguage-python"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fatorial</span>(n):
+    <span style="color: #008000; font-weight: bold">if</span> n <span style="color: #666666">==</span> <span style="color: #666666">1</span>:
+        resposta <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+    <span style="color: #008000; font-weight: bold">else</span>:
+        ultimo <span style="color: #666666">=</span> fatorial(n<span style="color: #666666">-1</span>)
+        resposta <span style="color: #666666">=</span> ultimo <span style="color: #666666">*</span> anterior
+    <span style="color: #008000; font-weight: bold">return</span> resposta
+</pre><p>Faça uma representação da memória do computador no momento em que a
+chamada <code class="language-text">fatorial(1)</code> retorna. Suponha que a chamada inicial é
+<code class="language-text">fatorial(3)</code>.</p>
+<p>b) Agora, considere a seguinte função:</p>
+<pre class="highlightlanguage-python"> <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fibonacci</span>(n):
+     <span style="color: #008000; font-weight: bold">if</span> n <span style="color: #666666">==</span> <span style="color: #666666">1</span> <span style="color: #AA22FF; font-weight: bold">or</span> n <span style="color: #666666">==</span> <span style="color: #666666">2</span>:
+         resposta <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+     <span style="color: #008000; font-weight: bold">else</span>:
+         ultimo <span style="color: #666666">=</span> fibonacci(n<span style="color: #666666">-1</span>)
+         penultimo <span style="color: #666666">=</span> fibonacci(n<span style="color: #666666">-2</span>)
+         resposta <span style="color: #666666">=</span> ultimo <span style="color: #666666">+</span> penultimo
+     <span style="color: #008000; font-weight: bold">return</span> resposta
+</pre><p>Faça uma representação da memória do computador na <strong>segunda vez</strong>
+em que uma chamada <code class="language-text">fibonacci(1)</code> retorna. Suponha que a chamada
+inicial é <code class="language-text">fibonacci(4)</code>.</p>
+</li>
+</ol>
+<h1 id="recursao">Recursão</h1>
+<ol>
+<li>
+<p>(Notas do Prof. Flávio) Vamos calcular o determinate de uma matriz
+usando co-fatores. Seja $A$ uma matriz quadrada de ordem $n$. O
+<em>menor complementar</em>, $M_{ij}$, de um elemento $a_{ij}$ da matriz
+$A$ é definido como o determinante da matriz quadrada de ordem
+$(n - 1)$ obtida a partir da matriz $A$, excluindo os elementos da
+linha $i$ e da coluna $j$. O <em>Co-Fator</em> $\alpha_{ij}$ de $A$ é
+definido como:</p>
+<p>$$
+\alpha_{ij} = (-1)^{i+j}M_{ij}.
+$$</p>
+<p>O determinante de uma matriz quadrada $A$ de ordem $n$ pode ser calculado
+usando os co-fatores da linha $i$ da seguinte maneira:</p>
+<p>$$
+det(A) = \alpha_{i1} a_{i1} + \alpha_{i2} a_{i2} + \dots + \alpha_{in} a_{in}.
+$$</p>
+<p>O mesmo cálculo pode ser feito pelos co-fatores da coluna $j$ da
+seguinte maneira:</p>
+<p>$$
+det(A) = \alpha_{1j} a_{1j} + \alpha_{2j} a_{2j} + \dots + \alpha_{nj} a_{nj}.
+$$</p>
+</li>
+<li>
+<p>Faça uma função recursiva para calcular $n \choose k$ sabendo que</p>
+<p>$$
+{n \choose k} = {n-1 \choose k} + {n-1 \choose k-1},
+$$</p>
+<p>e</p>
+<p>$$
+{n \choose n} = 1 \mbox{ e } {n \choose 1} = n.
+$$</p>
+<p>Faça uma rotina recursiva para calcular o determinante de uma
+matriz de ordem $n$ usando o método descrito acima. (Observe que
+existem outros métodos mais eficientes para se calcular o
+determinante, mas não os descreveremos aqui.)</p>
+</li>
+<li>
+<p>Uma planta de uma casa é representada por uma matriz de caracteres
+onde <code class="language-text">#</code> representa parede e <code class="language-text">.</code> representa um espaço vazio.
+Escreva uma função que conte o número de cômodos na casa. No
+exemplo abaixo existem 5 cômodos.</p>
+<img src="figs/planta.svg">
+</li>
+<li>
+<p>O cadeado de Alice, que é de combinação de $n$ números como o da
+figura abaixo, enferrujou-se e ficou com o seguinte defeito: toda
+vez que gira um número, o número imediatamente acima gira junto. O
+seu objetivo é ajudar Alice a obter a combinação da sua senha
+pessoal: uma sequência de $n$ zeros! Como o cadeado está
+enferrujado, deve-se girar o menor número de vezes possível. A
+seguir, você deverá escrever uma função recursiva que receba o
+tamanho do cadeado $n$ e os $n$ números da combinação atual de
+cima para baixo e instrua Alice a abrir o cadeado.</p>
+<img src="figs/lock.png" style="width: 100%; max-width: 200px;">
+<p>a) Em português: descreva o(s) caso(s) básicos do problema e
+descreva a instância do subproblema no caso geral.</p>
+<p>b) Escreva a função recursiva completa.</p>
+</li>
+</ol>
+<h1 id="divisao-e-conquista">Divisão e conquista</h1>
+<ol>
+<li>
+<p>(Notas de aula do prof. Flávio) Um vetor tem $2^{k} -1$ valores
+inteiros (figura (a)), onde $k$ é um inteiro positivo,
+$k \ge 1$. Este vetor representa uma figura hierárquica (figura
+(b)) da seguinte maneira:</p>
+<img src="figs/hier1.png" width="100%">
+<p>Você pode imaginar que este vetor está representando uma árvore
+genealógica de 3 níveis. Infelizmente, o usuário do programa que faz
+uso deste vetor necessita de algo mais amigável para ver esta
+estrutura. Faça uma rotina recursiva que dado este vetor $v$ e o
+valor $k$, imprime as seguintes linhas:</p>
+<img src="figs/hier2.png" width="50%">
+<p><em>Dica</em>: às vezes a função recursiva precisa resolver um problema um
+pouquinho mais geral que o original. E se o desenho tivesse que
+começar na coluna $x$?</p>
+</li>
+<li>
+<p>Faça uma função recursiva para calcular $x^n$, onde $n$ é um
+número grande. Tente fazer a função mais rápida que puder.</p>
+</li>
+<li>
+<p>O método da bisseção ou busca binária é naturalmente recursivo:</p>
+<p>a) Implemente o método da bisseção recursivamente para encontrar a
+raiz quadrada de um número.</p>
+<p>b) Escreva uma função recursiva que receba um vetor ordenado
+decrescentemente e um número $x$. A função deverá devolver o menor
+índice do vetor que contém $x$ ou <code class="language-text">None</code> se $x$ não estiver no
+vetor.</p>
+</li>
+<li>
+<p>Faça uma função recursiva para buscar um elemento em uma lista
+(<strong>não</strong> necessariamente ordenada) usando a estratégia de divisão e
+conquista.</p>
+<p>a) Compare com uma função iterativa para o mesmo problema e tente
+explicar porque ambas implementações (iterativa e recursiva) gastam
+praticamente o mesmo tempo.</p>
+<p>b) Agora suponha que você tenha vários processadores e que eles
+possam executar ao mesmo tempo sobre a mesma lista. Você consegue
+traçar em uma estratégia para melhorar significativamente o tempo
+de busca desse elemento?</p>
+</li>
+</ol>
+<h1 id="algoritmos-de-ordenacao-recursivos">Algoritmos de ordenação recursivos</h1>
+<ol>
+<li>
+<p>Aplique o algoritmo de particionamento do quick-sort sobre a lista
+$(13,19,9,5,12,21,7,4,11,2,6,6)$ com pivô igual a 6.</p>
+</li>
+<li>
+<p>Qual o valor retornado pelo algoritmo de particionamento se todos
+os elementos do vetor tiverem valores iguais?</p>
+</li>
+<li>
+<p>Faça uma execução passo-a-passo do quick-sort com a lista
+$(4,3,6,7,9,10,5,8)$.</p>
+</li>
+<li>
+<p>Modifique o algoritmo quick-sort para ordenar vetores em ordem
+decrescente.</p>
+</li>
+<li>
+<p>Mostre passo a passo a execução da função merge considerando dois
+sub-vetores: $(3,5,7,10,11,12)$ e $(4,6,8,9,11,13,14)$.</p>
+</li>
+<li>
+<p>Faça uma execução passo-a-passo do merge-sort para o vetor:
+$(30, 45, 21, 20, 6, 7 15, 100, 65, 33)$.</p>
+</li>
+<li>
+<p>Re-escreva o algoritmo merge-sort para que este passe a ordenar um
+vetor em ordem decrescente.</p>
+</li>
+</ol>
+<h1 id="exercicios-criativos">Exercícios criativos</h1>
+<ol>
+<li>
+<p>Joãozinho, aluno de algoritmos, definiu a sequência de Joãozinho da
+seguinte forma: um elemento é dado pela soma dos dois <em>posteriores</em>
+e é um para os dois primeiros. Justifique cada afirmação com que
+concordar ou implemente uma função para calcular o $n$-ésimo número
+de Joãozinho.</p>
+<p>a) A sequência não está bem definida, já que não existe sequência
+de números que satisfaçam o que ele deseja.</p>
+<p>b) Não é possível construir uma função recursiva porque reduzimos o
+problema de tamanho $n$ para dois problemas de tamanhos maiores
+$n+1$ e $n+2$.</p>
+<p>c) Não pode haver uma base para a recursão porque o valor de cada
+elemento depende de um número infinito de outros elementos.</p>
+</li>
+<li>
+<p>A torre de Hanói é um brinquedo com três estacas A, B e C e discos
+de tamanhos diferentes. O objetivo é mover todos os discos da
+estaca A para a estaca C respeitando as seguintes regras:</p>
+<ul>
+<li>
+<p>Apenas um disco pode ser movido de cada vez.</p>
+</li>
+<li>
+<p>Um disco só pode ser colocado sobre um disco maior.</p>
+</li>
+</ul>
+<img src="figs/hanoi.jpeg" width="100%">
+<p>a) Tente escrever uma função recursiva que receba um número $n$ do
+teclado e instrua o usuário a resolver a torre de Hanói com $n$
+discos. Tente argumentar porque sua função realiza o menor número
+de movimentos possível.</p>
+<p>b) <strong>Um desafio</strong>: (Manber) Vamos resolver uma variante do
+problema. O objetivo ainda é mover todos os discos para uma estaca
+respeitando as regras acima, mas agora os discos podem estar
+espalhados entre as três estacas. Cada uma tem um número qualquer
+de discos, mas eles ainda respeitam a propriedade de que um disco
+só pode estar sobre um disco maior. Tente escrever uma função
+recursiva que receba a configuração dos discos espalhados nas
+estacas e mostre uma sequência de instruções para mover todos os
+discos para a última estaca.</p>
+</li>
+</ol>
+
+
+        <!-- Navigation buttons -->
+<div role="navigation" class="row justify-content-between">
+
+  <div class="col-12 col-sm-5 col-lg-4">
+    <a class="btn btn-primary w-100 mt-1 mt-sm-0" href="11-eficiencia.html">
+      &larr; Anterior
+    </a>
+  </div>
+
+  <div class="col-12 d-none d-lg-inline-block col-lg-4">
+    <a class="btn btn-secondary w-100" href="../fixacao.html">
+      Voltar
+    </a>
+  </div>
+
+  <div class="col-12 col-sm-5 col-lg-4">
+  </div>
+
+</div>      </div>
+    </div>
+</article>
+
+<hr />
+
+
+<!-- Footer -->
+<footer>
+  <p class="copyright text-muted">
+    <a href="https://www.ic.unicamp.br/~lehilton/" title="Página pessoal">
+      Copyright &copy; 2020
+    </a>
+  </p>
+</footer>
+<!-- Bootstrap core JavaScript -->
+<script src="../dist/vendor/jquery/jquery.min.js"></script>
+<script src="../dist/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="../dist/vendor/prism/prism.js"></script> -->
+
+<!-- Custom scripts for this template -->
+<script src="../dist/js/main.min.js"></script>
+
+<!-- Mathjax setup -->
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+  };
+</script>
+<script src="../dist/vendor/mathjax/tex-chtml.js" id="MathJax-script" async></script>
+
+
+
+  </body>
+
+</html>
